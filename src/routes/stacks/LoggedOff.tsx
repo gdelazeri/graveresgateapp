@@ -1,16 +1,20 @@
-import SignUp from '../../screens/loggedOff/SignUp';
+import WelcomeScreen from '../../screens/loggedOff/Welcome';
 import { createStackNavigator } from '@react-navigation/stack';
 
 export enum LoggedOffRoutes {
   STACK = 'LoggedOff',
-  LOGGED_OFF_SIGN_UP = 'LoggedOffSignUp'
+  WELCOME = 'Welcome'
 }
 
 const Stack = createStackNavigator();
 
 const LoggedOff = () => (
   <Stack.Navigator>
-    <Stack.Screen name={LoggedOffRoutes.LOGGED_OFF_SIGN_UP} component={SignUp} />
+    <Stack.Screen
+      name={LoggedOffRoutes.WELCOME}
+      component={WelcomeScreen}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
 

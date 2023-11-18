@@ -8,7 +8,11 @@ const Stack = createStackNavigator();
 const Navigator = () => (
   <NavigationContainer>
     <Stack.Navigator>
-      <Stack.Screen name={RouteMap.LoggedOffRoutes.STACK} component={LoggedOff} />
+      <Stack.Screen
+        name={RouteMap.LoggedOffRoutes.STACK}
+        component={LoggedOff}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   </NavigationContainer>
 )
