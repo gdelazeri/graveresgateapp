@@ -13,7 +13,6 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [fontsLoaded] = useFonts({
     [fonts.bold]: require('./src/theme/fonts/Roboto-Bold.ttf'),
-    [fonts.medium]: require('./src/theme/fonts/Roboto-Medium.ttf'),
     [fonts.regular]: require('./src/theme/fonts/Roboto-Regular.ttf'),
   });
 

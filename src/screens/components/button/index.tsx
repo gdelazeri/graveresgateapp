@@ -8,6 +8,7 @@ interface ButtonProps {
   secondary?: boolean
   loading?: boolean
   icon?: ReactElement
+  onPress: () => void
 }
 
 const Button = ({
@@ -15,6 +16,7 @@ const Button = ({
   secondary = false,
   loading = false,
   icon,
+  onPress
 }: ButtonProps) => {
   return (
     <RNEButton
@@ -28,10 +30,11 @@ const Button = ({
         width: '100%'
       }}
       titleStyle={{
-        fontFamily: fonts.medium,
-        fontSize: 14,
+        fontFamily: fonts.bold,
+        fontSize: 16,
         color: secondary ? colors.red : colors.Greyscale.b100,
       }}
+      onPress={onPress}
     />
   )
 }
