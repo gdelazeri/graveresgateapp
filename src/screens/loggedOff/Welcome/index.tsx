@@ -6,11 +6,11 @@ const Welcome = () => {
     <Styled.ImageLogo />
     <Styled.Buttons>
       <Button
-        title='Criar conta'
+        title='Fazer login'
       />
       <Styled.Divider />
       <Button
-        title='Fazer login'
+        title='Criar conta'
         secondary
       />
     </Styled.Buttons>
