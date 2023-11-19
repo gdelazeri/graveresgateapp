@@ -4,7 +4,7 @@ import colors from '../../../theme/colors';
 
 type LabelSizeType = 'small' | 'medium' | 'large'
 
-enum LabelSizeValue {
+export enum LabelSizeValue {
   small = 14,
   medium = 16,
   large = 18,

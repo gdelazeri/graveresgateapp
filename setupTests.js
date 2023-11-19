@@ -5,6 +5,10 @@ jest.mock('expo-status-bar');
 jest.mock('expo-splash-screen');
 jest.mock('react-native-safe-area-context')
 
+jest.mock('react-native-text-input-mask', () => ({
+  default: jest.fn(),
+}))
+
 jest.mock('@react-navigation/native', () => {
   const actualNav = jest.requireActual('@react-navigation/native')
   return {

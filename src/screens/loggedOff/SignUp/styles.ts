@@ -20,8 +20,13 @@ const Title = styled.Text`
   color: ${colors.black};
 `
 
+const Divider = styled.Text`
+  height: 10px;
+`
+
 export default {
   Container,
   ImageLogo,
   Title,
+  Divider
 }
