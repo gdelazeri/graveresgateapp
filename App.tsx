@@ -26,9 +26,8 @@ export default function App() {
     return null;
   }
 
-
   return (
-    <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
+    <SafeAreaView style={styles.container} onLayout={onLayoutRootView} testID='safe-area-view'>
       <StatusBar style="auto" />
       <Navigation />
     </SafeAreaView>

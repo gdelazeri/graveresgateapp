@@ -13,7 +13,7 @@ const Welcome = ({ navigation }: WelcomeProps) => {
     <Styled.Buttons>
       <Button
         title='Fazer login'
-        onPress={() => {}}
+        onPress={() => navigation.navigate(routeMap.LoggedOffRoutes.SIGN_IN)}
       />
       <Styled.Divider />
       <Button

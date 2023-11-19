@@ -7,15 +7,32 @@ describe('Label', () => {
     jest.clearAllMocks()
   })
 
-  it('should render correctly', async () => {
+  it('should render correctly with default values', async () => {
+    const onPressMock = jest.fn()
+
+    const { getByText } = render(
+      <Label
+        onPress={onPressMock}
+      >
+        label sample
+      </Label>
+    )
+
+    const label = getByText('label sample')
+    fireEvent.press(label)
+
+    expect(onPressMock).toHaveBeenCalled()
+  })
+
+  it('should render correctly with non-default values', async () => {
     const onPressMock = jest.fn()
 
     const { getByText } = render(
       <Label
         onPress={onPressMock}
         size={'medium'}
-        color={colors.black}
-        bold={false}
+        color={colors.red}
+        bold
       >
         label sample
       </Label>
