@@ -12,7 +12,7 @@ const Header = ({
   title
 }: HeaderProps) => (
   <Appbar.Header style={{ backgroundColor: colors.Greyscale.b100 }} elevated>
-    <Appbar.BackAction onPress={onBackPress} size={20} />
+    <Appbar.BackAction onPress={onBackPress} size={20} testID='back-action' />
     <Appbar.Content title={title} titleStyle={{ fontFamily: fonts.regular, color: colors.black, fontSize: 18 }} />
   </Appbar.Header>
 );
