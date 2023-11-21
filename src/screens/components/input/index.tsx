@@ -44,6 +44,7 @@ const Input = ({
 
   return (
     <TextInput
+      testID="input-test-id"
       placeholder={placeholder}
       label={label}
       value={type === INPUT_TYPE.PHONE ? mask(value, "(99) 99999-9999") : value}
@@ -65,6 +66,7 @@ const Input = ({
             onPress={() => setIsSecureTextEnabled(!isSecureTextEnabled)}
             icon={secureTextEntry ? "eye-outline" : "eye-off-outline"}
             color={colors.Greyscale.b50}
+            testID="icon-secure-entry"
           />
         )
       }
