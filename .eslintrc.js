@@ -1,0 +1,116 @@
+module.exports = {
+  parser: "@typescript-eslint/parser",
+  extends: [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-native/all",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+  ],
+  plugins: [
+    "prettier",
+    "react-native",
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "import",
+    "@typescript-eslint",
+    "detox",
+  ],
+  env: {
+    jest: true,
+    browser: true,
+    node: true,
+    es6: true,
+    "react-native/react-native": true,
+  },
+  parserOptions: {
+    ecmaVersion: 6,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
+    babelOptions: {
+      presets: ["@babel/preset-react"],
+    },
+  },
+  rules: {
+    "react-native/no-unused-styles": 2,
+    "react-native/no-raw-text": 0,
+    "react-native/split-platform-components": 0,
+    "react-native/no-color-literals": 0,
+    "react-native/sort-styles": 0,
+    "react-native/no-inline-styles": 0,
+    "class-methods-use-this": 0,
+    "react/jsx-props-no-spreading": 0,
+    "jsx-a11y/aria-props": 2,
+    "jsx-a11y/heading-has-content": 0,
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        // NOTE: If this error triggers, either disable it or add
+        // your custom components, labels and attributes via these options
+        // See https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md
+        controlComponents: ["Input"],
+      },
+    ],
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/mouse-events-have-key-events": 2,
+    "jsx-a11y/role-has-required-aria-props": 2,
+    "jsx-a11y/role-supports-aria-props": 2,
+    "max-len": 0,
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { argsIgnorePattern: "^_|^React$", varsIgnorePattern: "^_|^React$" },
+    ],
+    "prefer-template": 2,
+    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-first-prop-new-line": [2, "multiline"],
+    "react/jsx-filename-extension": 0,
+    "react/jsx-uses-vars": 2,
+    "no-empty-pattern": 0,
+    "no-useless-escape": 0,
+    "no-extra-semi": 0, // maybe enable it at some point,
+    "import/no-unresolved": [2, { commonjs: true, amd: true }],
+    "import/named": 2,
+    "react/prop-types": 0,
+    "react/display-name": 0,
+    "react/jsx-key": 0,
+    "react/no-deprecated": 0,
+    "react/jsx-fragments": 2,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/no-extra-semi": 0,
+    "@typescript-eslint/ban-types": 0,
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-non-null-assertion": 0,
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { argsIgnorePattern: "^_|^React$", varsIgnorePattern: "^_|^React$" },
+    ],
+  },
+  settings: {
+    "import/resolver": {
+      node: {
+        moduleDirectory: [".", "node_modules", "./native"],
+        extensions: [".js", ".jsx", ".ts", ".tsx", ".coffee", ".cjsx"],
+      },
+      typescript: {},
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
+    "import/ignore": [
+      "react-native",
+      "@nozbe/with-observables",
+      ".*/react-native-softinputmode",
+      "@react-navigation/stack",
+      "@react-navigation/native",
+    ],
+    react: {
+      version: "detect",
+    },
+  },
+};

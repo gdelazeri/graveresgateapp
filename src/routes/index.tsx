@@ -1,7 +1,7 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import LoggedOff from './stacks/LoggedOff';
-import RouteMap from './routeMap';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import LoggedOff from "./stacks/LoggedOff";
+import RouteMap from "./routeMap";
 
 const Stack = createStackNavigator();
 
@@ -15,6 +15,6 @@ const Navigator = () => (
       />
     </Stack.Navigator>
   </NavigationContainer>
-)
+);
 
 export default Navigator;

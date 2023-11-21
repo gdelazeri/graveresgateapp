@@ -1,7 +1,7 @@
-import * as WelcomeScreen from '../../screens/loggedOff/Welcome';
-import * as SignUpScreen from '../../screens/loggedOff/SignUp';
-import { createStackNavigator } from '@react-navigation/stack';
-import routeMap from '../routeMap';
+import * as WelcomeScreen from "../../screens/loggedOff/Welcome";
+import * as SignUpScreen from "../../screens/loggedOff/SignUp";
+import { createStackNavigator } from "@react-navigation/stack";
+import routeMap from "../routeMap";
 
 const Stack = createStackNavigator();
 

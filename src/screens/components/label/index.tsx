@@ -1,8 +1,8 @@
-import fonts from '../../../theme/fonts';
-import Styled from './styles';
-import colors from '../../../theme/colors';
+import fonts from "../../../theme/fonts";
+import Styled from "./styles";
+import colors from "../../../theme/colors";
 
-type LabelSizeType = 'small' | 'medium' | 'large'
+type LabelSizeType = "small" | "medium" | "large";
 
 export enum LabelSizeValue {
   small = 14,
@@ -11,27 +11,32 @@ export enum LabelSizeValue {
 }
 
 type LabelProps = React.PropsWithChildren<{
-  onPress?: () => void
-  size?: LabelSizeType
-  color?: string
-  bold?: boolean
-}>
+  onPress?: () => void;
+  size?: LabelSizeType;
+  color?: string;
+  bold?: boolean;
+}>;
 
 const Label = ({
   children,
   onPress,
-  size = 'small',
+  size = "small",
   color = colors.black,
   bold = false,
 }: LabelProps) => {
-  const fontSize = LabelSizeValue[size]
-  const fontFamily = bold ? fonts.bold : fonts.regular
+  const fontSize = LabelSizeValue[size];
+  const fontFamily = bold ? fonts.bold : fonts.regular;
 
   return (
-    <Styled.Text onPress={onPress} fontSize={fontSize} fontFamily={fontFamily} color={color}>
+    <Styled.Text
+      onPress={onPress}
+      fontSize={fontSize}
+      fontFamily={fontFamily}
+      color={color}
+    >
       {children}
     </Styled.Text>
-  )
+  );
 };
 
 export default Label;

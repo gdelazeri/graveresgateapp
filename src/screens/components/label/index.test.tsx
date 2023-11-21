@@ -1,46 +1,37 @@
-import { render, fireEvent } from '@testing-library/react-native';
-import Label from '.'
-import colors from '../../../theme/colors';
+import { render, fireEvent } from "@testing-library/react-native";
+import Label from ".";
+import colors from "../../../theme/colors";
 
-describe('Label', () => {
+describe("Label", () => {
   beforeEach(() => {
-    jest.clearAllMocks()
-  })
+    jest.clearAllMocks();
+  });
 
-  it('should render correctly with default values', async () => {
-    const onPressMock = jest.fn()
-
-    const { getByText } = render(
-      <Label
-        onPress={onPressMock}
-      >
-        label sample
-      </Label>
-    )
-
-    const label = getByText('label sample')
-    fireEvent.press(label)
-
-    expect(onPressMock).toHaveBeenCalled()
-  })
-
-  it('should render correctly with non-default values', async () => {
-    const onPressMock = jest.fn()
+  it("should render correctly with default values", async () => {
+    const onPressMock = jest.fn();
 
     const { getByText } = render(
-      <Label
-        onPress={onPressMock}
-        size={'medium'}
-        color={colors.red}
-        bold
-      >
+      <Label onPress={onPressMock}>label sample</Label>,
+    );
+
+    const label = getByText("label sample");
+    fireEvent.press(label);
+
+    expect(onPressMock).toHaveBeenCalled();
+  });
+
+  it("should render correctly with non-default values", async () => {
+    const onPressMock = jest.fn();
+
+    const { getByText } = render(
+      <Label onPress={onPressMock} size={"medium"} color={colors.red} bold>
         label sample
-      </Label>
-    )
+      </Label>,
+    );
 
-    const label = getByText('label sample')
-    fireEvent.press(label)
+    const label = getByText("label sample");
+    fireEvent.press(label);
 
-    expect(onPressMock).toHaveBeenCalled()
-  })
-})
+    expect(onPressMock).toHaveBeenCalled();
+  });
+});

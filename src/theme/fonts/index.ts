@@ -1,4 +1,4 @@
 export default {
-  regular: 'Roboto-Regular',
-  bold: 'Roboto-Bold'
-}
+  regular: "Roboto-Regular",
+  bold: "Roboto-Bold",
+};

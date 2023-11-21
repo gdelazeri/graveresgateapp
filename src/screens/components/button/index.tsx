@@ -1,14 +1,14 @@
-import { ReactElement } from 'react';
-import { Button as RNEButton } from 'react-native-elements';
-import colors from '../../../theme/colors';
-import fonts from '../../../theme/fonts';
+import { ReactElement } from "react";
+import { Button as RNEButton } from "react-native-elements";
+import colors from "../../../theme/colors";
+import fonts from "../../../theme/fonts";
 
 interface ButtonProps {
-  title: string
-  secondary?: boolean
-  loading?: boolean
-  icon?: ReactElement
-  onPress: () => void
+  title: string;
+  secondary?: boolean;
+  loading?: boolean;
+  icon?: ReactElement;
+  onPress: () => void;
 }
 
 const Button = ({
@@ -16,7 +16,7 @@ const Button = ({
   secondary = false,
   loading = false,
   icon,
-  onPress
+  onPress,
 }: ButtonProps) => {
   return (
     <RNEButton
@@ -27,7 +27,7 @@ const Button = ({
         backgroundColor: secondary ? colors.Greyscale.b100 : colors.red,
         borderWidth: 1,
         borderColor: colors.red,
-        width: '100%'
+        width: "100%",
       }}
       titleStyle={{
         fontFamily: fonts.bold,
@@ -36,7 +36,7 @@ const Button = ({
       }}
       onPress={onPress}
     />
-  )
-}
+  );
+};
 
-export default Button
+export default Button;
