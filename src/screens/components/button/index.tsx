@@ -9,6 +9,8 @@ interface ButtonProps {
   loading?: boolean;
   icon?: ReactElement;
   onPress: () => void;
+  disabled: boolean;
+  testID?: string;
 }
 
 const Button = ({
@@ -17,12 +19,16 @@ const Button = ({
   loading = false,
   icon,
   onPress,
+  disabled,
+  testID,
 }: ButtonProps) => {
   return (
     <RNEButton
+      testID={testID}
       loading={loading}
       title={title}
       icon={icon}
+      disabled={disabled}
       buttonStyle={{
         backgroundColor: secondary ? colors.Greyscale.b100 : colors.red,
         borderWidth: 1,

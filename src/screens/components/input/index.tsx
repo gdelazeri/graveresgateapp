@@ -19,7 +19,8 @@ interface InputProps {
   label: string;
   value: string;
   onChangeText: (newValue: string) => void;
-  type?: INPUT_TYPE
+  type?: INPUT_TYPE;
+  testID?: string;
 }
 
 const Input = ({
@@ -27,7 +28,8 @@ const Input = ({
   label,
   value,
   onChangeText,
-  type = INPUT_TYPE.DEFAULT
+  type = INPUT_TYPE.DEFAULT,
+  testID,
 }: InputProps) => {
   const [isSecureTextEnabled, setIsSecureTextEnabled] = useState(true);
   const secureTextEntry = type === INPUT_TYPE.PASSWORD && isSecureTextEnabled;
@@ -35,16 +37,16 @@ const Input = ({
   let keyboardType: KeyboardType = "default";
   switch (type) {
     case INPUT_TYPE.EMAIL:
-      keyboardType = 'email-address'
+      keyboardType = "email-address";
       break;
     case INPUT_TYPE.PHONE:
-      keyboardType = 'phone-pad'
+      keyboardType = "phone-pad";
       break;
   }
 
   return (
     <TextInput
-      testID="input-test-id"
+      testID={testID}
       placeholder={placeholder}
       label={label}
       value={type === INPUT_TYPE.PHONE ? mask(value, "(99) 99999-9999") : value}
@@ -59,7 +61,11 @@ const Input = ({
       activeOutlineColor={colors.Greyscale.b50}
       secureTextEntry={secureTextEntry}
       keyboardType={keyboardType}
-      autoCapitalize={type === INPUT_TYPE.EMAIL || type === INPUT_TYPE.PASSWORD ? 'none' : 'sentences'}
+      autoCapitalize={
+        type === INPUT_TYPE.EMAIL || type === INPUT_TYPE.PASSWORD
+          ? "none"
+          : "sentences"
+      }
       right={
         type === INPUT_TYPE.PASSWORD && (
           <TextInput.Icon

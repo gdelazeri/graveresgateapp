@@ -8,7 +8,7 @@ const Container = styled.View`
   justify-content: space-between;
 `;
 
-const Form = styled.View``
+const Form = styled.View``;
 
 const ImageLogo = styled.Image.attrs({
   source: require("../../../../assets/icon.png"),

@@ -6,6 +6,8 @@ import Label from "../../components/label";
 import Styled from "./styles";
 import Input, { INPUT_TYPE } from "../../components/input";
 import Button from "../../components/button";
+import { isEmail } from "../../../utils/validators";
+import routeMap from "../../../routes/routeMap";
 
 interface SignUpProps {
   navigation: NavigationProp<ParamListBase>;
@@ -18,6 +20,26 @@ const SignUp = ({ navigation }: SignUpProps) => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
+  const validateInputs = () =>
+    fullName.length > 3 &&
+    isEmail(email) &&
+    phone.length === 15 &&
+    password.length >= 8 &&
+    password === passwordConfirm;
+
+  const onPressContinue = () => {
+    const payload = {
+      fullName,
+      email,
+      phone: phone.replace(/\D+/g, ""),
+      password,
+    };
+
+    navigation.navigate(routeMap.LoggedOffRoutes.SIGN_UP_VERIFICATION, {
+      ...payload,
+    });
+  };
+
   return (
     <Styled.Container>
       <Styled.Form>
@@ -29,6 +51,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
           value={fullName}
           onChangeText={setFullName}
           type={INPUT_TYPE.NAME}
+          testID="full-name-input"
         />
         <Styled.Divider />
         <Input
@@ -37,6 +60,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
           value={email}
           onChangeText={setEmail}
           type={INPUT_TYPE.EMAIL}
+          testID="email-input"
         />
         <Styled.Divider />
         <Input
@@ -45,6 +69,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
           value={phone}
           onChangeText={setPhone}
           type={INPUT_TYPE.PHONE}
+          testID="phone-input"
         />
         <Styled.Divider />
         <Input
@@ -53,6 +78,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
           value={password}
           onChangeText={setPassword}
           type={INPUT_TYPE.PASSWORD}
+          testID="password-input"
         />
         <Styled.Divider />
         <Input
@@ -61,11 +87,14 @@ const SignUp = ({ navigation }: SignUpProps) => {
           value={passwordConfirm}
           onChangeText={setPasswordConfirm}
           type={INPUT_TYPE.PASSWORD}
+          testID="password-confirm-input"
         />
       </Styled.Form>
       <Button
+        testID="continue-btn"
         title="Continuar"
-        onPress={() => {}}
+        onPress={onPressContinue}
+        disabled={!validateInputs()}
       />
     </Styled.Container>
   );
