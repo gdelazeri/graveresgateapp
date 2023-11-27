@@ -6,8 +6,8 @@ import Label from "../../components/label";
 import Styled from "./styles";
 import Input, { INPUT_TYPE } from "../../components/input";
 import Button from "../../components/button";
-import { isEmail } from "../../../utils/validators";
-import routeMap from "../../../routes/routeMap";
+import { isEmail, removePhoneMask } from "../../../utils/stringHelper";
+import useUser from "../../../hooks/useUser";
 
 interface SignUpProps {
   navigation: NavigationProp<ParamListBase>;
@@ -19,6 +19,8 @@ const SignUp = ({ navigation }: SignUpProps) => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const { register } = useUser();
 
   const validateInputs = () =>
     fullName.length > 3 &&
@@ -27,17 +29,17 @@ const SignUp = ({ navigation }: SignUpProps) => {
     password.length >= 8 &&
     password === passwordConfirm;
 
-  const onPressContinue = () => {
+  const onPressContinue = async () => {
+    setProcessing(true)
     const payload = {
-      fullName,
+      name: fullName,
       email,
-      phone: phone.replace(/\D+/g, ""),
+      phone: removePhoneMask(phone),
       password,
     };
 
-    navigation.navigate(routeMap.LoggedOffRoutes.SIGN_UP_VERIFICATION, {
-      ...payload,
-    });
+    await register(payload);
+    setProcessing(false)
   };
 
   return (
@@ -95,6 +97,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
         title="Continuar"
         onPress={onPressContinue}
         disabled={!validateInputs()}
+        loading={processing}
       />
     </Styled.Container>
   );

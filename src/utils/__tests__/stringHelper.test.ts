@@ -1,6 +1,6 @@
-import { isString, isEmail } from "../validators";
+import { isString, isEmail, removePhoneMask } from "../stringHelper";
 
-describe("validators", () => {
+describe("stringHelper", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -29,6 +29,13 @@ describe("validators", () => {
       expect(isEmail(null)).toBeFalsy();
       expect(isEmail(undefined)).toBeFalsy();
       expect(isEmail(1)).toBeFalsy();
+    });
+  });
+
+  describe("removePhoneMask", () => {
+    it("should remove phone mask", async () => {
+      expect(removePhoneMask("(51) 99999-9999")).toBe("51999999999");
+      expect(removePhoneMask("51999999999")).toBe("51999999999");
     });
   });
 });

@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
 import request from "./request";
 
-interface PostRegisterPayload {
+export interface PostRegisterPayload {
   name: string;
   email: string;
   phone: string;
