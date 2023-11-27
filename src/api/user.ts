@@ -9,8 +9,12 @@ export interface PostRegisterPayload {
 }
 
 interface PostRegisterResponse {
-  accessToken: string;
-  refreshToken: string;
+  success: boolean;
+  error: string | null;
+  result: {
+    accessToken: string;
+    refreshToken: string;
+  }
 }
 
 export const postRegister = async (payload: PostRegisterPayload) => {

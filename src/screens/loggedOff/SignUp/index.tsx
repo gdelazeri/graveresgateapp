@@ -30,7 +30,8 @@ const SignUp = ({ navigation }: SignUpProps) => {
     password === passwordConfirm;
 
   const onPressContinue = async () => {
-    setProcessing(true)
+    setProcessing(true);
+
     const payload = {
       name: fullName,
       email,
@@ -39,7 +40,8 @@ const SignUp = ({ navigation }: SignUpProps) => {
     };
 
     await register(payload);
-    setProcessing(false)
+
+    setProcessing(false);
   };
 
   return (
