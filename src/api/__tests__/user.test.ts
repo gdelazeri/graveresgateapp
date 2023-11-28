@@ -1,7 +1,7 @@
-import { postRegister } from "../user";
-import { post } from "../request";
+import { postRegister } from "@api/user";
+import { post } from "@api/request";
 
-jest.mock("../request", () => ({
+jest.mock("@api/request", () => ({
   post: jest.fn(),
   get: jest.fn(),
   put: jest.fn(),

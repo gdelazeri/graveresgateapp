@@ -1,6 +1,6 @@
 import { Appbar } from "react-native-paper";
-import fonts from "../../../theme/fonts";
-import colors from "../../../theme/colors";
+import fonts from "@theme/fonts";
+import colors from "@theme/colors";
 
 interface HeaderProps {
   onBackPress?: () => void;

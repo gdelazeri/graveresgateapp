@@ -1,7 +1,7 @@
 import axios from "axios";
-import { API_URL } from "../utils/environment";
-import useUser from "../hooks/useUser";
-import { isString } from "../utils/stringHelper";
+import { API_URL } from "@utils/environment";
+import useUser from "@hooks/useUser";
+import { isString } from "@utils/stringHelper";
 
 export interface ApiResponse<ResultType> {
   success: boolean;

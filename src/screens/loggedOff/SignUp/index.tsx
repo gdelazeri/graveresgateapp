@@ -1,9 +1,9 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 
-import Header from "../../components/header";
-import Label from "../../components/label";
-import Input, { INPUT_TYPE } from "../../components/input";
-import Button from "../../components/button";
+import Header from "@screens/components/header";
+import Label from "@screens/components/label";
+import Input, { INPUT_TYPE } from "@screens/components/input";
+import Button from "@screens/components/button";
 import useSignUp from "./useSignUp";
 import Styled from "./styles";
 

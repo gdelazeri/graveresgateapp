@@ -1,9 +1,9 @@
-import { act, renderHook } from "@testing-library/react-native";
+import { renderHook } from "@testing-library/react-native";
 
-import useUser from "../useUser";
-import storage, { STORAGE_KEYS } from "../../utils/storage";
+import useUser from "@hooks/useUser";
+import storage, { STORAGE_KEYS } from "@utils/storage";
 
-jest.mock("../../utils/storage", () => ({
+jest.mock("@utils/storage", () => ({
   get: jest.fn(),
   set: jest.fn(),
   STORAGE_KEYS: {

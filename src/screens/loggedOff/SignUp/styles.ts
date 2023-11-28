@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
-import colors from "../../../theme/colors";
-import fonts from "../../../theme/fonts";
+import colors from "@theme/colors";
+import fonts from "@theme/fonts";
 
 const Container = styled.View`
   flex: 1;
@@ -11,7 +11,7 @@ const Container = styled.View`
 const Form = styled.View``;
 
 const ImageLogo = styled.Image.attrs({
-  source: require("../../../../assets/icon.png"),
+  source: require("@assets/icon.png"),
 })`
   width: 200px;
   height: 200px;

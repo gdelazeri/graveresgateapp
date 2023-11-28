@@ -1,5 +1,5 @@
 import * as SecureStore from "expo-secure-store";
-import storage from "../storage";
+import storage from "@utils/storage";
 
 describe("storage", () => {
   beforeEach(() => {

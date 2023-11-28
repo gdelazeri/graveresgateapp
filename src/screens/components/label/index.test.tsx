@@ -1,6 +1,6 @@
 import { render, fireEvent } from "@testing-library/react-native";
 import Label from ".";
-import colors from "../../../theme/colors";
+import colors from "@theme/colors";
 
 describe("Label", () => {
   beforeEach(() => {

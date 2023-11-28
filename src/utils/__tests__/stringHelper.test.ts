@@ -1,4 +1,4 @@
-import { isString, isEmail, removePhoneMask } from "../stringHelper";
+import { isString, isEmail, removePhoneMask } from "@utils/stringHelper";
 
 describe("stringHelper", () => {
   beforeEach(() => {

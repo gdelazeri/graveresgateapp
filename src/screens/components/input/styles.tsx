@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
-import colors from "../../../theme/colors";
-import fonts from "../../../theme/fonts";
+import colors from "@theme/colors";
+import fonts from "@theme/fonts";
 
 const ErrorText = styled.Text`
   color: ${colors.red};

@@ -1,6 +1,6 @@
-import fonts from "../../../theme/fonts";
+import fonts from "@theme/fonts";
 import Styled from "./styles";
-import colors from "../../../theme/colors";
+import colors from "@theme/colors";
 
 type LabelSizeType = "small" | "medium" | "large";
 

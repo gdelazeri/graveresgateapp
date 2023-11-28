@@ -1,4 +1,4 @@
-import storage, { STORAGE_KEYS } from "../utils/storage";
+import storage, { STORAGE_KEYS } from "@utils/storage";
 
 const useUser = () => {
   const getTokens = async () => {

@@ -1,7 +1,7 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import Button from "../../components/button";
+import Button from "@screens/components/button";
 import Styled from "./styles";
-import routeMap from "../../../routes/routeMap";
+import routeMap from "@routes/routeMap";
 
 interface WelcomeProps {
   navigation: NavigationProp<ParamListBase>;

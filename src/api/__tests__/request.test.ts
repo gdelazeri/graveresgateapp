@@ -1,19 +1,19 @@
 import axios from "axios";
-import { get, post, put } from "../request";
-import useUser from "../../hooks/useUser";
+import { get, post, put } from "@api/request";
+import useUser from "@hooks/useUser";
 
 const API_URL_TEST = "https://graveapi.com.br";
 
 jest.mock("axios");
-jest.mock("../../utils/environment", () => ({
+jest.mock("@utils/environment", () => ({
   API_URL: API_URL_TEST,
 }));
-jest.mock("../../utils/storage", () => ({
+jest.mock("@utils/storage", () => ({
   get: jest.fn(),
   set: jest.fn(),
   STORAGE_KEYS: {},
 }));
-jest.mock("../../hooks/useUser", () =>
+jest.mock("@hooks/useUser", () =>
   jest.fn().mockImplementation(() => ({
     getTokens: jest.fn().mockResolvedValue({
       accessToken: "",

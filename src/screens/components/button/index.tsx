@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { Button as RNEButton } from "react-native-elements";
-import colors from "../../../theme/colors";
-import fonts from "../../../theme/fonts";
+import colors from "@theme/colors";
+import fonts from "@theme/fonts";
 
 interface ButtonProps {
   title: string;
@@ -9,7 +9,7 @@ interface ButtonProps {
   loading?: boolean;
   icon?: ReactElement;
   onPress: () => void;
-  disabled: boolean;
+  disabled?: boolean;
   testID?: string;
 }
 
@@ -19,7 +19,7 @@ const Button = ({
   loading = false,
   icon,
   onPress,
-  disabled,
+  disabled = false,
   testID,
 }: ButtonProps) => {
   return (

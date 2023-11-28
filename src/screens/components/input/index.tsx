@@ -2,10 +2,10 @@ import { useState } from "react";
 import { TextInput } from "react-native-paper";
 import { KeyboardType } from "react-native";
 import { mask } from "react-native-mask-text";
-import { LabelSizeValue } from "../../../screens/components/label";
-import fonts from "../../../theme/fonts";
-import colors from "../../../theme/colors";
-import { isString } from "../../../utils/stringHelper";
+import { LabelSizeValue } from "@screens/components/label";
+import fonts from "@theme/fonts";
+import colors from "@theme/colors";
+import { isString } from "@utils/stringHelper";
 import Styled from "./styles";
 
 export enum INPUT_TYPE {

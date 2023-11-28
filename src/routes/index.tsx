@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoggedOff from "./stacks/LoggedOff";
-import RouteMap from "./routeMap";
+import RouteMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
 

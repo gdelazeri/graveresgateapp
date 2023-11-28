@@ -1,14 +1,14 @@
 import { act, renderHook } from "@testing-library/react-native";
 
-import { postRegister } from "../../../../api/user";
-import useSignUp from "../useSignUp";
-import { removePhoneMask } from "../../../../utils/stringHelper";
-import useUser from "../../../../hooks/useUser";
+import { postRegister } from "@api/user";
+import { removePhoneMask } from "@utils/stringHelper";
+import useUser from "@hooks/useUser";
+import useSignUp from "@screens/loggedOff/SignUp/useSignUp";
 
-jest.mock("../../../../api/user", () => ({
+jest.mock("@api/user", () => ({
   postRegister: jest.fn(),
 }));
-jest.mock("../../../../hooks/useUser", () =>
+jest.mock("@hooks/useUser", () =>
   jest.fn().mockImplementation(() => ({
     setTokens: jest.fn(),
   })),
@@ -20,7 +20,7 @@ describe("useSignUp", () => {
   });
 
   it("should render correctly", async () => {
-    const { result } = renderHook(() => useSignUp());
+    const { result } = renderHook(() => useS());
 
     expect(result.current.fullName).toBe("");
     expect(result.current.email).toBe("");

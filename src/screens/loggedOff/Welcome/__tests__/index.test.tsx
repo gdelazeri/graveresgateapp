@@ -1,6 +1,6 @@
 import { render, fireEvent } from "@testing-library/react-native";
 import Welcome from "..";
-import routeMap from "../../../../routes/routeMap";
+import routeMap from "@routes/routeMap";
 
 describe("Welcome", () => {
   beforeEach(() => {

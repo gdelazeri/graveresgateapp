@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import { postRegister } from "../../../api/user";
-import { isEmail, removePhoneMask } from "../../../utils/stringHelper";
-import useUser from "../../../hooks/useUser";
+import { postRegister } from "@api/user";
+import { isEmail, removePhoneMask } from "@utils/stringHelper";
+import useUser from "@hooks/useUser";
 
 const useSignUp = () => {
   const [fullName, setFullName] = useState("");
