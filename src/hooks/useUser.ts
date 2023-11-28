@@ -1,21 +1,30 @@
 import storage, { STORAGE_KEYS } from "../utils/storage";
-import { PostRegisterPayload, postRegister } from "../api/user";
 
 const useUser = () => {
-  const register = async (payload: PostRegisterPayload) => {
-    const response = await postRegister(payload);
+  const getTokens = async () => {
+    const accessToken = await storage.get(STORAGE_KEYS.ACCESS_TOKEN);
+    const refreshToken = await storage.get(STORAGE_KEYS.REFRESH_TOKEN);
 
-    if (response) {
-      await storage.set(STORAGE_KEYS.ACCESS_TOKEN, response.result.accessToken);
-      await storage.set(STORAGE_KEYS.REFRESH_TOKEN, response.result.refreshToken);
-      return true;
-    }
+    return {
+      accessToken,
+      refreshToken,
+    };
+  };
 
-    return false;
+  const setTokens = async ({
+    accessToken,
+    refreshToken,
+  }: {
+    accessToken: string;
+    refreshToken: string;
+  }) => {
+    await storage.set(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
+    await storage.set(STORAGE_KEYS.REFRESH_TOKEN, refreshToken);
   };
 
   return {
-    register,
+    getTokens,
+    setTokens,
   };
 };
 

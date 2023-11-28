@@ -6,4 +6,4 @@ export const isEmail = (str: any) =>
     str,
   );
 
-export const removePhoneMask = (str: any) => str.replace(/\D+/g, "")
+export const removePhoneMask = (str: any) => str.replace(/\D+/g, "");

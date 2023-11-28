@@ -4,6 +4,7 @@ jest.mock("expo-asset");
 jest.mock("expo-status-bar");
 jest.mock("expo-splash-screen");
 jest.mock("react-native-safe-area-context");
+jest.useFakeTimers();
 
 jest.mock("react-native-text-input-mask", () => ({
   default: jest.fn(),

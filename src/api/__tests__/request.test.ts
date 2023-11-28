@@ -1,6 +1,6 @@
 import axios from "axios";
 import { get, post, put } from "../request";
-import storage from "../../utils/storage";
+import useUser from "../../hooks/useUser";
 
 const API_URL_TEST = "https://graveapi.com.br";
 
@@ -11,8 +11,16 @@ jest.mock("../../utils/environment", () => ({
 jest.mock("../../utils/storage", () => ({
   get: jest.fn(),
   set: jest.fn(),
-  STORAGE_KEYS: {}
+  STORAGE_KEYS: {},
 }));
+jest.mock("../../hooks/useUser", () =>
+  jest.fn().mockImplementation(() => ({
+    getTokens: jest.fn().mockResolvedValue({
+      accessToken: "",
+      refreshToken: "",
+    }),
+  })),
+);
 
 describe("request", () => {
   beforeEach(() => {
@@ -22,7 +30,9 @@ describe("request", () => {
   describe("get", () => {
     it("should request a axios.get with access token", async () => {
       // @ts-ignore
-      storage.get.mockResolvedValueOnce('token123')
+      useUser.mockReturnValueOnce({
+        getTokens: jest.fn().mockResolvedValueOnce({ accessToken: "token123" }),
+      });
 
       await get("/url");
 
@@ -45,7 +55,9 @@ describe("request", () => {
   describe("post", () => {
     it("should request a axios.post with access token", async () => {
       // @ts-ignore
-      storage.get.mockResolvedValueOnce('token123')
+      useUser.mockReturnValueOnce({
+        getTokens: jest.fn().mockResolvedValueOnce({ accessToken: "token123" }),
+      });
 
       await post("/url", { name: "Test" });
 
@@ -76,7 +88,9 @@ describe("request", () => {
   describe("put", () => {
     it("should request a axios.put with access token", async () => {
       // @ts-ignore
-      storage.get.mockResolvedValueOnce('token123')
+      useUser.mockReturnValueOnce({
+        getTokens: jest.fn().mockResolvedValueOnce({ accessToken: "token123" }),
+      });
 
       await put("/url/123", { name: "Test" });
 

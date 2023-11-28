@@ -1,47 +1,40 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import { useState } from "react";
 
 import Header from "../../components/header";
 import Label from "../../components/label";
-import Styled from "./styles";
 import Input, { INPUT_TYPE } from "../../components/input";
 import Button from "../../components/button";
-import { isEmail, removePhoneMask } from "../../../utils/stringHelper";
-import useUser from "../../../hooks/useUser";
+import useSignUp from "./useSignUp";
+import Styled from "./styles";
 
 interface SignUpProps {
   navigation: NavigationProp<ParamListBase>;
 }
 
 const SignUp = ({ navigation }: SignUpProps) => {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [processing, setProcessing] = useState(false);
-  const { register } = useUser();
-
-  const validateInputs = () =>
-    fullName.length > 3 &&
-    isEmail(email) &&
-    phone.length === 15 &&
-    password.length >= 8 &&
-    password === passwordConfirm;
+  const {
+    fullName,
+    setFullName,
+    email,
+    setEmail,
+    phone,
+    setPhone,
+    password,
+    setPassword,
+    passwordConfirm,
+    setPasswordConfirm,
+    isProcessing,
+    isFullNameValid,
+    isEmailValid,
+    isPhoneValid,
+    isPasswordValid,
+    isPasswordsEqual,
+    isFormValid,
+    register,
+  } = useSignUp();
 
   const onPressContinue = async () => {
-    setProcessing(true);
-
-    const payload = {
-      name: fullName,
-      email,
-      phone: removePhoneMask(phone),
-      password,
-    };
-
-    await register(payload);
-
-    setProcessing(false);
+    await register();
   };
 
   return (
@@ -56,6 +49,8 @@ const SignUp = ({ navigation }: SignUpProps) => {
           onChangeText={setFullName}
           type={INPUT_TYPE.NAME}
           testID="full-name-input"
+          invalid={!isFullNameValid}
+          invalidText="Informe seu nome completo"
         />
         <Styled.Divider />
         <Input
@@ -65,6 +60,8 @@ const SignUp = ({ navigation }: SignUpProps) => {
           onChangeText={setEmail}
           type={INPUT_TYPE.EMAIL}
           testID="email-input"
+          invalid={!isEmailValid}
+          invalidText="Informe um e-mail válido"
         />
         <Styled.Divider />
         <Input
@@ -74,6 +71,8 @@ const SignUp = ({ navigation }: SignUpProps) => {
           onChangeText={setPhone}
           type={INPUT_TYPE.PHONE}
           testID="phone-input"
+          invalid={!isPhoneValid}
+          invalidText="Número de celular incompleto"
         />
         <Styled.Divider />
         <Input
@@ -83,6 +82,8 @@ const SignUp = ({ navigation }: SignUpProps) => {
           onChangeText={setPassword}
           type={INPUT_TYPE.PASSWORD}
           testID="password-input"
+          invalid={!isPasswordValid}
+          invalidText="A senha precisa conter pelo menos 8 caracteres"
         />
         <Styled.Divider />
         <Input
@@ -92,14 +93,16 @@ const SignUp = ({ navigation }: SignUpProps) => {
           onChangeText={setPasswordConfirm}
           type={INPUT_TYPE.PASSWORD}
           testID="password-confirm-input"
+          invalid={!isPasswordsEqual}
+          invalidText="As senhas precisam ser iguais"
         />
       </Styled.Form>
       <Button
         testID="continue-btn"
         title="Continuar"
         onPress={onPressContinue}
-        disabled={!validateInputs()}
-        loading={processing}
+        disabled={!isFormValid}
+        loading={isProcessing}
       />
     </Styled.Container>
   );

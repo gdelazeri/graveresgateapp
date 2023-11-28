@@ -1,5 +1,7 @@
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent, act } from "@testing-library/react-native";
 import Input, { INPUT_TYPE } from ".";
+
+jest.useFakeTimers();
 
 describe("Input", () => {
   beforeEach(() => {
@@ -24,6 +26,34 @@ describe("Input", () => {
     fireEvent.changeText(input, "Test value");
 
     expect(onChangeText).toHaveBeenCalledWith("Test value");
+  });
+
+  it("should render correctly with invalid mode", async () => {
+    const onChangeText = jest.fn();
+
+    const { getByTestId, queryByText } = render(
+      <Input
+        label="Label"
+        placeholder="Placeholder"
+        value={""}
+        onChangeText={onChangeText}
+        testID="input-test-id"
+        invalid={true}
+        invalidText="Error message"
+      />,
+    );
+
+    const input = getByTestId("input-test-id");
+
+    await act(async () => {
+      input.props.onFocus();
+    });
+
+    await act(async () => {
+      input.props.onBlur();
+    });
+
+    expect(queryByText("Error message")).toBeDefined();
   });
 
   it("should render correctly with password type", async () => {

@@ -1,20 +1,21 @@
 import axios from "axios";
 import { API_URL } from "../utils/environment";
-import storage, { STORAGE_KEYS } from "../utils/storage";
+import useUser from "../hooks/useUser";
+import { isString } from "../utils/stringHelper";
 
-export interface ApiResponse<ResultType>
-{
+export interface ApiResponse<ResultType> {
   success: boolean;
   error: string | null;
   result: ResultType;
-};
+}
 
 const headers = async () => {
-  const accessToken = await storage.get(STORAGE_KEYS.ACCESS_TOKEN);
+  const { getTokens } = useUser();
+  const { accessToken } = await getTokens();
   return {
-    Authorization: accessToken ? `Bearer ${accessToken}` : ''
-  }
-}
+    Authorization: isString(accessToken) ? `Bearer ${accessToken}` : "",
+  };
+};
 
 export const post = async (url: string, payload: any) => {
   const header = await headers();

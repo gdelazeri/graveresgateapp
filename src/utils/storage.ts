@@ -8,8 +8,8 @@ const set = (key: string, value: string) =>
 const clear = (key: string) => SecureStore.deleteItemAsync(key);
 
 export enum STORAGE_KEYS {
-  ACCESS_TOKEN = 'ACCESS_TOKEN',
-  REFRESH_TOKEN = 'REFRESH_TOKEN',
+  ACCESS_TOKEN = "ACCESS_TOKEN",
+  REFRESH_TOKEN = "REFRESH_TOKEN",
 }
 
 export default { get, set, clear };
