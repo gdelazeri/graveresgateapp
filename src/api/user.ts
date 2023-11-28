@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import request from "./request";
+import { post, ApiResponse } from "./request";
 
 export interface PostRegisterPayload {
   name: string;
@@ -8,18 +8,14 @@ export interface PostRegisterPayload {
   password: string;
 }
 
-interface PostRegisterResponse {
-  success: boolean;
-  error: string | null;
-  result: {
-    accessToken: string;
-    refreshToken: string;
-  }
+interface PostRegisterResult {
+  accessToken: string;
+  refreshToken: string;
 }
 
 export const postRegister = async (payload: PostRegisterPayload) => {
   try {
-    const response: AxiosResponse<PostRegisterResponse> = await request.post(
+    const response: AxiosResponse<ApiResponse<PostRegisterResult>> = await post(
       "/v1/user",
       { ...payload },
     );

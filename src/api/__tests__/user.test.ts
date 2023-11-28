@@ -1,5 +1,5 @@
 import { postRegister } from "../user";
-import request from "../request";
+import { post } from "../request";
 
 jest.mock("../request", () => ({
   post: jest.fn(),
@@ -18,7 +18,7 @@ describe("user", () => {
         data: { accessToken: "accessToken", refreshToken: "refreshToken" },
       };
       // @ts-ignore
-      request.post.mockResolvedValue(responseMock);
+      post.mockResolvedValue(responseMock);
 
       const payload = {
         name: "name",
@@ -34,7 +34,7 @@ describe("user", () => {
 
     it("should register with error", async () => {
       // @ts-ignore
-      request.post.mockRejectedValue({});
+      post.mockRejectedValue({});
 
       const payload = {
         name: "name",
