@@ -7,6 +7,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 import Navigation from "./src/routes";
 import colors from "./src/theme/colors";
 import fonts from "./src/theme/fonts";
+import { UserProvider } from "@context/userContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -33,7 +34,9 @@ export default function App() {
       testID="safe-area-view"
     >
       <StatusBar style="auto" />
-      <Navigation />
+      <UserProvider>
+        <Navigation />
+      </UserProvider>
     </SafeAreaView>
   );
 }

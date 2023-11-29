@@ -2,17 +2,17 @@ import { act, renderHook } from "@testing-library/react-native";
 
 import { postRegister } from "@api/user";
 import { removePhoneMask } from "@utils/stringHelper";
-import useUser from "@hooks/useUser";
 import useSignUp from "@screens/loggedOff/SignUp/useSignUp";
+import { useUserContext } from "@context/userContext";
 
 jest.mock("@api/user", () => ({
   postRegister: jest.fn(),
 }));
-jest.mock("@hooks/useUser", () =>
-  jest.fn().mockImplementation(() => ({
+jest.mock("@context/userContext", () => ({
+  useUserContext: jest.fn().mockImplementation(() => ({
     setTokens: jest.fn(),
   })),
-);
+}));
 
 describe("useSignUp", () => {
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe("useSignUp", () => {
   });
 
   it("should render correctly", async () => {
-    const { result } = renderHook(() => useS());
+    const { result } = renderHook(() => useSignUp());
 
     expect(result.current.fullName).toBe("");
     expect(result.current.email).toBe("");
@@ -39,7 +39,7 @@ describe("useSignUp", () => {
   it("should trigger register method and save tokens", async () => {
     const setTokensMock = jest.fn();
     // @ts-ignore
-    useUser.mockReturnValue({
+    useUserContext.mockReturnValue({
       setTokens: setTokensMock,
     });
 
@@ -79,8 +79,8 @@ describe("useSignUp", () => {
       password: passwordTest,
     });
     expect(setTokensMock).toHaveBeenCalledWith({
-      accessToken: "accessToken",
-      refreshToken: "refreshToken",
+      newAccessToken: "accessToken",
+      newRefreshToken: "refreshToken",
     });
   });
 

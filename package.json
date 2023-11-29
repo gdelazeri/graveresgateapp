@@ -66,6 +66,18 @@
       "!**/node_modules/**",
       "!**/babel.config.js",
       "!**/jest.setup.js"
+    ],
+    "moduleNameMapper": {
+      "@assets/(.*)": "<rootDir>/assets/$1",
+      "@api/(.*)": "<rootDir>/src/api/$1",
+      "@context/(.*)": "<rootDir>/src/context/$1",
+      "@routes/(.*)": "<rootDir>/src/routes/$1",
+      "@screens/(.*)": "<rootDir>/src/screens/$1",
+      "@theme/(.*)": "<rootDir>/src/theme/$1",
+      "@utils/(.*)": "<rootDir>/src/utils/$1"
+    },
+    "modulePaths": [
+      "<rootDir>"
     ]
   },
   "private": true

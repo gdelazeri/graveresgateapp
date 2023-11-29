@@ -2,10 +2,15 @@ enum LoggedOffRoutes {
   STACK = "LoggedOff",
   WELCOME = "Welcome",
   SIGN_UP = "SignUp",
-  SIGN_UP_VERIFICATION = "SignUpVerification",
   SIGN_IN = "SignIn",
+}
+
+enum LoggedInRoutes {
+  STACK = "LoggedIn",
+  HOME = "Home",
 }
 
 export default {
   LoggedOffRoutes,
+  LoggedInRoutes,
 };

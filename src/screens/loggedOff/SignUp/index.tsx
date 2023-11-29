@@ -33,10 +33,6 @@ const SignUp = ({ navigation }: SignUpProps) => {
     register,
   } = useSignUp();
 
-  const onPressContinue = async () => {
-    await register();
-  };
-
   return (
     <Styled.Container>
       <Styled.Form>
@@ -100,7 +96,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
       <Button
         testID="continue-btn"
         title="Continuar"
-        onPress={onPressContinue}
+        onPress={register}
         disabled={!isFormValid}
         loading={isProcessing}
       />

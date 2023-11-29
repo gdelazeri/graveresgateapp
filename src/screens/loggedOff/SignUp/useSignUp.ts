@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { postRegister } from "@api/user";
 import { isEmail, removePhoneMask } from "@utils/stringHelper";
-import useUser from "@hooks/useUser";
+import { useUserContext } from "@context/userContext";
 
 const useSignUp = () => {
   const [fullName, setFullName] = useState("");
@@ -10,7 +10,7 @@ const useSignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
-  const { setTokens } = useUser();
+  const { setTokens } = useUserContext()
 
   const isFullNameValid =
     fullName.length > 3 && fullName.trim().split(" ").length > 1;
@@ -46,12 +46,13 @@ const useSignUp = () => {
     };
 
     const response = await postRegister(payload);
-    setIsProcessing(true);
+
+    setIsProcessing(false);
 
     if (response?.success) {
       await setTokens({
-        accessToken: response.result.accessToken,
-        refreshToken: response.result.refreshToken,
+        newAccessToken: response.result.accessToken,
+        newRefreshToken: response.result.refreshToken,
       });
     }
 

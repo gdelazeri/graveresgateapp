@@ -1,7 +1,8 @@
 import axios from "axios";
 import { API_URL } from "@utils/environment";
-import useUser from "@hooks/useUser";
 import { isString } from "@utils/stringHelper";
+import useUser from "@hooks/useUser";
+import storage, { STORAGE_KEYS } from "@utils/storage";
 
 export interface ApiResponse<ResultType> {
   success: boolean;
@@ -10,8 +11,7 @@ export interface ApiResponse<ResultType> {
 }
 
 const headers = async () => {
-  const { getTokens } = useUser();
-  const { accessToken } = await getTokens();
+  const accessToken = await storage.get(STORAGE_KEYS.ACCESS_TOKEN);
   return {
     Authorization: isString(accessToken) ? `Bearer ${accessToken}` : "",
   };
