@@ -31,8 +31,7 @@ const Navigator = () => {
         )}
       </Stack.Navigator>
     </NavigationContainer>
-  )
-}
-
+  );
+};
 
 export default Navigator;

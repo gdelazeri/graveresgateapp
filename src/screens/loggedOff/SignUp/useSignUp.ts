@@ -10,7 +10,7 @@ const useSignUp = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
-  const { setTokens } = useUserContext()
+  const { setTokens } = useUserContext();
 
   const isFullNameValid =
     fullName.length > 3 && fullName.trim().split(" ").length > 1;

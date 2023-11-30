@@ -22,7 +22,7 @@ describe("request", () => {
   describe("get", () => {
     it("should request a axios.get with access token", async () => {
       // @ts-ignore
-      storage.get.mockResolvedValueOnce('token123');
+      storage.get.mockResolvedValueOnce("token123");
 
       await get("/url");
 
@@ -45,7 +45,7 @@ describe("request", () => {
   describe("post", () => {
     it("should request a axios.post with access token", async () => {
       // @ts-ignore
-      storage.get.mockResolvedValueOnce('token123');
+      storage.get.mockResolvedValueOnce("token123");
 
       await post("/url", { name: "Test" });
 
@@ -76,7 +76,7 @@ describe("request", () => {
   describe("put", () => {
     it("should request a axios.put with access token", async () => {
       // @ts-ignore
-      storage.get.mockResolvedValueOnce('token123');
+      storage.get.mockResolvedValueOnce("token123");
 
       await put("/url/123", { name: "Test" });
 

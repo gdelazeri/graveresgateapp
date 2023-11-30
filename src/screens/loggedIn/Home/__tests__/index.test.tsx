@@ -11,6 +11,6 @@ describe("Home", () => {
       navigate: jest.fn(),
     } as any;
 
-    const { } = render(<Home navigation={navigationMock} />);
+    const {} = render(<Home navigation={navigationMock} />);
   });
 });

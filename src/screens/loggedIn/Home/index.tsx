@@ -8,15 +8,12 @@ interface WelcomeProps {
 }
 
 const Home = ({ navigation }: WelcomeProps) => {
-  const { clearTokens } = useUserContext()
+  const { clearTokens } = useUserContext();
 
   return (
     <Styled.Container>
       <Styled.ImageLogo />
-      <Button
-        title="Fazer logout"
-        onPress={clearTokens}
-      />
+      <Button title="Fazer logout" onPress={clearTokens} />
     </Styled.Container>
   );
 };
