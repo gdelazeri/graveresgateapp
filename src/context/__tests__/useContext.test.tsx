@@ -43,8 +43,8 @@ describe("useUserContext", () => {
   });
 
   it.only("should set new token values", async () => {
-    // @ts-ignore
     storage.get
+      // @ts-ignore
       .mockResolvedValueOnce("tokenAccess123")
       .mockResolvedValueOnce("tokenRefresh123");
 
@@ -73,8 +73,8 @@ describe("useUserContext", () => {
   });
 
   it.only("should get state values", async () => {
-    // @ts-ignore
     storage.get
+      // @ts-ignore
       .mockResolvedValueOnce("tokenAccess123")
       .mockResolvedValueOnce("tokenRefresh123");
 
