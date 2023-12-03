@@ -1,4 +1,4 @@
-import { postRegister } from "@api/user";
+import { postRegister, postLogin } from "@api/user";
 import { post } from "@api/request";
 
 jest.mock("@api/request", () => ({
@@ -44,6 +44,39 @@ describe("user", () => {
       };
 
       const response = await postRegister(payload);
+
+      expect(response).toBe(null);
+    });
+  });
+
+  describe("postLogin", () => {
+    it("should register with success", async () => {
+      const responseMock = {
+        data: { accessToken: "accessToken", refreshToken: "refreshToken" },
+      };
+      // @ts-ignore
+      post.mockResolvedValue(responseMock);
+
+      const payload = {
+        email: "email",
+        password: "password",
+      };
+
+      const response = await postLogin(payload);
+
+      expect(response).toBe(responseMock.data);
+    });
+
+    it("should register with error", async () => {
+      // @ts-ignore
+      post.mockRejectedValue({});
+
+      const payload = {
+        email: "email",
+        password: "password",
+      };
+
+      const response = await postLogin(payload);
 
       expect(response).toBe(null);
     });
