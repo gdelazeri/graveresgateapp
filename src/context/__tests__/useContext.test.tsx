@@ -42,7 +42,7 @@ describe("useUserContext", () => {
     jest.clearAllMocks();
   });
 
-  it.only("should set new token values", async () => {
+  it("should set new token values", async () => {
     storage.get
       // @ts-ignore
       .mockResolvedValueOnce("tokenAccess123")
@@ -72,7 +72,7 @@ describe("useUserContext", () => {
     expect(storage.get).toHaveBeenCalledWith(STORAGE_KEYS.REFRESH_TOKEN);
   });
 
-  it.only("should get state values", async () => {
+  it("should get state values", async () => {
     storage.get
       // @ts-ignore
       .mockResolvedValueOnce("tokenAccess123")

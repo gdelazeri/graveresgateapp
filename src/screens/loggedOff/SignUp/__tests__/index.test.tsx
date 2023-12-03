@@ -3,6 +3,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SignUp from "..";
 import useSignUp from "@screens/loggedOff/SignUp/useSignUp";
 
+jest.useFakeTimers();
+
 jest.mock("@screens/loggedOff/SignUp/useSignUp", () =>
   jest.fn().mockImplementation(() => ({
     register: jest.fn(),
