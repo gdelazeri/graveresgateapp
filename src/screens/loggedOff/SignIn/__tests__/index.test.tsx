@@ -33,9 +33,7 @@ describe("SignIn", () => {
         <SignIn.default navigation={navigationMock} />,
       );
 
-      expect(
-        queryByText("Informe seus dados de acesso:"),
-      ).toBeTruthy();
+      expect(queryByText("Informe seus dados de acesso:")).toBeTruthy();
     });
 
     it("should press continue button with non valid inputs", async () => {

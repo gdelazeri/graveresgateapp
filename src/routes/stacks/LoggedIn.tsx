@@ -9,7 +9,7 @@ const LoggedIn = () => (
     <Stack.Screen
       name={routeMap.LoggedInRoutes.HOME}
       component={HomeScreen.default}
-      options={{ headerShown: false }}
+      options={{ header: HomeScreen.NavHeader }}
     />
   </Stack.Navigator>
 );

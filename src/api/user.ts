@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { post, ApiResponse } from "./request";
+import { post, ApiResponse, get } from "./request";
 
 export interface PostRegisterPayload {
   name: string;
@@ -36,6 +36,35 @@ export const postLogin = async (payload: PostLoginPayload) => {
       "/v1/user/login",
       { ...payload },
     );
+    return response.data;
+  } catch (err) {
+    return null;
+  }
+};
+
+export interface IUser {
+  registrationId: string;
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  permission: UserPermission;
+  status: string;
+  isDriver: boolean;
+  imageUrl: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export enum UserPermission {
+  ADMIN = "ADMIN",
+  VOLUNTARY = "VOLUNTARY",
+  TRAINEE = "TRAINEE",
+}
+
+export const getUserData = async () => {
+  try {
+    const response: AxiosResponse<ApiResponse<IUser>> = await get("/v1/user");
     return response.data;
   } catch (err) {
     return null;

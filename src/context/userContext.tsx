@@ -6,6 +6,7 @@ import {
   useContext,
 } from "react";
 import storage, { STORAGE_KEYS } from "@utils/storage";
+import { IUser, getUserData } from "@api/user";
 
 interface ITokens {
   newAccessToken: string | null;
@@ -13,6 +14,7 @@ interface ITokens {
 }
 
 interface UserContextState {
+  userData: IUser | null;
   accessToken: string | null;
   refreshToken: string | null;
   setTokens: (tokens: ITokens) => Promise<void>;
@@ -24,6 +26,7 @@ type UserContextProps = {
 };
 
 const UserContext = createContext<UserContextState>({
+  userData: null,
   accessToken: "",
   refreshToken: "",
   setTokens: async () => {},
@@ -31,6 +34,7 @@ const UserContext = createContext<UserContextState>({
 });
 
 export const UserProvider = (props: UserContextProps) => {
+  const [userData, setUserData] = useState<IUser | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
 
@@ -42,8 +46,15 @@ export const UserProvider = (props: UserContextProps) => {
     const accessTokenStorage = await storage.get(STORAGE_KEYS.ACCESS_TOKEN);
     const refreshTokenStorage = await storage.get(STORAGE_KEYS.REFRESH_TOKEN);
 
-    if (accessTokenStorage) setAccessToken(accessTokenStorage);
     if (refreshTokenStorage) setRefreshToken(refreshTokenStorage);
+    if (accessTokenStorage) {
+      setAccessToken(accessTokenStorage);
+
+      const userDataResponse = await getUserData();
+      if (userDataResponse?.success) {
+        setUserData(userDataResponse.result);
+      }
+    }
   };
 
   const setTokens = async ({ newAccessToken, newRefreshToken }: ITokens) => {
@@ -52,6 +63,11 @@ export const UserProvider = (props: UserContextProps) => {
 
     await storage.set(STORAGE_KEYS.ACCESS_TOKEN, String(newAccessToken));
     await storage.set(STORAGE_KEYS.REFRESH_TOKEN, String(newRefreshToken));
+
+    const userDataResponse = await getUserData();
+    if (userDataResponse?.success) {
+      setUserData(userDataResponse.result);
+    }
   };
 
   const clearTokens = async () => {
@@ -64,7 +80,7 @@ export const UserProvider = (props: UserContextProps) => {
 
   return (
     <UserContext.Provider
-      value={{ accessToken, refreshToken, setTokens, clearTokens }}
+      value={{ accessToken, refreshToken, setTokens, clearTokens, userData }}
     >
       {props.children}
     </UserContext.Provider>

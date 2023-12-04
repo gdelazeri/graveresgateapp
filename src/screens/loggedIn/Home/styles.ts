@@ -8,14 +8,6 @@ const Container = styled.View`
   background-color: white;
 `;
 
-const ImageLogo = styled.Image.attrs({
-  source: require("@assets/icon.png"),
-})`
-  width: 200px;
-  height: 200px;
-`;
-
 export default {
   Container,
-  ImageLogo,
 };

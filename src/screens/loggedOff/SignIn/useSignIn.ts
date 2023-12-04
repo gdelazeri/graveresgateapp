@@ -13,13 +13,8 @@ const useSignIn = () => {
   const isPasswordValid = password.length >= 8;
 
   const isFormValid = useMemo(
-    () =>
-      isEmailValid &&
-      isPasswordValid,
-    [
-      isEmailValid,
-      isPasswordValid,
-    ],
+    () => isEmailValid && isPasswordValid,
+    [isEmailValid, isPasswordValid],
   );
 
   const login = async () => {

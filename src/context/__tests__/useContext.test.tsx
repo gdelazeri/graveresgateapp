@@ -3,12 +3,17 @@ import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
 import { UserProvider, useUserContext } from "@context/userContext";
 import storage, { STORAGE_KEYS } from "@utils/storage";
 import { Text, TouchableOpacity, View } from "react-native";
+import { getUserData } from "@api/user";
 
 jest.mock("@utils/storage", () => ({
   get: jest.fn(),
   set: jest.fn(),
   clear: jest.fn(),
   STORAGE_KEYS: {},
+}));
+
+jest.mock("@api/user", () => ({
+  getUserData: jest.fn(),
 }));
 
 const TestComponent = () => {
@@ -48,6 +53,15 @@ describe("useUserContext", () => {
       .mockResolvedValueOnce("tokenAccess123")
       .mockResolvedValueOnce("tokenRefresh123");
 
+    // @ts-ignore
+    getUserData.mockResolvedValueOnce({
+      success: true,
+      result: {
+        name: "name",
+        email: "email",
+      },
+    });
+
     const { getByTestId, queryByText } = render(
       <UserProvider>
         <TestComponent />
@@ -70,6 +84,7 @@ describe("useUserContext", () => {
 
     expect(storage.get).toHaveBeenCalledWith(STORAGE_KEYS.ACCESS_TOKEN);
     expect(storage.get).toHaveBeenCalledWith(STORAGE_KEYS.REFRESH_TOKEN);
+    expect(getUserData).toHaveBeenCalled();
   });
 
   it("should get state values", async () => {
@@ -77,6 +92,15 @@ describe("useUserContext", () => {
       // @ts-ignore
       .mockResolvedValueOnce("tokenAccess123")
       .mockResolvedValueOnce("tokenRefresh123");
+
+    // @ts-ignore
+    getUserData.mockResolvedValueOnce({
+      success: true,
+      result: {
+        name: "name",
+        email: "email",
+      },
+    });
 
     const { getByTestId, queryByText } = render(
       <UserProvider>
@@ -102,5 +126,6 @@ describe("useUserContext", () => {
     expect(storage.get).toHaveBeenCalledWith(STORAGE_KEYS.REFRESH_TOKEN);
     expect(storage.clear).toHaveBeenCalledWith(STORAGE_KEYS.ACCESS_TOKEN);
     expect(storage.clear).toHaveBeenCalledWith(STORAGE_KEYS.REFRESH_TOKEN);
+    expect(getUserData).toHaveBeenCalled();
   });
 });

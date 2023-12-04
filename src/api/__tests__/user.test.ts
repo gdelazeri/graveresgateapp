@@ -1,5 +1,5 @@
-import { postRegister, postLogin } from "@api/user";
-import { post } from "@api/request";
+import { postRegister, postLogin, getUserData } from "@api/user";
+import { get, post } from "@api/request";
 
 jest.mock("@api/request", () => ({
   post: jest.fn(),
@@ -77,6 +77,29 @@ describe("user", () => {
       };
 
       const response = await postLogin(payload);
+
+      expect(response).toBe(null);
+    });
+  });
+
+  describe("getUserData", () => {
+    it("should get data with success", async () => {
+      const responseMock = {
+        data: { name: "Test", email: "test@test.com" },
+      };
+      // @ts-ignore
+      get.mockResolvedValue(responseMock);
+
+      const response = await getUserData();
+
+      expect(response).toBe(responseMock.data);
+    });
+
+    it("should get data with error", async () => {
+      // @ts-ignore
+      get.mockRejectedValue({});
+
+      const response = await getUserData();
 
       expect(response).toBe(null);
     });

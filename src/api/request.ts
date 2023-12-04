@@ -1,7 +1,6 @@
 import axios from "axios";
 import { API_URL } from "@utils/environment";
 import { isString } from "@utils/stringHelper";
-import useUser from "@hooks/useUser";
 import storage, { STORAGE_KEYS } from "@utils/storage";
 
 export interface ApiResponse<ResultType> {
