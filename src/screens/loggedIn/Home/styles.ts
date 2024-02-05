@@ -1,11 +1,10 @@
+import colors from "@theme/colors";
 import styled from "styled-components/native";
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   flex: 1;
   padding: 16px;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
+  background-color: ${colors.Greyscale.b98};
 `;
 
 export default {
