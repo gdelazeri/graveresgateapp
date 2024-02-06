@@ -51,8 +51,11 @@ export const UserProvider = (props: UserContextProps) => {
       setAccessToken(accessTokenStorage);
 
       const userDataResponse = await getUserData();
+
       if (userDataResponse?.success) {
         setUserData(userDataResponse.result);
+      } else {
+        clearTokens()
       }
     }
   };
