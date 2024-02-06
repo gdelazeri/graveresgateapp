@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react-native";
 
 import { postLogin } from "@api/user";
-import useSignIn from "@screens/loggedOff/SignIn/useSignIn";
+import useSignIn from "@screens/SignIn/useSignIn";
 import { useUserContext } from "@context/userContext";
 
 jest.mock("@api/user", () => ({

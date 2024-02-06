@@ -2,7 +2,7 @@ import { act, renderHook } from "@testing-library/react-native";
 
 import { postRegister } from "@api/user";
 import { removePhoneMask } from "@utils/stringHelper";
-import useSignUp from "@screens/loggedOff/SignUp/useSignUp";
+import useSignUp from "@screens/SignUp/useSignUp";
 import { useUserContext } from "@context/userContext";
 
 jest.mock("@api/user", () => ({

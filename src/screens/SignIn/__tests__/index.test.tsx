@@ -1,29 +1,19 @@
 import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import * as SignUp from "..";
-import useSignUp from "@screens/loggedOff/SignUp/useSignUp";
+import * as SignIn from "..";
+import useSignIn from "@screens/SignIn/useSignIn";
 
 jest.useFakeTimers();
 
-jest.mock("@screens/loggedOff/SignUp/useSignUp", () =>
+jest.mock("@screens/loggedOff/SignIn/useSignIn.ts", () =>
   jest.fn().mockImplementation(() => ({
-    register: jest.fn(),
-    fullName: "",
-    setFullName: jest.fn(),
+    login: jest.fn(),
     email: "",
     setEmail: jest.fn(),
-    phone: "",
-    setPhone: jest.fn(),
     password: "",
-    setPassword: jest.fn(),
-    passwordConfirm: "",
-    setPasswordConfirm: jest.fn(),
     isProcessing: true,
-    isFullNameValid: true,
     isEmailValid: true,
-    isPhoneValid: true,
     isPasswordValid: true,
-    isPasswordsEqual: true,
     isFormValid: true,
   })),
 );
@@ -32,75 +22,69 @@ const navigationMock = {
   navigate: jest.fn(),
 } as any;
 
-describe("SignUp", () => {
+describe("SignIn", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  describe("SignUp tests", () => {
+  describe("SignIn tests", () => {
     it("should render correctly", async () => {
       const { queryByText } = render(
-        <SignUp.default navigation={navigationMock} />,
+        <SignIn.default navigation={navigationMock} />,
       );
 
-      expect(
-        queryByText("Preencha seus dados nos campos abaixo:"),
-      ).toBeTruthy();
+      expect(queryByText("Informe seus dados de acesso:")).toBeTruthy();
     });
 
     it("should press continue button with non valid inputs", async () => {
-      const registerFunctionMock = jest.fn();
+      const loginFunctionMock = jest.fn();
       // @ts-ignore
-      useSignUp.mockReturnValue({
-        register: registerFunctionMock,
+      useSignIn.mockReturnValue({
+        register: loginFunctionMock,
       });
 
       const { getByTestId } = render(
-        <SignUp.default navigation={navigationMock} />,
+        <SignIn.default navigation={navigationMock} />,
       );
 
       // try to press continue button
       await act(async () => {
-        fireEvent.press(getByTestId("continue-btn"));
+        fireEvent.press(getByTestId("sign-in-btn"));
       });
 
-      expect(registerFunctionMock).not.toHaveBeenCalled();
+      expect(loginFunctionMock).not.toHaveBeenCalled();
       expect(
-        getByTestId("continue-btn").props.accessibilityState.disabled,
+        getByTestId("sign-in-btn").props.accessibilityState.disabled,
       ).toBeTruthy();
     });
 
     it("should fill inputs and press continue button", async () => {
-      const registerFunctionMock = jest.fn();
-      const fullName = "Full Name";
+      const loginFunctionMock = jest.fn();
       const email = "fullname@teste.com";
-      const phone = "(51) 99999-9999";
       const password = "Pass1234";
       const isFormValid = true;
 
       // @ts-ignore
-      useSignUp.mockReturnValueOnce({
-        register: registerFunctionMock,
-        fullName,
+      useSignIn.mockReturnValueOnce({
+        login: loginFunctionMock,
         email,
-        phone,
         password,
         passwordConfirm: password,
         isFormValid,
       });
 
       const { getByTestId } = render(
-        <SignUp.default navigation={navigationMock} />,
+        <SignIn.default navigation={navigationMock} />,
       );
 
       // press continue button
       await act(async () => {
-        fireEvent.press(getByTestId("continue-btn"));
+        fireEvent.press(getByTestId("sign-in-btn"));
       });
 
-      expect(registerFunctionMock).toHaveBeenCalled();
+      expect(loginFunctionMock).toHaveBeenCalled();
       expect(
-        getByTestId("continue-btn").props.accessibilityState.disabled,
+        getByTestId("sign-in-btn").props.accessibilityState.disabled,
       ).toBeFalsy();
     });
   });
@@ -111,11 +95,11 @@ describe("SignUp", () => {
         <SafeAreaProvider
           initialSafeAreaInsets={{ top: 1, left: 2, right: 3, bottom: 4 }}
         >
-          <SignUp.NavHeader navigation={navigationMock} />
+          <SignIn.NavHeader navigation={navigationMock} />
         </SafeAreaProvider>,
       );
 
-      expect(queryByText("Criar conta")).toBeTruthy();
+      expect(queryByText("Fazer login")).toBeTruthy();
     });
   });
 });

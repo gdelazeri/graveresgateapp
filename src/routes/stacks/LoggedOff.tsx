@@ -1,6 +1,6 @@
-import * as WelcomeScreen from "@screens/loggedOff/Welcome";
-import * as SignUpScreen from "@screens/loggedOff/SignUp";
-import * as SignInScreen from "@screens/loggedOff/SignIn";
+import * as WelcomeScreen from "@screens/Welcome";
+import * as SignUpScreen from "@screens/SignUp";
+import * as SignInScreen from "@screens/SignIn";
 import { createStackNavigator } from "@react-navigation/stack";
 import routeMap from "@routes/routeMap";
 
