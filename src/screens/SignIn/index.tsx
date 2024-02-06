@@ -21,6 +21,7 @@ const SignIn = ({ navigation }: SignInProps) => {
     isEmailValid,
     isPasswordValid,
     isFormValid,
+    isError,
     login,
   } = useSignIn();
 
@@ -50,7 +51,14 @@ const SignIn = ({ navigation }: SignInProps) => {
           invalid={!isPasswordValid}
           invalidText="A senha precisa conter pelo menos 8 caracteres"
         />
+        {isError && (
+          <Styled.ErrorMessage>
+            Ocorreu um erro ao tentar fazer login. Verifique suas credenciais e
+            tente novamente.
+          </Styled.ErrorMessage>
+        )}
       </Styled.Form>
+     
       <Button
         testID="sign-in-btn"
         title="Entrar"

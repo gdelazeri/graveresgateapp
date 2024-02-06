@@ -7,6 +7,7 @@ const useSignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isError, setIsError] = useState(false);
   const { setTokens } = useUserContext();
 
   const isEmailValid = isEmail(email);
@@ -19,6 +20,7 @@ const useSignIn = () => {
 
   const login = async () => {
     setIsProcessing(true);
+    setIsError(false)
 
     const payload = {
       email: email.trim(),
@@ -34,6 +36,8 @@ const useSignIn = () => {
         newAccessToken: response.result.accessToken,
         newRefreshToken: response.result.refreshToken,
       });
+    } else {
+      setIsError(true)
     }
 
     return response?.success;
@@ -48,6 +52,7 @@ const useSignIn = () => {
     isEmailValid,
     isPasswordValid,
     isFormValid,
+    isError,
     login,
   };
 };

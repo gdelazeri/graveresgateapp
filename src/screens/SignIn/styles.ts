@@ -20,9 +20,18 @@ const Divider = styled.Text`
   height: 10px;
 `;
 
+const ErrorMessage = styled.Text`
+  font-family: ${fonts.bold};
+  font-size: 14px;
+  color: ${colors.red};
+  text-align: center;
+  margin-top: 30px;
+`;
+
 export default {
   Container,
   Form,
   Title,
   Divider,
+  ErrorMessage
 };

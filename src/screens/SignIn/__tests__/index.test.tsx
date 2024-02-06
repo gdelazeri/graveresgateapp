@@ -1,11 +1,11 @@
-import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
+import { act, fireEvent, render } from "@testing-library/react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as SignIn from "..";
 import useSignIn from "@screens/SignIn/useSignIn";
 
 jest.useFakeTimers();
 
-jest.mock("@screens/loggedOff/SignIn/useSignIn.ts", () =>
+jest.mock("@screens/SignIn/useSignIn.ts", () =>
   jest.fn().mockImplementation(() => ({
     login: jest.fn(),
     email: "",
@@ -15,6 +15,7 @@ jest.mock("@screens/loggedOff/SignIn/useSignIn.ts", () =>
     isEmailValid: true,
     isPasswordValid: true,
     isFormValid: true,
+    isError: false,
   })),
 );
 
@@ -86,6 +87,21 @@ describe("SignIn", () => {
       expect(
         getByTestId("sign-in-btn").props.accessibilityState.disabled,
       ).toBeFalsy();
+    });
+
+    it("should show error message", async () => {
+      // @ts-ignore
+      useSignIn.mockReturnValueOnce({
+        isError: true
+      });
+
+      const { queryByText } = render(
+        <SignIn.default navigation={navigationMock} />,
+      );
+
+      expect(
+        queryByText("Ocorreu um erro ao tentar fazer login. Verifique suas credenciais e tente novamente."),
+      ).toBeTruthy();
     });
   });
 
