@@ -3,6 +3,7 @@ import { useUserContext } from "@context/userContext";
 import Styled from "./styles";
 import Header from "./components/header";
 import Card from "./components/card";
+import routeMap from "@routes/routeMap";
 
 interface WelcomeProps {
   navigation: NavigationProp<ParamListBase>;
@@ -34,7 +35,9 @@ const Home = ({ navigation }: WelcomeProps) => {
         icon={'group'}
         title="Equipe"
         subtitle="Voluntários e carga horária"
-        onPress={() => { clearTokens() }}
+        onPress={() => { 
+          navigation.navigate(routeMap.LoggedInRoutes.USER_LIST)
+        }}
       />
       <Card
         icon={'local-activity'}

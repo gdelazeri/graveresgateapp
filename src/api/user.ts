@@ -43,6 +43,7 @@ export const postLogin = async (payload: PostLoginPayload) => {
 };
 
 export interface IUser {
+  id: string;
   registrationId: string;
   name: string;
   email: string;
@@ -65,6 +66,15 @@ export enum UserPermission {
 export const getUserData = async () => {
   try {
     const response: AxiosResponse<ApiResponse<IUser>> = await get("/v1/user");
+    return response.data;
+  } catch (err) {
+    return null;
+  }
+};
+
+export const listUsers = async () => {
+  try {
+    const response: AxiosResponse<ApiResponse<IUser[]>> = await get("v1/user/list");
     return response.data;
   } catch (err) {
     return null;

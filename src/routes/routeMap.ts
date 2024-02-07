@@ -8,6 +8,7 @@ enum LoggedOffRoutes {
 enum LoggedInRoutes {
   STACK = "LoggedIn",
   HOME = "Home",
+  USER_LIST = "UserList",
 }
 
 export default {
