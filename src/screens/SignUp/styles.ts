@@ -24,7 +24,7 @@ const Title = styled.Text`
 `;
 
 const Divider = styled.Text`
-  height: 10px;
+  height: 16px;
 `;
 
 export default {

@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { TextInput } from "react-native-paper";
 import { KeyboardType } from "react-native";
 import { mask } from "react-native-mask-text";
-import { LabelSizeValue } from "@screens/components/label";
-import fonts from "@theme/fonts";
+import { Icon } from "react-native-elements";
+import Label from "@screens/components/label";
 import colors from "@theme/colors";
 import { isString } from "@utils/stringHelper";
 import Styled from "./styles";
@@ -55,42 +54,38 @@ const Input = ({
 
   return (
     <>
-      <TextInput
-        testID={testID}
-        placeholder={placeholder}
-        label={label}
-        value={
-          type === INPUT_TYPE.PHONE ? mask(value, "(99) 99999-9999") : value
-        }
-        onChangeText={onChangeText}
-        mode={"outlined"}
-        style={{
-          backgroundColor: colors.Greyscale.b100,
-          fontSize: LabelSizeValue.medium,
-          fontFamily: fonts.regular,
-        }}
-        outlineColor={isInvalid ? colors.red : colors.Greyscale.b80}
-        activeOutlineColor={isInvalid ? colors.red : colors.Greyscale.b50}
-        secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
-        autoCapitalize={
-          type === INPUT_TYPE.EMAIL || type === INPUT_TYPE.PASSWORD
-            ? "none"
-            : "sentences"
-        }
-        right={
-          type === INPUT_TYPE.PASSWORD && (
-            <TextInput.Icon
-              onPress={() => setIsSecureTextEnabled(!isSecureTextEnabled)}
-              icon={secureTextEntry ? "eye-outline" : "eye-off-outline"}
+      <Label size={'small'}>{label}</Label>
+      <Styled.Container>
+        <Styled.TextInput
+          testID={testID}
+          placeholder={placeholder}
+          value={
+            type === INPUT_TYPE.PHONE ? mask(value, "(99) 99999-9999") : value
+          }
+          type={type}
+          onChangeText={onChangeText}
+          secureTextEntry={secureTextEntry}
+          keyboardType={keyboardType}
+          autoCapitalize={
+            type === INPUT_TYPE.EMAIL || type === INPUT_TYPE.PASSWORD
+              ? "none"
+              : "sentences"
+          }
+          isInvalid={isInvalid}
+          isFocused={isFocused}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        />
+        {type === INPUT_TYPE.PASSWORD && (
+          <Styled.IconContainer onPress={() => setIsSecureTextEnabled(!isSecureTextEnabled)}>
+            <Icon
+              name={secureTextEntry ? "visibility" : "visibility-off"}
               color={colors.Greyscale.b50}
               testID="icon-secure-entry"
             />
-          )
-        }
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-      />
+          </Styled.IconContainer>
+        )}
+      </Styled.Container>
       {isInvalid && isString(invalidText) && (
         <Styled.ErrorText>{invalidText}</Styled.ErrorText>
       )}

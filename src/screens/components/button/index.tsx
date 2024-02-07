@@ -2,6 +2,7 @@ import { ReactElement } from "react";
 import { Button as RNEButton } from "react-native-elements";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
+import { LabelSizeValue } from "../label";
 
 interface ButtonProps {
   title: string;
@@ -37,7 +38,7 @@ const Button = ({
       }}
       titleStyle={{
         fontFamily: fonts.bold,
-        fontSize: 16,
+        fontSize: LabelSizeValue.medium,
         color: secondary ? colors.red : colors.Greyscale.b100,
       }}
       onPress={onPress}
