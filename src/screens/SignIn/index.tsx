@@ -2,10 +2,11 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 
 import Header from "@screens/components/header";
 import Label from "@screens/components/label";
-import Input, { INPUT_TYPE } from "@screens/components/input";
+import Input from "@screens/components/input";
 import Button from "@screens/components/button";
 import useSignIn from "./useSignIn";
 import Styled from "./styles";
+import { INPUT_TYPE } from "@screens/components/input/types";
 
 interface SignInProps {
   navigation: NavigationProp<ParamListBase>;

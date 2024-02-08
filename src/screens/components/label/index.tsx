@@ -1,14 +1,9 @@
 import fonts from "@theme/fonts";
 import Styled from "./styles";
 import colors from "@theme/colors";
+import { LabelSizeValue } from "./types";
 
 type LabelSizeType = "small" | "medium" | "large";
-
-export enum LabelSizeValue {
-  small = 14,
-  medium = 16,
-  large = 18,
-}
 
 type LabelProps = React.PropsWithChildren<{
   onPress?: () => void;

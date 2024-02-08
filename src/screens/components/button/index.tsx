@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { Button as RNEButton } from "react-native-elements";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
-import { LabelSizeValue } from "../label";
+import { LabelSizeValue } from "../label/types";
 
 interface ButtonProps {
   title: string;

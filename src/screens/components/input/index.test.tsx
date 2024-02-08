@@ -1,5 +1,6 @@
 import { render, fireEvent, act } from "@testing-library/react-native";
-import Input, { INPUT_TYPE } from ".";
+import Input from ".";
+import { INPUT_TYPE } from "./types";
 
 jest.useFakeTimers();
 

@@ -4,10 +4,10 @@ import Header from "@screens/components/header";
 import Styled from "./styles";
 import { useState } from "react";
 import colors from "@theme/colors";
-import { LabelSizeValue } from "@screens/components/label";
 import fonts from "@theme/fonts";
 import { FlatList, Text } from "react-native";
 import { useUserList } from "./useUserList";
+import { LabelSizeValue } from "@screens/components/label/types";
 
 interface WelcomeProps {
   navigation: NavigationProp<ParamListBase>;

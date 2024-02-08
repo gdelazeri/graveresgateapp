@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
 import { TextInputProps } from "react-native";
-import { INPUT_TYPE } from ".";
+import { INPUT_TYPE } from "./types";
 
 const ErrorText = styled.Text`
   color: ${colors.red};

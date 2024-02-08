@@ -6,14 +6,7 @@ import Label from "@screens/components/label";
 import colors from "@theme/colors";
 import { isString } from "@utils/stringHelper";
 import Styled from "./styles";
-
-export enum INPUT_TYPE {
-  DEFAULT,
-  NAME,
-  EMAIL,
-  PHONE,
-  PASSWORD,
-}
+import { INPUT_TYPE } from "./types";
 
 interface InputProps {
   placeholder: string;
