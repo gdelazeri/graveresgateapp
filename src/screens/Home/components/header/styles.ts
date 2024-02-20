@@ -18,30 +18,7 @@ const Title = styled.Text`
   margin-left: 8px;
 `;
 
-const UserIcon = styled(Icon).attrs({
-  name: "account-circle",
-  size: 48,
-  color: colors.Greyscale.b50,
-  containerStyle: {
-    padding: 0,
-    margin: 0
-  }
-})``;
-
-const AvatarContainer = styled.View`
-  border-width: 2px;
-  border-color: ${colors.red};
-  border-radius: 24px;
-  width: 48px;
-  height: 48px;
-  overflow: hidden;
-  align-items: center;
-  justify-content: center;
-`;
-
 export default {
   Header,
   Title,
-  UserIcon,
-  AvatarContainer,
 };

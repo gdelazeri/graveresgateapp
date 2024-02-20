@@ -5,7 +5,7 @@ import Header from "./components/header";
 import Card from "./components/card";
 import routeMap from "@routes/routeMap";
 
-interface WelcomeProps {
+interface HomeProps {
   navigation: NavigationProp<ParamListBase>;
 }
 
@@ -14,7 +14,7 @@ interface WelcomeProps {
 // Livros (Liro on-line e livro de deslocamento)
 // Voluntários ()
 
-const Home = ({ navigation }: WelcomeProps) => {
+const Home = ({ navigation }: HomeProps) => {
   const { clearTokens } = useUserContext();
 
   return (

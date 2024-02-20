@@ -1,20 +1,14 @@
-import { Avatar, Icon } from "react-native-elements";
-import Styled from "./styles";
 import { isString } from "@utils/stringHelper";
 import { useUserContext } from "@context/userContext";
+import Avatar from "@screens/components/avatar";
+import Styled from "./styles";
 
 const Header = () => {
   const { userData } = useUserContext();
 
   return (
     <Styled.Header>
-        {isString(userData?.imageUrl) ? (
-          <Styled.AvatarContainer>
-            <Avatar source={{ uri: userData?.imageUrl }} size={48} />
-          </Styled.AvatarContainer>
-        ) : (
-          <Styled.UserIcon />
-        )}
+     <Avatar imageUrl={userData?.imageUrl} />
       {isString(userData?.name) && (
         <Styled.Title>Olá, {userData?.name}</Styled.Title>
       )}
