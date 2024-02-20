@@ -80,3 +80,12 @@ export const listUsers = async () => {
     return null;
   }
 };
+
+export const getUserById = async (id: string) => {
+  try {
+    const response: AxiosResponse<ApiResponse<IUser>> = await get(`v1/user/getById/${id}`);
+    return response.data;
+  } catch (err) {
+    return null;
+  }
+};

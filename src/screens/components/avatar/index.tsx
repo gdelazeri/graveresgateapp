@@ -4,10 +4,10 @@ import Styled from "./styles";
 
 interface AvatarProps {
   imageUrl?: string;
+  size?: number;
 }
 
-const Avatar = ({ imageUrl }: AvatarProps) => {
-  const size = 48
+const Avatar = ({ imageUrl, size = 48 }: AvatarProps) => {
   if (isString(imageUrl)) {
     return (
       <Styled.AvatarContainer size={size}>

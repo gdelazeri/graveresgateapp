@@ -6,6 +6,7 @@ import Loader from "@screens/components/loader";
 import UserListItem from "./components/UserListItem";
 import { useUserList } from "./useUserList";
 import Styled from "./styles";
+import routeMap from "@routes/routeMap";
 
 interface UserListProps {
   navigation: NavigationProp<ParamListBase>;
@@ -15,7 +16,7 @@ const UserList = ({ navigation }: UserListProps) => {
   const { isLoading, searchQuery, setSearchQuery, list } = useUserList()
 
   const onPressItem = (id: string) => {
-    navigation.navigate('UserDetail', { id })
+    navigation.navigate(routeMap.UserRoutes.USER_DETAILS, { id })
   }
 
   if (isLoading) {

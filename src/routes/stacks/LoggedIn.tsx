@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import * as HomeScreen from "@screens/Home";
-import * as UserListScreen from "@screens/UserList";
+import UserStack from "@routes/stacks/UserStack";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -13,9 +13,9 @@ const LoggedIn = () => (
       options={{ header: HomeScreen.NavHeader }}
     />
     <Stack.Screen
-      name={routeMap.LoggedInRoutes.USER_LIST}
-      component={UserListScreen.default}
-      options={{ header: UserListScreen.NavHeader }}
+      name={routeMap.UserRoutes.STACK}
+      component={UserStack}
+      options={{ headerShown: false }}
     />
   </Stack.Navigator>
 );

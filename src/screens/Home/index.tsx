@@ -36,7 +36,7 @@ const Home = ({ navigation }: HomeProps) => {
         title="Equipe"
         subtitle="Voluntários e carga horária"
         onPress={() => { 
-          navigation.navigate(routeMap.LoggedInRoutes.USER_LIST)
+          navigation.navigate(routeMap.UserRoutes.STACK)
         }}
       />
       <Card
