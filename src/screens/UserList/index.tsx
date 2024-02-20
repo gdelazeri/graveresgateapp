@@ -1,44 +1,39 @@
+import { FlatList } from "react-native";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import { Searchbar } from "react-native-paper";
 import Header from "@screens/components/header";
-import Styled from "./styles";
-import { useState } from "react";
-import colors from "@theme/colors";
-import fonts from "@theme/fonts";
-import { FlatList, Text } from "react-native";
+import SearchBar from "@screens/components/searchBar";
+import Loader from "@screens/components/loader";
+import UserListItem from "./components/UserListItem";
 import { useUserList } from "./useUserList";
-import { LabelSizeValue } from "@screens/components/label/types";
+import Styled from "./styles";
 
-interface WelcomeProps {
+interface UserListProps {
   navigation: NavigationProp<ParamListBase>;
 }
 
-const UserList = ({ navigation }: WelcomeProps) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const { isLoading, list } = useUserList()
+const UserList = ({ navigation }: UserListProps) => {
+  const { isLoading, searchQuery, setSearchQuery, list } = useUserList()
+
+  const onPressItem = (id: string) => {
+    navigation.navigate('UserDetail', { id })
+  }
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Styled.Container>
-      <Searchbar 
-        placeholder="Search"
+      <SearchBar
+        placeholder={'Busque um membro da equipe...'}
         onChangeText={setSearchQuery}
         value={searchQuery}
-        placeholderTextColor={colors.Greyscale.b60}
-        style={{
-          backgroundColor: colors.Greyscale.b100,
-          fontSize: LabelSizeValue.medium,
-          fontFamily: fonts.regular,
-          color: colors.black,
-          borderRadius: 4,
-          borderWidth: 1,
-          borderColor: colors.Greyscale.b80,
-          margin: 16
-        }}
       />
       <FlatList
         data={list}
-        renderItem={({ item }) => <Text>{item.name}</Text>}
+        renderItem={({ item }) => <UserListItem user={item} onPress={() => onPressItem(item.id)} />}
         keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={() => <Styled.Divider />}
       />
     </Styled.Container>
   );
@@ -46,4 +41,6 @@ const UserList = ({ navigation }: WelcomeProps) => {
 
 export default UserList;
 
-export const NavHeader = () => <Header title="Equipe" />;
+export const NavHeader = ({ navigation }: UserListProps) => (
+  <Header onBackPress={navigation.goBack} title="Equipe" />
+);
