@@ -10,6 +10,7 @@ const Text = styled.Text<TextStyledProps>`
   font-family: ${({ fontFamily }: TextStyledProps) => fontFamily};
   font-size: ${({ fontSize }: TextStyledProps) => fontSize}px;
   color: ${({ color }: TextStyledProps) => color};
+  margin-bottom: 2px;
 `;
 
 export default {

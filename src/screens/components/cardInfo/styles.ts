@@ -5,10 +5,15 @@ const Container = styled.View`
   padding: 12px;
   border-radius: 8px;
   background-color: ${colors.Greyscale.b100};
-  border-width: 1;
+  border-width: 1px;
   border-color: ${colors.Greyscale.b90};
+`;
+
+const LabelContainer = styled.View`
+  margin-bottom: 12px;
 `;
 
 export default {
   Container,
+  LabelContainer
 };

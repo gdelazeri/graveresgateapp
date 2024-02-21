@@ -50,7 +50,7 @@ export interface IUser {
   phone: string;
   password: string;
   permission: UserPermission;
-  status: string;
+  status: UserStatus;
   isDriver: boolean;
   imageUrl: string;
   createdAt: Date;
@@ -61,6 +61,13 @@ export enum UserPermission {
   ADMIN = "ADMIN",
   VOLUNTARY = "VOLUNTARY",
   TRAINEE = "TRAINEE",
+}
+
+export enum UserStatus {
+  ACTIVE = 'ACTIVE',
+  PENDING = 'PENDING',
+  SUSPENDED = 'SUSPENDED',
+  DELETED = 'DELETED',
 }
 
 export const getUserData = async () => {
