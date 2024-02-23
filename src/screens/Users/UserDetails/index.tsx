@@ -7,10 +7,10 @@ import Label from "@screens/components/label";
 import Avatar from "@screens/components/avatar";
 import CardInfo from "@screens/components/cardInfo";
 import colors from "@theme/colors";
-import Chip from "@screens/components/chip";
 import UserDetailsStatus from "./components/status";
 import UserDetailsPermission from "./components/permission";
 import UserDetailsDriver from "./components/driver";
+import routeMap from "@routes/routeMap";
 
 interface UserDetailsProps {
   navigation: NavigationProp<ParamListBase>;
@@ -25,17 +25,21 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
   const { id } = route.params
   const { isLoading, user } = useUserDetails(id)
 
+  const onPressEditPersonalInformation = () => {
+    navigation.navigate(routeMap.UserRoutes.USER_EDIT_PERSONAL_INFO, { id });
+  }
+
   if (isLoading) {
     return <Loader />;
   }
 
   return (
     <Styled.Container>
-      <Avatar imageUrl={user?.imageUrl} size={96} />
+      <Avatar imageUrl={user?.imageUrl} size={144} />
 
       <Styled.Divider />
 
-      <CardInfo title="Dados Pessoais">
+      <CardInfo title="Dados Pessoais" onPressEdit={onPressEditPersonalInformation}>
         <Label size='small' color={colors.Greyscale.b50}>Nome</Label>
         <Label size='medium'>{user?.name}</Label>
         <Styled.Divider />
@@ -51,7 +55,7 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
 
       <Styled.Divider />
 
-      <CardInfo title="Perfil de Acesso">
+      <CardInfo title="Perfil" onPressEdit={() => {}}>
         <Label size='small' color={colors.Greyscale.b50}>Status</Label>
         <UserDetailsStatus status={user!.status} />
         <Styled.Divider />

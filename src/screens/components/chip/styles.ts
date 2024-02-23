@@ -20,7 +20,7 @@ const ChipContainer = styled.View<ChipProps>`
 
 const Label = styled.Text`
   color: ${({ color }: ChipProps) => color || colors.black};
-  font-size: ${LabelSizeValue.small};
+  font-size: ${LabelSizeValue.small}px;
   font-family: ${fonts.regular};
 `
 

@@ -11,6 +11,8 @@ const Container = styled.View`
 
 const LabelContainer = styled.View`
   margin-bottom: 12px;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export default {

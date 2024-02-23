@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { post, ApiResponse, get } from "./request";
+import { post, ApiResponse, get, put } from "./request";
 
 export interface PostRegisterPayload {
   name: string;
@@ -91,6 +91,15 @@ export const listUsers = async () => {
 export const getUserById = async (id: string) => {
   try {
     const response: AxiosResponse<ApiResponse<IUser>> = await get(`v1/user/getById/${id}`);
+    return response.data;
+  } catch (err) {
+    return null;
+  }
+};
+
+export const putUserData = async (id: string, payload: any) => {
+  try {
+    const response: AxiosResponse<ApiResponse<IUser>> = await put(`v1/user/${id}`, payload);
     return response.data;
   } catch (err) {
     return null;
