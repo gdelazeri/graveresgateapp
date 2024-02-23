@@ -1,7 +1,8 @@
 import { listUsers } from "@api/user/userApi";
 import { User } from "@api/user/types";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
+import { useFocusEffect } from "@react-navigation/native";
 
 const fuseOptionKey = ['name', 'email']
 const fuseOptions = {
@@ -16,6 +17,7 @@ const fuseOptions = {
 } as IFuseOptions<User>
 
 export const useUserList = () => {
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [allUsers, setAllUsers] = useState<User[]>([]);
@@ -33,28 +35,37 @@ export const useUserList = () => {
     } else {
       setList(allUsers)
     }
-  }, [searchQuery])
+  }, [searchQuery, allUsers])
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
+    const response = await listUsers();
+    if (response?.success) {
+      setAllUsers(response.result);
+    } else {
+      setAllUsers([]);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
       setIsLoading(true);
-      const response = await listUsers();
-      if (response?.success) {
-        setAllUsers(response.result);
-        setList(response.result);
-      } else {
-        setAllUsers([]);
-      }
-      setIsLoading(false);
-    };
+      fetchData()
+        .then(() => setIsLoading(false))
+    }, [])
+  );
 
-    fetchData();
-  }, []);
+  const refresh = () => {
+    setIsRefreshing(true);
+    fetchData()
+      .then(() => setIsRefreshing(false))
+  }
 
   return {
     isLoading,
+    isRefreshing,
     searchQuery,
     setSearchQuery,
-    list
+    list,
+    refresh
   } as const;
 }

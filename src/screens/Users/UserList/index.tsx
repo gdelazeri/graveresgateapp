@@ -1,4 +1,4 @@
-import { FlatList } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import Header from "@screens/components/header";
 import SearchBar from "@screens/components/searchBar";
@@ -16,7 +16,14 @@ interface UserListProps {
 
 const UserList = ({ navigation }: UserListProps) => {
   const { permission } = useUserContext();
-  const { isLoading, searchQuery, setSearchQuery, list } = useUserList()
+  const {
+    isLoading,
+    isRefreshing,
+    searchQuery,
+    setSearchQuery,
+    list,
+    refresh
+  } = useUserList()
 
   const onPressItem = (id: string) => {
     navigation.navigate(routeMap.UserRoutes.USER_DETAILS, { id })
@@ -37,6 +44,7 @@ const UserList = ({ navigation }: UserListProps) => {
       )}
       <FlatList
         data={list}
+        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refresh} />}
         renderItem={({ item }) => (
           <UserListItem
             user={item}
