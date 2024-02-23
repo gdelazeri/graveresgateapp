@@ -39,7 +39,9 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
 
   return (
     <Styled.Container>
-      <Avatar imageUrl={user?.imageUrl} size={144} />
+      <Styled.ContainerAvatar>
+        <Avatar imageUrl={user?.imageUrl} size={144} />
+      </Styled.ContainerAvatar>
 
       <Styled.Divider />
 

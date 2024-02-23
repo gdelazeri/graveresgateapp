@@ -7,7 +7,8 @@ interface AvatarStyleProps {
 }
 
 const UserIcon = styled(Icon).attrs({
-  name: "account-circle",
+  name: "user-circle",
+  type: 'font-awesome',
   color: colors.Greyscale.b50,
   containerStyle: {
     padding: 0,
