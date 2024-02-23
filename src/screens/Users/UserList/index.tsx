@@ -7,12 +7,15 @@ import UserListItem from "./components/UserListItem";
 import { useUserList } from "./useUserList";
 import Styled from "./styles";
 import routeMap from "@routes/routeMap";
+import { useUserContext } from "@context/userContext";
+import { UserPermission } from "@api/user/types";
 
 interface UserListProps {
   navigation: NavigationProp<ParamListBase>;
 }
 
 const UserList = ({ navigation }: UserListProps) => {
+  const { permission } = useUserContext();
   const { isLoading, searchQuery, setSearchQuery, list } = useUserList()
 
   const onPressItem = (id: string) => {
@@ -25,14 +28,16 @@ const UserList = ({ navigation }: UserListProps) => {
 
   return (
     <Styled.Container>
-      <SearchBar
-        placeholder={'Busque um membro da equipe...'}
-        onChangeText={setSearchQuery}
-        value={searchQuery}
-      />
+      {permission === UserPermission.ADMIN && (
+        <SearchBar
+          placeholder={'Busque um membro da equipe...'}
+          onChangeText={setSearchQuery}
+          value={searchQuery}
+        />
+      )}
       <FlatList
         data={list}
-        renderItem={({ item }) => <UserListItem user={item} onPress={() => onPressItem(item.id)} />}
+        renderItem={({ item }) => <UserListItem user={item} onPress={permission === UserPermission.ADMIN ? () => onPressItem(item.id) : undefined} />}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Styled.Divider />}
       />

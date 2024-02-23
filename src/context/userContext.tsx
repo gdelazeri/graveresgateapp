@@ -7,7 +7,7 @@ import {
 } from "react";
 import storage, { STORAGE_KEYS } from "@utils/storage";
 import { getUserData } from "@api/user/userApi";
-import { User } from "@api/user/types";
+import { User, UserPermission } from "@api/user/types";
 
 interface ITokens {
   newAccessToken: string | null;
@@ -16,6 +16,7 @@ interface ITokens {
 
 interface UserContextState {
   userData: User | null;
+  permission: UserPermission | null,
   accessToken: string | null;
   refreshToken: string | null;
   setTokens: (tokens: ITokens) => Promise<void>;
@@ -28,6 +29,7 @@ type UserContextProps = {
 
 const UserContext = createContext<UserContextState>({
   userData: null,
+  permission: null,
   accessToken: "",
   refreshToken: "",
   setTokens: async () => {},
@@ -38,6 +40,7 @@ export const UserProvider = (props: UserContextProps) => {
   const [userData, setUserData] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
+  const [permission, setPermission] = useState<UserPermission | null>(null);
 
   useEffect(() => {
     loadTokens();
@@ -55,6 +58,7 @@ export const UserProvider = (props: UserContextProps) => {
 
       if (userDataResponse?.success) {
         setUserData(userDataResponse.result);
+        setPermission(userDataResponse.result.permission);
       } else {
         clearTokens()
       }
@@ -71,6 +75,7 @@ export const UserProvider = (props: UserContextProps) => {
     const userDataResponse = await getUserData();
     if (userDataResponse?.success) {
       setUserData(userDataResponse.result);
+      setPermission(userDataResponse.result.permission);
     }
   };
 
@@ -84,7 +89,7 @@ export const UserProvider = (props: UserContextProps) => {
 
   return (
     <UserContext.Provider
-      value={{ accessToken, refreshToken, setTokens, clearTokens, userData }}
+      value={{ accessToken, refreshToken, setTokens, clearTokens, userData, permission }}
     >
       {props.children}
     </UserContext.Provider>
