@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react-native";
 
-import { postRegister } from "@api/user";
+import { postRegister } from "@api/user/userApi";
 import { removePhoneMask } from "@utils/stringHelper";
 import useSignUp from "@screens/SignUp/useSignUp";
 import { useUserContext } from "@context/userContext";

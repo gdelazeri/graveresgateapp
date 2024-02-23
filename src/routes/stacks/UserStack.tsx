@@ -2,6 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as UserListScreen from "@screens/Users/UserList";
 import * as UserDetailsScreen from "@screens/Users/UserDetails";
 import * as UserEditPersonalInformationScreen from "@screens/Users/UserEditPersonalInformation";
+import * as UserEditProfileScreen from "@screens/Users/UserEditProfile";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -26,6 +27,13 @@ const LoggedIn = () => (
       component={UserEditPersonalInformationScreen.default}
       // @ts-ignore
       options={{ header: UserEditPersonalInformationScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.UserRoutes.USER_EDIT_PROFILE}
+      // @ts-ignore
+      component={UserEditProfileScreen.default}
+      // @ts-ignore
+      options={{ header: UserEditProfileScreen.NavHeader }}
     />
   </Stack.Navigator>
 );

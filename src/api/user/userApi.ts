@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { post, ApiResponse, get, put } from "./request";
+import { post, ApiResponse, get, put } from "../request";
 
 export interface PostRegisterPayload {
   name: string;
@@ -63,11 +63,24 @@ export enum UserPermission {
   TRAINEE = "TRAINEE",
 }
 
+export const UserPermissionLabel = {
+  [UserPermission.ADMIN]: 'Administrador',
+  [UserPermission.TRAINEE]: 'Estagiario',
+  [UserPermission.VOLUNTARY]: 'Voluntário'
+}
+
 export enum UserStatus {
   ACTIVE = 'ACTIVE',
   PENDING = 'PENDING',
   SUSPENDED = 'SUSPENDED',
   DELETED = 'DELETED',
+}
+
+export const UserStatusLabel = {
+  [UserStatus.ACTIVE]: 'Ativo',
+  [UserStatus.PENDING]: 'Pendente',
+  [UserStatus.SUSPENDED]: 'Suspenso',
+  [UserStatus.DELETED]: 'Excluído',
 }
 
 export const getUserData = async () => {

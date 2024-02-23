@@ -3,7 +3,7 @@ import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
 import { UserProvider, useUserContext } from "@context/userContext";
 import storage, { STORAGE_KEYS } from "@utils/storage";
 import { Text, TouchableOpacity, View } from "react-native";
-import { getUserData } from "@api/user";
+import { getUserData } from "@api/user/userApi";
 
 jest.mock("@utils/storage", () => ({
   get: jest.fn(),

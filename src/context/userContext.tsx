@@ -6,7 +6,7 @@ import {
   useContext,
 } from "react";
 import storage, { STORAGE_KEYS } from "@utils/storage";
-import { IUser, getUserData } from "@api/user";
+import { IUser, getUserData } from "@api/user/userApi";
 
 interface ITokens {
   newAccessToken: string | null;

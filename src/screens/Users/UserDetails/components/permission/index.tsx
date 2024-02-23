@@ -1,12 +1,6 @@
-import { UserPermission } from "@api/user";
+import { UserPermission, UserPermissionLabel } from "@api/user/userApi";
 import Chip from "@screens/components/chip";
 import colors from "@theme/colors";
-
-const PermissionMapperLabel = {
-  [UserPermission.ADMIN]: 'Administrador',
-  [UserPermission.TRAINEE]: 'Estagiario',
-  [UserPermission.VOLUNTARY]: 'Voluntário'
-}
 
 interface UserDetailsPermissionProps {
   permission: UserPermission
@@ -14,9 +8,9 @@ interface UserDetailsPermissionProps {
 
 const UserDetailsPermission = ({ permission }: UserDetailsPermissionProps) => (
   <Chip
-    label={PermissionMapperLabel[permission]}
+    label={UserPermissionLabel[permission]}
     labelColor={colors.black}
-    backgroundColor={colors.Greyscale.b80}
+    backgroundColor={colors.Greyscale.b90}
   />
 )
 

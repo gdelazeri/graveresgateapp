@@ -1,5 +1,5 @@
 import { fireEvent, render } from "@testing-library/react-native";
-import { IUser } from "@api/user";
+import { IUser } from "@api/user/userApi";
 import UserListItem from ".";
 
 describe("UserListItem", () => {

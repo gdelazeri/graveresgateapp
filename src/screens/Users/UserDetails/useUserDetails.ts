@@ -1,4 +1,4 @@
-import { IUser, getUserById } from "@api/user";
+import { IUser, getUserById } from "@api/user/userApi";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback, useEffect, useState } from "react";
 

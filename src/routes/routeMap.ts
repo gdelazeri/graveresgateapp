@@ -15,6 +15,7 @@ enum UserRoutes {
   USER_LIST = "UserList",
   USER_DETAILS = "UserDetails",
   USER_EDIT_PERSONAL_INFO = "UserEditPersonalInfo",
+  USER_EDIT_PROFILE = "UserEditProfile",
 }
 
 export default {

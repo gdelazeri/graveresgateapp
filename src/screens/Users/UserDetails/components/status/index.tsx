@@ -1,25 +1,18 @@
-import { UserStatus } from "@api/user";
+import { UserStatus, UserStatusLabel } from "@api/user/userApi";
 import Chip from "@screens/components/chip";
 import colors from "@theme/colors";
-
-const StatusMapperLabel = {
-  [UserStatus.ACTIVE]: 'Ativo',
-  [UserStatus.PENDING]: 'Pendente',
-  [UserStatus.SUSPENDED]: 'Suspenso',
-  [UserStatus.DELETED]: 'Excluído',
-}
 
 const StatusMapperBackgroundColor = {
   [UserStatus.ACTIVE]: colors.green,
   [UserStatus.PENDING]: colors.yellow,
-  [UserStatus.SUSPENDED]: colors.Greyscale.b50,
+  [UserStatus.SUSPENDED]: colors.red,
   [UserStatus.DELETED]: colors.red,
 }
 
 const StatusMapperLabelColor = {
   [UserStatus.ACTIVE]: colors.Greyscale.b100,
   [UserStatus.PENDING]: colors.black,
-  [UserStatus.SUSPENDED]: colors.black,
+  [UserStatus.SUSPENDED]: colors.Greyscale.b100,
   [UserStatus.DELETED]: colors.Greyscale.b100,
 }
 
@@ -29,7 +22,7 @@ interface UserDetailsStatusProps {
 
 const UserDetailsStatus = ({ status }: UserDetailsStatusProps) => (
   <Chip
-    label={StatusMapperLabel[status]}
+    label={UserStatusLabel[status]}
     labelColor={StatusMapperLabelColor[status]}
     backgroundColor={StatusMapperBackgroundColor[status]}
   />

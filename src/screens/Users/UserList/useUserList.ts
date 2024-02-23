@@ -1,4 +1,4 @@
-import { IUser, listUsers } from "@api/user";
+import { IUser, listUsers } from "@api/user/userApi";
 import { useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
 

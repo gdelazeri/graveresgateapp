@@ -1,26 +1,24 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-
 import Header from "@screens/components/header";
 import Input from "@screens/components/input";
 import Button from "@screens/components/button";
-import { useUserEditPersonalInformation } from "./useUserEditPersonalInformation";
 import { INPUT_TYPE } from "@screens/components/input/types";
+import { IUser } from "@api/user/userApi";
+import { useUserEditPersonalInformation } from "./useUserEditPersonalInformation";
 import Styled from "./styles";
-import Loader from "@screens/components/loader";
 
 interface UserEditPersonalInformationProps {
   navigation: NavigationProp<ParamListBase>;
   route: {
     params: {
-      id: string;
+      user: IUser;
     }
   }
 }
 
 const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInformationProps) => {
-  const { id } = route.params
+  const { user } = route.params
   const {
-    isLoading,
     fullName,
     setFullName,
     email,
@@ -36,17 +34,13 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
     isRegistrationIdValid,
     isFormValid,
     save,
-  } = useUserEditPersonalInformation(id);
+  } = useUserEditPersonalInformation(user);
 
   const onPressSave = async () => {
     const success = await save();
     if (success) {
       navigation.goBack();
     }
-  }
-
-  if (isLoading) {
-    return <Loader />;
   }
 
   return (

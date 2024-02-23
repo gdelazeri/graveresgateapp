@@ -1,4 +1,4 @@
-import { postRegister, postLogin, getUserData } from "@api/user";
+import { postRegister, postLogin, getUserData } from "@api/user/userApi";
 import { get, post } from "@api/request";
 
 jest.mock("@api/request", () => ({

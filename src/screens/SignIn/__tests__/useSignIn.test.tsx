@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react-native";
 
-import { postLogin } from "@api/user";
+import { postLogin } from "@api/user/userApi";
 import useSignIn from "@screens/SignIn/useSignIn";
 import { useUserContext } from "@context/userContext";
 

@@ -1,9 +1,8 @@
-import { getUserById, putUserData } from "@api/user";
+import { IUser, putUserData } from "@api/user/userApi";
 import { isEmail, removePhoneMask } from "@utils/stringHelper";
 import { useEffect, useMemo, useState } from "react";
 
-export const useUserEditPersonalInformation = (id: string) => {
-  const [isLoading, setIsLoading] = useState(true);
+export const useUserEditPersonalInformation = (user: IUser) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,25 +28,16 @@ export const useUserEditPersonalInformation = (id: string) => {
   );
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const response = await getUserById(id);
-      if (response?.success) {
-        setFullName(response.result.name);
-        setEmail(response.result.email);
-        setPhone(response.result.phone);
-        setRegistrationId(response.result.registrationId);
-      }
-      setIsLoading(false);
-    }
-
-    fetchData();
-  }, [id]);
+    setFullName(user.name);
+    setEmail(user.email);
+    setPhone(user.phone);
+    setRegistrationId(user.registrationId);
+  }, [user]);
 
   const save = async () => {
     setIsProcessing(true);
     const response = await putUserData(
-      id,
+      user.id,
       {
         name: fullName,
         email,
@@ -61,7 +51,6 @@ export const useUserEditPersonalInformation = (id: string) => {
   }
 
   return {
-    isLoading,
     isProcessing,
     fullName,
     setFullName,

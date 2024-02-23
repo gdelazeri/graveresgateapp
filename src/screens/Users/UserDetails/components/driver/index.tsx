@@ -9,7 +9,7 @@ const UserDetailsDriver = ({ isDriver }: UserDetailsDriverProps) => (
   <Chip
     label={isDriver ? 'Sim' : 'Não'}
     labelColor={colors.black}
-    backgroundColor={colors.Greyscale.b80}
+    backgroundColor={colors.Greyscale.b90}
   />
 )
 

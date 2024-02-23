@@ -1,4 +1,4 @@
-import { IUser } from "@api/user";
+import { IUser } from "@api/user/userApi";
 import Styled from "./styles";
 import Label from "@screens/components/label";
 import Avatar from "@screens/components/avatar";

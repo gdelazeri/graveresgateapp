@@ -26,7 +26,11 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
   const { isLoading, user } = useUserDetails(id)
 
   const onPressEditPersonalInformation = () => {
-    navigation.navigate(routeMap.UserRoutes.USER_EDIT_PERSONAL_INFO, { id });
+    navigation.navigate(routeMap.UserRoutes.USER_EDIT_PERSONAL_INFO, { user });
+  }
+
+  const onPressEditProfile = () => {
+    navigation.navigate(routeMap.UserRoutes.USER_EDIT_PROFILE, { user });
   }
 
   if (isLoading) {
@@ -55,7 +59,7 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
 
       <Styled.Divider />
 
-      <CardInfo title="Perfil" onPressEdit={() => {}}>
+      <CardInfo title="Perfil" onPressEdit={onPressEditProfile}>
         <Label size='small' color={colors.Greyscale.b50}>Status</Label>
         <UserDetailsStatus status={user!.status} />
         <Styled.Divider />

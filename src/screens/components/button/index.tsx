@@ -35,6 +35,7 @@ const Button = ({
         borderWidth: 1,
         borderColor: colors.red,
         width: "100%",
+        borderRadius: 4,
       }}
       titleStyle={{
         fontFamily: fonts.bold,

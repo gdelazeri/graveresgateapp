@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { postRegister } from "@api/user";
+import { postRegister } from "@api/user/userApi";
 import { isEmail, removePhoneMask } from "@utils/stringHelper";
 import { useUserContext } from "@context/userContext";
 

@@ -22,6 +22,7 @@ const TextInput = styled.TextInput<CustomTextInputProps>`
   font-size: 16px;
   font-family: ${fonts.regular};
   border-width: 1px;
+  border-radius: 4px;
   border-color: ${({ isInvalid, isFocused }: CustomTextInputProps) => isInvalid ? colors.red : (isFocused ? colors.Greyscale.b50 : colors.Greyscale.b80)};
   height: 50px;
   padding: 12px;
