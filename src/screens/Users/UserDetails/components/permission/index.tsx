@@ -1,4 +1,4 @@
-import { UserPermission, UserPermissionLabel } from "@api/user/userApi";
+import { UserPermission, UserPermissionLabel } from "@api/user/types";
 import Chip from "@screens/components/chip";
 import colors from "@theme/colors";
 

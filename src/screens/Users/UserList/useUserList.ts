@@ -1,4 +1,5 @@
-import { IUser, listUsers } from "@api/user/userApi";
+import { listUsers } from "@api/user/userApi";
+import { User } from "@api/user/types";
 import { useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
 
@@ -12,13 +13,13 @@ const fuseOptions = {
     typeof obj[path] === 'string' ? obj[path] : '',
   threshold: 0.2,
   ignoreLocation: true
-} as IFuseOptions<IUser>
+} as IFuseOptions<User>
 
 export const useUserList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [allUsers, setAllUsers] = useState<IUser[]>([]);
-  const [list, setList] = useState<IUser[]>([]);
+  const [allUsers, setAllUsers] = useState<User[]>([]);
+  const [list, setList] = useState<User[]>([]);
 
   const initFuse = useMemo(() => new Fuse(allUsers, fuseOptions), [allUsers])
 

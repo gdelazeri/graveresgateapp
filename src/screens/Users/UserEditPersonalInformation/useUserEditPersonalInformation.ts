@@ -1,8 +1,9 @@
-import { IUser, putUserData } from "@api/user/userApi";
+import { putUserData } from "@api/user/userApi";
+import { User } from "@api/user/types";
 import { isEmail, removePhoneMask } from "@utils/stringHelper";
 import { useEffect, useMemo, useState } from "react";
 
-export const useUserEditPersonalInformation = (user: IUser) => {
+export const useUserEditPersonalInformation = (user: User) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");

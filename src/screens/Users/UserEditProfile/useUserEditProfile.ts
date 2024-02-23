@@ -1,7 +1,8 @@
-import { IUser, UserPermission, UserStatus, putUserData } from "@api/user/userApi";
+import { User, UserPermission, UserStatus } from "@api/user/types";
+import { putUserData } from "@api/user/userApi";
 import { useEffect, useState } from "react";
 
-export const useUserEditProfile = (user: IUser) => {
+export const useUserEditProfile = (user: User) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [status, setStatus] = useState<UserStatus | null>(null);
   const [permission, setPermission] = useState(UserPermission.TRAINEE);

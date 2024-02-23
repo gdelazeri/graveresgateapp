@@ -25,7 +25,7 @@ const Select = ({
   invalid = false,
   invalidText,
 }: SelectProps) => {
-  const [isFocused, setIsFocused] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <>

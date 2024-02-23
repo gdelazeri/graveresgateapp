@@ -1,10 +1,11 @@
-import { IUser, getUserById } from "@api/user/userApi";
+import { getUserById } from "@api/user/userApi";
+import { User } from "@api/user/types";
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 export const useUserDetails = (id: string) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<User>();
 
   useFocusEffect(
     useCallback(() => {

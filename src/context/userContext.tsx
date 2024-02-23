@@ -6,7 +6,8 @@ import {
   useContext,
 } from "react";
 import storage, { STORAGE_KEYS } from "@utils/storage";
-import { IUser, getUserData } from "@api/user/userApi";
+import { getUserData } from "@api/user/userApi";
+import { User } from "@api/user/types";
 
 interface ITokens {
   newAccessToken: string | null;
@@ -14,7 +15,7 @@ interface ITokens {
 }
 
 interface UserContextState {
-  userData: IUser | null;
+  userData: User | null;
   accessToken: string | null;
   refreshToken: string | null;
   setTokens: (tokens: ITokens) => Promise<void>;
@@ -34,7 +35,7 @@ const UserContext = createContext<UserContextState>({
 });
 
 export const UserProvider = (props: UserContextProps) => {
-  const [userData, setUserData] = useState<IUser | null>(null);
+  const [userData, setUserData] = useState<User | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [refreshToken, setRefreshToken] = useState<string | null>(null);
 

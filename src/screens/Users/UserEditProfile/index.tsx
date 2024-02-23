@@ -5,7 +5,7 @@ import Button from "@screens/components/button";
 import { useUserEditProfile } from "./useUserEditProfile";
 import Styled from "./styles";
 import Label from "@screens/components/label";
-import { IUser, UserPermission, UserPermissionLabel, UserStatus, UserStatusLabel } from "@api/user/userApi";
+import { User, UserPermission, UserPermissionLabel, UserStatus, UserStatusLabel } from "@api/user/types";
 import Select from "@screens/components/select";
 import { Switch } from "react-native-elements";
 import colors from "@theme/colors";
@@ -14,7 +14,7 @@ interface UserEditProfileProps {
   navigation: NavigationProp<ParamListBase>;
   route: {
     params: {
-      user: IUser;
+      user: User;
     }
   }
 }

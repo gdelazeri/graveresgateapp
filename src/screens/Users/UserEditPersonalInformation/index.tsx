@@ -3,7 +3,7 @@ import Header from "@screens/components/header";
 import Input from "@screens/components/input";
 import Button from "@screens/components/button";
 import { INPUT_TYPE } from "@screens/components/input/types";
-import { IUser } from "@api/user/userApi";
+import { User } from "@api/user/types";
 import { useUserEditPersonalInformation } from "./useUserEditPersonalInformation";
 import Styled from "./styles";
 
@@ -11,7 +11,7 @@ interface UserEditPersonalInformationProps {
   navigation: NavigationProp<ParamListBase>;
   route: {
     params: {
-      user: IUser;
+      user: User;
     }
   }
 }

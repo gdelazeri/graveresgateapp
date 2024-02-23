@@ -1,4 +1,4 @@
-import { UserStatus, UserStatusLabel } from "@api/user/userApi";
+import { UserStatus, UserStatusLabel } from "@api/user/types";
 import Chip from "@screens/components/chip";
 import colors from "@theme/colors";
 
