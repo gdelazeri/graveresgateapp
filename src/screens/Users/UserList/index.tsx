@@ -37,7 +37,12 @@ const UserList = ({ navigation }: UserListProps) => {
       )}
       <FlatList
         data={list}
-        renderItem={({ item }) => <UserListItem user={item} onPress={permission === UserPermission.ADMIN ? () => onPressItem(item.id) : undefined} />}
+        renderItem={({ item }) => (
+          <UserListItem
+            user={item}
+            onPress={permission === UserPermission.ADMIN ? () => onPressItem(item.id) : undefined}
+          />
+        )}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Styled.Divider />}
       />
