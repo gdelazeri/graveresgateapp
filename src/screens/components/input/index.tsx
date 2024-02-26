@@ -68,6 +68,7 @@ const Input = ({
           isFocused={isFocused}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
+          multiline={type === INPUT_TYPE.TEXT}
         />
         {type === INPUT_TYPE.PASSWORD && (
           <Styled.IconContainer onPress={() => setIsSecureTextEnabled(!isSecureTextEnabled)}>

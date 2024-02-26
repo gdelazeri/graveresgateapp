@@ -18,8 +18,14 @@ enum UserRoutes {
   USER_EDIT_PROFILE = "UserEditProfile",
 }
 
+enum DutyRoutes {
+  STACK = "Duty",
+  CREATE_DUTY_REQUEST = "CreateDutyRequest",
+}
+
 export default {
   LoggedOffRoutes,
   LoggedInRoutes,
-  UserRoutes
+  UserRoutes,
+  DutyRoutes
 };

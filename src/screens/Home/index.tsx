@@ -23,7 +23,9 @@ const Home = ({ navigation }: HomeProps) => {
         icon={'insert-invitation'}
         title="Plantões"
         subtitle="Marcação de plantão e escalas"
-        onPress={() => { clearTokens() }}
+        onPress={() => { 
+          navigation.navigate(routeMap.DutyRoutes.STACK)
+        }}
       />
       <Card
         icon={'list-alt'}

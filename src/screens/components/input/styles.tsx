@@ -24,7 +24,7 @@ const TextInput = styled.TextInput<CustomTextInputProps>`
   border-width: 1px;
   border-radius: 4px;
   border-color: ${({ isInvalid, isFocused }: CustomTextInputProps) => isInvalid ? colors.red : (isFocused ? colors.Greyscale.b50 : colors.Greyscale.b80)};
-  height: 50px;
+  height: ${({ type }: CustomTextInputProps) => type === INPUT_TYPE.TEXT ? 120 : 50}px;
   padding: 12px;
   padding-right: ${({ type }: CustomTextInputProps) => type === INPUT_TYPE.PASSWORD ? 50 : 12}px;
 `;

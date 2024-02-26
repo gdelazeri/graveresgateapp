@@ -7,7 +7,7 @@ import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
 
-const LoggedIn = () => (
+const UserStack = () => (
   <Stack.Navigator>
     <Stack.Screen
       name={routeMap.UserRoutes.USER_LIST}
@@ -38,4 +38,4 @@ const LoggedIn = () => (
   </Stack.Navigator>
 );
 
-export default LoggedIn;
+export default UserStack;
