@@ -30,7 +30,7 @@ const Input = ({
   invalidText,
 }: InputProps) => {
   const [isSecureTextEnabled, setIsSecureTextEnabled] = useState(true);
-  const [isFocused, setIsFocused] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
 
   const secureTextEntry = type === INPUT_TYPE.PASSWORD && isSecureTextEnabled;
   const isInvalid = invalid && !isFocused;

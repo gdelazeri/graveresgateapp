@@ -24,6 +24,7 @@ const HomeCard = ({ icon, title, subtitle, onPress }: HomeCardProps) => (
         width: 0,
         height: 2,
       },
+      backgroundColor: colors.Greyscale.b100,
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
       elevation: 5,

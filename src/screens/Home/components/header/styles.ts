@@ -1,7 +1,6 @@
 import styled from "styled-components/native";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
-import { Icon } from "react-native-elements";
 
 const Header = styled.View`
   padding: 16px;

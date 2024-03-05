@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { postRegister } from "@api/user/userApi";
-import { isString, removePhoneMask } from "@utils/stringHelper";
-import { DutyShift } from "@api/dutyRequest/types";
+import { isString } from "@utils/stringHelper";
+import { DutyPosition, DutyShift } from "@api/dutyRequest/types";
 
 const useDutyRequest = () => {
   const [date, setDate] = useState("");
   const [shift, setShift] = useState<DutyShift | null>(null);
+  const [positions, setPositions] = useState<DutyPosition[]>([]);
   const [note, setNote] = useState("");
  
   const [isProcessing, setIsProcessing] = useState(false);
@@ -29,6 +29,8 @@ const useDutyRequest = () => {
     setDate,
     shift,
     setShift,
+    positions,
+    setPositions,
     note,
     setNote,
     isProcessing,

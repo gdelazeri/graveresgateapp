@@ -8,11 +8,9 @@ import useDutyRequest from "./useDutyRequest";
 import { INPUT_TYPE } from "@screens/components/input/types";
 import Styled from "./styles";
 import DateInput from "@screens/components/dateInput";
-import moment from "moment";
 import Select from "@screens/components/select";
-import { DutyShift, DutyShiftLabel } from "@api/dutyRequest/types";
-import { DISABLE_SPEEDY } from "styled-components/dist/constants";
-import { useEffect, useState } from "react";
+import { DutyPosition, DutyPositionLabel, DutyShift, DutyShiftLabel } from "@api/dutyRequest/types";
+import RadioGroup from "@screens/components/radioGroup";
 
 interface DutyRequestProps {
   navigation: NavigationProp<ParamListBase>;
@@ -24,6 +22,8 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
     setDate,
     shift,
     setShift,
+    positions,
+    setPositions,
     note,
     setNote,
     isProcessing,
@@ -38,10 +38,18 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
       value: value
     }))
 
+  const positionItems = [DutyPosition.LEADER, DutyPosition.DRIVER, DutyPosition.RESCUER, DutyPosition.RADIO_OPERATOR]
+    .map((value) => ({
+      key: value,
+      label: DutyPositionLabel[value as DutyPosition],
+      value: value
+    }))
+
   return (
     <Styled.Container>
       <Styled.Form>
-        <Label size={"medium"}>Preencha os dados para a solicitação de plantão. A marcação não é garantia de vaga na escala.</Label>
+        <Label size={"medium"}>Preencha os dados para a solicitação de plantão.</Label>
+        <Label size={"small"}>A marcação não é garantia de vaga na escala.</Label>
         <Styled.Divider />
         <DateInput
           label="Data do plantão"
@@ -57,6 +65,14 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
           value={shift ? shift.toString() : null}
           onChangeValue={(value) => setShift(value as DutyShift)}
           items={shiftItems}
+        />
+        <Styled.Divider />
+        <RadioGroup
+          label="Posições"
+          items={positionItems}
+          selectedValue={positions}
+          onChangeValue={(value) => setPositions(value as DutyPosition[])}
+          multiple
         />
         <Styled.Divider />
         <Input
@@ -82,5 +98,5 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
 export default DutyRequest;
 
 export const NavHeader = ({ navigation }: DutyRequestProps) => (
-  <Header title="Marcação Plantão" onBackPress={navigation.goBack} />
+  <Header title="Marcação de Plantão" onBackPress={navigation.goBack} />
 );

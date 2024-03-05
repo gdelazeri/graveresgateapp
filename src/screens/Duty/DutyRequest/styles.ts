@@ -2,13 +2,14 @@ import styled from "styled-components/native";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
 
-const Container = styled.View`
+const Container = styled.ScrollView`
   flex: 1;
   padding: 16px;
-  justify-content: space-between;
 `;
 
-const Form = styled.View``;
+const Form = styled.View`
+  margin-bottom: 16px;
+`;
 
 const Title = styled.Text`
   font-family: ${fonts.regular};
