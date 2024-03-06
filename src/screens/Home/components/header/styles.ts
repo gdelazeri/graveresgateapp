@@ -5,7 +5,8 @@ import fonts from "@theme/fonts";
 const Header = styled.View`
   padding: 16px;
   padding-top: 8px;
-  background-color: ${colors.Greyscale.b98};
+  padding-bottom: 8px;
+  background-color: ${colors.Greyscale.b100};
   flex-direction: row;
   align-items: center;
 `;

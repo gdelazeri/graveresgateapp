@@ -7,3 +7,10 @@ export const isEmail = (str: any) =>
   );
 
 export const removePhoneMask = (str: any) => str.replace(/\D+/g, "");
+
+export const getFirstName = (userName: string | undefined) => {
+  if (!isString(userName)) return "";
+
+  const nameSplitted = String(userName).split(" ");
+  return nameSplitted[0];
+}
