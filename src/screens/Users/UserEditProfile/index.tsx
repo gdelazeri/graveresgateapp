@@ -59,8 +59,8 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
     }));
 
   return (
-    <Styled.Container>
-      <Styled.Form>
+    <>
+      <Styled.Container>
         <Select
           label="Status"
           placeholder="Selecione um status"
@@ -96,15 +96,17 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
         <Styled.ContainerSwitch>
           <Switch value={isLeader} onValueChange={(value) => setIsLeader(value)} trackColor={{ true: colors.green }} />
         </Styled.ContainerSwitch>
-      </Styled.Form>
-      <Button
-        testID="save-btn"
-        title="Salvar"
-        onPress={onPressSave}
-        disabled={!isStatusValid || !isPermissionValid}
-        loading={isProcessing}
-      />
-    </Styled.Container>
+      </Styled.Container>
+      <Styled.Footer>
+        <Button
+          testID="save-btn"
+          title="Salvar"
+          onPress={onPressSave}
+          disabled={!isStatusValid || !isPermissionValid}
+          loading={isProcessing}
+        />
+      </Styled.Footer>
+    </>
   );
 };
 

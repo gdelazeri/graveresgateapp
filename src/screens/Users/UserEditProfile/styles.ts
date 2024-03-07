@@ -1,12 +1,17 @@
+import colors from "@theme/colors";
 import styled from "styled-components/native";
 
 const Container = styled.View`
   flex: 1;
   padding: 16px;
-  justify-content: space-between;
 `;
 
-const Form = styled.View``;
+const Footer = styled.View`
+  padding: 16px;
+  background-color: ${colors.Greyscale.b100};
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+`;
 
 const Divider = styled.Text`
   height: 16px;
@@ -18,7 +23,7 @@ const ContainerSwitch = styled.View`
 
 export default {
   Container,
-  Form,
+  Footer,
   Divider,
   ContainerSwitch
 };
