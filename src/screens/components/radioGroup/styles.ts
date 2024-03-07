@@ -14,6 +14,7 @@ const Item = styled.TouchableOpacity`
 `
 
 const ItemLabel = styled.View`
+  margin-top: 2px;
   margin-left: 4px;
 `
 

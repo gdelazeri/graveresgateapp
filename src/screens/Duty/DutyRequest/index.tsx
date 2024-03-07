@@ -4,13 +4,13 @@ import Header from "@screens/components/header";
 import Label from "@screens/components/label";
 import Input from "@screens/components/input";
 import Button from "@screens/components/button";
-import useDutyRequest from "./useDutyRequest";
 import { INPUT_TYPE } from "@screens/components/input/types";
-import Styled from "./styles";
 import DateInput from "@screens/components/dateInput";
 import Select from "@screens/components/select";
-import { DutyPosition, DutyPositionLabel, DutyShift, DutyShiftLabel } from "@api/dutyRequest/types";
+import { DutyPosition, DutyShift } from "@api/dutyRequest/types";
 import RadioGroup from "@screens/components/radioGroup";
+import useDutyRequest from "./useDutyRequest";
+import Styled from "./styles";
 
 interface DutyRequestProps {
   navigation: NavigationProp<ParamListBase>;
@@ -29,25 +29,13 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
     isProcessing,
     isFormValid,
     save,
+    shiftOptions,
+    positionOptions
   } = useDutyRequest();
 
-  const shiftItems = [DutyShift.DAY, DutyShift.NIGHT]
-    .map((value) => ({
-      key: value,
-      label: DutyShiftLabel[value as DutyShift],
-      value: value
-    }))
-
-  const positionItems = [DutyPosition.LEADER, DutyPosition.DRIVER, DutyPosition.RESCUER, DutyPosition.RADIO_OPERATOR]
-    .map((value) => ({
-      key: value,
-      label: DutyPositionLabel[value as DutyPosition],
-      value: value
-    }))
-
   return (
-    <Styled.Container>
-      <Styled.Form>
+    <>
+      <Styled.Container>
         <Label size={"medium"}>Preencha os dados para a solicitação de plantão.</Label>
         <Label size={"small"}>A marcação não é garantia de vaga na escala.</Label>
         <Styled.Divider />
@@ -64,12 +52,12 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
           placeholder="Selecione um turno"
           value={shift ? shift.toString() : null}
           onChangeValue={(value) => setShift(value as DutyShift)}
-          items={shiftItems}
+          items={shiftOptions}
         />
         <Styled.Divider />
         <RadioGroup
           label="Posições"
-          items={positionItems}
+          items={positionOptions}
           selectedValue={positions}
           onChangeValue={(value) => setPositions(value as DutyPosition[])}
           multiple
@@ -82,16 +70,17 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
           onChangeText={(value) => setNote(value)}
           type={INPUT_TYPE.TEXT}
         />
-        
-      </Styled.Form>
-      <Button
-        testID="continue-btn"
-        title="Marcar plantão"
-        onPress={save}
-        disabled={!isFormValid}
-        loading={isProcessing}
-      />
-    </Styled.Container>
+      </Styled.Container>
+      <Styled.Footer>
+        <Button
+          testID="continue-btn"
+          title="Marcar plantão"
+          onPress={save}
+          disabled={!isFormValid}
+          loading={isProcessing}
+        />
+      </Styled.Footer>
+    </>
   );
 };
 

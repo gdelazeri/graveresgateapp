@@ -1,16 +1,55 @@
-import { useState } from "react";
+import moment from "moment";
+import { useEffect, useMemo, useState } from "react";
+import { DutyPosition, DutyPositionLabel, DutyShift, DutyShiftLabel } from "@api/dutyRequest/types";
+import { useUserContext } from "@context/userContext";
 import { isString } from "@utils/stringHelper";
-import { DutyPosition, DutyShift } from "@api/dutyRequest/types";
+import { UserPermission } from "@api/user/types";
 
 const useDutyRequest = () => {
   const [date, setDate] = useState("");
   const [shift, setShift] = useState<DutyShift | null>(null);
   const [positions, setPositions] = useState<DutyPosition[]>([]);
   const [note, setNote] = useState("");
- 
   const [isProcessing, setIsProcessing] = useState(false);
+  const { userData } = useUserContext();
 
-  const isFormValid = isString(date)
+  const isFormValid = isString(date) && shift !== null && positions.length > 0;
+
+  const shiftOptions = useMemo(() => {
+    const optionList = moment(date).weekday() === 4 ? [DutyShift.NIGHT] : [DutyShift.DAY, DutyShift.NIGHT]
+
+    return [...optionList]
+      .map((value) => ({
+        key: value.toString(),
+        label: DutyShiftLabel[value as DutyShift],
+        value: value
+      }))
+  }, [date])
+
+  const positionOptions = useMemo(() => {
+    let optionList = []
+
+    if (userData?.permission === UserPermission.TRAINEE) {
+      optionList = [DutyPosition.TRAINEE]
+    } else {
+      optionList = [DutyPosition.LEADER, DutyPosition.RESCUER, DutyPosition.RADIO_OPERATOR]
+      if (userData?.isDriver) optionList.push(DutyPosition.DRIVER)
+    }
+
+    return [...optionList]
+      .map((value) => ({
+        key: value.toString(),
+        label: DutyPositionLabel[value as DutyPosition],
+        value: value
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label))
+  }, [userData])
+
+  useEffect(() => {
+    if (userData?.permission === UserPermission.TRAINEE) {
+      setPositions([DutyPosition.TRAINEE])
+    }
+  }, [userData])
 
   const save = async () => {
     setIsProcessing(true);
@@ -36,6 +75,8 @@ const useDutyRequest = () => {
     isProcessing,
     isFormValid,
     save,
+    shiftOptions,
+    positionOptions,
   };
 };
 

@@ -1,15 +1,15 @@
 import styled from "styled-components/native";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const Container = styled.ScrollView`
-  flex: 1;
+const Container = styled(KeyboardAwareScrollView)`
   padding: 16px;
 `;
 
-const Form = styled.View`
-  margin-bottom: 16px;
-`;
+const Footer = styled.View`
+  padding: 16px;
+`
 
 const Title = styled.Text`
   font-family: ${fonts.regular};
@@ -23,7 +23,7 @@ const Divider = styled.Text`
 
 export default {
   Container,
-  Form,
+  Footer,
   Title,
   Divider,
 };

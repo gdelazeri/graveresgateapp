@@ -44,8 +44,8 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
   }
 
   return (
-    <Styled.Container>
-      <Styled.Form>
+    <>
+      <Styled.Container>
         <Input
           label="Nome completo"
           placeholder="Nome completo do voluntário"
@@ -89,15 +89,17 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
           invalid={!isRegistrationIdValid}
           invalidText="Número de matrícula inválido"
         />
-      </Styled.Form>
-      <Button
-        testID="save-btn"
-        title="Salvar"
-        onPress={onPressSave}
-        disabled={!isFormValid}
-        loading={isProcessing}
-      />
-    </Styled.Container>
+      </Styled.Container>
+      <Styled.Footer>
+        <Button
+          testID="save-btn"
+          title="Salvar"
+          onPress={onPressSave}
+          disabled={!isFormValid}
+          loading={isProcessing}
+        />
+      </Styled.Footer>
+      </>
   );
 };
 

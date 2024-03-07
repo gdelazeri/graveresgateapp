@@ -1,12 +1,13 @@
 import styled from "styled-components/native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const Container = styled.View`
-  flex: 1;
+const Container = styled(KeyboardAwareScrollView)`
   padding: 16px;
-  justify-content: space-between;
 `;
 
-const Form = styled.View``;
+const Footer = styled.View`
+  padding: 16px;
+`;
 
 const Divider = styled.Text`
   height: 16px;
@@ -14,6 +15,6 @@ const Divider = styled.Text`
 
 export default {
   Container,
-  Form,
+  Footer,
   Divider,
 };
