@@ -11,6 +11,7 @@ import UserDetailsStatus from "./components/status";
 import UserDetailsPermission from "./components/permission";
 import UserDetailsDriver from "./components/driver";
 import routeMap from "@routes/routeMap";
+import UserDetailsLeader from "./components/leader";
 
 interface UserDetailsProps {
   navigation: NavigationProp<ParamListBase>;
@@ -70,6 +71,9 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
         <Styled.Divider />
         <Label size='small' color={colors.Greyscale.b50}>Condutor</Label>
         <UserDetailsDriver isDriver={user!.isDriver} />
+        <Styled.Divider />
+        <Label size='small' color={colors.Greyscale.b50}>Líder</Label>
+        <UserDetailsLeader isLeader={user!.isLeader} />
       </CardInfo>
     </Styled.Container>
   );

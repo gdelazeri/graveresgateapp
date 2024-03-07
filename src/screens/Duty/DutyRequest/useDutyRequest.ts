@@ -32,8 +32,9 @@ const useDutyRequest = () => {
     if (userData?.permission === UserPermission.TRAINEE) {
       optionList = [DutyPosition.TRAINEE]
     } else {
-      optionList = [DutyPosition.LEADER, DutyPosition.RESCUER, DutyPosition.RADIO_OPERATOR]
+      optionList = [DutyPosition.RESCUER, DutyPosition.RADIO_OPERATOR]
       if (userData?.isDriver) optionList.push(DutyPosition.DRIVER)
+      if (userData?.isLeader) optionList.push(DutyPosition.LEADER)
     }
 
     return [...optionList]

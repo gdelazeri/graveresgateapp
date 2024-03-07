@@ -29,6 +29,8 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
     setPermission,
     isDriver,
     setIsDriver,
+    isLeader,
+    setIsLeader,
     isStatusValid,
     isPermissionValid,
     save,
@@ -47,6 +49,7 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
       label: UserStatusLabel[status as UserStatus],
       value: status
     }))
+
   const permissionItems = Object
     .keys(UserPermission)
     .map((permission) => ({
@@ -86,7 +89,13 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
         <Styled.ContainerSwitch>
           <Switch value={isDriver} onValueChange={(value) => setIsDriver(value)} trackColor={{ true: colors.green }} />
         </Styled.ContainerSwitch>
+        
+        <Styled.Divider />
 
+        <Label size={'small'}>Líder</Label>
+        <Styled.ContainerSwitch>
+          <Switch value={isLeader} onValueChange={(value) => setIsLeader(value)} trackColor={{ true: colors.green }} />
+        </Styled.ContainerSwitch>
       </Styled.Form>
       <Button
         testID="save-btn"

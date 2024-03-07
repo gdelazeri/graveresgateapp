@@ -7,6 +7,7 @@ export const useUserEditProfile = (user: User) => {
   const [status, setStatus] = useState<UserStatus | null>(null);
   const [permission, setPermission] = useState(UserPermission.TRAINEE);
   const [isDriver, setIsDriver] = useState(false);
+  const [isLeader, setIsLeader] = useState(false);
 
   const isStatusValid = status !== null;
   const isPermissionValid = permission !== null;
@@ -15,6 +16,7 @@ export const useUserEditProfile = (user: User) => {
     setStatus(user.status);
     setPermission(user.permission);
     setIsDriver(user.isDriver);
+    setIsLeader(user.isLeader);
   }, [user]);
 
   const save = async () => {
@@ -25,6 +27,7 @@ export const useUserEditProfile = (user: User) => {
         status,
         permission,
         isDriver,
+        isLeader,
       }
     )
     setIsProcessing(false);
@@ -40,6 +43,8 @@ export const useUserEditProfile = (user: User) => {
     setPermission,
     isDriver,
     setIsDriver,
+    isLeader,
+    setIsLeader,
     isStatusValid,
     isPermissionValid,
     save,

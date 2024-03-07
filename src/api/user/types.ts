@@ -8,6 +8,7 @@ export type User = {
   permission: UserPermission;
   status: UserStatus;
   isDriver: boolean;
+  isLeader: boolean;
   imageUrl: string;
   createdAt: Date;
   updatedAt: Date;
