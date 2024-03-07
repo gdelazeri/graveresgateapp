@@ -4,10 +4,13 @@ import { DutyPosition, DutyPositionLabel, DutyShift, DutyShiftLabel } from "@api
 import { useUserContext } from "@context/userContext";
 import { isString } from "@utils/stringHelper";
 import { UserPermission } from "@api/user/types";
+import { postDutyRequest } from "@api/dutyRequest/dutyRequestApi";
 
 const useDutyRequest = () => {
   const [date, setDate] = useState("");
   const [shift, setShift] = useState<DutyShift | null>(null);
+  const [startAt, setStartAt] = useState<string | null>(null);
+  const [endAt, setEndAt] = useState<string | null>(null);
   const [positions, setPositions] = useState<DutyPosition[]>([]);
   const [note, setNote] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -56,12 +59,19 @@ const useDutyRequest = () => {
     setIsProcessing(true);
 
     const payload = {
-      date
+      date,
+      shift: shift as DutyShift,
+      startAt: startAt as string,
+      endAt: endAt as string,
+      note,
+      positions,
     };
+
+    const response = await postDutyRequest(payload);
 
     setIsProcessing(false);
 
-    return true;
+    return response !== null
   };
 
   return {
@@ -69,6 +79,10 @@ const useDutyRequest = () => {
     setDate,
     shift,
     setShift,
+    startAt,
+    setStartAt,
+    endAt,
+    setEndAt,
     positions,
     setPositions,
     note,

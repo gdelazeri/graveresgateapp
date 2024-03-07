@@ -21,9 +21,21 @@ const Divider = styled.Text`
   height: 16px;
 `;
 
+const Inline = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const TimeInputContainer = styled.View`
+  width: 50%;
+`
+
 export default {
   Container,
   Footer,
   Title,
   Divider,
+  Inline,
+  TimeInputContainer
 };

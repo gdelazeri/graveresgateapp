@@ -7,10 +7,11 @@ import Button from "@screens/components/button";
 import { INPUT_TYPE } from "@screens/components/input/types";
 import DateInput from "@screens/components/dateInput";
 import Select from "@screens/components/select";
-import { DutyPosition, DutyShift } from "@api/dutyRequest/types";
+import { DutyPosition, DutyShift, DutyShiftTimes } from "@api/dutyRequest/types";
 import RadioGroup from "@screens/components/radioGroup";
 import useDutyRequest from "./useDutyRequest";
 import Styled from "./styles";
+import TimeInput from "@screens/components/timeInput";
 
 interface DutyRequestProps {
   navigation: NavigationProp<ParamListBase>;
@@ -22,6 +23,10 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
     setDate,
     shift,
     setShift,
+    startAt,
+    setStartAt,
+    endAt,
+    setEndAt,
     positions,
     setPositions,
     note,
@@ -33,6 +38,18 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
     positionOptions
   } = useDutyRequest();
 
+  const onChangeShift = (shift: DutyShift) => {
+    setShift(shift);
+    setStartAt(DutyShiftTimes[shift]?.start || null)
+    setEndAt(DutyShiftTimes[shift]?.end || null)
+  }
+
+  const onPressSave = async () => {
+    const success = await save();
+    if (success) {
+      navigation.goBack();
+    }
+  }
   return (
     <>
       <Styled.Container>
@@ -51,9 +68,27 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
           label="Turno"
           placeholder="Selecione um turno"
           value={shift ? shift.toString() : null}
-          onChangeValue={(value) => setShift(value as DutyShift)}
+          onChangeValue={(value) => onChangeShift(value as DutyShift)}
           items={shiftOptions}
         />
+        <Styled.Divider />
+        <Styled.Inline style={{ marginBottom: 4 }}>
+          <Styled.TimeInputContainer style={{ paddingRight: 8 }}>
+            <TimeInput
+              label="Horário de entrada"
+              value={startAt || ""}
+              onChangeValue={(value) => setStartAt(value)}
+            />
+          </Styled.TimeInputContainer>
+          <Styled.TimeInputContainer style={{ paddingLeft: 8 }}>
+            <TimeInput
+              label="Horário de saída"
+              value={endAt || ""}
+              onChangeValue={(value) => setEndAt(value)}
+            />
+          </Styled.TimeInputContainer>
+        </Styled.Inline>
+        <Label size="small">Edite os campos acima caso precise alterar os horários de entrada e saída</Label>
         <Styled.Divider />
         <RadioGroup
           label="Posições"
@@ -75,7 +110,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
         <Button
           testID="continue-btn"
           title="Marcar plantão"
-          onPress={save}
+          onPress={onPressSave}
           disabled={!isFormValid}
           loading={isProcessing}
         />

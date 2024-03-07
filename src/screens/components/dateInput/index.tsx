@@ -1,8 +1,8 @@
+import moment from "moment";
 import { useState } from "react";
 import Label from "@screens/components/label";
 import Styled from "./styles";
 import { isString } from "@utils/stringHelper";
-import moment from "moment";
 import DutyCalendar from "../dutyCalendar";
 import Calendar from "../calendar";
 

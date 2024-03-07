@@ -60,6 +60,11 @@ const Select = ({
               borderColor: isFocused ? colors.Greyscale.b50 : colors.Greyscale.b80,
               height: 50,
               padding: 12,
+            },
+            placeholder: {
+              fontSize: 16,
+              fontFamily: fonts.regular,
+              color: colors.Greyscale.b60
             }
           }}
         />

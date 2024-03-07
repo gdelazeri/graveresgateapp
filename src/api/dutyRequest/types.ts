@@ -8,6 +8,17 @@ export const DutyShiftLabel = {
   [DutyShift.NIGHT]: 'Noite - 19h50min às 8h10min',
 }
 
+export const DutyShiftTimes = {
+  [DutyShift.DAY]: {
+    start: '07:50',
+    end: '20:10',
+  },
+  [DutyShift.NIGHT]: {
+    start: '19:50',
+    end: '08:10',
+  },
+}
+
 export enum DutyPosition {
   DRIVER = 'DRIVER',
   LEADER = 'LEADER',
@@ -22,4 +33,14 @@ export const DutyPositionLabel = {
   [DutyPosition.RESCUER]: 'Socorrista',
   [DutyPosition.RADIO_OPERATOR]: 'Sala de Operações',
   [DutyPosition.TRAINEE]: 'Estagiário',
+}
+
+export type DutyRequest = {
+  id: string;
+  date: string;
+  shift: DutyShift;
+  startAt: Date;
+  endAt: Date;
+  note: string;
+  positions: DutyPosition[];
 }
