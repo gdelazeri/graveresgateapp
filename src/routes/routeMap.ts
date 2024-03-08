@@ -20,6 +20,7 @@ enum UserRoutes {
 
 enum DutyRoutes {
   STACK = "Duty",
+  DUTY_HOME = "DutyHome",
   CREATE_DUTY_REQUEST = "CreateDutyRequest",
 }
 

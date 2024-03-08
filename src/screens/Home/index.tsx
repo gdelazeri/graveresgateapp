@@ -2,7 +2,7 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { useUserContext } from "@context/userContext";
 import Styled from "./styles";
 import Header from "./components/header";
-import Card from "./components/card";
+import Card from "@screens/components/cardListItem";
 import routeMap from "@routes/routeMap";
 
 interface HomeProps {

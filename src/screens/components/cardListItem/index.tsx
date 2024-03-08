@@ -4,13 +4,13 @@ import colors from "@theme/colors";
 import fonts from "@theme/fonts";
 
 interface HomeCardProps {
-  icon: 'insert-invitation' | 'list-alt' | 'group' | 'local-activity';
+  icon?: 'insert-invitation' | 'list-alt' | 'group' | 'local-activity';
   title: string;
   subtitle: string;
   onPress: () => void;
 }
 
-const HomeCard = ({ icon, title, subtitle, onPress }: HomeCardProps) => (
+const CardListItem = ({ icon, title, subtitle, onPress }: HomeCardProps) => (
   <ListItem
     Component={TouchableScale}
     // @ts-ignore
@@ -33,16 +33,16 @@ const HomeCard = ({ icon, title, subtitle, onPress }: HomeCardProps) => (
     onPress={onPress}
     containerStyle={{ borderRadius: 8 }}
   >
-    <Icon name={icon} size={56} color={colors.red} />
+    {icon && <Icon name={icon} size={56} color={colors.red} />}
     <ListItem.Content>
       <ListItem.Title style={{ fontFamily: fonts.bold }}>
         {title}
       </ListItem.Title>
-      <ListItem.Subtitle style={{ fontFamily: fonts.regular }}>
+      <ListItem.Subtitle style={{ fontFamily: fonts.regular, marginTop: 2 }}>
         {subtitle}
       </ListItem.Subtitle>
     </ListItem.Content>
   </ListItem>
 );
 
-export default HomeCard;
+export default CardListItem;

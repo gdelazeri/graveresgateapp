@@ -54,7 +54,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
     <>
       <Styled.Container>
         <Label size={"medium"}>Preencha os dados para a solicitação de plantão.</Label>
-        <Label size={"small"}>A marcação não é garantia de vaga na escala.</Label>
+        <Label size={"small"}>A solicitação não é garantia de vaga na escala.</Label>
         <Styled.Divider />
         <DateInput
           label="Data do plantão"
@@ -109,7 +109,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
       <Styled.Footer>
         <Button
           testID="continue-btn"
-          title="Marcar plantão"
+          title="Enviar solicitação"
           onPress={onPressSave}
           disabled={!isFormValid}
           loading={isProcessing}
