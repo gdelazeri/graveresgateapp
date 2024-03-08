@@ -1,5 +1,4 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import { useUserContext } from "@context/userContext";
 import Styled from "./styles";
 import Header from "./components/header";
 import Card from "@screens/components/cardListItem";
@@ -15,8 +14,6 @@ interface HomeProps {
 // Voluntários ()
 
 const Home = ({ navigation }: HomeProps) => {
-  const { clearTokens } = useUserContext();
-
   return (
     <Styled.Container>
       <Card
@@ -31,7 +28,7 @@ const Home = ({ navigation }: HomeProps) => {
         icon={'list-alt'}
         title="Formulários"
         subtitle="Fichas, livros e checklists"
-        onPress={() => { clearTokens() }}
+        onPress={() => { }}
       />
       <Card
         icon={'group'}
@@ -45,7 +42,7 @@ const Home = ({ navigation }: HomeProps) => {
         icon={'local-activity'}
         title="Eventos"
         subtitle="Informações sobre eventos e fotos"
-        onPress={() => { clearTokens() }}
+        onPress={() => { }}
       />
     </Styled.Container>
   );
