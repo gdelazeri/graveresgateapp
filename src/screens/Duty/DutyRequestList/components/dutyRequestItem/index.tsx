@@ -32,7 +32,6 @@ const DutyRequestItem = ({ item, onPress }: DutyRequestItemProps) => (
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
       elevation: 5,
-      marginBottom: 24
     }}
     onPress={onPress}
     containerStyle={{ borderRadius: 8 }}

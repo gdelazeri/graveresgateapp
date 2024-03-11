@@ -5,6 +5,7 @@ import Header from "@screens/components/header";
 import useDutyRequestList from "./useDutyRequestList";
 import DutyRequestItem from "./components/dutyRequestItem";
 import routeMap from "@routes/routeMap";
+import Styled from "./styles";
 
 interface DutyRequestListProps {
   navigation: NavigationProp<ParamListBase>;
@@ -19,6 +20,8 @@ const DutyRequestList = ({ navigation }: DutyRequestListProps) => {
     <FlatList
       data={list}
       contentContainerStyle={{ padding: 16 }}
+      keyExtractor={(item) => item.id}
+      ItemSeparatorComponent={() => <Styled.Divider />}
       renderItem={({ item }) => (
         <DutyRequestItem
           item={item}
