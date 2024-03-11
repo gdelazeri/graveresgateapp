@@ -19,7 +19,10 @@ const useDutyRequest = () => {
   const isFormValid = isString(date) && shift !== null && positions.length > 0;
 
   const shiftOptions = useMemo(() => {
-    const optionList = moment(date).weekday() === 4 ? [DutyShift.NIGHT] : [DutyShift.DAY, DutyShift.NIGHT]
+    let optionList = [DutyShift.DAY, DutyShift.NIGHT]
+
+    if (moment(date).weekday() === 4) optionList = [DutyShift.NIGHT]
+    if (moment(date).weekday() === 0) optionList = [DutyShift.DAY]
 
     return [...optionList]
       .map((value) => ({
@@ -71,7 +74,7 @@ const useDutyRequest = () => {
 
     setIsProcessing(false);
 
-    return response !== null
+    return response?.result
   };
 
   return {

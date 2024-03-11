@@ -39,3 +39,11 @@ export const get = async (url: string) => {
     headers: header,
   });
 };
+
+export const remove = async (url: string) => {
+  const header = await headers();
+  return axios.delete(url, {
+    baseURL: API_URL,
+    headers: header,
+  });
+};

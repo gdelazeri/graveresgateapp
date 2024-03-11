@@ -23,7 +23,7 @@ const DutyRequestList = ({ navigation }: DutyRequestListProps) => {
         <DutyRequestItem
           item={item}
           onPress={() => {
-            navigation.navigate(routeMap.DutyRoutes.CREATE_DUTY_REQUEST, { id: item.id })
+            navigation.navigate(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: item.id })
           }}
         />
       )}

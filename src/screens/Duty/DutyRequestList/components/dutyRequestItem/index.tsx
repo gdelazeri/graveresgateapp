@@ -1,4 +1,4 @@
-import { DutyPositionLabel, DutyRequestListItem, DutyRequestStatus, DutyRequestStatusLabel, DutyShiftLabel } from "@api/dutyRequest/types";
+import { DutyRequestListItem, DutyRequestStatus, DutyRequestStatusLabel, DutyShiftLabel } from "@api/dutyRequest/types";
 import TouchableScale from 'react-native-touchable-scale'; 
 import { ListItem } from "react-native-elements";
 import colors from "@theme/colors";
@@ -6,8 +6,8 @@ import fonts from "@theme/fonts";
 import { LabelSizeValue } from "@screens/components/label/types";
 import moment from "moment";
 import Chip from "@screens/components/chip";
-import Styled from "./styles";
 import { isString } from "@utils/stringHelper";
+import DutyRequestPositions from "@screens/components/dutyRequestPositions";
 
 interface DutyRequestItemProps {
   item: DutyRequestListItem;
@@ -41,18 +41,7 @@ const DutyRequestItem = ({ item, onPress }: DutyRequestItemProps) => (
       <ListItem.Title style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}>
         {moment(item.date).format('DD/MM/YYYY')} - {DutyShiftLabel[item.shift]}
       </ListItem.Title>
-      <Styled.PositionContainer>
-        {item.positions.map((position, index) => (
-          <Styled.PositionItem key={`${item.id}_position_${index}`}>
-            <Chip
-              testID={`${item.id}_position_${index}`}
-              label={DutyPositionLabel[position]}
-              labelColor={colors.Greyscale.b100}
-              backgroundColor={colors.red}
-            />
-          </Styled.PositionItem>
-        ))}
-      </Styled.PositionContainer>
+      <DutyRequestPositions id={item.id} positions={item.positions} />
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }}>
         Das {item.startAt.substring(0, 5)} às {item.endAt.substring(0, 5)}
       </ListItem.Subtitle>
@@ -63,7 +52,7 @@ const DutyRequestItem = ({ item, onPress }: DutyRequestItemProps) => (
       )}
     </ListItem.Content>
     <Chip
-      label={DutyRequestStatusLabel[DutyRequestStatus.PENDING]}
+      label={DutyRequestStatusLabel[item.status]}
       labelColor={item.status === DutyRequestStatus.APPROVED ? colors.Greyscale.b100 : colors.black}
       backgroundColor={item.status === DutyRequestStatus.APPROVED ? colors.green : colors.yellow}
     />

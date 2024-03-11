@@ -1,5 +1,4 @@
-import { NavigationProp, ParamListBase } from "@react-navigation/native";
-
+import { NavigationProp, ParamListBase, StackActions } from "@react-navigation/native";
 import Header from "@screens/components/header";
 import Label from "@screens/components/label";
 import Input from "@screens/components/input";
@@ -12,6 +11,7 @@ import RadioGroup from "@screens/components/radioGroup";
 import useDutyRequest from "./useDutyRequest";
 import Styled from "./styles";
 import TimeInput from "@screens/components/timeInput";
+import routeMap from "@routes/routeMap";
 
 interface DutyRequestProps {
   navigation: NavigationProp<ParamListBase>;
@@ -45,9 +45,12 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
   }
 
   const onPressSave = async () => {
-    const success = await save();
-    if (success) {
-      navigation.goBack();
+    const dutyRequestCreated = await save();
+
+    if (dutyRequestCreated) {
+      navigation.dispatch(
+        StackActions.replace(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: dutyRequestCreated.id })
+      );
     }
   }
   return (
