@@ -22,15 +22,18 @@ const DutyCalendar = ({ visible, value, onChangeValue, onClose }: CalendarProps)
   const [month, setMonth] = useState(Number(moment().format('MM')))
 
   useEffect(() => {
-    const date = moment().set('month', month-1).startOf('month')
+    const date = moment().set('month', month-1).startOf('month').subtract(15, 'days')
     const marked: MarkedDatesType = {}
+    let counterDays = 0
+    const maxDays = 45
 
-    while (date.month() === month-1) {
-      if ([1,2,3].includes(date.weekday())) {
+    while (counterDays < maxDays) {
+      if ([1,2,3].includes(date.weekday()) || date.isBefore(moment(), 'day')) {
         const day = date.format('YYYY-MM-DD')
         marked[day] = { disabled: true, disableTouchEvent: true }
       }
       date.add(1, 'days')
+      counterDays += 1
     }
     setMarkedDates(marked)
   }, [month])
