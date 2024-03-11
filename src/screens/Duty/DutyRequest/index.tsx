@@ -49,7 +49,10 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
 
     if (dutyRequestCreated) {
       navigation.dispatch(
-        StackActions.replace(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: dutyRequestCreated.id })
+        StackActions.replace(routeMap.DutyRoutes.LIST_DUTY_REQUEST)
+      );
+      navigation.dispatch(
+        StackActions.push(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: dutyRequestCreated.id })
       );
     }
   }

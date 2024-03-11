@@ -12,14 +12,14 @@ interface DutyHomeProps {
 const DutyHome = ({ navigation }: DutyHomeProps) => (
   <Styled.Container>
     <CardListItem
-      title="Marcar plantão"
-      subtitle="Preencha o formulário para solicitar seu plantão"
-      onPress={() => { navigation.navigate(routeMap.DutyRoutes.CREATE_DUTY_REQUEST) }}
-    />
-    <CardListItem
       title="Escala de plantão"
       subtitle="Veja as escalas disponíveis"
       onPress={() => { }}
+    />
+    <CardListItem
+      title="Marcar plantão"
+      subtitle="Preencha o formulário para solicitar seu plantão"
+      onPress={() => { navigation.navigate(routeMap.DutyRoutes.CREATE_DUTY_REQUEST) }}
     />
     <CardListItem
       title="Minhas solicitações"
