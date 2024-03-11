@@ -24,6 +24,7 @@ enum DutyRoutes {
   CREATE_DUTY_REQUEST = "CreateDutyRequest",
   LIST_DUTY_REQUEST = "ListDutyRequest",
   DUTY_REQUEST_DETAILS = "DutyRequestDetails",
+  SCHEDULE = "Schedule",
 }
 
 export default {

@@ -14,7 +14,7 @@ const DutyHome = ({ navigation }: DutyHomeProps) => (
     <CardListItem
       title="Escala de plantão"
       subtitle="Veja as escalas disponíveis"
-      onPress={() => { }}
+      onPress={() => { navigation.navigate(routeMap.DutyRoutes.SCHEDULE) }}
     />
     <CardListItem
       title="Marcar plantão"

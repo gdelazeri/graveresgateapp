@@ -3,6 +3,7 @@ import * as DutyHomeScreen from "@screens/Duty/DutyHome";
 import * as DutyRequestScreen from "@screens/Duty/DutyRequest";
 import * as DutyRequestListScreen from "@screens/Duty/DutyRequestList";
 import * as DutyRequestDetailsScreen from "@screens/Duty/DutyRequestDetails";
+import * as ScheduleScreen from "@screens/Duty/Schedule";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -30,6 +31,11 @@ const DutyStack = () => (
       component={DutyRequestDetailsScreen.default}
       // @ts-ignore
       options={{ header: DutyRequestDetailsScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.DutyRoutes.SCHEDULE}
+      component={ScheduleScreen.default}
+      options={{ header: ScheduleScreen.NavHeader }}
     />
   </Stack.Navigator>
 );
