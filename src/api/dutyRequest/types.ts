@@ -4,6 +4,11 @@ export enum DutyShift {
 }
 
 export const DutyShiftLabel = {
+  [DutyShift.DAY]: 'Dia',
+  [DutyShift.NIGHT]: 'Noite',
+}
+
+export const DutyShiftLabelTimes = {
   [DutyShift.DAY]: 'Dia - 7h50min às 20h10min',
   [DutyShift.NIGHT]: 'Noite - 19h50min às 8h10min',
 }
@@ -35,12 +40,26 @@ export const DutyPositionLabel = {
   [DutyPosition.TRAINEE]: 'Estagiário',
 }
 
+export enum DutyRequestStatus {
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED'
+}
+
+export const DutyRequestStatusLabel = {
+  [DutyRequestStatus.PENDING]: 'Pendente',
+  [DutyRequestStatus.APPROVED]: 'Aprovado'
+}
+
 export type DutyRequest = {
   id: string;
   date: string;
   shift: DutyShift;
-  startAt: Date;
-  endAt: Date;
+  startAt: string;
+  endAt: string;
   note: string;
   positions: DutyPosition[];
+}
+
+export interface DutyRequestListItem extends DutyRequest {
+  status: DutyRequestStatus
 }

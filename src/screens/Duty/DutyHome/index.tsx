@@ -24,7 +24,7 @@ const DutyHome = ({ navigation }: DutyHomeProps) => (
     <CardListItem
       title="Minhas solicitações"
       subtitle="Acompanhe as suas solicitações de plantão"
-      onPress={() => { navigation.navigate(routeMap.DutyRoutes.CREATE_DUTY_REQUEST) }}
+      onPress={() => { navigation.navigate(routeMap.DutyRoutes.LIST_DUTY_REQUEST) }}
     />
   </Styled.Container>
 );

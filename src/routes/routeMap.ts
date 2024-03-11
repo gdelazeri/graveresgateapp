@@ -22,6 +22,7 @@ enum DutyRoutes {
   STACK = "Duty",
   DUTY_HOME = "DutyHome",
   CREATE_DUTY_REQUEST = "CreateDutyRequest",
+  LIST_DUTY_REQUEST = "ListDutyRequest",
 }
 
 export default {

@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
-import { post, ApiResponse } from "../request";
-import { DutyPosition, DutyRequest, DutyShift } from "./types";
+import { post, ApiResponse, get } from "../request";
+import { DutyPosition, DutyRequest, DutyRequestListItem, DutyShift } from "./types";
 
 export interface PostDutyRequestPayload {
   date: string;
@@ -16,6 +16,17 @@ export const postDutyRequest = async (payload: PostDutyRequestPayload) => {
     const response: AxiosResponse<ApiResponse<DutyRequest>> = await post(
       "/v1/duty-request",
       { ...payload },
+    );
+    return response.data;
+  } catch (err) {
+    return null;
+  }
+};
+
+export const getDutyRequests = async () => {
+  try {
+    const response: AxiosResponse<ApiResponse<DutyRequestListItem[]>> = await get(
+      "/v1/duty-request/requests",
     );
     return response.data;
   } catch (err) {

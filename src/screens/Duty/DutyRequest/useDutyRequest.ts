@@ -1,6 +1,6 @@
 import moment from "moment";
 import { useEffect, useMemo, useState } from "react";
-import { DutyPosition, DutyPositionLabel, DutyShift, DutyShiftLabel } from "@api/dutyRequest/types";
+import { DutyPosition, DutyPositionLabel, DutyShift, DutyShiftLabelTimes } from "@api/dutyRequest/types";
 import { useUserContext } from "@context/userContext";
 import { isString } from "@utils/stringHelper";
 import { UserPermission } from "@api/user/types";
@@ -24,7 +24,7 @@ const useDutyRequest = () => {
     return [...optionList]
       .map((value) => ({
         key: value.toString(),
-        label: DutyShiftLabel[value as DutyShift],
+        label: DutyShiftLabelTimes[value as DutyShift],
         value: value
       }))
   }, [date])
