@@ -74,7 +74,7 @@ const useDutyRequest = () => {
 
     setIsProcessing(false);
 
-    return response?.result
+    return response
   };
 
   return {

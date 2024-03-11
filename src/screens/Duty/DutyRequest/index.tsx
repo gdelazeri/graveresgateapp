@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import { NavigationProp, ParamListBase, StackActions } from "@react-navigation/native";
 import Header from "@screens/components/header";
 import Label from "@screens/components/label";
@@ -6,12 +7,12 @@ import Button from "@screens/components/button";
 import { INPUT_TYPE } from "@screens/components/input/types";
 import DateInput from "@screens/components/dateInput";
 import Select from "@screens/components/select";
-import { DutyPosition, DutyShift, DutyShiftTimes } from "@api/dutyRequest/types";
+import { DutyPosition, DutyRequestErrorCode, DutyRequestErrorCodeMessage, DutyShift, DutyShiftTimes } from "@api/dutyRequest/types";
 import RadioGroup from "@screens/components/radioGroup";
-import useDutyRequest from "./useDutyRequest";
-import Styled from "./styles";
 import TimeInput from "@screens/components/timeInput";
 import routeMap from "@routes/routeMap";
+import useDutyRequest from "./useDutyRequest";
+import Styled from "./styles";
 
 interface DutyRequestProps {
   navigation: NavigationProp<ParamListBase>;
@@ -45,15 +46,27 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
   }
 
   const onPressSave = async () => {
-    const dutyRequestCreated = await save();
+    const response = await save();
 
-    if (dutyRequestCreated) {
+    if (response.success && response.result) {
       navigation.dispatch(
         StackActions.replace(routeMap.DutyRoutes.LIST_DUTY_REQUEST)
       );
       navigation.dispatch(
-        StackActions.push(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: dutyRequestCreated.id })
+        StackActions.push(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: response.result.id })
       );
+    } else if (response.error === DutyRequestErrorCode.DutyRequestExistent) {
+      Alert.alert(
+        'Erro ao solicitar plantão',
+        DutyRequestErrorCodeMessage[response.error],
+        [{ text: 'OK' }]
+      )
+    } else {
+      Alert.alert(
+        'Erro ao solicitar plantão',
+        'Ocorreu algum erro ao solicitar o plantão, tente novamente.',
+        [{ text: 'OK' }]
+      )
     }
   }
   return (

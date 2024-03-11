@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { post, ApiResponse, get, remove } from "../request";
 import { DutyPosition, DutyRequest, DutyRequestListItem, DutyShift } from "./types";
 
@@ -18,8 +18,9 @@ export const postDutyRequest = async (payload: PostDutyRequestPayload) => {
       { ...payload },
     );
     return response.data;
-  } catch (err) {
-    return null;
+  } catch (err: any) {
+    const error = err as AxiosError<ApiResponse<DutyRequest>>;
+    return error.response!.data;
   }
 };
 
@@ -29,8 +30,9 @@ export const getDutyRequests = async () => {
       "/v1/duty-request/requests",
     );
     return response.data;
-  } catch (err) {
-    return null;
+  } catch (err: any) {
+    const error = err as AxiosError<ApiResponse<DutyRequestListItem[]>>;
+    return error.response!.data;
   }
 };
 
@@ -40,8 +42,9 @@ export const getDutyRequestDetails = async (id: string) => {
       `/v1/duty-request/getById/${id}`,
     );
     return response.data;
-  } catch (err) {
-    return null;
+  } catch (err: any) {
+    const error = err as AxiosError<ApiResponse<DutyRequestListItem>>;
+    return error.response!.data;
   }
 };
 
@@ -51,7 +54,8 @@ export const deleteDutyRequest = async (id: string) => {
       `/v1/duty-request/${id}`,
     );
     return response.data;
-  } catch (err) {
-    return null;
+  } catch (err: any) {
+    const error = err as AxiosError<ApiResponse<boolean>>;
+    return error.response!.data;
   }
 };

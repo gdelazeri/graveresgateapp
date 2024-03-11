@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { post, ApiResponse, get, put } from "../request";
 import { User } from "./types";
 
@@ -22,7 +22,8 @@ export const postRegister = async (payload: PostRegisterPayload) => {
     );
     return response.data;
   } catch (err) {
-    return null;
+    const error = err as AxiosError<ApiResponse<TokenResult>>;
+    return error.response!.data;
   }
 };
 
@@ -39,7 +40,8 @@ export const postLogin = async (payload: PostLoginPayload) => {
     );
     return response.data;
   } catch (err) {
-    return null;
+    const error = err as AxiosError<ApiResponse<TokenResult>>;
+    return error.response!.data;
   }
 };
 
@@ -48,7 +50,8 @@ export const getUserData = async () => {
     const response: AxiosResponse<ApiResponse<User>> = await get("/v1/user");
     return response.data;
   } catch (err) {
-    return null;
+    const error = err as AxiosError<ApiResponse<User>>;
+    return error.response!.data;
   }
 };
 
@@ -57,7 +60,8 @@ export const listUsers = async () => {
     const response: AxiosResponse<ApiResponse<User[]>> = await get("v1/user/list");
     return response.data;
   } catch (err) {
-    return null;
+    const error = err as AxiosError<ApiResponse<User[]>>;
+    return error.response!.data;
   }
 };
 
@@ -66,7 +70,8 @@ export const getUserById = async (id: string) => {
     const response: AxiosResponse<ApiResponse<User>> = await get(`v1/user/getById/${id}`);
     return response.data;
   } catch (err) {
-    return null;
+    const error = err as AxiosError<ApiResponse<User>>;
+    return error.response!.data;
   }
 };
 
@@ -75,6 +80,7 @@ export const putUserData = async (id: string, payload: any) => {
     const response: AxiosResponse<ApiResponse<User>> = await put(`v1/user/${id}`, payload);
     return response.data;
   } catch (err) {
-    return null;
+    const error = err as AxiosError<ApiResponse<User>>;
+    return error.response!.data;
   }
 };

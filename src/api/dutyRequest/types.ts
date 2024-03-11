@@ -63,3 +63,13 @@ export type DutyRequest = {
 export interface DutyRequestListItem extends DutyRequest {
   status: DutyRequestStatus
 }
+
+export enum DutyRequestErrorCode {
+  DutyRequestInexistent = 'DR_0001',
+  DutyRequestExistent = 'DR_0002',
+}
+
+export const DutyRequestErrorCodeMessage = {
+  [DutyRequestErrorCode.DutyRequestInexistent]: 'Marcação de plantão não encontrada',
+  [DutyRequestErrorCode.DutyRequestExistent]: 'Já existe uma solicitação para a data e turno selecionado. Se quiser alterá-la você precisa cancelar a solicitação existente e criar uma nova.',
+}
