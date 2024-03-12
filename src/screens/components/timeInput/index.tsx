@@ -21,7 +21,7 @@ const TimeInput = ({
   const [isVisible, setIsVisible] = useState(false);
 
   const handleConfirm = (date: Date) => {
-    onChangeValue(moment(date).locale('pt').format('HH:mm'));
+    onChangeValue(moment(date).format('HH:mm'));
     setIsVisible(false);
   };
 

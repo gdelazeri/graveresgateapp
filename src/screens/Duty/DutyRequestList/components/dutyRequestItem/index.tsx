@@ -38,7 +38,7 @@ const DutyRequestItem = ({ item, onPress }: DutyRequestItemProps) => (
   >
     <ListItem.Content>
       <ListItem.Title style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}>
-        {moment(item.date).format('DD/MM/YYYY')} - {DutyShiftLabel[item.shift]}
+        {moment(item.date).format('ddd')}, {moment(item.date).format('LL')} - {DutyShiftLabel[item.shift]}
       </ListItem.Title>
       <DutyRequestPositions id={item.id} positions={item.positions} />
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }}>

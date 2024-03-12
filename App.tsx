@@ -1,3 +1,4 @@
+import "moment/locale/pt-br";
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";

@@ -29,7 +29,7 @@ const DateInput = ({
     <>
       <Label size={'small'}>{label}</Label>
       <Styled.Container isFocused={isVisible} onPress={() => setIsVisible(!isVisible)}>
-        {isString(value) && <Styled.TextDate>{moment(value).format('DD/MM/YYYY')}</Styled.TextDate>}
+        {isString(value) && <Styled.TextDate>{moment(value).format('LL')}</Styled.TextDate>}
         {!isString(value) && <Styled.TextDatePlaceholder>{placeholder}</Styled.TextDatePlaceholder>}
       </Styled.Container>
       <CalendarComponent

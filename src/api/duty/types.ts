@@ -21,7 +21,9 @@ export type Duty = {
 }
 
 export enum ListDutyPeriod {
-  PAST = 'PAST',
+  PREVIOUS = 'PREVIOUS',
   CURRENT = 'CURRENT',
-  FUTURE = 'FUTURE',
+  NEXT = 'NEXT',
 }
+
+export const MAX_PAGE_SIZE = 20;

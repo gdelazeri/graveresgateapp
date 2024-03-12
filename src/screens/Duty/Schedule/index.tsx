@@ -10,12 +10,15 @@ import useSchedule from "./useSchedule";
 import Loader from "@screens/components/loader";
 import { LabelSizeValue } from "@screens/components/label/types";
 import EmptyList from "@screens/components/emptyList";
+import { useUserContext } from "@context/userContext";
+import { UserPermission } from "@api/user/types";
 
 interface ScheduleProps {
   navigation: NavigationProp<ParamListBase>;
 }
 
 const Schedule = ({ navigation }: ScheduleProps) => {
+  const { userData } = useUserContext();
   const {
     isLoading,
     isRefreshing,
@@ -23,7 +26,8 @@ const Schedule = ({ navigation }: ScheduleProps) => {
     list,
     periodOptions,
     period,
-    setPeriod
+    onChangePeriod,
+    onEndReached
   } = useSchedule();
 
   return (
@@ -36,7 +40,7 @@ const Schedule = ({ navigation }: ScheduleProps) => {
         fontStyle={{ fontSize: LabelSizeValue.small }}
         activeFontStyle={{ fontSize: LabelSizeValue.small }}
         onChange={(event) => {
-          setPeriod(periodOptions[event.nativeEvent.selectedSegmentIndex].value)
+          onChangePeriod(periodOptions[event.nativeEvent.selectedSegmentIndex].value)
         }}
       />
       {isLoading && <Loader />}
@@ -45,7 +49,7 @@ const Schedule = ({ navigation }: ScheduleProps) => {
           refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refresh} />}
           data={list}
           contentContainerStyle={{ padding: 16, paddingTop: 0 }}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => `${item.date}_${item.shift}`}
           ItemSeparatorComponent={() => <Styled.Divider />}
           renderItem={({ item }) => (
             <DutyItem
@@ -53,9 +57,11 @@ const Schedule = ({ navigation }: ScheduleProps) => {
               onPress={() => {
                 navigation.navigate(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: item.id })
               }}
+              disabled={userData?.permission !== UserPermission.ADMIN}
             />
           )}
           ListEmptyComponent={() => <EmptyList text="Nenhum plantão encontrado" />}
+          onEndReached={onEndReached}
         />
       )}
     </>

@@ -1,6 +1,6 @@
-import {  useEffect, useState } from "react";
-import { listDuty } from "@api/duty/dutyApi";
-import { Duty, ListDutyPeriod } from "@api/duty/types";
+import { useEffect, useState } from "react";
+import { listDutyByMonth, listPreviousDuty } from "@api/duty/dutyApi";
+import { Duty, ListDutyPeriod, MAX_PAGE_SIZE } from "@api/duty/types";
 import { useUserContext } from "@context/userContext";
 import { UserPermission } from "@api/user/types";
 
@@ -10,10 +10,11 @@ const useSchedule = () => {
   const [periodOptions, setPeriodOptions] = useState<{ label: string, value: ListDutyPeriod }[]>([]);
   const [list, setList] = useState<Duty[]>([]);
   const [period, setPeriod] = useState<ListDutyPeriod>(ListDutyPeriod.CURRENT);
+  const [page, setPage] = useState(1);
   const { userData } = useUserContext()
 
-  const fetchData = async () => {
-    const response = await listDuty(period);
+  const fetchDutyByMonth = async () => {
+    const response = await listDutyByMonth(period);
     if (response?.success) {
       setList(response.result);
     }
@@ -21,27 +22,61 @@ const useSchedule = () => {
     setIsRefreshing(false);
   };
 
+  const fetchPreviousDuty = async (pageNumber: number) => {
+    const response = await listPreviousDuty(pageNumber, MAX_PAGE_SIZE);
+    if (response?.success) {
+      if (pageNumber === 1) {
+        setList(response.result);
+      } else {
+        setList([...list, ...response.result]);
+      }
+    }
+    setIsLoading(false);
+    setIsRefreshing(false);
+  };
+
   useEffect(() => {
     setIsLoading(true);
-    fetchData()
+    if (period === ListDutyPeriod.PREVIOUS) {
+      fetchPreviousDuty(page);
+    } else {
+      fetchDutyByMonth();
+    }
   }, [period])
 
   useEffect(() => {
     const list = []
     if (userData?.permission === UserPermission.ADMIN) {
-      list.push({ label: 'Meses anteriores', value: ListDutyPeriod.PAST })
+      list.push({ label: 'Meses anteriores', value: ListDutyPeriod.PREVIOUS })
     }
 
     setPeriodOptions([
       ...list,
       { label: 'Mês atual', value: ListDutyPeriod.CURRENT },
-      { label: 'Próximo mês', value: ListDutyPeriod.FUTURE },
+      { label: 'Próximo mês', value: ListDutyPeriod.NEXT },
     ])
   }, [userData])
 
   const refresh = () => {
     setIsRefreshing(true);
-    fetchData()
+    setPage(1);
+    if (period === ListDutyPeriod.PREVIOUS) {
+      fetchPreviousDuty(1);
+    } else {
+      fetchDutyByMonth();
+    }
+  }
+
+  const onEndReached = () => {
+    if (period === ListDutyPeriod.PREVIOUS && list.length === page * MAX_PAGE_SIZE) {
+      setPage(page + 1);
+      fetchPreviousDuty(page + 1);
+    }
+  }
+
+  const onChangePeriod = (value: ListDutyPeriod) => {
+    setPage(1);
+    setPeriod(value);
   }
 
   return {
@@ -50,8 +85,9 @@ const useSchedule = () => {
     list,
     periodOptions,
     period,
-    setPeriod,
+    onChangePeriod,
     refresh,
+    onEndReached
   };
 };
 

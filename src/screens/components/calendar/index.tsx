@@ -1,7 +1,17 @@
 import XDate from 'xdate'
-import { Calendar as RNCalendar } from 'react-native-calendars'
-import { calendarTheme } from "./types";
+import { Calendar as RNCalendar, LocaleConfig } from 'react-native-calendars'
 import { DateData } from 'react-native-calendars/src/types';
+import moment from 'moment';
+import { calendarTheme } from "./types";
+
+LocaleConfig.locales['default'] = {
+  monthNames: moment.months().map(month => month.charAt(0).toUpperCase() + month.slice(1)),
+  monthNamesShort: moment.monthsShort(),
+  dayNames: moment.weekdays(),
+  dayNamesShort: moment.weekdaysShort(),
+}
+
+LocaleConfig.defaultLocale = 'default'
 
 type MarkedDatesType = {
   [key: string]: {

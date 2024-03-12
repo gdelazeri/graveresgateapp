@@ -59,7 +59,7 @@ const DutyRequestDetails = ({ route, navigation }: DutyRequestDetailsProps) => {
       <Styled.Container>
         <CardInfo>
           <Label size={"small"}>Data</Label>
-          <Label size={"medium"}>{moment(dutyRequest?.date).format('DD/MM/YYYY')}</Label>
+          <Label size={"medium"}>{moment(dutyRequest?.date).format('LL')}</Label>
           
           <Styled.Divider />
 

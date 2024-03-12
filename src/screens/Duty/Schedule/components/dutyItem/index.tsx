@@ -6,13 +6,15 @@ import colors from "@theme/colors";
 import fonts from "@theme/fonts";
 import { LabelSizeValue } from "@screens/components/label/types";
 import { Duty } from "@api/duty/types";
+import Label from "@screens/components/label";
 
 interface DutyItemProps {
   item: Duty;
   onPress: () => void
+  disabled?: boolean
 }
 
-const DutyItem = ({ item, onPress }: DutyItemProps) => (
+const DutyItem = ({ item, onPress, disabled }: DutyItemProps) => (
   <ListItem
     Component={TouchableScale}
     // @ts-ignore
@@ -33,31 +35,32 @@ const DutyItem = ({ item, onPress }: DutyItemProps) => (
     }}
     onPress={onPress}
     containerStyle={{ borderRadius: 8 }}
+    disabled={disabled}
   >
     <ListItem.Content>
       <ListItem.Title style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}>
-        {moment(item.date).format('DD/MM/YYYY')} - {DutyShiftLabel[item.shift]}
+        {moment(item.date).format('ddd')}, {moment(item.date).format('LL')} - {DutyShiftLabel[item.shift]}
       </ListItem.Title>
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }} numberOfLines={1}>
-        Líder: {item.leaderName || 'VAGO'}
+        Líder: {item.leaderName || <Label color={colors.green} bold>VAGO</Label>}
       </ListItem.Subtitle>
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }} numberOfLines={1}>
-        Condutor: {item.driverName || 'VAGO'}
+        Condutor: {item.driverName || <Label color={colors.green} bold>VAGO</Label>}
       </ListItem.Subtitle>
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }} numberOfLines={1}>
-        1º Socorrista: {item.firstRescuerName || 'VAGO'}
+        1º Socorrista: {item.firstRescuerName || <Label color={colors.green} bold>VAGO</Label>}
       </ListItem.Subtitle>
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }} numberOfLines={1}>
-        2º Socorrista: {item.secondRescuerName || 'VAGO'}
+        2º Socorrista: {item.secondRescuerName || <Label color={colors.green} bold>VAGO</Label>} 
       </ListItem.Subtitle>
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }} numberOfLines={1}>
-        Auxiliar de S.O: {item.assistantRadioOperatorName || 'VAGO'}
+        Auxiliar de S.O: {item.assistantRadioOperatorName || <Label color={colors.green} bold>VAGO</Label>}
       </ListItem.Subtitle>
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }} numberOfLines={1}>
-        S.O: {item.radioOperatorName || 'VAGO'}
+        S.O: {item.radioOperatorName || <Label color={colors.green} bold>VAGO</Label>}
       </ListItem.Subtitle>
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }} numberOfLines={1}>
-        Estágio: {item.traineeName || 'VAGO'}
+        Estágio: {item.traineeName || <Label color={colors.green} bold>VAGO</Label>}
       </ListItem.Subtitle>
     </ListItem.Content>
   </ListItem>
