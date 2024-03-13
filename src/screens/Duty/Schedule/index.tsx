@@ -55,7 +55,7 @@ const Schedule = ({ navigation }: ScheduleProps) => {
             <DutyItem
               item={item}
               onPress={() => {
-                navigation.navigate(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: item.id })
+                navigation.navigate(routeMap.DutyRoutes.DUTY_FORM, { duty: item })
               }}
               disabled={userData?.permission !== UserPermission.ADMIN}
             />

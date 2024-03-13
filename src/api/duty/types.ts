@@ -20,6 +20,18 @@ export type Duty = {
   traineeName: string;
 }
 
+export type DutyPayload = {
+  date: string;
+  shift: DutyShift;
+  leaderId: string | null;
+  driverId: string | null;
+  firstRescuerId: string | null;
+  secondRescuerId: string | null;
+  radioOperatorId: string | null;
+  assistantRadioOperatorId: string | null;
+  traineeId: string | null;
+}
+
 export enum ListDutyPeriod {
   PREVIOUS = 'PREVIOUS',
   CURRENT = 'CURRENT',

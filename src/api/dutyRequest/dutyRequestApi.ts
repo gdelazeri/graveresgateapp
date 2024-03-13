@@ -24,7 +24,19 @@ export const postDutyRequest = async (payload: PostDutyRequestPayload) => {
   }
 };
 
-export const getDutyRequests = async () => {
+export const listDutyRequests = async (date: string, shift: DutyShift) => {
+  try {
+    const response: AxiosResponse<ApiResponse<DutyRequestListItem[]>> = await get(
+      `/v1/duty-request/list/${date}/${shift}`,
+    );
+    return response.data;
+  } catch (err: any) {
+    const error = err as AxiosError<ApiResponse<DutyRequestListItem[]>>;
+    return error.response!.data;
+  }
+};
+
+export const listMyDutyRequests = async () => {
   try {
     const response: AxiosResponse<ApiResponse<DutyRequestListItem[]>> = await get(
       "/v1/duty-request/requests",

@@ -6,7 +6,7 @@ const Container = styled.ScrollView`
 `;
 
 const Divider = styled.Text`
-  height: 16px;
+  height: 8px;
 `;
 
 const Footer = styled.View`
@@ -16,8 +16,13 @@ const Footer = styled.View`
   border-top-left-radius: 8px;
 `
 
+const StatusContainer = styled.View`
+  margin-top: 4px;
+`
+
 export default {
   Container,
   Divider,
   Footer,
+  StatusContainer,
 };

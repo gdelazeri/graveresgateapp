@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { DutyRequestListItem } from "@api/dutyRequest/types";
 import { useFocusEffect } from "@react-navigation/native";
-import { getDutyRequests } from "@api/dutyRequest/dutyRequestApi";
+import { listMyDutyRequests } from "@api/dutyRequest/dutyRequestApi";
 
 const useDutyRequestList = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +11,7 @@ const useDutyRequestList = () => {
     useCallback(() => {
       const fetchData = async () => {
         setIsLoading(true);
-        const response = await getDutyRequests();
+        const response = await listMyDutyRequests();
         if (response?.success) {
           setList(response.result);
         }

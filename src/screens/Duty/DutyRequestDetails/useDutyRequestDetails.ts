@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { deleteDutyRequest, getDutyRequestDetails, getDutyRequests } from "@api/dutyRequest/dutyRequestApi";
+import { deleteDutyRequest, getDutyRequestDetails, listMyDutyRequests } from "@api/dutyRequest/dutyRequestApi";
 import { DutyRequestListItem } from "@api/dutyRequest/types";
 import { useFocusEffect } from "@react-navigation/native";
 

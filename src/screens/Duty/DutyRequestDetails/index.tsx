@@ -58,37 +58,39 @@ const DutyRequestDetails = ({ route, navigation }: DutyRequestDetailsProps) => {
     <>
       <Styled.Container>
         <CardInfo>
-          <Label size={"small"}>Data</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>Data</Label>
           <Label size={"medium"}>{moment(dutyRequest?.date).format('LL')}</Label>
           
           <Styled.Divider />
 
-          <Label size={"small"}>Turno</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>Turno</Label>
           <Label size={"medium"}>{DutyShiftLabel[dutyRequest?.shift as DutyShift]}</Label>
           
           <Styled.Divider />
 
-          <Label size={"small"}>Horário</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>Horário</Label>
           <Label size={"medium"}>Das {dutyRequest?.startAt.substring(0, 5)} às {dutyRequest?.endAt.substring(0, 5)}</Label>
 
           <Styled.Divider />
 
-          <Label size={"small"}>Posições</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>Posições</Label>
           <DutyRequestPositions id={dutyRequest?.id as string} positions={(dutyRequest?.positions || []) as DutyPosition[]} />
 
           <Styled.Divider />
 
-          <Label size={"small"}>Status</Label>
-          <Chip
-            label={DutyRequestStatusLabel[dutyRequest?.status as DutyRequestStatus]}
-            labelColor={dutyRequest?.status === DutyRequestStatus.APPROVED ? colors.Greyscale.b100 : colors.black}
-            backgroundColor={dutyRequest?.status === DutyRequestStatus.APPROVED ? colors.green : colors.yellow}
-          />
+          <Label size={"small"} color={colors.Greyscale.b50}>Status</Label>
+          <Styled.StatusContainer>
+            <Chip
+              label={DutyRequestStatusLabel[dutyRequest?.status as DutyRequestStatus]}
+              labelColor={dutyRequest?.status === DutyRequestStatus.APPROVED ? colors.Greyscale.b100 : colors.black}
+              backgroundColor={dutyRequest?.status === DutyRequestStatus.APPROVED ? colors.green : colors.yellow}
+            />
+          </Styled.StatusContainer>
                   
           {isString(dutyRequest?.note) && (
             <>
               <Styled.Divider />
-              <Label size={"small"}>Observações</Label>
+              <Label size={"small"} color={colors.Greyscale.b50}>Observações</Label>
               <Label size={"medium"}>{dutyRequest?.note}</Label>
             </>
           )}

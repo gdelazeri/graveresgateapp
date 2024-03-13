@@ -13,6 +13,7 @@ import TimeInput from "@screens/components/timeInput";
 import routeMap from "@routes/routeMap";
 import useDutyRequest from "./useDutyRequest";
 import Styled from "./styles";
+import CardInfo from '@screens/components/cardInfo';
 
 interface DutyRequestProps {
   navigation: NavigationProp<ParamListBase>;
@@ -72,58 +73,60 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
   return (
     <>
       <Styled.Container>
-        <Label size={"medium"}>Preencha os dados para a solicitação de plantão.</Label>
-        <Label size={"small"}>A solicitação não é garantia de vaga na escala.</Label>
-        <Styled.Divider />
-        <DateInput
-          label="Data do plantão"
-          placeholder="Selecione a data"
-          value={date}
-          onChangeValue={setDate}
-          type="duty"
-        />
-        <Styled.Divider />
-        <Select
-          label="Turno"
-          placeholder="Selecione um turno"
-          value={shift ? shift.toString() : null}
-          onChangeValue={(value) => onChangeShift(value as DutyShift)}
-          items={shiftOptions}
-        />
-        <Styled.Divider />
-        <Styled.Inline style={{ marginBottom: 4 }}>
-          <Styled.TimeInputContainer style={{ paddingRight: 8 }}>
-            <TimeInput
-              label="Horário de entrada"
-              value={startAt || ""}
-              onChangeValue={(value) => setStartAt(value)}
-            />
-          </Styled.TimeInputContainer>
-          <Styled.TimeInputContainer style={{ paddingLeft: 8 }}>
-            <TimeInput
-              label="Horário de saída"
-              value={endAt || ""}
-              onChangeValue={(value) => setEndAt(value)}
-            />
-          </Styled.TimeInputContainer>
-        </Styled.Inline>
-        <Label size="small">Edite os campos acima caso precise alterar os horários de entrada e saída</Label>
-        <Styled.Divider />
-        <RadioGroup
-          label="Posições"
-          items={positionOptions}
-          selectedValue={positions}
-          onChangeValue={(value) => setPositions(value as DutyPosition[])}
-          multiple
-        />
-        <Styled.Divider />
-        <Input
-          label="Observações"
-          placeholder="Escreva aqui..."
-          value={note}
-          onChangeText={(value) => setNote(value)}
-          type={INPUT_TYPE.TEXT}
-        />
+        <CardInfo>
+          <Label size={"medium"}>Preencha os dados para a solicitação de plantão.</Label>
+          <Label size={"small"}>A solicitação não é garantia de vaga na escala.</Label>
+          <Styled.Divider />
+          <DateInput
+            label="Data do plantão"
+            placeholder="Selecione a data"
+            value={date}
+            onChangeValue={setDate}
+            type="duty"
+          />
+          <Styled.Divider />
+          <Select
+            label="Turno"
+            placeholder="Selecione um turno"
+            value={shift ? shift.toString() : null}
+            onChangeValue={(value) => onChangeShift(value as DutyShift)}
+            items={shiftOptions}
+          />
+          <Styled.Divider />
+          <Styled.Inline style={{ marginBottom: 4 }}>
+            <Styled.TimeInputContainer style={{ paddingRight: 8 }}>
+              <TimeInput
+                label="Horário de entrada"
+                value={startAt || ""}
+                onChangeValue={(value) => setStartAt(value)}
+              />
+            </Styled.TimeInputContainer>
+            <Styled.TimeInputContainer style={{ paddingLeft: 8 }}>
+              <TimeInput
+                label="Horário de saída"
+                value={endAt || ""}
+                onChangeValue={(value) => setEndAt(value)}
+              />
+            </Styled.TimeInputContainer>
+          </Styled.Inline>
+          <Label size="small">Edite os campos acima caso precise alterar os horários de entrada e saída</Label>
+          <Styled.Divider />
+          <RadioGroup
+            label="Posições"
+            items={positionOptions}
+            selectedValue={positions}
+            onChangeValue={(value) => setPositions(value as DutyPosition[])}
+            multiple
+          />
+          <Styled.Divider />
+          <Input
+            label="Observações"
+            placeholder="Escreva aqui..."
+            value={note}
+            onChangeText={(value) => setNote(value)}
+            type={INPUT_TYPE.TEXT}
+          />
+        </CardInfo>
       </Styled.Container>
       <Styled.Footer>
         <Button
