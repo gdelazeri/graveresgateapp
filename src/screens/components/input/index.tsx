@@ -52,6 +52,7 @@ const Input = ({
         <Styled.TextInput
           testID={testID}
           placeholder={placeholder}
+          placeholderTextColor={colors.Greyscale.b60}
           value={
             type === INPUT_TYPE.PHONE ? mask(value, "(99) 99999-9999") : value
           }

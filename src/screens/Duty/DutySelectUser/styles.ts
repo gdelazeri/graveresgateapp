@@ -16,8 +16,15 @@ const Divider = styled.Text`
   height: 16px;
 `;
 
+const Inline = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+`
+
 export default {
   Container,
   Footer,
   Divider,
+  Inline,
 };

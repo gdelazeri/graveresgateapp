@@ -1,3 +1,4 @@
+import Label from '../label';
 import Styled from './styles';
 
 interface ChipProps {
@@ -11,7 +12,7 @@ const Chip = ({ label, labelColor, backgroundColor, testID }: ChipProps) => {
   return (
     <Styled.Container testID={testID}>
       <Styled.ChipContainer backgroundColor={backgroundColor}>
-        <Styled.Label color={labelColor}>{label}</Styled.Label>
+        <Label size='small' color={labelColor}>{label}</Label>
       </Styled.ChipContainer>
     </Styled.Container>
   );

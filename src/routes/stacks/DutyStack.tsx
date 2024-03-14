@@ -5,6 +5,7 @@ import * as DutyRequestListScreen from "@screens/Duty/DutyRequestList";
 import * as DutyRequestDetailsScreen from "@screens/Duty/DutyRequestDetails";
 import * as ScheduleScreen from "@screens/Duty/Schedule";
 import * as DutyFormScreen from "@screens/Duty/DutyForm";
+import * as DutySelectUserScreen from "@screens/Duty/DutySelectUser";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -44,6 +45,13 @@ const DutyStack = () => (
       component={DutyFormScreen.default}
       // @ts-ignore
       options={{ header: DutyFormScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.DutyRoutes.DUTY_SELECT_USER}
+      // @ts-ignore
+      component={DutySelectUserScreen.default}
+      // @ts-ignore
+      options={{ header: DutySelectUserScreen.NavHeader }}
     />
   </Stack.Navigator>
 );

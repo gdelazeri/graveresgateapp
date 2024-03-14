@@ -58,6 +58,7 @@ export type DutyRequest = {
   endAt: string;
   note: string;
   positions: DutyPosition[];
+  userId?: string;
 }
 
 export interface DutyRequestListItem extends DutyRequest {

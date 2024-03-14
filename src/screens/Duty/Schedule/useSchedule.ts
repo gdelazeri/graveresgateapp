@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { listDutyByMonth, listPreviousDuty } from "@api/duty/dutyApi";
 import { Duty, ListDutyPeriod, MAX_PAGE_SIZE } from "@api/duty/types";
 import { useUserContext } from "@context/userContext";
 import { UserPermission } from "@api/user/types";
+import { useFocusEffect } from "@react-navigation/native";
 
 const useSchedule = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,14 +36,16 @@ const useSchedule = () => {
     setIsRefreshing(false);
   };
 
-  useEffect(() => {
-    setIsLoading(true);
-    if (period === ListDutyPeriod.PREVIOUS) {
-      fetchPreviousDuty(page);
-    } else {
-      fetchDutyByMonth();
-    }
-  }, [period])
+  useFocusEffect(
+    useCallback(() => {
+      setIsLoading(true);
+      if (period === ListDutyPeriod.PREVIOUS) {
+        fetchPreviousDuty(page);
+      } else {
+        fetchDutyByMonth();
+      }
+    }, [period])
+  )
 
   useEffect(() => {
     const list = []

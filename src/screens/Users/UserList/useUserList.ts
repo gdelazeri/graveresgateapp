@@ -1,4 +1,4 @@
-import { listUsers } from "@api/user/userApi";
+import { listAllUsers } from "@api/user/userApi";
 import { User } from "@api/user/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
@@ -38,7 +38,7 @@ export const useUserList = () => {
   }, [searchQuery, allUsers])
 
   const fetchData = async () => {
-    const response = await listUsers();
+    const response = await listAllUsers();
     if (response?.success) {
       setAllUsers(response.result);
     } else {

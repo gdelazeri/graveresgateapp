@@ -32,11 +32,12 @@ export const put = async (url: string, payload: any) => {
   });
 };
 
-export const get = async (url: string) => {
+export const get = async (url: string, params?: any) => {
   const header = await headers();
   return axios.get(url, {
     baseURL: API_URL,
     headers: header,
+    params,
   });
 };
 

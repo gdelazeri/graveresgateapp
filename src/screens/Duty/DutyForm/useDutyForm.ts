@@ -3,19 +3,20 @@ import { DutyRequest } from "@api/dutyRequest/types";
 import { listDutyRequests } from "@api/dutyRequest/dutyRequestApi";
 import { Duty } from "@api/duty/types";
 import { getDuty, postDuty } from "@api/duty/dutyApi";
+import { User } from "@api/user/types";
 
 interface UseDutyFormProps {
   duty: Duty
 }
 
 const useDutyForm = ({ duty }: UseDutyFormProps) => {
-  const [leaderId, setLeaderId] = useState<string | null>(null);
-  const [driverId, setDriverId] = useState<string | null>(null);
-  const [firstRescuerId, setFirstRescuerId] = useState<string | null>(null);
-  const [secondRescuerId, setsScondRescuerId] = useState<string | null>(null);
-  const [radioOperatorId, setRadioOperatorId] = useState<string | null>(null);
-  const [assistantRadioOperatorId, setAssistantRadioOperatorId] = useState<string | null>(null);
-  const [traineeId, setTraineeId] = useState<string | null>(null);
+  const [leader, setLeader] = useState<User | null>(null);
+  const [driver, setDriver] = useState<User | null>(null);
+  const [firstRescuer, setFirstRescuer] = useState<User | null>(null);
+  const [secondRescuer, setSecondRescuer] = useState<User | null>(null);
+  const [radioOperator, setRadioOperator] = useState<User | null>(null);
+  const [assistantRadioOperator, setAssistantRadioOperator] = useState<User | null>(null);
+  const [trainee, setTrainee] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [dutyRequestList, setDutyRequestList] = useState<DutyRequest[]>([]);
@@ -27,13 +28,13 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
       const responseDuty = await getDuty(duty.date, duty.shift);
 
       if (responseDuty.success && responseDuty.result) {
-        setLeaderId(responseDuty.result.leaderId);
-        setDriverId(responseDuty.result.driverId);
-        setFirstRescuerId(responseDuty.result.firstRescuerId);
-        setsScondRescuerId(responseDuty.result.secondRescuerId);
-        setRadioOperatorId(responseDuty.result.radioOperatorId);
-        setAssistantRadioOperatorId(responseDuty.result.assistantRadioOperatorId);
-        setTraineeId(responseDuty.result.traineeId);
+        setLeader({ id: responseDuty.result.leaderId, name: responseDuty.result.leaderName } as User)
+        setDriver({ id: responseDuty.result.driverId, name: responseDuty.result.driverName } as User)
+        setFirstRescuer({ id: responseDuty.result.firstRescuerId, name: responseDuty.result.firstRescuerName } as User)
+        setSecondRescuer({ id: responseDuty.result.secondRescuerId, name: responseDuty.result.secondRescuerName } as User)
+        setRadioOperator({ id: responseDuty.result.radioOperatorId, name: responseDuty.result.radioOperatorName } as User)
+        setAssistantRadioOperator({ id: responseDuty.result.assistantRadioOperatorId, name: responseDuty.result.assistantRadioOperatorName } as User)
+        setTrainee({ id: responseDuty.result.traineeId, name: responseDuty.result.traineeName } as User)
       }
 
       const responseDutyRequests = await listDutyRequests(duty.date, duty.shift);
@@ -43,7 +44,8 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
 
       setIsLoading(false)
     }
-    fetchData();
+
+    fetchData()
   }, [])
 
   const save = async () => {
@@ -52,13 +54,13 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
     const payload = {
       date: duty.date,
       shift: duty.shift,
-      leaderId,
-      driverId,
-      firstRescuerId,
-      secondRescuerId,
-      radioOperatorId,
-      assistantRadioOperatorId,
-      traineeId,
+      leaderId: leader?.id || null,
+      driverId: driver?.id || null,
+      firstRescuerId: firstRescuer?.id || null,
+      secondRescuerId: secondRescuer?.id || null,
+      radioOperatorId: radioOperator?.id || null,
+      assistantRadioOperatorId: assistantRadioOperator?.id || null,
+      traineeId: trainee?.id || null,
     };
 
     const response = await postDuty(payload);
@@ -71,20 +73,20 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
   return {
     isLoading,
     isProcessing,
-    leaderId,
-    setLeaderId,
-    driverId,
-    setDriverId,
-    firstRescuerId,
-    setFirstRescuerId,
-    secondRescuerId,
-    setsScondRescuerId,
-    radioOperatorId,
-    setRadioOperatorId,
-    assistantRadioOperatorId,
-    setAssistantRadioOperatorId,
-    traineeId,
-    setTraineeId,
+    leader,
+    setLeader,
+    driver,
+    setDriver,
+    firstRescuer,
+    setFirstRescuer,
+    secondRescuer,
+    setSecondRescuer,
+    radioOperator,
+    setRadioOperator,
+    assistantRadioOperator,
+    setAssistantRadioOperator,
+    trainee,
+    setTrainee,
     dutyRequestList,
     save
   };

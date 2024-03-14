@@ -18,14 +18,7 @@ const ChipContainer = styled.View<ChipProps>`
   background-color: ${({ backgroundColor }: ChipProps) => backgroundColor || colors.Greyscale.b100};
 `;
 
-const Label = styled.Text`
-  color: ${({ color }: ChipProps) => color || colors.black};
-  font-size: ${LabelSizeValue.small}px;
-  font-family: ${fonts.regular};
-`
-
 export default {
   Container,
   ChipContainer,
-  Label
 };
