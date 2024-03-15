@@ -4,6 +4,7 @@ import { isString } from "@utils/stringHelper";
 import Styled from "./styles";
 import { User } from "@api/user/types";
 import Avatar from "@screens/components/avatar";
+import RequestsIndicator from "../requestsIndicator";
 
 interface DutyUserPositionProps {
   placeholder: string;
@@ -11,6 +12,8 @@ interface DutyUserPositionProps {
   user?: User | null;
   onPress: () => void;
   disabled?: boolean
+  onRemove: () => void;
+  requestsCount: number;
 }
 
 const DutyUserPosition = ({
@@ -18,22 +21,31 @@ const DutyUserPosition = ({
   label,
   user,
   onPress,
-  disabled = false
+  disabled = false,
+  onRemove,
+  requestsCount,
 }: DutyUserPositionProps) => {
-  console.log({ user })
   return (
     <>
-      {isString(label) && <Label size={'small'}>{label}</Label>}
+      {isString(label) && <Styled.LabelContainer>
+        <Label size={'small'}>{label}</Label>
+        <RequestsIndicator count={requestsCount} />
+      </Styled.LabelContainer>}
       <Styled.Container onPress={onPress} disabled={disabled}>
-        {user?.id !== null && (
+        {isString(user?.id) && (
           <Styled.UserData>
             <Styled.UserAvatar>
               <Avatar imageUrl={user?.imageUrl} size={24} />
             </Styled.UserAvatar>
-            <Styled.Label>{user?.name}</Styled.Label>
+            <Label size={'medium'} numberOfLines={1}>{user?.name}</Label>
           </Styled.UserData>
         )}
-        {user?.id === null && isString(placeholder) && <Label size="medium" color={colors.Greyscale.b60}>{placeholder}</Label>}
+        {isString(user?.id) && (
+          <Styled.IconContainer onPress={onRemove}>
+            <Styled.RemoveIcon />
+          </Styled.IconContainer>
+        )}
+        {!isString(user?.id) && isString(placeholder) && <Label size="medium" color={colors.Greyscale.b60}>{placeholder}</Label>}
       </Styled.Container>
     </>
   );

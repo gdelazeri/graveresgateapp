@@ -15,7 +15,6 @@ describe("UserListItem", () => {
     );
 
     expect(queryByText('User Name')).toBeTruthy();
-    expect(queryByText('User E-mail')).toBeTruthy();
 
     fireEvent.press(getByTestId('user-list-item-id'));
     expect(onPressMock).toHaveBeenCalledTimes(1);

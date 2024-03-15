@@ -3,12 +3,12 @@ import Styled from "./styles";
 import Label from "@screens/components/label";
 import Avatar from "@screens/components/avatar";
 
-interface UserListItemProps {
+interface UserSelectListItemProps {
   user: User;
   onPress?: () => void;
 }
 
-const UserListItem = ({ user, onPress }: UserListItemProps) => (
+const UserSelectListItem = ({ user, onPress }: UserSelectListItemProps) => (
   <Styled.Touchable onPress={onPress} testID={`user-list-item-${user.id}`} activeOpacity={typeof onPress === 'function' ? 0.7 : 1}>
     <Avatar imageUrl={user.imageUrl} />
     <Styled.UserInfo>
@@ -17,4 +17,4 @@ const UserListItem = ({ user, onPress }: UserListItemProps) => (
   </Styled.Touchable>
 )
 
-export default UserListItem;
+export default UserSelectListItem;

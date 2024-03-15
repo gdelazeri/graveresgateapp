@@ -6,9 +6,10 @@ import { listFilteredUsers } from "@api/user/userApi";
 interface UseDutySelectUserProps {
   position: DutyPosition;
   dutyRequests: DutyRequest[];
+  usersAlreadySelected: string[];
 }
 
-const useDutySelectUser = ({ position, dutyRequests }: UseDutySelectUserProps) => {
+const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: UseDutySelectUserProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [list, setList] = useState<User[]>([]);
   const [sectionList, setSectionList] = useState<{ title: string, data: User[] }[]>([]);
@@ -32,6 +33,7 @@ const useDutySelectUser = ({ position, dutyRequests }: UseDutySelectUserProps) =
           permission = UserPermission.TRAINEE;
           break;
         case DutyPosition.RESCUER:
+        case DutyPosition.RADIO_OPERATOR:
           permission = UserPermission.VOLUNTARY;
           break;
         default:
@@ -46,7 +48,7 @@ const useDutySelectUser = ({ position, dutyRequests }: UseDutySelectUserProps) =
 
       if (response.success && response.result) {
         setList(
-          [ ...response.result ]
+          [...response.result].filter((user) => !usersAlreadySelected.includes(user.id))
         );
       }
 

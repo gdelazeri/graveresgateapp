@@ -5,7 +5,6 @@ import Header from "@screens/components/header";
 import Label from "@screens/components/label";
 import Button from "@screens/components/button";
 import { DutyPosition, DutyShiftLabelTimes } from "@api/dutyRequest/types";
-import Styled from "./styles";
 import CardInfo from '@screens/components/cardInfo';
 import { Duty } from '@api/duty/types';
 import useDutyForm from './useDutyForm';
@@ -13,6 +12,8 @@ import Loader from '@screens/components/loader';
 import { User } from '@api/user/types';
 import routeMap from '@routes/routeMap';
 import DutyUserPosition from './components/dutyUserPosition';
+import { isString } from '@utils/stringHelper';
+import Styled from "./styles";
 
 interface DutyFormProps {
   navigation: NavigationProp<ParamListBase>;
@@ -65,6 +66,8 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
   const rescuerRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.RESCUER));
   const radioOperatorRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.RADIO_OPERATOR));
   const traineeRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.TRAINEE));
+  const usersAlreadySelected = [leader?.id, driver?.id, firstRescuer?.id, secondRescuer?.id, radioOperator?.id, assistantRadioOperator?.id, trainee?.id]
+    .filter((id) => isString(id)) as string[];
 
   if (isLoading) {
     return <Loader />
@@ -86,13 +89,17 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
           <DutyUserPosition
             label='Líder'
+            requestsCount={leaderRequests.length}
             user={leader}
-            placeholder='Selecione um líder'
+            placeholder='Selecione o(a) líder'
+            onRemove={() => setLeader(null)}
             onPress={() => {
               navigation.navigate(routeMap.DutyRoutes.DUTY_SELECT_USER, {
+                tittle: 'Selecione o(a) líder',
                 dutyRequests: leaderRequests,
                 position: DutyPosition.LEADER,
-                onSelect: (user: User) => setLeader(user)
+                onSelect: (user: User) => setLeader(user),
+                usersAlreadySelected
               })
             }}
           />
@@ -101,13 +108,17 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
           <DutyUserPosition
             label='Condutor'
+            requestsCount={driverRequests.length}
             user={driver}
-            placeholder='Selecione um condutor'
+            placeholder='Selecione o(a) condutor'
+            onRemove={() => setDriver(null)}
             onPress={() => {
               navigation.navigate(routeMap.DutyRoutes.DUTY_SELECT_USER, {
+                tittle: 'Selecione o(a) condutor',
                 dutyRequests: driverRequests,
                 position: DutyPosition.DRIVER,
-                onSelect: (user: User) => setDriver(user)
+                onSelect: (user: User) => setDriver(user),
+                usersAlreadySelected
               })
             }}
           />
@@ -116,13 +127,17 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
           <DutyUserPosition
             label='1º Socorrista'
+            requestsCount={rescuerRequests.length}
             user={firstRescuer}
-            placeholder='Selecione um socorrista'
+            placeholder='Selecione o(a) socorrista'
+            onRemove={() => setFirstRescuer(null)}
             onPress={() => {
               navigation.navigate(routeMap.DutyRoutes.DUTY_SELECT_USER, {
+                tittle: 'Selecione o(a) 1º Socorrista',
                 dutyRequests: rescuerRequests,
                 position: DutyPosition.RESCUER,
-                onSelect: (user: User) => setFirstRescuer(user)
+                onSelect: (user: User) => setFirstRescuer(user),
+                usersAlreadySelected
               })
             }}
           />
@@ -131,13 +146,17 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
           <DutyUserPosition
             label='2º Socorrista'
+            requestsCount={rescuerRequests.length}
             user={secondRescuer}
-            placeholder='Selecione um socorrista'
+            placeholder='Selecione o(a) 2º Socorrista'
+            onRemove={() => setSecondRescuer(null)}
             onPress={() => {
               navigation.navigate(routeMap.DutyRoutes.DUTY_SELECT_USER, {
+                tittle: 'Selecione o(a) 2º Socorrista',
                 dutyRequests: rescuerRequests,
                 position: DutyPosition.RESCUER,
-                onSelect: (user: User) => setSecondRescuer(user)
+                onSelect: (user: User) => setSecondRescuer(user),
+                usersAlreadySelected
               })
             }}
           />
@@ -146,13 +165,17 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
           <DutyUserPosition
             label='Auxiliar de S.O.'
+            requestsCount={radioOperatorRequests.length}
             user={assistantRadioOperator}
-            placeholder='Selecione um auxiliar de S.O.'
+            placeholder='Selecione o(a) auxiliar de S.O.'
+            onRemove={() => setAssistantRadioOperator(null)}
             onPress={() => {
               navigation.navigate(routeMap.DutyRoutes.DUTY_SELECT_USER, {
+                title: 'Selecione o(a) auxiliar de S.O.',
                 dutyRequests: radioOperatorRequests,
                 position: DutyPosition.RADIO_OPERATOR,
-                onSelect: (user: User) => setAssistantRadioOperator(user)
+                onSelect: (user: User) => setAssistantRadioOperator(user),
+                usersAlreadySelected
               })
             }}
           />
@@ -161,13 +184,17 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
           <DutyUserPosition
             label='S.O.'
+            requestsCount={radioOperatorRequests.length}
             user={radioOperator}
-            placeholder='Selecione um S.O.'
+            placeholder='Selecione o(a) S.O.'
+            onRemove={() => setRadioOperator(null)}
             onPress={() => {
               navigation.navigate(routeMap.DutyRoutes.DUTY_SELECT_USER, {
+                title: 'Selecione o(a) S.O.',
                 dutyRequests: radioOperatorRequests,
                 position: DutyPosition.RADIO_OPERATOR,
-                onSelect: (user: User) => setRadioOperator(user)
+                onSelect: (user: User) => setRadioOperator(user),
+                usersAlreadySelected
               })
             }}
           />
@@ -176,13 +203,17 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
           <DutyUserPosition
             label='Estágio'
+            requestsCount={traineeRequests.length}
             user={trainee}
-            placeholder='Selecione um estagiário'
+            placeholder='Selecione o(a) estagiário(a)'
+            onRemove={() => setTrainee(null)}
             onPress={() => {
               navigation.navigate(routeMap.DutyRoutes.DUTY_SELECT_USER, {
+                title: 'Selecione o(a) estagiário(a)',
                 dutyRequests: traineeRequests,
                 position: DutyPosition.TRAINEE,
-                onSelect: (user: User) => setTrainee(user)
+                onSelect: (user: User) => setTrainee(user),
+                usersAlreadySelected
               })
             }}
           />
