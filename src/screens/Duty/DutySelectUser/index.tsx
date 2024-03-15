@@ -9,6 +9,7 @@ import UserSelectListItem from './components/UserListItem';
 import ListHeader from './components/ListHeader';
 import Styled from './styles';
 import EmptyList from '@screens/components/emptyList';
+import SearchBar from '@screens/components/searchBar';
 
 interface DutySelectUserProps {
   navigation: NavigationProp<ParamListBase>;
@@ -28,6 +29,8 @@ const DutySelectUser = ({ navigation, route }: DutySelectUserProps) => {
 
   const {
     isLoading,
+    searchValue,
+    setSearchValue,
     sectionList,
   } = useDutySelectUser({ position, dutyRequests, usersAlreadySelected });
 
@@ -41,13 +44,20 @@ const DutySelectUser = ({ navigation, route }: DutySelectUserProps) => {
   }
 
   return (
-    <SectionList
-      sections={sectionList}
-      renderSectionHeader={({ section: { title, data } }) => <ListHeader title={title} isEmpty={data.length === 0} />}
-      renderItem={({ item }) => <UserSelectListItem user={item} onPress={() => onPressSelect(item)} />}
-      ItemSeparatorComponent={() => <Styled.DividerItem />}
-      ListEmptyComponent={() => <EmptyList text='Nenhum' />}
-    />
+    <>
+      <SearchBar
+        placeholder="Pesquisar..."
+        onChangeText={setSearchValue}
+        value={searchValue}
+      />
+      <SectionList
+        sections={sectionList}
+        renderSectionHeader={({ section: { title, data } }) => <ListHeader title={title} isEmpty={data.length === 0} />}
+        renderItem={({ item }) => <UserSelectListItem user={item} onPress={() => onPressSelect(item)} />}
+        ItemSeparatorComponent={() => <Styled.DividerItem />}
+        ListEmptyComponent={() => <EmptyList text='Nenhum' />}
+      />
+    </>
   );
 };
 
@@ -55,5 +65,5 @@ export default DutySelectUser;
 
 export const NavHeader = ({ navigation, route }: DutySelectUserProps) => {
   const { title } = route.params
-  return <Header title={title || "Selecione o voluntário"} onBackPress={navigation.goBack} />
+  return <Header title={title} onBackPress={navigation.goBack} />
 };

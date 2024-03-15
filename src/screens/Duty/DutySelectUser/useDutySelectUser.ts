@@ -1,7 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import Fuse, { IFuseOptions } from "fuse.js";
 import { DutyPosition, DutyRequest } from "@api/dutyRequest/types";
 import { User, UserPermission } from "@api/user/types";
 import { listFilteredUsers } from "@api/user/userApi";
+
+const fuseOptionKey = ['name']
+const fuseOptions = {
+  includeScore: true,
+  includeMatches: true,
+  shouldSort: true,
+  keys: fuseOptionKey,
+  getFn: (obj: any, path: string) =>
+    typeof obj[path] === 'string' ? obj[path] : '',
+  threshold: 0.2,
+  ignoreLocation: true
+} as IFuseOptions<User>
 
 interface UseDutySelectUserProps {
   position: DutyPosition;
@@ -11,8 +24,24 @@ interface UseDutySelectUserProps {
 
 const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: UseDutySelectUserProps) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState('');
   const [list, setList] = useState<User[]>([]);
+  const [allUsers, setAllUsers] = useState<User[]>([]);
   const [sectionList, setSectionList] = useState<{ title: string, data: User[] }[]>([]);
+
+  const initFuse = useMemo(() => new Fuse(allUsers, fuseOptions), [allUsers])
+
+  useEffect(() => {
+    if (searchValue.length > 0) {
+      const results = initFuse.search(searchValue).map(result => ({
+        ...result.item,
+        matches: result.matches
+      }))
+      setList(results)
+    } else {
+      setList(allUsers)
+    }
+  }, [searchValue, allUsers])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +76,7 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
       });
 
       if (response.success && response.result) {
-        setList(
+        setAllUsers(
           [...response.result].filter((user) => !usersAlreadySelected.includes(user.id))
         );
       }
@@ -72,6 +101,8 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
 
   return {
     isLoading,
+    searchValue,
+    setSearchValue,
     sectionList,
   };
 };

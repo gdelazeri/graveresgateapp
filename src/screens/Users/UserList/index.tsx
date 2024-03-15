@@ -37,7 +37,7 @@ const UserList = ({ navigation }: UserListProps) => {
     <Styled.Container>
       {permission === UserPermission.ADMIN && (
         <SearchBar
-          placeholder={'Busque um membro da equipe...'}
+          placeholder={'Pesquisar...'}
           onChangeText={setSearchQuery}
           value={searchQuery}
         />

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
 import { useFocusEffect } from "@react-navigation/native";
 
-const fuseOptionKey = ['name', 'email']
+const fuseOptionKey = ['name']
 const fuseOptions = {
   includeScore: true,
   includeMatches: true,
