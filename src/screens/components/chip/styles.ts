@@ -13,8 +13,8 @@ const Container = styled.View`
 `;
 
 const ChipContainer = styled.View<ChipProps>`
-  padding: 4px 8px;
-  border-radius: 8px;
+  padding: 2px 8px;
+  border-radius: 16px;
   background-color: ${({ backgroundColor }: ChipProps) => backgroundColor || colors.Greyscale.b100};
 `;
 
