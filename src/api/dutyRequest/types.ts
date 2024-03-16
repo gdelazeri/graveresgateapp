@@ -8,11 +8,6 @@ export const DutyShiftLabel = {
   [DutyShift.NIGHT]: 'Noite',
 }
 
-export const DutyShiftLabelTimes = {
-  [DutyShift.DAY]: 'Dia - 7h50min às 20h10min',
-  [DutyShift.NIGHT]: 'Noite - 19h50min às 8h10min',
-}
-
 export const DutyShiftTimes = {
   [DutyShift.DAY]: {
     start: '07:50',
@@ -22,6 +17,11 @@ export const DutyShiftTimes = {
     start: '19:50',
     end: '08:10',
   },
+}
+
+export const DutyShiftLabelTimes = {
+  [DutyShift.DAY]: `${DutyShiftLabel[DutyShift.DAY]} - ${DutyShiftTimes[DutyShift.DAY].start} às ${DutyShiftTimes[DutyShift.DAY].end}`,
+  [DutyShift.NIGHT]: `${DutyShiftLabel[DutyShift.NIGHT]} - ${DutyShiftTimes[DutyShift.NIGHT].start} às ${DutyShiftTimes[DutyShift.NIGHT].end}`,
 }
 
 export enum DutyPosition {

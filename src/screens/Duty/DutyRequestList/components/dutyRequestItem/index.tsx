@@ -42,7 +42,7 @@ const DutyRequestItem = ({ item, onPress }: DutyRequestItemProps) => (
       </ListItem.Title>
       <DutyRequestPositions id={item.id} positions={item.positions} />
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }}>
-        Das {item.startAt.substring(0, 5)} às {item.endAt.substring(0, 5)}
+        {item.startAt.substring(0, 5)} às {item.endAt.substring(0, 5)}
       </ListItem.Subtitle>
       {isString(item.note) && (
         <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }}>

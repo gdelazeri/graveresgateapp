@@ -69,7 +69,7 @@ const DutyRequestDetails = ({ route, navigation }: DutyRequestDetailsProps) => {
           <Styled.Divider />
 
           <Label size={"small"} color={colors.Greyscale.b50}>Horário</Label>
-          <Label size={"medium"}>Das {dutyRequest?.startAt.substring(0, 5)} às {dutyRequest?.endAt.substring(0, 5)}</Label>
+          <Label size={"medium"}>{dutyRequest?.startAt.substring(0, 5)} às {dutyRequest?.endAt.substring(0, 5)}</Label>
 
           <Styled.Divider />
 

@@ -11,6 +11,7 @@ type LabelProps = React.PropsWithChildren<{
   color?: string;
   bold?: boolean;
   numberOfLines?: number;
+  noMarginBottom?: boolean;
 }>;
 
 const Label = ({
@@ -20,6 +21,7 @@ const Label = ({
   color = colors.black,
   bold = false,
   numberOfLines,
+  noMarginBottom = false,
 }: LabelProps) => {
   const fontSize = LabelSizeValue[size];
   const fontFamily = bold ? fonts.bold : fonts.regular;
@@ -31,6 +33,7 @@ const Label = ({
       fontFamily={fontFamily}
       color={color}
       numberOfLines={numberOfLines}
+      noMarginBottom={noMarginBottom}
     >
       {children}
     </Styled.Text>

@@ -1,3 +1,5 @@
+import { DutyRequest } from "@api/dutyRequest/types";
+
 export type User = {
   id: string;
   registrationId: string;
@@ -38,4 +40,8 @@ export const UserStatusLabel = {
   [UserStatus.PENDING]: 'Pendente',
   [UserStatus.SUSPENDED]: 'Suspenso',
   [UserStatus.DELETED]: 'Excluído',
+}
+
+export interface UserDutyRequest extends User {
+  dutyRequest: DutyRequest;
 }

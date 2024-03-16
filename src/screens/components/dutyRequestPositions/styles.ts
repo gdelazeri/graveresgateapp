@@ -8,7 +8,7 @@ const Container = styled.View`
 
 const Item = styled.View`
   margin-top: 4px;
-  margin-right: 8px;
+  margin-right: 4px;
 `;
 
 export default {

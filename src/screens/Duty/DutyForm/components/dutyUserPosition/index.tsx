@@ -37,7 +37,7 @@ const DutyUserPosition = ({
             <Styled.UserAvatar>
               <Avatar imageUrl={user?.imageUrl} size={24} />
             </Styled.UserAvatar>
-            <Label size={'medium'} numberOfLines={1}>{user?.name}</Label>
+            <Label size={'medium'} numberOfLines={1} noMarginBottom>{user?.name}</Label>
           </Styled.UserData>
         )}
         {isString(user?.id) && !disabled && (

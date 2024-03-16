@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
 import { DutyPosition, DutyRequest } from "@api/dutyRequest/types";
-import { User, UserPermission } from "@api/user/types";
+import { User, UserDutyRequest, UserPermission } from "@api/user/types";
 import { listFilteredUsers } from "@api/user/userApi";
 
 const fuseOptionKey = ['name']
@@ -27,7 +27,7 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
   const [searchValue, setSearchValue] = useState('');
   const [list, setList] = useState<User[]>([]);
   const [allUsers, setAllUsers] = useState<User[]>([]);
-  const [sectionList, setSectionList] = useState<{ title: string, data: User[] }[]>([]);
+  const [sectionList, setSectionList] = useState<{ title: string, data: UserDutyRequest[] }[]>([]);
 
   const initFuse = useMemo(() => new Fuse(allUsers, fuseOptions), [allUsers])
 
@@ -86,9 +86,16 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
 
   useEffect(() => {
     const requestedUserIds = dutyRequests.map((request) => request.userId);
-    const requestedUsers = list.filter((user) => requestedUserIds.includes(user.id)) as User[];
-    const otherUsers = list.filter((user) => !requestedUserIds.includes(user.id)) as User[];
-
+    const requestedUsers = [...list.filter((user) => requestedUserIds.includes(user.id))]
+      .map((user) => {
+        const dutyRequest = dutyRequests.find((request) => request.userId === user.id);
+        return {
+          ...user,
+          dutyRequest,
+        } as UserDutyRequest
+      })
+    const otherUsers = list.filter((user) => !requestedUserIds.includes(user.id)) as UserDutyRequest[];
+// console.log(requestedUsers)
     const section = [
       { title: 'Solicitações', data: [...requestedUsers] },
       { title: 'Outros voluntários', data: [...otherUsers] },
