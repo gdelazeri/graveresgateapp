@@ -15,8 +15,8 @@ const DutyRequestPositions = ({ id, positions }: DutyRequestPositionsProps) => (
         <Chip
           testID={`${id}_position_${index}`}
           label={DutyPositionLabel[position]}
-          labelColor={colors.Greyscale.b100}
-          backgroundColor={colors.red}
+          labelColor={colors.black}
+          backgroundColor={colors.Greyscale.b90}
         />
       </Styled.Item>
     ))}

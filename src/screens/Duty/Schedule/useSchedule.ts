@@ -38,7 +38,6 @@ const useSchedule = () => {
 
   useFocusEffect(
     useCallback(() => {
-      setIsLoading(true);
       if (period === ListDutyPeriod.PREVIOUS) {
         fetchPreviousDuty(page);
       } else {
