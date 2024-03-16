@@ -6,18 +6,25 @@ export type Duty = {
   shift: DutyShift;
   leaderId: string;
   leaderName: string;
+  leaderImageUrl: string;
   driverId: string;
   driverName: string;
+  driverImageUrl: string;
   firstRescuerId: string;
   firstRescuerName: string;
+  firstRescuerImageUrl: string;
   secondRescuerId: string;
   secondRescuerName: string;
+  secondRescuerImageUrl: string;
   radioOperatorId: string;
   radioOperatorName: string;
+  radioOperatorImageUrl: string;
   assistantRadioOperatorId: string;
   assistantRadioOperatorName: string;
+  assistantRadioOperatorImageUrl: string;
   traineeId: string;
   traineeName: string;
+  traineeImageUrl: string;
 }
 
 export type DutyPayload = {

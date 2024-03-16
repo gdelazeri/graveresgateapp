@@ -31,13 +31,41 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
       const responseDuty = await getDuty(duty.date, duty.shift);
 
       if (responseDuty.success && responseDuty.result) {
-        setLeader({ id: responseDuty.result.leaderId, name: responseDuty.result.leaderName } as User)
-        setDriver({ id: responseDuty.result.driverId, name: responseDuty.result.driverName } as User)
-        setFirstRescuer({ id: responseDuty.result.firstRescuerId, name: responseDuty.result.firstRescuerName } as User)
-        setSecondRescuer({ id: responseDuty.result.secondRescuerId, name: responseDuty.result.secondRescuerName } as User)
-        setRadioOperator({ id: responseDuty.result.radioOperatorId, name: responseDuty.result.radioOperatorName } as User)
-        setAssistantRadioOperator({ id: responseDuty.result.assistantRadioOperatorId, name: responseDuty.result.assistantRadioOperatorName } as User)
-        setTrainee({ id: responseDuty.result.traineeId, name: responseDuty.result.traineeName } as User)
+        setLeader({
+          id: responseDuty.result.leaderId,
+          name: responseDuty.result.leaderName,
+          imageUrl: responseDuty.result.leaderImageUrl
+        } as User);
+        setDriver({
+          id: responseDuty.result.driverId,
+          name: responseDuty.result.driverName,
+          imageUrl: responseDuty.result.driverImageUrl
+        } as User);
+        setFirstRescuer({
+          id: responseDuty.result.firstRescuerId,
+          name: responseDuty.result.firstRescuerName,
+          imageUrl: responseDuty.result.firstRescuerImageUrl
+        } as User);
+        setSecondRescuer({
+          id: responseDuty.result.secondRescuerId,
+          name: responseDuty.result.secondRescuerName,
+          imageUrl: responseDuty.result.secondRescuerImageUrl
+        } as User);
+        setRadioOperator({
+          id: responseDuty.result.radioOperatorId,
+          name: responseDuty.result.radioOperatorName,
+          imageUrl: responseDuty.result.radioOperatorImageUrl
+        } as User);
+        setAssistantRadioOperator({
+          id: responseDuty.result.assistantRadioOperatorId,
+          name: responseDuty.result.assistantRadioOperatorName,
+          imageUrl: responseDuty.result.assistantRadioOperatorImageUrl
+        } as User);
+        setTrainee({
+          id: responseDuty.result.traineeId,
+          name: responseDuty.result.traineeName,
+          imageUrl: responseDuty.result.traineeImageUrl
+        } as User);
       }
 
       const responseDutyRequests = await listDutyRequests(duty.date, duty.shift);
