@@ -63,8 +63,6 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
           break;
         case DutyPosition.RESCUER:
         case DutyPosition.RADIO_OPERATOR:
-          permission = UserPermission.VOLUNTARY;
-          break;
         default:
           break;
       }
@@ -88,11 +86,11 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
 
   useEffect(() => {
     const requestedUserIds = dutyRequests.map((request) => request.userId);
-    const requestdUsers = list.filter((user) => requestedUserIds.includes(user.id)) as User[];
+    const requestedUsers = list.filter((user) => requestedUserIds.includes(user.id)) as User[];
     const otherUsers = list.filter((user) => !requestedUserIds.includes(user.id)) as User[];
 
     const section = [
-      { title: 'Solicitações', data: [...requestdUsers] },
+      { title: 'Solicitações', data: [...requestedUsers] },
       { title: 'Outros voluntários', data: [...otherUsers] },
     ]
 

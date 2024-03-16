@@ -40,7 +40,7 @@ const DutyUserPosition = ({
             <Label size={'medium'} numberOfLines={1}>{user?.name}</Label>
           </Styled.UserData>
         )}
-        {isString(user?.id) && (
+        {isString(user?.id) && !disabled && (
           <Styled.IconContainer onPress={onRemove}>
             <Styled.RemoveIcon />
           </Styled.IconContainer>

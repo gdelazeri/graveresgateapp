@@ -44,6 +44,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
     trainee,
     setTrainee,
     dutyRequestList,
+    isEditable,
     save
   } = useDutyForm({ duty });
 
@@ -102,6 +103,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected
               })
             }}
+            disabled={!isEditable}
           />
 
           <Styled.Divider />
@@ -121,6 +123,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected
               })
             }}
+            disabled={!isEditable}
           />
           
           <Styled.Divider />
@@ -140,6 +143,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected
               })
             }}
+            disabled={!isEditable}
           />
 
           <Styled.Divider />
@@ -159,6 +163,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected
               })
             }}
+            disabled={!isEditable}
           />
 
           <Styled.Divider />
@@ -178,6 +183,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected
               })
             }}
+            disabled={!isEditable}
           />
 
           <Styled.Divider />
@@ -197,6 +203,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected
               })
             }}
+            disabled={!isEditable}
           />
 
           <Styled.Divider />
@@ -216,6 +223,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected
               })
             }}
+            disabled={!isEditable}
           />
 
         </CardInfo>
@@ -226,6 +234,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           title="Salvar"
           onPress={onPressSave}
           loading={isProcessing}
+          disabled={!isEditable}
         />
       </Styled.Footer>
     </>

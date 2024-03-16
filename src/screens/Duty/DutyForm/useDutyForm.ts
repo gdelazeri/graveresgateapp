@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import moment from "moment";
 import { DutyRequest } from "@api/dutyRequest/types";
 import { listDutyRequests } from "@api/dutyRequest/dutyRequestApi";
 import { Duty } from "@api/duty/types";
@@ -20,6 +21,8 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [dutyRequestList, setDutyRequestList] = useState<DutyRequest[]>([]);
+
+  const isEditable = moment(duty.date).isSameOrAfter(moment().subtract(1, 'day'), "day");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,6 +91,7 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
     trainee,
     setTrainee,
     dutyRequestList,
+    isEditable,
     save
   };
 };
