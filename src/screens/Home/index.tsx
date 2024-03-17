@@ -10,11 +10,6 @@ interface HomeProps {
   navigation: NavigationProp<ParamListBase>;
 }
 
-// Plantões (Marcação de plantão e escalas)
-// Formulários (Ficha de atendimento e checklists)
-// Livros (Liro on-line e livro de deslocamento)
-// Voluntários ()
-
 const Home = ({ navigation }: HomeProps) => {
   const { userData } = useUserContext();
 

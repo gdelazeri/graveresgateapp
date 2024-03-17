@@ -11,7 +11,7 @@ const ContainerAvatar = styled.View`
 `;
 
 const Divider = styled.View`
-  height: 12px;
+  height: 8px;
 `;
 
 export default {
