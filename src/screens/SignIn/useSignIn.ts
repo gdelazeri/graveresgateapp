@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { postLogin } from "@api/user/userApi";
-import { isEmail } from "@utils/stringHelper";
+import { isEmail, isString } from "@utils/stringHelper";
 import { useUserContext } from "@context/userContext";
 
 const useSignIn = () => {
@@ -10,12 +10,12 @@ const useSignIn = () => {
   const [isError, setIsError] = useState(false);
   const { setTokens } = useUserContext();
 
-  const isEmailValid = isEmail(email);
-  const isPasswordValid = password.length >= 8;
+  const isEmailValid = email.length === 0 || isEmail(email);
+  const isPasswordValid = password.length === 0 || password.length >= 8;
 
   const isFormValid = useMemo(
-    () => isEmailValid && isPasswordValid,
-    [isEmailValid, isPasswordValid],
+    () => isString(email) && isEmailValid && isString(password) && isPasswordValid,
+    [email, isEmailValid, password, isPasswordValid],
   );
 
   const login = async () => {
