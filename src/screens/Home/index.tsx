@@ -44,6 +44,12 @@ const Home = ({ navigation }: HomeProps) => {
         subtitle="Informações sobre eventos e fotos"
         onPress={() => { }}
       />
+      <Card
+        icon={'settings'}
+        title="Configurações"
+        subtitle="Ajuste as configurações do aplicativo"
+        onPress={() => { }}
+      />
     </Styled.Container>
   );
 };

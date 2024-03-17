@@ -4,7 +4,7 @@ import colors from "@theme/colors";
 import fonts from "@theme/fonts";
 
 interface HomeCardProps {
-  icon?: 'insert-invitation' | 'list-alt' | 'group' | 'local-activity';
+  icon?: 'insert-invitation' | 'list-alt' | 'group' | 'local-activity' | 'settings';
   title: string;
   subtitle: string;
   onPress: () => void;
