@@ -91,6 +91,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           <DutyUserPosition
             label='Líder'
             requestsCount={leaderRequests.length}
+            dutyRequest={leaderRequests.find((dutyRequest) => dutyRequest.userId === leader?.id)}
             user={leader}
             placeholder='Selecione o líder'
             onRemove={() => setLeader(null)}
@@ -111,6 +112,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           <DutyUserPosition
             label='Condutor'
             requestsCount={driverRequests.length}
+            dutyRequest={driverRequests.find((dutyRequest) => dutyRequest.userId === driver?.id)}
             user={driver}
             placeholder='Selecione o condutor'
             onRemove={() => setDriver(null)}
@@ -131,8 +133,9 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           <DutyUserPosition
             label='1º Socorrista'
             requestsCount={rescuerRequests.length}
+            dutyRequest={rescuerRequests.find((dutyRequest) => dutyRequest.userId === firstRescuer?.id)}
             user={firstRescuer}
-            placeholder='Selecione o socorrista'
+            placeholder='Selecione o 1º Socorrista'
             onRemove={() => setFirstRescuer(null)}
             onPress={() => {
               navigation.navigate(routeMap.DutyRoutes.DUTY_SELECT_USER, {
@@ -151,6 +154,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           <DutyUserPosition
             label='2º Socorrista'
             requestsCount={rescuerRequests.length}
+            dutyRequest={rescuerRequests.find((dutyRequest) => dutyRequest.userId === secondRescuer?.id)}
             user={secondRescuer}
             placeholder='Selecione o 2º Socorrista'
             onRemove={() => setSecondRescuer(null)}
@@ -171,6 +175,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           <DutyUserPosition
             label='Auxiliar de S.O.'
             requestsCount={radioOperatorRequests.length}
+            dutyRequest={radioOperatorRequests.find((dutyRequest) => dutyRequest.userId === assistantRadioOperator?.id)}
             user={assistantRadioOperator}
             placeholder='Selecione o auxiliar de S.O.'
             onRemove={() => setAssistantRadioOperator(null)}
@@ -191,6 +196,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           <DutyUserPosition
             label='S.O.'
             requestsCount={radioOperatorRequests.length}
+            dutyRequest={radioOperatorRequests.find((dutyRequest) => dutyRequest.userId === radioOperator?.id)}
             user={radioOperator}
             placeholder='Selecione o S.O.'
             onRemove={() => setRadioOperator(null)}
@@ -211,6 +217,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           <DutyUserPosition
             label='Estágio'
             requestsCount={traineeRequests.length}
+            dutyRequest={traineeRequests.find((dutyRequest) => dutyRequest.userId === trainee?.id)}
             user={trainee}
             placeholder='Selecione o estagiário'
             onRemove={() => setTrainee(null)}
@@ -227,6 +234,8 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           />
 
         </CardInfo>
+
+        <Styled.Divider />
       </Styled.Container>
       <Styled.Footer>
         <Button

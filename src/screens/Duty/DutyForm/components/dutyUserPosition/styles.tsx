@@ -10,7 +10,7 @@ const Container = styled.TouchableOpacity`
   border-radius: 4px;
   border-width: 1px;
   padding: 0px 0px 0px 8px;
-  height: 40px;
+  height: 50px;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
@@ -49,7 +49,27 @@ const LabelContainer = styled.View`
   align-items: baseline;
   justify-content: space-between;
   width: 100%;
-`
+`;
+
+const DutyRequestInfoContainer = styled.View`
+  margin-top: 4px;
+`;
+
+const Inline = styled.View`
+  flex-direction: row;
+`;
+
+const TimeIcon = styled(Icon).attrs({
+  name: "access-time",
+  size: 16,
+  color: colors.Greyscale.b50,
+  containerStyle: {
+    padding: 0,
+    margin: 0
+  }
+})`
+  margin-right: 4px;
+`;
 
 export default {
   Container,
@@ -57,5 +77,8 @@ export default {
   UserAvatar,
   LabelContainer,
   IconContainer,
-  RemoveIcon
+  RemoveIcon,
+  DutyRequestInfoContainer,
+  Inline,
+  TimeIcon
 };

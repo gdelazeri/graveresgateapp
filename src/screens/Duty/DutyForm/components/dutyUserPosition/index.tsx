@@ -5,6 +5,7 @@ import Styled from "./styles";
 import { User } from "@api/user/types";
 import Avatar from "@screens/components/avatar";
 import RequestsIndicator from "../requestsIndicator";
+import { DutyRequest } from "@api/dutyRequest/types";
 
 interface DutyUserPositionProps {
   placeholder: string;
@@ -14,6 +15,7 @@ interface DutyUserPositionProps {
   disabled?: boolean
   onRemove: () => void;
   requestsCount: number;
+  dutyRequest?: DutyRequest;
 }
 
 const DutyUserPosition = ({
@@ -24,6 +26,7 @@ const DutyUserPosition = ({
   disabled = false,
   onRemove,
   requestsCount,
+  dutyRequest,
 }: DutyUserPositionProps) => {
   return (
     <>
@@ -35,7 +38,7 @@ const DutyUserPosition = ({
         {isString(user?.id) && (
           <Styled.UserData>
             <Styled.UserAvatar>
-              <Avatar imageUrl={user?.imageUrl} size={24} />
+              <Avatar imageUrl={user?.imageUrl} size={32} />
             </Styled.UserAvatar>
             <Label size={'medium'} numberOfLines={1} noMarginBottom>{user?.name}</Label>
           </Styled.UserData>
@@ -45,8 +48,17 @@ const DutyUserPosition = ({
             <Styled.RemoveIcon />
           </Styled.IconContainer>
         )}
-        {!isString(user?.id) && isString(placeholder) && <Label size="medium" color={colors.Greyscale.b60}>{placeholder}</Label>}
+        {!isString(user?.id) && isString(placeholder) && <Label size="medium" color={colors.Greyscale.b60} noMarginBottom>{placeholder}</Label>}
       </Styled.Container>
+      {dutyRequest && (
+        <Styled.DutyRequestInfoContainer>
+          <Styled.Inline>
+            <Styled.TimeIcon />
+            <Label size={'small'} color={colors.Greyscale.b50}>{dutyRequest.startAt.substring(0,5)} às {dutyRequest.endAt.substring(0,5)}</Label>
+          </Styled.Inline>
+          {isString(dutyRequest.note) && <Label size={'small'} color={colors.Greyscale.b50} noMarginBottom>Obs.: {dutyRequest.note}</Label>}
+        </Styled.DutyRequestInfoContainer>
+      )}
     </>
   );
 };
