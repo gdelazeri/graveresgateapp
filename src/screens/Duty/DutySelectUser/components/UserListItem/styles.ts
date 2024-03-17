@@ -11,12 +11,14 @@ const Touchable = styled.TouchableOpacity`
  
 const UserInfo = styled.View`
   margin-left: 12px;
+  width: 85%;
 `;
 
-const Inline = styled.View`
+const InlineTime = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: 2px;
+  margin-bottom: 2px;
 `;
 
 const TimeIcon = styled(Icon).attrs({
@@ -34,6 +36,6 @@ const TimeIcon = styled(Icon).attrs({
 export default {
   Touchable,
   UserInfo,
-  Inline,
+  InlineTime,
   TimeIcon
 };
