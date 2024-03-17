@@ -3,6 +3,8 @@ import Styled from "./styles";
 import Header from "./components/header";
 import Card from "@screens/components/cardListItem";
 import routeMap from "@routes/routeMap";
+import { useUserContext } from "@context/userContext";
+import { UserPermission } from "@api/user/types";
 
 interface HomeProps {
   navigation: NavigationProp<ParamListBase>;
@@ -14,6 +16,8 @@ interface HomeProps {
 // Voluntários ()
 
 const Home = ({ navigation }: HomeProps) => {
+  const { userData } = useUserContext();
+
   return (
     <Styled.Container>
       <Card
@@ -44,12 +48,14 @@ const Home = ({ navigation }: HomeProps) => {
         subtitle="Informações sobre eventos e fotos"
         onPress={() => { }}
       />
-      <Card
-        icon={'settings'}
-        title="Configurações"
-        subtitle="Ajuste as configurações do aplicativo"
-        onPress={() => { }}
-      />
+      {userData?.permission === UserPermission.ADMIN && (
+        <Card
+          icon={'settings'}
+          title="Configurações"
+          subtitle="Ajuste as configurações do aplicativo"
+          onPress={() => { }}
+        />
+      )}
     </Styled.Container>
   );
 };
