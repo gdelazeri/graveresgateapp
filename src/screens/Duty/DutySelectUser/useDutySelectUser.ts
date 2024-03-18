@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
 import { DutyPosition, DutyRequest } from "@api/dutyRequest/types";
 import { User, UserDutyRequest, UserPermission } from "@api/user/types";
-import { listFilteredUsers } from "@api/user/userApi";
+import { listActiveUsers } from "@api/user/userApi";
 
 const fuseOptionKey = ['name']
 const fuseOptions = {
@@ -46,32 +46,7 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true)
-
-      let isLeader: boolean | undefined = undefined;
-      let isDriver: boolean | undefined = undefined;
-      let permission: UserPermission | undefined = undefined;
-
-      switch (position) {
-        case DutyPosition.LEADER:
-          isLeader = true;
-          break;
-        case DutyPosition.DRIVER:
-          isDriver = true;
-          break;
-        case DutyPosition.TRAINEE:
-          permission = UserPermission.TRAINEE;
-          break;
-        case DutyPosition.RESCUER:
-        case DutyPosition.RADIO_OPERATOR:
-        default:
-          break;
-      }
-    
-      const response = await listFilteredUsers({
-        isDriver,
-        isLeader,
-        permission
-      });
+      const response = await listActiveUsers();
 
       if (response.success && response.result) {
         setAllUsers(

@@ -4,6 +4,7 @@ import Label from "@screens/components/label";
 import Avatar from "@screens/components/avatar";
 import colors from "@theme/colors";
 import { isString } from "@utils/stringHelper";
+import Chip from "@screens/components/chip";
 
 interface UserSelectListItemProps {
   user: UserDutyRequest;
@@ -30,6 +31,18 @@ const UserSelectListItem = ({ user, onPress }: UserSelectListItemProps) => (
           )}
         </>
       )}
+      <Styled.Inline>
+        {user.isLeader && (
+          <Styled.ChipContainer>
+            <Chip label="Líder" backgroundColor={colors.Greyscale.b90} labelColor={colors.black} />
+          </Styled.ChipContainer>
+        )}
+        {user.isDriver && (
+          <Styled.ChipContainer>
+            <Chip label="Condutor" backgroundColor={colors.Greyscale.b90} labelColor={colors.black} />
+          </Styled.ChipContainer>
+        )}
+      </Styled.Inline>
     </Styled.UserInfo>
   </Styled.Touchable>
 )

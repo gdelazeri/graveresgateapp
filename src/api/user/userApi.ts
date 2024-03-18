@@ -65,24 +65,9 @@ export const listAllUsers = async () => {
   }
 };
 
-export const listFilteredUsers = async ({
-  isLeader,
-  isDriver,
-  permission,
-}: {
-  isLeader?: boolean
-  isDriver?: boolean
-  permission?: UserPermission
-}) => {
+export const listActiveUsers = async () => {
   try {
-    const response: AxiosResponse<ApiResponse<User[]>> = await get(
-      "v1/user/list",
-      {
-        isLeader,
-        isDriver,
-        permission,
-      }
-    );
+    const response: AxiosResponse<ApiResponse<User[]>> = await get("v1/user/list/active");
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<User[]>>;

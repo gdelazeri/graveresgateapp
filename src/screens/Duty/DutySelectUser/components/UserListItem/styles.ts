@@ -33,9 +33,19 @@ const TimeIcon = styled(Icon).attrs({
   margin-right: 4px;
 `;
 
+const Inline = styled.View`
+  flex-direction: row;
+`;
+
+const ChipContainer = styled.View`
+  margin-right: 8px;
+`;
+
 export default {
   Touchable,
   UserInfo,
   InlineTime,
-  TimeIcon
+  TimeIcon,
+  Inline,
+  ChipContainer,
 };
