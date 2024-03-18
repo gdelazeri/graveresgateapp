@@ -62,13 +62,13 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
     }
   }
 
-  const leaderRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.LEADER));
-  const driverRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.DRIVER));
-  const rescuerRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.RESCUER));
-  const radioOperatorRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.RADIO_OPERATOR));
-  const traineeRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.TRAINEE));
   const usersAlreadySelected = [leader?.id, driver?.id, firstRescuer?.id, secondRescuer?.id, radioOperator?.id, assistantRadioOperator?.id, trainee?.id]
     .filter((id) => isString(id)) as string[];
+  const leaderRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.LEADER));
+  const driverRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.DRIVER));
+  const rescuerRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.RESCUER));
+  const radioOperatorRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.RADIO_OPERATOR));
+  const traineeRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.TRAINEE));
 
   if (isLoading) {
     return <Loader />

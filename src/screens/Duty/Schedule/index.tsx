@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+import moment from "moment";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { FlatList, RefreshControl } from "react-native";
 import SegmentedControl from '@react-native-segmented-control/segmented-control'
@@ -29,6 +31,19 @@ const Schedule = ({ navigation }: ScheduleProps) => {
     onChangePeriod,
     onEndReached
   } = useSchedule();
+  const ref = useRef<FlatList>(null);
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (ref.current) {
+        const date = moment().format('YYYY-MM-DD');
+        const index = list.findIndex((item) => item.date >= date);
+        if (index !== -1) {
+          ref.current.scrollToIndex({ index, animated: true });
+        }
+      }
+    }
+  }, [isLoading])
 
   return (
     <>
@@ -46,6 +61,7 @@ const Schedule = ({ navigation }: ScheduleProps) => {
       {isLoading && <Loader />}
       {!isLoading && (
         <FlatList
+          ref={ref}
           refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refresh} />}
           data={list}
           contentContainerStyle={{ padding: 16, paddingTop: 0 }}
@@ -62,6 +78,12 @@ const Schedule = ({ navigation }: ScheduleProps) => {
           )}
           ListEmptyComponent={() => <EmptyList text="Nenhum plantão encontrado" />}
           onEndReached={onEndReached}
+          onScrollToIndexFailed={({ index }) => {
+            const wait = new Promise(resolve => setTimeout(resolve, 500));
+            wait.then(() => {
+              ref.current?.scrollToIndex({ index, animated: true });
+            });
+          }}
         />
       )}
     </>

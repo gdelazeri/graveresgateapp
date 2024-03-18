@@ -77,6 +77,7 @@ const useSchedule = () => {
   }
 
   const onChangePeriod = (value: ListDutyPeriod) => {
+    setIsLoading(true);
     setPage(1);
     setPeriod(value);
   }

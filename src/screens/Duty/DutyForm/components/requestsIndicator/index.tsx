@@ -12,7 +12,7 @@ const RequestsIndicator = ({
   return (
     <Styled.Container>
       <Label size="small" color={colors.Greyscale.b50}>
-        {count > 0 ? count : 'Nenhuma'} solicitaç{count > 1 ? 'ões' : 'ão'}
+        {count > 0 ? count : 'Nenhuma'} solicitaç{count > 1 ? 'ões' : 'ão'} pendente{count > 1 ? 's' : ''}
       </Label>
     </Styled.Container>
   );
