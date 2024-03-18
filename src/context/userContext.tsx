@@ -20,6 +20,7 @@ interface UserContextState {
   accessToken: string | null;
   refreshToken: string | null;
   setTokens: (tokens: ITokens) => Promise<void>;
+  signOut: () => Promise<void>;
   clearTokens: () => Promise<void>;
 }
 
@@ -33,6 +34,7 @@ const UserContext = createContext<UserContextState>({
   accessToken: "",
   refreshToken: "",
   setTokens: async () => {},
+  signOut: async () => {},
   clearTokens: async () => {},
 });
 
@@ -47,21 +49,24 @@ export const UserProvider = (props: UserContextProps) => {
   }, []);
 
   const loadTokens = async () => {
-    const accessTokenStorage = await storage.get(STORAGE_KEYS.ACCESS_TOKEN);
-    const refreshTokenStorage = await storage.get(STORAGE_KEYS.REFRESH_TOKEN);
-
-    if (refreshTokenStorage) setRefreshToken(refreshTokenStorage);
-    if (accessTokenStorage) {
-      setAccessToken(accessTokenStorage);
-
-      const userDataResponse = await getUserData();
-
-      if (userDataResponse?.success) {
-        setUserData(userDataResponse.result);
-        setPermission(userDataResponse.result.permission);
-      } else {
-        clearTokens()
+    try {
+      const accessTokenStorage = await storage.get(STORAGE_KEYS.ACCESS_TOKEN);
+      const refreshTokenStorage = await storage.get(STORAGE_KEYS.REFRESH_TOKEN);
+  
+      if (refreshTokenStorage) setRefreshToken(refreshTokenStorage);
+      if (accessTokenStorage) {
+        setAccessToken(accessTokenStorage);
+  
+        const userDataResponse = await getUserData();
+        if (userDataResponse?.success) {
+          setUserData(userDataResponse.result);
+          setPermission(userDataResponse.result.permission);
+        } else {
+          clearTokens();
+        }
       }
+    } catch (err) {
+      clearTokens();
     }
   };
 
@@ -85,11 +90,17 @@ export const UserProvider = (props: UserContextProps) => {
 
     await storage.clear(STORAGE_KEYS.ACCESS_TOKEN);
     await storage.clear(STORAGE_KEYS.REFRESH_TOKEN);
-  };
+  }
+
+  const signOut = async () => {
+    await clearTokens();
+    await storage.clear(STORAGE_KEYS.USERNAME);
+    await storage.clear(STORAGE_KEYS.PASSWORD);
+  }
 
   return (
     <UserContext.Provider
-      value={{ accessToken, refreshToken, setTokens, clearTokens, userData, permission }}
+      value={{ accessToken, refreshToken, setTokens, signOut, clearTokens, userData, permission }}
     >
       {props.children}
     </UserContext.Provider>

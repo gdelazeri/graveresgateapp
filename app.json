@@ -29,5 +29,13 @@
         "backgroundColor": "#ffffff"
       }
     }
-  }
+  },
+  "plugins": [
+    [
+      "expo-secure-store",
+      {
+        "faceIDPermission": "Allow Grave Resgate App to access your Face ID biometric data."
+      }
+    ]
+  ]
 }

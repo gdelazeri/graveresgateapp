@@ -7,6 +7,7 @@ import Button from "@screens/components/button";
 import useSignIn from "./useSignIn";
 import Styled from "./styles";
 import { INPUT_TYPE } from "@screens/components/input/types";
+import Loader from "@screens/components/loader";
 
 interface SignInProps {
   navigation: NavigationProp<ParamListBase>;
@@ -14,6 +15,7 @@ interface SignInProps {
 
 const SignIn = ({ navigation }: SignInProps) => {
   const {
+    isLoading,
     email,
     setEmail,
     password,
@@ -25,6 +27,10 @@ const SignIn = ({ navigation }: SignInProps) => {
     isError,
     login,
   } = useSignIn();
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <Styled.Container>

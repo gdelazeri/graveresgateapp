@@ -17,7 +17,7 @@ jest.mock("@api/user", () => ({
 }));
 
 const TestComponent = () => {
-  const { accessToken, refreshToken, clearTokens, setTokens } =
+  const { accessToken, refreshToken, signOut, setTokens } =
     useUserContext();
 
   return (
@@ -35,7 +35,7 @@ const TestComponent = () => {
       >
         Set tokens
       </TouchableOpacity>
-      <TouchableOpacity testID="clearTokens" onPress={clearTokens}>
+      <TouchableOpacity testID="signOut" onPress={signOut}>
         Clear tokens
       </TouchableOpacity>
     </View>
@@ -114,7 +114,7 @@ describe("useUserContext", () => {
     });
 
     await act(() => {
-      fireEvent.press(getByTestId("clearTokens"));
+      fireEvent.press(getByTestId("signOut"));
     });
 
     await waitFor(() => {

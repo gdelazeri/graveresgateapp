@@ -95,7 +95,7 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
         } as UserDutyRequest
       })
     const otherUsers = list.filter((user) => !requestedUserIds.includes(user.id)) as UserDutyRequest[];
-// console.log(requestedUsers)
+
     const section = [
       { title: 'Solicitações', data: [...requestedUsers] },
       { title: 'Outros voluntários', data: [...otherUsers] },

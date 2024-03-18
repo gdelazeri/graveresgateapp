@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { postLogin } from "@api/user/userApi";
 import { isEmail, isString } from "@utils/stringHelper";
 import { useUserContext } from "@context/userContext";
+import storage, { STORAGE_KEYS } from "@utils/storage";
 
 const useSignIn = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -18,32 +20,58 @@ const useSignIn = () => {
     [email, isEmailValid, password, isPasswordValid],
   );
 
-  const login = async () => {
-    setIsProcessing(true);
-    setIsError(false)
+  const getCredentials = async () => {
+    setIsLoading(true);
+    const usernameStored = await storage.get(STORAGE_KEYS.USERNAME);
+    const passwordStored = await storage.get(STORAGE_KEYS.PASSWORD);
 
-    const payload = {
-      email: email.trim(),
-      password,
-    };
-
-    const response = await postLogin(payload);
-
-    setIsProcessing(false);
-
-    if (response?.success) {
-      await setTokens({
-        newAccessToken: response.result.accessToken,
-        newRefreshToken: response.result.refreshToken,
-      });
-    } else {
-      setIsError(true)
+    if (isString(usernameStored) && isString(passwordStored)) {
+      setEmail(String(usernameStored));
+      setPassword(String(passwordStored));
     }
 
-    return response?.success;
+    setIsLoading(false);
+  }
+
+  useEffect(() => {
+    getCredentials(); 
+  }, [])
+
+  const login = async () => {
+    try {
+      setIsProcessing(true);
+      setIsError(false)
+  
+      const payload = {
+        email: email.trim(),
+        password,
+      };
+  
+      const response = await postLogin(payload);
+  
+      setIsProcessing(false);
+  
+      if (response?.success) {
+        await storage.set(STORAGE_KEYS.USERNAME, payload.email);
+        await storage.set(STORAGE_KEYS.PASSWORD, payload.password);
+        await setTokens({
+          newAccessToken: response.result.accessToken,
+          newRefreshToken: response.result.refreshToken,
+        });
+      } else {
+        setIsError(true)
+      }
+  
+      return response?.success;
+    } catch (err) {
+      setIsProcessing(false);
+      setIsError(true)
+      return false;
+    }
   };
 
   return {
+    isLoading,
     email,
     setEmail,
     password,
