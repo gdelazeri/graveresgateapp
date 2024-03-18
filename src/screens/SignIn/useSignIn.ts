@@ -16,8 +16,16 @@ const useSignIn = () => {
   const isPasswordValid = password.length === 0 || password.length >= 8;
 
   const isFormValid = useMemo(
-    () => isString(email) && isEmailValid && isString(password) && isPasswordValid,
-    [email, isEmailValid, password, isPasswordValid],
+    () => isString(email)
+    && isEmailValid
+    && isString(password)
+    && isPasswordValid,
+    [
+      email,
+      isEmailValid,
+      password,
+      isPasswordValid
+    ],
   );
 
   const getCredentials = async () => {
