@@ -29,9 +29,16 @@ enum DutyRoutes {
   DUTY_SELECT_USER = "DutySelectUser"
 }
 
+enum SettingsRoutes {
+  STACK = "Settings",
+  SETTINGS_HOME = "SettingsHome",
+  VEHICLE_LIST = "VehicleList"
+}
+
 export default {
   LoggedOffRoutes,
   LoggedInRoutes,
   UserRoutes,
-  DutyRoutes
+  DutyRoutes,
+  SettingsRoutes
 };

@@ -1,9 +1,10 @@
 import styled from "styled-components/native";
 
-const Divider = styled.Text`
-  height: 16px;
+const Container = styled.View`
+  flex: 1;
+  padding: 16px;
 `;
 
 export default {
-  Divider,
+  Container,
 };

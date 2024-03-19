@@ -1,7 +1,7 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import Styled from "./styles";
 import Header from "./components/header";
-import Card from "@screens/components/cardListItem";
+import CardListItem from "@screens/components/cardListItem";
 import routeMap from "@routes/routeMap";
 import { useUserContext } from "@context/userContext";
 import { UserPermission } from "@api/user/types";
@@ -15,7 +15,7 @@ const Home = ({ navigation }: HomeProps) => {
 
   return (
     <Styled.Container>
-      <Card
+      <CardListItem
         icon={'insert-invitation'}
         title="Plantões"
         subtitle="Marcação de plantão e escalas"
@@ -23,13 +23,13 @@ const Home = ({ navigation }: HomeProps) => {
           navigation.navigate(routeMap.DutyRoutes.STACK)
         }}
       />
-      <Card
+      <CardListItem
         icon={'list-alt'}
         title="Formulários"
         subtitle="Fichas, livros e checklists"
         onPress={() => { }}
       />
-      <Card
+      <CardListItem
         icon={'group'}
         title="Equipe"
         subtitle="Voluntários e carga horária"
@@ -37,18 +37,20 @@ const Home = ({ navigation }: HomeProps) => {
           navigation.navigate(routeMap.UserRoutes.STACK)
         }}
       />
-      <Card
+      <CardListItem
         icon={'local-activity'}
         title="Eventos"
         subtitle="Informações sobre eventos e fotos"
         onPress={() => { }}
       />
       {userData?.permission === UserPermission.ADMIN && (
-        <Card
+        <CardListItem
           icon={'settings'}
           title="Configurações"
           subtitle="Ajuste as configurações do aplicativo"
-          onPress={() => { }}
+          onPress={() => {
+            navigation.navigate(routeMap.SettingsRoutes.STACK)
+          }}
         />
       )}
     </Styled.Container>

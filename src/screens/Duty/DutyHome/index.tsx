@@ -14,16 +14,22 @@ const DutyHome = ({ navigation }: DutyHomeProps) => (
     <CardListItem
       title="Escala de plantão"
       subtitle="Veja as escalas disponíveis"
+      icon="calendar-month"
+      iconType="material-community"
       onPress={() => { navigation.navigate(routeMap.DutyRoutes.SCHEDULE) }}
     />
     <CardListItem
-      title="Marcar plantão"
+      title="Marcação de plantão"
       subtitle="Preencha o formulário para solicitar seu plantão"
+      icon="calendar-plus"
+      iconType="material-community"
       onPress={() => { navigation.navigate(routeMap.DutyRoutes.CREATE_DUTY_REQUEST) }}
     />
     <CardListItem
       title="Minhas solicitações"
       subtitle="Acompanhe as suas solicitações de plantão"
+      icon="calendar-account"
+      iconType="material-community"
       onPress={() => { navigation.navigate(routeMap.DutyRoutes.LIST_DUTY_REQUEST) }}
     />
   </Styled.Container>
