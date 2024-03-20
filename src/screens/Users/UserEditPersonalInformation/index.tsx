@@ -47,7 +47,7 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
     <>
       <Styled.Container>
         <Input
-          label="Nome completo"
+          label="Nome completo*"
           placeholder="Nome completo do voluntário"
           value={fullName}
           onChangeText={setFullName}
@@ -58,7 +58,7 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
         />
         <Styled.Divider />
         <Input
-          label="E-mail"
+          label="E-mail*"
           placeholder="E-mail do voluntário"
           value={email}
           onChangeText={setEmail}
@@ -69,7 +69,7 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
         />
         <Styled.Divider />
         <Input
-          label="Celular"
+          label="Celular*"
           placeholder="Número de celular do voluntário"
           value={phone}
           onChangeText={setPhone}

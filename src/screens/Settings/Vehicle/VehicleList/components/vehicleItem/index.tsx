@@ -38,7 +38,10 @@ const VehicleItem = ({ item, onPress }: VehicleItemProps) => (
         {item.name}
       </ListItem.Title>
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }}>
-        {item.brand} - {item.model} - {item.year}
+        {item.brand} - {item.model}
+      </ListItem.Subtitle>
+      <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 2 }}>
+        Ano: {item.year}
       </ListItem.Subtitle>
       <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 2 }}>
         Placa: {item.licensePlate}

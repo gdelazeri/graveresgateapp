@@ -78,7 +78,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
           <Label size={"small"}>A solicitação não é garantia de vaga na escala.</Label>
           <Styled.Divider />
           <DateInput
-            label="Data do plantão"
+            label="Data do plantão*"
             placeholder="Selecione a data"
             value={date}
             onChangeValue={setDate}
@@ -86,7 +86,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
           />
           <Styled.Divider />
           <Select
-            label="Turno"
+            label="Turno*"
             placeholder="Selecione um turno"
             value={shift ? shift.toString() : null}
             onChangeValue={(value) => onChangeShift(value as DutyShift)}
@@ -112,7 +112,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
           <Label size="small">Edite os campos acima caso precise alterar os horários de entrada e saída</Label>
           <Styled.Divider />
           <RadioGroup
-            label="Posições"
+            label="Posições*"
             items={positionOptions}
             selectedValue={positions}
             onChangeValue={(value) => setPositions(value as DutyPosition[])}

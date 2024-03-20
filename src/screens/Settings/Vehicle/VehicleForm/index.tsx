@@ -49,7 +49,7 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
       <Styled.Container>
         <CardInfo>
           <Input
-            label="Nome da viatura"
+            label="Nome da viatura*"
             value={name}
             onChangeText={setName}
             placeholder="Ex.: UR-G01, VTR-02"
@@ -67,7 +67,7 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
           <Styled.Divider/>
 
           <Input
-            label="Modelo do veículo"
+            label="Modelo do veículo*"
             value={model}
             onChangeText={setModel}
             placeholder="Ex.: Master, Sprinter"

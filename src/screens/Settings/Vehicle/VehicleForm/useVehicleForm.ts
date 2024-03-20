@@ -18,11 +18,9 @@ const useVehicleForm = ({ vehicle }: UseVehicleFormProps) => {
 
   const isValidForm = useMemo(() => (
     isString(name) &&
-    isString(brand) &&
     isString(model)
   ), [
     name,
-    brand,
     model
   ])
 

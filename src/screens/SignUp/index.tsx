@@ -40,7 +40,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
         <Label size={"medium"}>Preencha seus dados nos campos abaixo:</Label>
         <Styled.Divider />
         <Input
-          label="Nome completo"
+          label="Nome completo*"
           placeholder="Seu nome completo"
           value={fullName}
           onChangeText={setFullName}
@@ -51,7 +51,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
         />
         <Styled.Divider />
         <Input
-          label="E-mail"
+          label="E-mail*"
           placeholder="Seu e-mail"
           value={email}
           onChangeText={setEmail}
@@ -62,7 +62,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
         />
         <Styled.Divider />
         <Input
-          label="Celular"
+          label="Celular*"
           placeholder="Seu número de celular"
           value={phone}
           onChangeText={setPhone}
@@ -73,7 +73,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
         />
         <Styled.Divider />
         <Input
-          label="Senha"
+          label="Senha*"
           placeholder="Sua senha de acesso"
           value={password}
           onChangeText={setPassword}
@@ -84,7 +84,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
         />
         <Styled.Divider />
         <Input
-          label="Confirmar senha"
+          label="Confirmar senha*"
           placeholder="Confirme sua senha de acesso"
           value={passwordConfirm}
           onChangeText={setPasswordConfirm}
