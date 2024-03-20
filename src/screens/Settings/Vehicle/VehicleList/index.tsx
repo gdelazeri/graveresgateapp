@@ -8,6 +8,7 @@ import VehicleItem from "./components/vehicleItem";
 
 import useVehicleList from "./useVehicleList";
 import Styled from "./styles";
+import { Vehicle } from "@api/vehicle/types";
 
 interface VehicleListProps {
   navigation: NavigationProp<ParamListBase>;
@@ -21,8 +22,8 @@ const VehicleList = ({ navigation }: VehicleListProps) => {
     onRefresh
   } = useVehicleList()
 
-  const onPressItem = (id: string) => {
-    navigation.navigate(routeMap.UserRoutes.USER_DETAILS, { id })
+  const onPressItem = (item: Vehicle) => {
+    navigation.navigate(routeMap.SettingsRoutes.VEHICLE_FORM, { vehicle: item })
   }
 
   if (isLoading) {
@@ -38,7 +39,7 @@ const VehicleList = ({ navigation }: VehicleListProps) => {
         renderItem={({ item }) => (
           <VehicleItem
             item={item}
-            onPress={() => onPressItem(item.id)}
+            onPress={() => onPressItem(item)}
           />
         )}
         keyExtractor={(item) => item.id}
@@ -47,7 +48,7 @@ const VehicleList = ({ navigation }: VehicleListProps) => {
       <Styled.Footer>
         <Button
           title="Adicionar viatura"
-          onPress={() => navigation.navigate('')}
+          onPress={() => navigation.navigate(routeMap.SettingsRoutes.VEHICLE_FORM)}
         />
       </Styled.Footer>
     </Styled.Container>

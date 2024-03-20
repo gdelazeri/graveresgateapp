@@ -4,7 +4,11 @@ import { Vehicle } from "./types";
 
 export interface PostVehiclePayload {
   name: string;
+  brand: string;
+  model: string;
   licensePlate: string;
+  year: string;
+  isAvailable: boolean;
 }
 
 export const postVehicle = async (payload: PostVehiclePayload) => {

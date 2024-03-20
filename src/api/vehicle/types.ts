@@ -5,4 +5,5 @@ export type Vehicle = {
   brand: string;
   model: string;
   year: string;
+  isAvailable: boolean;
 }

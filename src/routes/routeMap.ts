@@ -32,7 +32,8 @@ enum DutyRoutes {
 enum SettingsRoutes {
   STACK = "Settings",
   SETTINGS_HOME = "SettingsHome",
-  VEHICLE_LIST = "VehicleList"
+  VEHICLE_LIST = "VehicleList",
+  VEHICLE_FORM = "VehicleForm",
 }
 
 export default {

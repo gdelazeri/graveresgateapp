@@ -4,6 +4,7 @@ import colors from "@theme/colors";
 import fonts from "@theme/fonts";
 import { LabelSizeValue } from "@screens/components/label/types";
 import { Vehicle } from "@api/vehicle/types";
+import Chip from '@screens/components/chip';
 
 interface VehicleItemProps {
   item: Vehicle;
@@ -43,6 +44,11 @@ const VehicleItem = ({ item, onPress }: VehicleItemProps) => (
         Placa: {item.licensePlate}
       </ListItem.Subtitle>
     </ListItem.Content>
+    <Chip
+      label={item.isAvailable ? 'Disponível' : 'Indisponível'}
+      labelColor={colors.Greyscale.b100}
+      backgroundColor={item.isAvailable ? colors.green : colors.red}
+    />
   </ListItem>
 );
 
