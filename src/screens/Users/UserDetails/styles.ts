@@ -1,6 +1,10 @@
 import styled from "styled-components/native";
 
-const Container = styled.ScrollView`
+const Container = styled.View`
+  flex: 1;
+`;
+
+const ScrollView = styled.ScrollView`
   padding: 12px;
 `;
 
@@ -16,6 +20,7 @@ const Divider = styled.View`
 
 export default {
   Container,
+  ScrollView,
   ContainerAvatar,
   Divider
 };

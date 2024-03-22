@@ -23,15 +23,12 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
   const { user } = route.params
   const {
     isProcessing,
-    status,
-    setStatus,
     permission,
     setPermission,
     isDriver,
     setIsDriver,
     isLeader,
     setIsLeader,
-    isStatusValid,
     isPermissionValid,
     save,
   } = useUserEditProfile(user);
@@ -42,13 +39,6 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
       navigation.goBack();
     }
   }
-
-  const statusItems = [UserStatus.ACTIVE, UserStatus.PENDING, UserStatus.SUSPENDED]
-    .map((status) => ({
-      key: status,
-      label: UserStatusLabel[status as UserStatus],
-      value: status
-    }))
 
   const permissionItems = Object
     .keys(UserPermission)
@@ -61,18 +51,6 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
   return (
     <>
       <Styled.Container>
-        <Select
-          label="Status"
-          placeholder="Selecione um status"
-          value={status ? status.toString() : null}
-          onChangeValue={(value) => setStatus(value as UserStatus)}
-          items={statusItems}
-          invalid={!isStatusValid}
-          invalidText="Informe o status"
-        />
-
-        <Styled.Divider />
-
         <Select
           label="Permissão"
           placeholder="Selecione uma permissão"
@@ -102,7 +80,7 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
           testID="save-btn"
           title="Salvar"
           onPress={onPressSave}
-          disabled={!isStatusValid || !isPermissionValid}
+          disabled={!isPermissionValid}
           loading={isProcessing}
         />
       </Styled.Footer>

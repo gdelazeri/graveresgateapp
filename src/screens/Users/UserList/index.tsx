@@ -35,13 +35,11 @@ const UserList = ({ navigation }: UserListProps) => {
 
   return (
     <Styled.Container>
-      {permission === UserPermission.ADMIN && (
-        <SearchBar
-          placeholder={'Pesquisar...'}
-          onChangeText={setSearchQuery}
-          value={searchQuery}
-        />
-      )}
+      <SearchBar
+        placeholder={'Pesquisar...'}
+        onChangeText={setSearchQuery}
+        value={searchQuery}
+      />
       <FlatList
         data={list}
         refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refresh} />}

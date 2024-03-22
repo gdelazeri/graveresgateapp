@@ -1,8 +1,9 @@
-import { listAllUsers } from "@api/user/userApi";
-import { User } from "@api/user/types";
+import { listActiveUsers, listAllUsers } from "@api/user/userApi";
+import { User, UserPermission } from "@api/user/types";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
 import { useFocusEffect } from "@react-navigation/native";
+import { useUserContext } from "@context/userContext";
 
 const fuseOptionKey = ['name']
 const fuseOptions = {
@@ -22,6 +23,7 @@ export const useUserList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [allUsers, setAllUsers] = useState<User[]>([]);
   const [list, setList] = useState<User[]>([]);
+  const { permission } = useUserContext();
 
   const initFuse = useMemo(() => new Fuse(allUsers, fuseOptions), [allUsers])
 
@@ -38,7 +40,7 @@ export const useUserList = () => {
   }, [searchQuery, allUsers])
 
   const fetchData = async () => {
-    const response = await listAllUsers();
+    const response = permission === UserPermission.ADMIN ? await listAllUsers() : await listActiveUsers();
     if (response?.success) {
       setAllUsers(response.result);
     } else {

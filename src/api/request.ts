@@ -25,6 +25,10 @@ export const post = async (url: string, payload: any) => {
 };
 
 export const put = async (url: string, payload: any) => {
+  console.log(url, payload, {
+    baseURL: API_URL,
+    headers: header,
+  })
   const header = await headers();
   return axios.put(url, payload, {
     baseURL: API_URL,
@@ -44,6 +48,14 @@ export const get = async (url: string, params?: any) => {
 export const remove = async (url: string) => {
   const header = await headers();
   return axios.delete(url, {
+    baseURL: API_URL,
+    headers: header,
+  });
+};
+
+export const patch = async (url: string) => {
+  const header = await headers();
+  return axios.patch(url, {
     baseURL: API_URL,
     headers: header,
   });

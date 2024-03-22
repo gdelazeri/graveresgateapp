@@ -1,4 +1,4 @@
-import { User } from "@api/user/types";
+import { User, UserStatus, UserStatusLabel } from "@api/user/types";
 import Styled from "./styles";
 import Label from "@screens/components/label";
 import Avatar from "@screens/components/avatar";
@@ -15,19 +15,12 @@ const UserListItem = ({ user, onPress }: UserListItemProps) => (
     <Avatar imageUrl={user.imageUrl} />
     <Styled.UserInfo>
       <Label size='medium'>{user.name}</Label>
-      {(user.isLeader || user.isDriver) && (
-        <Styled.Inline>
-          {user.isLeader && (
-            <Styled.ChipContainer>
-              <Chip label="Líder" backgroundColor={colors.Greyscale.b90} labelColor={colors.black} />
-            </Styled.ChipContainer>
-          )}
-          {user.isDriver && (
-            <Styled.ChipContainer>
-              <Chip label="Condutor" backgroundColor={colors.Greyscale.b90} labelColor={colors.black} />
-            </Styled.ChipContainer>
-          )}
-        </Styled.Inline>
+      {user.status !== UserStatus.ACTIVE && (
+        <Chip
+          label={UserStatusLabel[user.status]}
+          backgroundColor={user.status === UserStatus.PENDING ? colors.yellow : colors.red}
+          labelColor={user.status === UserStatus.PENDING ? colors.black : colors.Greyscale.b100}
+        />
       )}
     </Styled.UserInfo>
   </Styled.Touchable>

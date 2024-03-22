@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { post, ApiResponse, get, put } from "../request";
-import { User, UserPermission } from "./types";
+import { post, ApiResponse, get, put, remove, patch } from "../request";
+import { User } from "./types";
 
 export interface PostRegisterPayload {
   name: string;
@@ -88,6 +88,26 @@ export const getUserById = async (id: string) => {
 export const putUserData = async (id: string, payload: any) => {
   try {
     const response: AxiosResponse<ApiResponse<User>> = await put(`v1/user/${id}`, payload);
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ApiResponse<User>>;
+    return error.response!.data;
+  }
+};
+
+export const deleteUserById = async (id: string) => {
+  try {
+    const response: AxiosResponse<ApiResponse<boolean>> = await remove(`v1/user/${id}`);
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ApiResponse<boolean>>;
+    return error.response!.data;
+  }
+};
+
+export const patchApproveUser = async (id: string) => {
+  try {
+    const response: AxiosResponse<ApiResponse<User>> = await patch(`v1/user/${id}/approve`);
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<User>>;
