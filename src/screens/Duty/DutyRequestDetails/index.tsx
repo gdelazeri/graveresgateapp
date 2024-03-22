@@ -28,27 +28,40 @@ const DutyRequestDetails = ({ route, navigation }: DutyRequestDetailsProps) => {
   const { id } = route.params;
   const { isLoading, isProcessing, dutyRequest, remove } = useDutyRequestDetails({ id })
 
-  const onPressDelete = () => {
-    Alert.alert(
-      'Cancelar solicitação',
-      'Deseja realmente cancelar a solicitação de plantão? Essa ação não poderá ser desfeita.',
-      [
-        {
-          text: 'Não',
-          style: 'cancel'
-        },
-        {
-          text: 'Sim',
-          style: 'destructive',
-          onPress: onDelete
-        }
-      ]
-    )
-  }
   const onDelete = async () => {
     await remove();
     navigation.goBack();
   };
+
+  const onPressDelete = () => {
+    if (dutyRequest?.status !== DutyRequestStatus.PENDING) {
+      Alert.alert(
+        'Não é possível cancelar a solicitação',
+        'Para cancelar, entre em contato com o responsável pela escala de plantão.',
+        [
+          {
+            text: 'Ok'
+          }
+        ]
+      )
+    } else {
+      Alert.alert(
+        'Cancelar solicitação',
+        'Deseja realmente cancelar a solicitação de plantão? Essa ação não poderá ser desfeita.',
+        [
+          {
+            text: 'Não',
+            style: 'cancel'
+          },
+          {
+            text: 'Sim',
+            style: 'destructive',
+            onPress: onDelete
+          }
+        ]
+      )
+    }
+  }
 
   if (isLoading) {
     return <Loader />
@@ -101,7 +114,6 @@ const DutyRequestDetails = ({ route, navigation }: DutyRequestDetailsProps) => {
           testID="delete-btn"
           title="Cancelar solicitação"
           onPress={onPressDelete}
-          disabled={dutyRequest?.status !== DutyRequestStatus.PENDING}
           loading={isProcessing}
         />
       </Styled.Footer>

@@ -53,7 +53,6 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
     assistantRadioOperatorRequests,
     traineeRequests,
   } = useDutyForm({ duty });
-  console.log(assistantRadioOperatorRequests)
 
   const onPressSave = async () => {
     const response = await save();
