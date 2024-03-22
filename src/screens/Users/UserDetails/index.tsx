@@ -79,7 +79,7 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
   const onPressSuspend = () => {
     Alert.alert(
       'Suspender voluntário',
-      'Tem certeza que deseja suspender este voluntário? Ao suspender, este usuário não poderá marcar novos plantões até que seu status seja alterado para ATIVO novamente.',
+      'Tem certeza que deseja suspender este voluntário? Ao suspender, este usuário não poderá acessar o aplicativo até que seu status seja alterado para ATIVO novamente.',
       [
         {
           text: 'Cancelar',

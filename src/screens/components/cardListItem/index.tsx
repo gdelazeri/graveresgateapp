@@ -9,9 +9,10 @@ interface HomeCardProps {
   title: string;
   subtitle: string;
   onPress: () => void;
+  disabled?: boolean;
 }
 
-const CardListItem = ({ icon, iconType, title, subtitle, onPress }: HomeCardProps) => (
+const CardListItem = ({ icon, iconType, title, subtitle, onPress, disabled = false }: HomeCardProps) => (
   <ListItem
     Component={TouchableScale}
     // @ts-ignore
@@ -32,6 +33,7 @@ const CardListItem = ({ icon, iconType, title, subtitle, onPress }: HomeCardProp
       marginBottom: 24
     }}
     onPress={onPress}
+    disabled={disabled}
     containerStyle={{ borderRadius: 8 }}
   >
     {icon && <Icon name={icon} size={56} color={colors.red} type={iconType} />}

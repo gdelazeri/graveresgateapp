@@ -4,14 +4,15 @@ import Header from "./components/header";
 import CardListItem from "@screens/components/cardListItem";
 import routeMap from "@routes/routeMap";
 import { useUserContext } from "@context/userContext";
-import { UserPermission } from "@api/user/types";
+import { UserPermission, UserStatus } from "@api/user/types";
 
 interface HomeProps {
   navigation: NavigationProp<ParamListBase>;
 }
 
 const Home = ({ navigation }: HomeProps) => {
-  const { userData } = useUserContext();
+  const { permission, userData } = useUserContext();
+  const isNavigationDisabled = userData?.status !== UserStatus.ACTIVE;
 
   return (
     <Styled.Container>
@@ -22,12 +23,14 @@ const Home = ({ navigation }: HomeProps) => {
         onPress={() => { 
           navigation.navigate(routeMap.DutyRoutes.STACK)
         }}
+        disabled={isNavigationDisabled}
       />
       <CardListItem
         icon={'list-alt'}
         title="Formulários"
         subtitle="Fichas, livros e checklists"
         onPress={() => { }}
+        disabled={isNavigationDisabled}
       />
       <CardListItem
         icon={'group'}
@@ -36,14 +39,16 @@ const Home = ({ navigation }: HomeProps) => {
         onPress={() => { 
           navigation.navigate(routeMap.UserRoutes.STACK)
         }}
+        disabled={isNavigationDisabled}
       />
       <CardListItem
         icon={'local-activity'}
         title="Eventos"
         subtitle="Informações sobre eventos e fotos"
         onPress={() => { }}
+        disabled={isNavigationDisabled}
       />
-      {userData?.permission === UserPermission.ADMIN && (
+      {permission === UserPermission.ADMIN && (
         <CardListItem
           icon={'settings'}
           title="Configurações"
@@ -51,6 +56,7 @@ const Home = ({ navigation }: HomeProps) => {
           onPress={() => {
             navigation.navigate(routeMap.SettingsRoutes.STACK)
           }}
+          disabled={isNavigationDisabled}
         />
       )}
     </Styled.Container>

@@ -13,7 +13,7 @@ const Header = () => {
       'Tem certeza que deseja sair? Você precisará informar seu e-mail e senha para acessar o aplicativo novamente.',
       [
         { text: 'Não', style: 'cancel' },
-        { text: 'Sim, desejo sair', onPress: signOut }
+        { text: 'Sim, desejo sair', onPress: signOut, style: 'destructive' }
       ]
     )
   }

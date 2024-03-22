@@ -60,8 +60,7 @@ const SignIn = ({ navigation }: SignInProps) => {
         />
         {isError && (
           <Styled.ErrorMessage>
-            Ocorreu um erro ao tentar fazer login. Verifique suas credenciais e
-            tente novamente.
+            Ocorreu um erro ao tentar fazer login. Verifique suas credenciais e tente novamente, se o erro persistir entre em contato com os administradores.
           </Styled.ErrorMessage>
         )}
       </Styled.Form>
