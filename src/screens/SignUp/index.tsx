@@ -7,6 +7,8 @@ import Button from "@screens/components/button";
 import useSignUp from "./useSignUp";
 import Styled from "./styles";
 import { INPUT_TYPE } from "@screens/components/input/types";
+import FooterContainer from "@screens/components/footerContainer";
+import Select from "@screens/components/select";
 
 interface SignUpProps {
   navigation: NavigationProp<ParamListBase>;
@@ -20,6 +22,10 @@ const SignUp = ({ navigation }: SignUpProps) => {
     setEmail,
     phone,
     setPhone,
+    birthDate,
+    setBirthDate,
+    courseEdition,
+    setCourseEdition,
     password,
     setPassword,
     passwordConfirm,
@@ -28,6 +34,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
     isFullNameValid,
     isEmailValid,
     isPhoneValid,
+    isBirthDateValid,
     isPasswordValid,
     isPasswordsEqual,
     isFormValid,
@@ -73,6 +80,26 @@ const SignUp = ({ navigation }: SignUpProps) => {
         />
         <Styled.Divider />
         <Input
+          label="Data de nascimento*"
+          placeholder="Sua data de nascimento"
+          value={birthDate}
+          onChangeText={setBirthDate}
+          type={INPUT_TYPE.DATE}
+          testID="birth-date-input"
+          invalid={!isBirthDateValid}
+          invalidText="Data de nascimento incompleta"
+        />
+        <Styled.Divider />
+        <Input
+          label="Edição do curso de APH"
+          placeholder="Informe a edição do curso"
+          value={courseEdition ? courseEdition.toString() : ''}
+          onChangeText={(value) => setCourseEdition(value ? parseInt(value) : null)}
+          type={INPUT_TYPE.DEFAULT}
+          testID="course-edition-input"
+        />
+        <Styled.Divider />
+        <Input
           label="Senha*"
           placeholder="Sua senha de acesso"
           value={password}
@@ -94,13 +121,15 @@ const SignUp = ({ navigation }: SignUpProps) => {
           invalidText="As senhas precisam ser iguais"
         />
       </Styled.Form>
-      <Button
-        testID="continue-btn"
-        title="Continuar"
-        onPress={register}
-        disabled={!isFormValid}
-        loading={isProcessing}
-      />
+      <FooterContainer>
+        <Button
+          testID="continue-btn"
+          title="Continuar"
+          onPress={register}
+          disabled={!isFormValid}
+          loading={isProcessing}
+        />
+      </FooterContainer>
     </Styled.Container>
   );
 };

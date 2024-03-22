@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { KeyboardType } from "react-native";
 import { mask } from "react-native-mask-text";
 import { Icon } from "react-native-elements";
@@ -43,9 +43,21 @@ const Input = ({
       keyboardType = "email-address";
       break;
     case INPUT_TYPE.PHONE:
+    case INPUT_TYPE.DATE:
       keyboardType = "phone-pad";
       break;
   }
+
+  const textInputValue = useMemo(() => {
+    switch (type) {
+      case INPUT_TYPE.PHONE:
+        return mask(value, "(99) 99999-9999");
+      case INPUT_TYPE.DATE:
+        return mask(value, "99/99/9999");
+      default:
+        return value;
+    }
+  }, [value, type])
 
   return (
     <>
@@ -55,9 +67,7 @@ const Input = ({
           testID={testID}
           placeholder={placeholder}
           placeholderTextColor={colors.Greyscale.b60}
-          value={
-            type === INPUT_TYPE.PHONE ? mask(value, "(99) 99999-9999") : value
-          }
+          value={textInputValue}
           type={type}
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}
