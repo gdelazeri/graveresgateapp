@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
-import { DutyRequest } from "@api/dutyRequest/types";
+import { DutyPosition, DutyRequest } from "@api/dutyRequest/types";
 import { listDutyRequests } from "@api/dutyRequest/dutyRequestApi";
 import { Duty } from "@api/duty/types";
 import { getDuty, postDuty } from "@api/duty/dutyApi";
 import { User } from "@api/user/types";
+import { isString } from "@utils/stringHelper";
 
 interface UseDutyFormProps {
   duty: Duty
@@ -101,6 +102,15 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
     return response
   };
 
+  const usersAlreadySelected = [leader?.id, driver?.id, firstRescuer?.id, secondRescuer?.id, radioOperator?.id, assistantRadioOperator?.id, trainee?.id]
+    .filter((id) => isString(id)) as string[];
+  const leaderRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.LEADER));
+  const driverRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.DRIVER));
+  const rescuerRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.RESCUER));
+  const radioOperatorRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.RADIO_OPERATOR));
+  const assistantRadioOperatorRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.ASSISTANT_RADIO_OPERATOR));
+  const traineeRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.TRAINEE));
+
   return {
     isLoading,
     isProcessing,
@@ -118,9 +128,15 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
     setAssistantRadioOperator,
     trainee,
     setTrainee,
-    dutyRequestList,
     isEditable,
-    save
+    save,
+    usersAlreadySelected,
+    leaderRequests,
+    driverRequests,
+    rescuerRequests,
+    radioOperatorRequests,
+    assistantRadioOperatorRequests,
+    traineeRequests,
   };
 };
 

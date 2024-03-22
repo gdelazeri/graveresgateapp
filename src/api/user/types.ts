@@ -19,13 +19,15 @@ export type User = {
 export enum UserPermission {
   ADMIN = "ADMIN",
   VOLUNTARY = "VOLUNTARY",
+  ASSISTANT_RADIO_OPERATOR = 'ASSISTANT_RADIO_OPERATOR',
   TRAINEE = "TRAINEE",
 }
 
 export const UserPermissionLabel = {
   [UserPermission.ADMIN]: 'Administrador',
   [UserPermission.TRAINEE]: 'Estagiario',
-  [UserPermission.VOLUNTARY]: 'Voluntário'
+  [UserPermission.VOLUNTARY]: 'Voluntário',
+  [UserPermission.ASSISTANT_RADIO_OPERATOR]: 'Auxliar de S.O.'
 }
 
 export enum UserStatus {
@@ -44,4 +46,5 @@ export const UserStatusLabel = {
 
 export interface UserDutyRequest extends User {
   dutyRequest: DutyRequest;
+  selected: boolean;
 }

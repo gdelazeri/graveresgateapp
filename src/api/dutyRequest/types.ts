@@ -29,6 +29,7 @@ export enum DutyPosition {
   LEADER = 'LEADER',
   RESCUER = 'RESCUER',
   RADIO_OPERATOR = 'RADIO_OPERATOR',
+  ASSISTANT_RADIO_OPERATOR = 'ASSISTANT_RADIO_OPERATOR',
   TRAINEE = 'TRAINEE',
 }
 
@@ -37,6 +38,7 @@ export const DutyPositionLabel = {
   [DutyPosition.LEADER]: 'Líder',
   [DutyPosition.RESCUER]: 'Socorrista',
   [DutyPosition.RADIO_OPERATOR]: 'Sala de Operações',
+  [DutyPosition.ASSISTANT_RADIO_OPERATOR]: 'Auxiliar de S.O.',
   [DutyPosition.TRAINEE]: 'Estagiário',
 }
 
@@ -59,6 +61,7 @@ export type DutyRequest = {
   note: string;
   positions: DutyPosition[];
   userId?: string;
+  createdAt: string;
 }
 
 export interface DutyRequestListItem extends DutyRequest {

@@ -5,6 +5,7 @@ import Avatar from "@screens/components/avatar";
 import colors from "@theme/colors";
 import { isString } from "@utils/stringHelper";
 import Chip from "@screens/components/chip";
+import moment from "moment";
 
 interface UserSelectListItemProps {
   user: UserDutyRequest;
@@ -12,7 +13,11 @@ interface UserSelectListItemProps {
 }
 
 const UserSelectListItem = ({ user, onPress }: UserSelectListItemProps) => (
-  <Styled.Touchable onPress={onPress} testID={`user-list-item-${user.id}`} activeOpacity={typeof onPress === 'function' ? 0.7 : 1}>
+  <Styled.Touchable
+    onPress={onPress}
+    testID={`user-list-item-${user.id}`}
+    disabled={user.selected}
+  >
     <Avatar imageUrl={user.imageUrl} size={48} />
     <Styled.UserInfo>
       <Label size='medium'>{user.name}</Label>

@@ -2,11 +2,16 @@ import colors from "@theme/colors";
 import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
 
-const Touchable = styled.TouchableOpacity`
+interface UserItemProps {
+  disabled: boolean;
+}
+
+const Touchable = styled.TouchableOpacity<UserItemProps>`
   background-color: ${colors.Greyscale.b100};
   padding: 12px;
   flex-direction: row;
   align-items: center;
+  opacity: ${({ disabled }: UserItemProps) => (disabled ? 0.5 : 1)};
 `;
  
 const UserInfo = styled.View`

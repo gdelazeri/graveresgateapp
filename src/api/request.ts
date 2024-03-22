@@ -25,10 +25,6 @@ export const post = async (url: string, payload: any) => {
 };
 
 export const put = async (url: string, payload: any) => {
-  console.log(url, payload, {
-    baseURL: API_URL,
-    headers: header,
-  })
   const header = await headers();
   return axios.put(url, payload, {
     baseURL: API_URL,

@@ -37,6 +37,8 @@ const useDutyRequest = () => {
 
     if (userData?.permission === UserPermission.TRAINEE) {
       optionList = [DutyPosition.TRAINEE]
+    } else if (userData?.permission === UserPermission.ASSISTANT_RADIO_OPERATOR) {
+      optionList = [DutyPosition.ASSISTANT_RADIO_OPERATOR]
     } else {
       optionList = [DutyPosition.RESCUER, DutyPosition.RADIO_OPERATOR]
       if (userData?.isDriver) optionList.push(DutyPosition.DRIVER)

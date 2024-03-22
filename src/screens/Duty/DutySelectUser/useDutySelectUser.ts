@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
-import { DutyPosition, DutyRequest } from "@api/dutyRequest/types";
-import { User, UserDutyRequest, UserPermission } from "@api/user/types";
+import {  DutyRequest } from "@api/dutyRequest/types";
+import { User, UserDutyRequest } from "@api/user/types";
 import { listActiveUsers } from "@api/user/userApi";
 
 const fuseOptionKey = ['name']
@@ -17,12 +17,11 @@ const fuseOptions = {
 } as IFuseOptions<User>
 
 interface UseDutySelectUserProps {
-  position: DutyPosition;
   dutyRequests: DutyRequest[];
   usersAlreadySelected: string[];
 }
 
-const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: UseDutySelectUserProps) => {
+const useDutySelectUser = ({ dutyRequests, usersAlreadySelected }: UseDutySelectUserProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('');
   const [list, setList] = useState<User[]>([]);
@@ -50,7 +49,10 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
 
       if (response.success && response.result) {
         setAllUsers(
-          [...response.result].filter((user) => !usersAlreadySelected.includes(user.id))
+          [...response.result].map((user) => ({
+            ...user,
+            selected: usersAlreadySelected.includes(user.id)
+          }))
         );
       }
 
@@ -61,6 +63,7 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
 
   useEffect(() => {
     const requestedUserIds = dutyRequests.map((request) => request.userId);
+
     const requestedUsers = [...list.filter((user) => requestedUserIds.includes(user.id))]
       .map((user) => {
         const dutyRequest = dutyRequests.find((request) => request.userId === user.id);
@@ -69,6 +72,8 @@ const useDutySelectUser = ({ position, dutyRequests, usersAlreadySelected }: Use
           dutyRequest,
         } as UserDutyRequest
       })
+      .sort((a, b) => a.dutyRequest?.createdAt > b.dutyRequest?.createdAt ? 1 : -1)
+
     const otherUsers = list.filter((user) => !requestedUserIds.includes(user.id)) as UserDutyRequest[];
 
     const section = [

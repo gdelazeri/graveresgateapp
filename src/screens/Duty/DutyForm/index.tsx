@@ -43,10 +43,17 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
     setAssistantRadioOperator,
     trainee,
     setTrainee,
-    dutyRequestList,
     isEditable,
-    save
+    save,
+    usersAlreadySelected,
+    leaderRequests,
+    driverRequests,
+    rescuerRequests,
+    radioOperatorRequests,
+    assistantRadioOperatorRequests,
+    traineeRequests,
   } = useDutyForm({ duty });
+  console.log(assistantRadioOperatorRequests)
 
   const onPressSave = async () => {
     const response = await save();
@@ -61,14 +68,6 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
       )
     }
   }
-
-  const usersAlreadySelected = [leader?.id, driver?.id, firstRescuer?.id, secondRescuer?.id, radioOperator?.id, assistantRadioOperator?.id, trainee?.id]
-    .filter((id) => isString(id)) as string[];
-  const leaderRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.LEADER));
-  const driverRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.DRIVER));
-  const rescuerRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.RESCUER));
-  const radioOperatorRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.RADIO_OPERATOR));
-  const traineeRequests = dutyRequestList.filter((dutyRequest) => !usersAlreadySelected.includes(String(dutyRequest.userId)) && dutyRequest.positions.includes(DutyPosition.TRAINEE));
 
   if (isLoading) {
     return <Loader />
@@ -174,15 +173,15 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
           <DutyUserPosition
             label='Auxiliar de S.O.'
-            requestsCount={radioOperatorRequests.length}
-            dutyRequest={radioOperatorRequests.find((dutyRequest) => dutyRequest.userId === assistantRadioOperator?.id)}
+            requestsCount={assistantRadioOperatorRequests.length}
+            dutyRequest={assistantRadioOperatorRequests.find((dutyRequest) => dutyRequest.userId === assistantRadioOperator?.id)}
             user={assistantRadioOperator}
             placeholder='Selecione o auxiliar de S.O.'
             onRemove={() => setAssistantRadioOperator(null)}
             onPress={() => {
               navigation.navigate(routeMap.DutyRoutes.DUTY_SELECT_USER, {
                 title: 'Selecione o auxiliar de S.O.',
-                dutyRequests: radioOperatorRequests,
+                dutyRequests: assistantRadioOperatorRequests,
                 position: DutyPosition.RADIO_OPERATOR,
                 onSelect: (user: User) => setAssistantRadioOperator(user),
                 usersAlreadySelected
