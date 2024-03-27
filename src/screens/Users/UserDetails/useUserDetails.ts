@@ -1,4 +1,4 @@
-import { deleteUserById, getUserById, patchApproveUser, putUserData } from "@api/user/userApi";
+import { deleteUserById, getUserById, putUserData } from "@api/user/userApi";
 import { User, UserStatus } from "@api/user/types";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback, useState } from "react";

@@ -6,6 +6,8 @@ import { INPUT_TYPE } from "@screens/components/input/types";
 import { User } from "@api/user/types";
 import { useUserEditPersonalInformation } from "./useUserEditPersonalInformation";
 import Styled from "./styles";
+import Select from "@screens/components/select";
+import { isString } from "@utils/stringHelper";
 
 interface UserEditPersonalInformationProps {
   navigation: NavigationProp<ParamListBase>;
@@ -25,6 +27,10 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
     setEmail,
     phone,
     setPhone,
+    birthDate,
+    setBirthDate,
+    courseId,
+    setCourseId,
     registrationId,
     setRegistrationId,
     isProcessing,
@@ -33,6 +39,7 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
     isPhoneValid,
     isRegistrationIdValid,
     isFormValid,
+    courseList,
     save,
   } = useUserEditPersonalInformation(user);
 
@@ -77,6 +84,23 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
           testID="phone-input"
           invalid={!isPhoneValid}
           invalidText="Número de celular inválido"
+        />
+        <Styled.Divider />
+        <Input
+          label="Data de nascimento*"
+          placeholder="Sua data de nascimento"
+          value={birthDate}
+          onChangeText={setBirthDate}
+          type={INPUT_TYPE.DATE}
+          testID="birth-date-input"
+        />
+        <Styled.Divider />
+        <Select
+          label="Edição do curso de APH"
+          placeholder="Selecione a edição do curso"
+          value={isString(courseId) ? courseId : null}
+          onChangeValue={(value) => setCourseId(value)}
+          items={courseList.map((course) => ({ value: course.id, label: course.name }))}
         />
         <Styled.Divider />
         <Input

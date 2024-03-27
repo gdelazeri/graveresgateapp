@@ -1,4 +1,5 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
+import moment from "moment";
 import Header from "@screens/components/header";
 import Loader from "@screens/components/loader";
 import { useUserDetails } from "./useUserDetails";
@@ -16,6 +17,7 @@ import FooterContainer from "@screens/components/footerContainer";
 import Button from "@screens/components/button";
 import { Alert } from "react-native";
 import { UserStatus } from "@api/user/types";
+import { isString } from "@utils/stringHelper";
 
 interface UserDetailsProps {
   navigation: NavigationProp<ParamListBase>;
@@ -134,6 +136,12 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
           <Styled.Divider />
           <Label size='small' color={colors.Greyscale.b50}>Telefone</Label>
           <Label size='medium'>{user?.phone}</Label>
+          <Styled.Divider />
+          <Label size='small' color={colors.Greyscale.b50}>Data de nascimento</Label>
+          <Label size='medium'>{isString(user?.birthDate) ? moment(user?.birthDate).format('DD/MM/YYYY') : '-'}</Label>
+          <Styled.Divider />
+          <Label size='small' color={colors.Greyscale.b50}>Edição do curso de APH</Label>
+          <Label size='medium'>{user?.course?.name || '-'}</Label>
           <Styled.Divider />
           <Label size='small' color={colors.Greyscale.b50}>Matrícula</Label>
           <Label size='medium'>{user?.registrationId || '-'}</Label>

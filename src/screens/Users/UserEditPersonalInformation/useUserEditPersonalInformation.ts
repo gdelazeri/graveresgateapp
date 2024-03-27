@@ -1,14 +1,20 @@
 import { putUserData } from "@api/user/userApi";
 import { User } from "@api/user/types";
-import { isEmail, removePhoneMask } from "@utils/stringHelper";
+import { isEmail, isString, removePhoneMask } from "@utils/stringHelper";
 import { useEffect, useMemo, useState } from "react";
+import { Course } from "@api/course/types";
+import { getAllCourses } from "@api/course/courseApi";
+import moment from "moment";
 
 export const useUserEditPersonalInformation = (user: User) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [registrationId, setRegistrationId] = useState("");
+  const [birthDate, setBirthDate] = useState<string | null>("");
+  const [courseId, setCourseId] = useState<string | null>(null);
+  const [registrationId, setRegistrationId] = useState<string | null>("");
+  const [courseList, setCourseList] = useState<Course[]>([]);
 
   const isFullNameValid =
     fullName.length > 3 && fullName.trim().split(" ").length > 1;
@@ -32,7 +38,15 @@ export const useUserEditPersonalInformation = (user: User) => {
     setFullName(user.name);
     setEmail(user.email);
     setPhone(user.phone);
+    setBirthDate(isString(user.birthDate) ? moment(user.birthDate).format('DD/MM/YYYY') : null);
+    setCourseId(user.courseId);
     setRegistrationId(user.registrationId);
+
+    getAllCourses().then((response) => {
+      if (response.success) {
+        setCourseList([...response.result]);
+      }
+    })
   }, [user]);
 
   const save = async () => {
@@ -43,6 +57,8 @@ export const useUserEditPersonalInformation = (user: User) => {
         name: fullName,
         email,
         phone: removePhoneMask(phone),
+        birthDate: isString(user.birthDate) ? moment(birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD') : null,
+        courseId,
         registrationId,
       }
     )
@@ -59,6 +75,10 @@ export const useUserEditPersonalInformation = (user: User) => {
     setEmail,
     phone,
     setPhone,
+    birthDate,
+    setBirthDate,
+    courseId,
+    setCourseId,
     registrationId,
     setRegistrationId,
     isFullNameValid,
@@ -66,6 +86,7 @@ export const useUserEditPersonalInformation = (user: User) => {
     isPhoneValid,
     isFormValid,
     isRegistrationIdValid,
+    courseList,
     save,
   } as const;
 }

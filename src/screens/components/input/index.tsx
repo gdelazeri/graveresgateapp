@@ -11,7 +11,7 @@ import { INPUT_TYPE } from "./types";
 interface InputProps {
   placeholder: string;
   label: string;
-  value: string;
+  value: string | null | undefined;
   onChangeText: (newValue: string) => void;
   type?: INPUT_TYPE;
   testID?: string;

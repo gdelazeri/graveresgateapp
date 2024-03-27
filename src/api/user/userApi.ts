@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { post, ApiResponse, get, put, remove, patch } from "../request";
+import { post, ApiResponse, get, put, remove } from "../request";
 import { User } from "./types";
 
 export interface PostRegisterPayload {
@@ -101,16 +101,6 @@ export const deleteUserById = async (id: string) => {
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<boolean>>;
-    return error.response!.data;
-  }
-};
-
-export const patchApproveUser = async (id: string) => {
-  try {
-    const response: AxiosResponse<ApiResponse<User>> = await patch(`v1/user/${id}/approve`);
-    return response.data;
-  } catch (err) {
-    const error = err as AxiosError<ApiResponse<User>>;
     return error.response!.data;
   }
 };

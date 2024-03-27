@@ -1,3 +1,4 @@
+import { Course } from "@api/course/types";
 import { DutyRequest } from "@api/dutyRequest/types";
 
 export type User = {
@@ -6,6 +7,8 @@ export type User = {
   name: string;
   email: string;
   phone: string;
+  birthDate: string;
+  courseId: string;
   password: string;
   permission: UserPermission;
   status: UserStatus;
@@ -14,6 +17,7 @@ export type User = {
   imageUrl: string;
   createdAt: Date;
   updatedAt: Date;
+  course: Course;
 }
 
 export enum UserPermission {
