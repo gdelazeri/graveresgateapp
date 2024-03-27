@@ -4,11 +4,12 @@ import Header from "@screens/components/header";
 import Label from "@screens/components/label";
 import Input from "@screens/components/input";
 import Button from "@screens/components/button";
+import Select from "@screens/components/select";
 import useSignUp from "./useSignUp";
 import Styled from "./styles";
 import { INPUT_TYPE } from "@screens/components/input/types";
 import FooterContainer from "@screens/components/footerContainer";
-import Select from "@screens/components/select";
+import { isString } from "@utils/stringHelper";
 
 interface SignUpProps {
   navigation: NavigationProp<ParamListBase>;
@@ -24,8 +25,8 @@ const SignUp = ({ navigation }: SignUpProps) => {
     setPhone,
     birthDate,
     setBirthDate,
-    courseEdition,
-    setCourseEdition,
+    courseId,
+    setCourseId,
     password,
     setPassword,
     passwordConfirm,
@@ -38,6 +39,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
     isPasswordValid,
     isPasswordsEqual,
     isFormValid,
+    courseList,
     register,
   } = useSignUp();
 
@@ -90,13 +92,12 @@ const SignUp = ({ navigation }: SignUpProps) => {
           invalidText="Data de nascimento incompleta"
         />
         <Styled.Divider />
-        <Input
+        <Select
           label="Edição do curso de APH"
-          placeholder="Informe a edição do curso"
-          value={courseEdition ? courseEdition.toString() : ''}
-          onChangeText={(value) => setCourseEdition(value ? parseInt(value) : null)}
-          type={INPUT_TYPE.DEFAULT}
-          testID="course-edition-input"
+          placeholder="Selecione a edição do curso"
+          value={isString(courseId) ? courseId : null}
+          onChangeValue={(value) => setCourseId(value)}
+          items={courseList.map((course) => ({ value: course.id, label: course.name }))}
         />
         <Styled.Divider />
         <Input

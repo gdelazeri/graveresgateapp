@@ -1,18 +1,21 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { postRegister } from "@api/user/userApi";
 import { isEmail, isString, removePhoneMask } from "@utils/stringHelper";
 import { useUserContext } from "@context/userContext";
 import moment from "moment";
+import { getAllCourses } from "@api/course/courseApi";
+import { Course } from "@api/course/types";
 
 const useSignUp = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [birthDate, setBirthDate] = useState("");
-  const [courseEdition, setCourseEdition] = useState<number | null>(null);
+  const [courseId, setCourseId] = useState<string | null>(null);
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [courseList, setCourseList] = useState<Course[]>([]);
   const { setTokens } = useUserContext();
 
   const isFullNameValid = fullName.length === 0 || (fullName.length > 3 && fullName.trim().split(" ").length > 1);
@@ -54,7 +57,7 @@ const useSignUp = () => {
       email: email.trim(),
       phone: removePhoneMask(phone),
       birthDate: moment(birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-      courseEdition,
+      courseId,
       password,
     };
 
@@ -72,6 +75,16 @@ const useSignUp = () => {
     return response?.success;
   };
 
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const response = await getAllCourses();
+      if (response && response.success) {
+        setCourseList([ ...response.result ]);
+      }
+    }
+    fetchCourses();
+  }, [])
+
   return {
     fullName,
     setFullName,
@@ -81,8 +94,8 @@ const useSignUp = () => {
     setPhone,
     birthDate,
     setBirthDate,
-    courseEdition,
-    setCourseEdition,
+    courseId,
+    setCourseId,
     password,
     setPassword,
     passwordConfirm,
@@ -95,6 +108,7 @@ const useSignUp = () => {
     isPasswordValid,
     isPasswordsEqual,
     isFormValid,
+    courseList,
     register,
   };
 };
