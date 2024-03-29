@@ -1,11 +1,10 @@
-import { UserDutyRequest } from "@api/user/types";
+import { UserDutyRequest, UserPermission } from "@api/user/types";
 import Styled from "./styles";
 import Label from "@screens/components/label";
 import Avatar from "@screens/components/avatar";
 import colors from "@theme/colors";
 import { isString } from "@utils/stringHelper";
 import Chip from "@screens/components/chip";
-import moment from "moment";
 
 interface UserSelectListItemProps {
   user: UserDutyRequest;
@@ -45,6 +44,15 @@ const UserSelectListItem = ({ user, onPress }: UserSelectListItemProps) => (
         {user.isDriver && (
           <Styled.ChipContainer>
             <Chip label="Condutor" backgroundColor={colors.Greyscale.b90} labelColor={colors.black} />
+          </Styled.ChipContainer>
+        )}
+        {user.permission === UserPermission.TRAINEE && (
+          <Styled.ChipContainer>
+            <Chip
+              label={`Estagiário${user?.course ? ` - ${user.course.name}` : ''}`}
+              backgroundColor={colors.Greyscale.b90}
+              labelColor={colors.black}
+            />
           </Styled.ChipContainer>
         )}
       </Styled.Inline>

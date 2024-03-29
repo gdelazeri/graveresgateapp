@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { post, ApiResponse, get, put, remove } from "../request";
-import { User } from "./types";
+import { User, UserPermission } from "./types";
 
 export interface PostRegisterPayload {
   name: string;
@@ -65,9 +65,21 @@ export const listAllUsers = async () => {
   }
 };
 
-export const listActiveUsers = async () => {
+export const listActiveUsers = async ({
+  isDriver,
+  isLeader,
+  permission,
+}: {
+  isDriver?: boolean;
+  isLeader?: boolean;
+  permission?: UserPermission;
+}) => {
   try {
-    const response: AxiosResponse<ApiResponse<User[]>> = await get("v1/user/list/active");
+    const response: AxiosResponse<ApiResponse<User[]>> = await get("v1/user/list/active", {
+      isDriver,
+      isLeader,
+      permission,
+    });
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<User[]>>;

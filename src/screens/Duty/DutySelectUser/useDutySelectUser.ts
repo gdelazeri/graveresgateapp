@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
-import {  DutyRequest } from "@api/dutyRequest/types";
-import { User, UserDutyRequest } from "@api/user/types";
+import {  DutyPosition, DutyRequest } from "@api/dutyRequest/types";
+import { User, UserDutyRequest, UserPermission } from "@api/user/types";
 import { listActiveUsers } from "@api/user/userApi";
 
 const fuseOptionKey = ['name']
@@ -17,11 +17,16 @@ const fuseOptions = {
 } as IFuseOptions<User>
 
 interface UseDutySelectUserProps {
+  position: DutyPosition;
   dutyRequests: DutyRequest[];
   usersAlreadySelected: string[];
 }
 
-const useDutySelectUser = ({ dutyRequests, usersAlreadySelected }: UseDutySelectUserProps) => {
+const useDutySelectUser = ({
+  position,
+  dutyRequests,
+  usersAlreadySelected
+}: UseDutySelectUserProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('');
   const [list, setList] = useState<User[]>([]);
@@ -45,7 +50,24 @@ const useDutySelectUser = ({ dutyRequests, usersAlreadySelected }: UseDutySelect
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true)
-      const response = await listActiveUsers();
+
+      let isDriver;
+      let isLeader;
+      let permission;
+
+      switch (position) {
+        case DutyPosition.DRIVER:
+          isDriver = true;
+          break;
+        case DutyPosition.LEADER:
+          isLeader = true;
+          break;
+        case DutyPosition.TRAINEE:
+          permission = UserPermission.TRAINEE;
+          break;
+      }
+
+      const response = await listActiveUsers({ isDriver, isLeader, permission });
 
       if (response.success && response.result) {
         setAllUsers(
