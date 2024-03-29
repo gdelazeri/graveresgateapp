@@ -40,7 +40,7 @@ export const useUserList = () => {
   }, [searchQuery, allUsers])
 
   const fetchData = async () => {
-    const response = permission === UserPermission.ADMIN ? await listAllUsers() : await listActiveUsers();
+    const response = permission === UserPermission.ADMIN ? await listAllUsers() : await listActiveUsers({});
     if (response?.success) {
       setAllUsers(response.result);
     } else {
