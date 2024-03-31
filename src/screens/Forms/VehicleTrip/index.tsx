@@ -12,6 +12,7 @@ import { INPUT_TYPE } from "@screens/components/input/types";
 import TimeInput from "@screens/components/timeInput";
 import FooterContainer from "@screens/components/footerContainer";
 import Button from "@screens/components/button";
+import VehicleTripDriver from "./components/vehicleTripDriver";
 
 interface VehicleTripProps {
   navigation: NavigationProp<ParamListBase>;
@@ -63,11 +64,14 @@ const VehicleTrip = ({ navigation }: VehicleTripProps) => {
 
           <Styled.Divider />
 
-          <Input  
+          <VehicleTripDriver
             label="Condutor*"
-            placeholder="Informe o condutor"
-            value={place}
-            onChangeText={setPlace}
+            placeholder="Selecione o condutor"
+            user={driverList.find(driver => driver.id === driverId)}
+            onPress={() => {
+              
+            }}
+            onRemove={() => setDriverId(undefined)}
           />
 
           <Styled.Divider />
