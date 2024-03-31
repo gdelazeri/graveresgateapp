@@ -3,7 +3,7 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import Header from "@screens/components/header";
 import SearchBar from "@screens/components/searchBar";
 import Loader from "@screens/components/loader";
-import UserListItem from "./components/UserListItem";
+import UserListItem from "@screens/components/userListItem";
 import { useUserList } from "./useUserList";
 import Styled from "./styles";
 import routeMap from "@routes/routeMap";
