@@ -29,7 +29,9 @@ const Home = ({ navigation }: HomeProps) => {
         icon={'list-alt'}
         title="Formulários"
         subtitle="Fichas, livros e checklists"
-        onPress={() => { }}
+        onPress={() => {
+          navigation.navigate(routeMap.FormsRoutes.STACK)
+        }}
         disabled={isNavigationDisabled}
       />
       <CardListItem

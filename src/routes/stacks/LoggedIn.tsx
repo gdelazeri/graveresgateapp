@@ -3,6 +3,7 @@ import * as HomeScreen from "@screens/Home";
 import UserStack from "@routes/stacks/UserStack";
 import DutyStack from "@routes/stacks/DutyStack";
 import SettingsStack from "@routes/stacks/SettingsStack";
+import FormsStack from "@routes/stacks/FormsStack";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -22,6 +23,11 @@ const LoggedIn = () => (
     <Stack.Screen
       name={routeMap.DutyRoutes.STACK}
       component={DutyStack}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.STACK}
+      component={FormsStack}
       options={{ headerShown: false }}
     />
     <Stack.Screen

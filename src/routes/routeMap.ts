@@ -36,10 +36,16 @@ enum SettingsRoutes {
   VEHICLE_FORM = "VehicleForm",
 }
 
+enum FormsRoutes {
+  STACK = "Forms",
+  FORMS_HOME = "FormsHome",
+}
+
 export default {
   LoggedOffRoutes,
   LoggedInRoutes,
   UserRoutes,
   DutyRoutes,
-  SettingsRoutes
+  SettingsRoutes,
+  FormsRoutes
 };

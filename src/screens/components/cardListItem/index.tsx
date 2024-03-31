@@ -2,12 +2,13 @@ import TouchableScale from 'react-native-touchable-scale';
 import { Icon, ListItem } from "react-native-elements";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
+import { isString } from '@utils/stringHelper';
 
 interface HomeCardProps {
   icon?: string;
   iconType?: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   onPress: () => void;
   disabled?: boolean;
 }
@@ -41,9 +42,9 @@ const CardListItem = ({ icon, iconType, title, subtitle, onPress, disabled = fal
       <ListItem.Title style={{ fontFamily: fonts.bold }}>
         {title}
       </ListItem.Title>
-      <ListItem.Subtitle style={{ fontFamily: fonts.regular, marginTop: 2 }}>
+      {isString(subtitle) && <ListItem.Subtitle style={{ fontFamily: fonts.regular, marginTop: 2 }}>
         {subtitle}
-      </ListItem.Subtitle>
+      </ListItem.Subtitle>}
     </ListItem.Content>
   </ListItem>
 );
