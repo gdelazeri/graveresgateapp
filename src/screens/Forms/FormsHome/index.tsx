@@ -20,7 +20,7 @@ const FormsHome = ({ navigation }: FormsHomeProps) => (
     <CardListItem
       title="Livro de deslocamento"
       icon="edit-road"
-      onPress={() => { navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST) }}
+      onPress={() => { navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP) }}
     />
     <CardListItem
       title="Checklist Condutor"

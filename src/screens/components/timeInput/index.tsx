@@ -7,16 +7,20 @@ import { isString } from "@utils/stringHelper";
 import Styled from "./styles";
 import { View } from "react-native";
 
+type MinuteInterval = 1 | 2 | 3 | 4 | 5 | 6 | 10 | 12 | 15 | 20 | 30;
+
 interface TimeInputProps {
   label: string;
   value: string;
   onChangeValue: (newValue: string) => void;
+  minuteInterval?: MinuteInterval;
 }
 
 const TimeInput = ({
   label,
   value,
   onChangeValue,
+  minuteInterval = 1
 }: TimeInputProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -40,7 +44,7 @@ const TimeInput = ({
         mode={'time'}
         onConfirm={handleConfirm}
         onCancel={() => setIsVisible(false)}
-        minuteInterval={5}
+        minuteInterval={minuteInterval}
         date={date}
       />
     </View>

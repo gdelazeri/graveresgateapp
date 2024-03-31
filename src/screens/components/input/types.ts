@@ -5,5 +5,6 @@ export enum INPUT_TYPE {
   PHONE,
   PASSWORD,
   TEXT,
-  DATE
+  DATE,
+  NUMERIC
 }

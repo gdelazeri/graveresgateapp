@@ -99,6 +99,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
                 label="Horário de entrada"
                 value={startAt || ""}
                 onChangeValue={(value) => setStartAt(value)}
+                minuteInterval={5}
               />
             </Styled.TimeInputContainer>
             <Styled.TimeInputContainer style={{ paddingLeft: 8 }}>
@@ -106,6 +107,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
                 label="Horário de saída"
                 value={endAt || ""}
                 onChangeValue={(value) => setEndAt(value)}
+                minuteInterval={5}
               />
             </Styled.TimeInputContainer>
           </Styled.Inline>

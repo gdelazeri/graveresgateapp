@@ -39,6 +39,7 @@ enum SettingsRoutes {
 enum FormsRoutes {
   STACK = "Forms",
   FORMS_HOME = "FormsHome",
+  VEHICLE_TRIP = "VehicleTrip",
 }
 
 export default {

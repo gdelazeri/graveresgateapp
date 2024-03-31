@@ -46,17 +46,23 @@ const Input = ({
     case INPUT_TYPE.DATE:
       keyboardType = "phone-pad";
       break;
+    case INPUT_TYPE.NUMERIC:
+      keyboardType = "numeric";
+      break;
   }
 
   const textInputValue = useMemo(() => {
+    if (!isString(value)) return "";
+
     switch (type) {
       case INPUT_TYPE.PHONE:
-        return mask(value, "(99) 99999-9999");
+        return mask(String(value), "(99) 99999-9999");
       case INPUT_TYPE.DATE:
-        return mask(value, "99/99/9999");
+        return mask(String(value), "99/99/9999");
       default:
         return value;
     }
+
   }, [value, type])
 
   return (

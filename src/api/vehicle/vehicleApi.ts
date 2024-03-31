@@ -24,9 +24,19 @@ export const postVehicle = async (payload: PostVehiclePayload) => {
   }
 };
 
-export const getAllVehicles = async () => {
+export const listAllVehicles = async () => {
   try {
     const response: AxiosResponse<ApiResponse<Vehicle[]>> = await get("v1/vehicle/list");
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ApiResponse<Vehicle[]>>;
+    return error.response!.data;
+  }
+};
+
+export const listAvailableVehicles = async () => {
+  try {
+    const response: AxiosResponse<ApiResponse<Vehicle[]>> = await get("v1/vehicle/list/available");
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<Vehicle[]>>;
