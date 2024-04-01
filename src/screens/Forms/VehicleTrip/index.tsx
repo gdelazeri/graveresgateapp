@@ -13,12 +13,20 @@ import TimeInput from "@screens/components/timeInput";
 import FooterContainer from "@screens/components/footerContainer";
 import Button from "@screens/components/button";
 import VehicleTripDriver from "./components/vehicleTripDriver";
+import routeMap from "@routes/routeMap";
+import { User } from "@api/user/types";
 
 interface VehicleTripProps {
   navigation: NavigationProp<ParamListBase>;
+  route: {
+    params: {
+      id?: string
+    }
+  }
 }
 
-const VehicleTrip = ({ navigation }: VehicleTripProps) => {
+const VehicleTrip = ({ navigation, route }: VehicleTripProps) => {
+  const { id } = route.params || {};
   const {
     isLoading,
     vehicleId,
@@ -41,7 +49,7 @@ const VehicleTrip = ({ navigation }: VehicleTripProps) => {
     setReason,
     vehicleList,
     driverList
-  } = useVehicleTrip()
+  } = useVehicleTrip(id)
 
   if (isLoading) {
     return <Loader />
@@ -69,7 +77,11 @@ const VehicleTrip = ({ navigation }: VehicleTripProps) => {
             placeholder="Selecione o condutor"
             user={driverList.find(driver => driver.id === driverId)}
             onPress={() => {
-              
+              navigation.navigate(routeMap.FormsRoutes.SELECT_USER, {
+                title: "Selecione o condutor",
+                position: "DRIVER",
+                onSelect: (user: User) => setDriverId(user.id)
+              })
             }}
             onRemove={() => setDriverId(undefined)}
           />

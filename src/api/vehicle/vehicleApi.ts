@@ -1,15 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { post, ApiResponse, get, put } from "../request";
-import { Vehicle } from "./types";
-
-export interface PostVehiclePayload {
-  name: string;
-  brand: string;
-  model: string;
-  licensePlate: string;
-  year: string;
-  isAvailable: boolean;
-}
+import { PostVehiclePayload, Vehicle } from "./types";
 
 export const postVehicle = async (payload: PostVehiclePayload) => {
   try {
@@ -26,7 +17,7 @@ export const postVehicle = async (payload: PostVehiclePayload) => {
 
 export const listAllVehicles = async () => {
   try {
-    const response: AxiosResponse<ApiResponse<Vehicle[]>> = await get("v1/vehicle/list");
+    const response: AxiosResponse<ApiResponse<Vehicle[]>> = await get("/v1/vehicle/list");
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<Vehicle[]>>;
@@ -36,7 +27,7 @@ export const listAllVehicles = async () => {
 
 export const listAvailableVehicles = async () => {
   try {
-    const response: AxiosResponse<ApiResponse<Vehicle[]>> = await get("v1/vehicle/list/available");
+    const response: AxiosResponse<ApiResponse<Vehicle[]>> = await get("/v1/vehicle/list/available");
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<Vehicle[]>>;
@@ -46,7 +37,7 @@ export const listAvailableVehicles = async () => {
 
 export const getVehicleById = async (id: string) => {
   try {
-    const response: AxiosResponse<ApiResponse<Vehicle>> = await get(`v1/vehicle/getById/${id}`);
+    const response: AxiosResponse<ApiResponse<Vehicle>> = await get(`/v1/vehicle/getById/${id}`);
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<Vehicle>>;
@@ -56,7 +47,7 @@ export const getVehicleById = async (id: string) => {
 
 export const putVehicle = async (id: string, payload: PostVehiclePayload) => {
   try {
-    const response: AxiosResponse<ApiResponse<Vehicle>> = await put(`v1/vehicle/${id}`, payload);
+    const response: AxiosResponse<ApiResponse<Vehicle>> = await put(`/v1/vehicle/${id}`, payload);
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<Vehicle>>;

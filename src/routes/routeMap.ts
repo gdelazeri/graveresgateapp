@@ -40,6 +40,7 @@ enum FormsRoutes {
   STACK = "Forms",
   FORMS_HOME = "FormsHome",
   VEHICLE_TRIP = "VehicleTrip",
+  SELECT_USER = "SelectUser",
 }
 
 export default {

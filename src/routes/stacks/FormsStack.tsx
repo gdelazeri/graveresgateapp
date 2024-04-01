@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import * as FormsHomeScreen from "@screens/Forms/FormsHome";
 import * as VehicleTripScreen from "@screens/Forms/VehicleTrip";
+import * as SelectUserScreen from "@screens/Forms/SelectUser";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -16,6 +17,13 @@ const FormsStack = () => (
       name={routeMap.FormsRoutes.VEHICLE_TRIP}
       component={VehicleTripScreen.default}
       options={{ header: VehicleTripScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.SELECT_USER}
+      // @ts-ignore
+      component={SelectUserScreen.default}
+      // @ts-ignore
+      options={{ header: SelectUserScreen.NavHeader }}
     />
   </Stack.Navigator>
 );

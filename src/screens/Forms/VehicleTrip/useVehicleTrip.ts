@@ -5,8 +5,10 @@ import { listAvailableVehicles } from "@api/vehicle/vehicleApi";
 import { listActiveUsers } from "@api/user/userApi";
 import { User } from "@api/user/types";
 import moment from "moment";
+import { isString } from "@utils/stringHelper";
+import { postVehicleTrip, putVehicleTrip } from "@api/vehicleTrip/vehicleTripApi";
 
-export const useVehicleTrip = () => {
+export const useVehicleTrip = (id?: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [vehicleId, setVehicleId] = useState<string | undefined>()
   const [driverId, setDriverId] = useState<string | undefined>()
@@ -19,6 +21,7 @@ export const useVehicleTrip = () => {
   const [reason, setReason] = useState<string>('')
   const [vehicleList, setVehicleList] = useState<Vehicle[]>([]);
   const [driverList, setDriverList] = useState<User[]>([]);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false)
   
   useFocusEffect(
     useCallback(() => {
@@ -42,6 +45,33 @@ export const useVehicleTrip = () => {
     }, [])
   );
 
+  const save = async () => {
+    setIsProcessing(true);
+
+    const payload = {
+      vehicleId: String(vehicleId),
+      driverId: String(driverId),
+      date,
+      kmInitial,
+      kmFinal,
+      startAt,
+      endAt,
+      place,
+      reason,
+    };
+
+    let response;
+    if (isString(id)) {
+      response = await putVehicleTrip(String(id), payload);
+    } else {
+      response = await postVehicleTrip(payload);
+    }
+
+    setIsProcessing(false);
+
+    return response
+  };
+
   return {
     isLoading,
     vehicleId,
@@ -63,6 +93,8 @@ export const useVehicleTrip = () => {
     reason,
     setReason,
     vehicleList,
-    driverList
+    driverList,
+    isProcessing,
+    save
   };
 }
