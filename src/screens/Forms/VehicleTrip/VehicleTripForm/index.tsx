@@ -3,7 +3,7 @@ import Header from "@screens/components/header";
 import CardInfo from "@screens/components/cardInfo";
 import Label from "@screens/components/label";
 import Styled from "./styles";
-import { useFormVehicleTrip } from "./useFormVehicleTrip";
+import { useVehicleTripForm } from "./useVehicleTripForm";
 import RadioGroup from "@screens/components/radioGroup";
 import Loader from "@screens/components/loader";
 import DateInput from "@screens/components/dateInput";
@@ -53,7 +53,7 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
     isProcessing,
     isFormValid,
     save,
-  } = useFormVehicleTrip(id)
+  } = useVehicleTripForm(id)
 
   const onPressSave = async () => {
     const response = await save();
@@ -63,7 +63,8 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
         navigation.goBack();
       } else {
         navigation.dispatch(
-          StackActions.replace(routeMap.FormsRoutes.VEHICLE_TRIP, { id: response.result.id })
+          StackActions.replace(routeMap.FormsRoutes.VEHICLE_TRIP_DETAILS,
+          { id: response.result.id })
         );
       }
     } else {

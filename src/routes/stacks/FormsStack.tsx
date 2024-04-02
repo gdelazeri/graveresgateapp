@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import * as FormsHomeScreen from "@screens/Forms/FormsHome";
-import * as FormVehicleTripScreen from "@screens/Forms/FormVehicleTrip";
-import * as VehicleTripScreen from "@screens/Forms/VehicleTrip";
+import * as VehicleTripFormScreen from "@screens/Forms/VehicleTrip/VehicleTripForm";
+import * as VehicleTripDetailsScreen from "@screens/Forms/VehicleTrip/VehicleTripDetails";
 import * as SelectUserScreen from "@screens/Forms/SelectUser";
 import routeMap from "@routes/routeMap";
 
@@ -15,18 +15,18 @@ const FormsStack = () => (
       options={{ header: FormsHomeScreen.NavHeader }}
     />
     <Stack.Screen
-      name={routeMap.FormsRoutes.FORM_VEHICLE_TRIP}
+      name={routeMap.FormsRoutes.VEHICLE_TRIP_FORM}
       // @ts-ignore
-      component={FormVehicleTripScreen.default}
+      component={VehicleTripFormScreen.default}
       // @ts-ignore
-      options={{ header: FormVehicleTripScreen.NavHeader }}
+      options={{ header: VehicleTripFormScreen.NavHeader }}
     />
     <Stack.Screen
-      name={routeMap.FormsRoutes.VEHICLE_TRIP}
+      name={routeMap.FormsRoutes.VEHICLE_TRIP_DETAILS}
       // @ts-ignore
-      component={VehicleTripScreen.default}
+      component={VehicleTripDetailsScreen.default}
       // @ts-ignore
-      options={{ header: VehicleTripScreen.NavHeader }}
+      options={{ header: VehicleTripDetailsScreen.NavHeader }}
     />
     <Stack.Screen
       name={routeMap.FormsRoutes.SELECT_USER}

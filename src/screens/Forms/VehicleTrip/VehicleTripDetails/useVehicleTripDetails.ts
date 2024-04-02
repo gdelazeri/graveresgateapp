@@ -5,7 +5,7 @@ import { User } from "@api/user/types";
 import moment from "moment";
 import { getVehicleTrip } from "@api/vehicleTrip/vehicleTripApi";
 
-export const useVehicleTrip = (id: string) => {
+export const useVehicleTripDetails = (id: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [vehicle, setVehicle] = useState<Vehicle>()
   const [driver, setDriver] = useState<User>()

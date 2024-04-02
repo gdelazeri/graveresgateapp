@@ -1,9 +1,9 @@
-import { NavigationProp, ParamListBase, StackActions } from "@react-navigation/native";
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import Header from "@screens/components/header";
 import CardInfo from "@screens/components/cardInfo";
 import Label from "@screens/components/label";
 import Styled from "./styles";
-import { useVehicleTrip } from "./useVehicleTrip";
+import { useVehicleTripDetails } from "./useVehicleTripDetails";
 import Loader from "@screens/components/loader";
 import FooterContainer from "@screens/components/footerContainer";
 import Button from "@screens/components/button";
@@ -13,7 +13,7 @@ import moment from "moment";
 import { useUserContext } from "@context/userContext";
 import { UserPermission } from "@api/user/types";
 
-interface VehicleTripProps {
+interface VehicleTripDetailsProps {
   navigation: NavigationProp<ParamListBase>;
   route: {
     params: {
@@ -22,7 +22,7 @@ interface VehicleTripProps {
   }
 }
 
-const VehicleTrip = ({ navigation, route }: VehicleTripProps) => {
+const VehicleTripDetails = ({ navigation, route }: VehicleTripDetailsProps) => {
   const { id } = route.params || {};
   const {
     isLoading,
@@ -37,11 +37,11 @@ const VehicleTrip = ({ navigation, route }: VehicleTripProps) => {
     reason,
     createdAt,
     createdByUser,
-  } = useVehicleTrip(id)
+  } = useVehicleTripDetails(id)
   const { permission } = useUserContext()
 
   const onPressEdit = () => {
-    navigation.navigate(routeMap.FormsRoutes.FORM_VEHICLE_TRIP, { id })
+    navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP_FORM, { id })
   }
 
   if (isLoading) {
@@ -126,8 +126,8 @@ const VehicleTrip = ({ navigation, route }: VehicleTripProps) => {
   );
 };
 
-export default VehicleTrip;
+export default VehicleTripDetails;
 
-export const NavHeader = ({ navigation }: VehicleTripProps) => (
+export const NavHeader = ({ navigation }: VehicleTripDetailsProps) => (
   <Header onBackPress={navigation.goBack} title="Deslocamento da viatura" />
 );

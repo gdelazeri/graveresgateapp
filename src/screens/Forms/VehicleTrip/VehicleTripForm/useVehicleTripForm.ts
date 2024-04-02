@@ -8,7 +8,7 @@ import moment from "moment";
 import { isString } from "@utils/stringHelper";
 import { getVehicleTrip, postVehicleTrip, putVehicleTrip } from "@api/vehicleTrip/vehicleTripApi";
 
-export const useFormVehicleTrip = (id?: string) => {
+export const useVehicleTripForm = (id?: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [vehicleId, setVehicleId] = useState<string | undefined>()
   const [driverId, setDriverId] = useState<string | undefined>()
