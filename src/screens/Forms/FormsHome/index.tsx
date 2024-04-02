@@ -36,8 +36,7 @@ const FormsHome = ({ navigation }: FormsHomeProps) => (
     />
     <CardHomeItem
       title="Checklist Radio Operador"
-      icon="radio-handheld"
-      iconType="material-community"
+      icon="support-agent"
       onPress={() => { navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST) }}
     />
   </Styled.Container>
