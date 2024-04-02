@@ -1,3 +1,6 @@
+import { User } from "@api/user/types"
+import { Vehicle } from "@api/vehicle/types"
+
 export type VehicleTrip = {
   id: string
   vehicleId: string
@@ -23,4 +26,10 @@ export interface PostVehicleTripPayload {
   endAt: string
   place: string
   reason: string
+}
+
+export interface GetVehicleTripData extends VehicleTrip {
+  vehicle: Vehicle
+  driver: User
+  createdByUser: User
 }

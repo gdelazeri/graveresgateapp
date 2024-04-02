@@ -6,7 +6,7 @@ import { listActiveUsers } from "@api/user/userApi";
 import { User } from "@api/user/types";
 import moment from "moment";
 import { isString } from "@utils/stringHelper";
-import { postVehicleTrip, putVehicleTrip } from "@api/vehicleTrip/vehicleTripApi";
+import { getVehicleTrip, postVehicleTrip, putVehicleTrip } from "@api/vehicleTrip/vehicleTripApi";
 
 export const useFormVehicleTrip = (id?: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -39,6 +39,21 @@ export const useFormVehicleTrip = (id?: string) => {
     useCallback(() => {
       const fetchData = async () => {
         setIsLoading(true);
+
+        if (isString(id)) {
+          const response = await getVehicleTrip(String(id));
+          if (response.success && response.result) {
+            setVehicleId(response.result.vehicleId);
+            setDriverId(response.result.driverId);
+            setDate(response.result.date);
+            setKmInitial(response.result.kmInitial);
+            setKmFinal(response.result.kmFinal);
+            setStartAt(response.result.startAt.substring(0, 5));
+            setEndAt(response.result.endAt.substring(0, 5));
+            setPlace(response.result.place);
+            setReason(response.result.reason);
+          }
+        }
 
         const responseVehicles = await listAvailableVehicles();
         if (responseVehicles.success && responseVehicles.result) {

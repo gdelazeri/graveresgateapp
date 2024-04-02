@@ -1,4 +1,4 @@
-import { NavigationProp, ParamListBase } from "@react-navigation/native";
+import { NavigationProp, ParamListBase, StackActions } from "@react-navigation/native";
 import Header from "@screens/components/header";
 import CardInfo from "@screens/components/cardInfo";
 import Label from "@screens/components/label";
@@ -15,6 +15,7 @@ import Button from "@screens/components/button";
 import VehicleTripDriver from "./components/vehicleTripDriver";
 import routeMap from "@routes/routeMap";
 import { User } from "@api/user/types";
+import { isString } from "@utils/stringHelper";
 
 interface FormVehicleTripProps {
   navigation: NavigationProp<ParamListBase>;
@@ -55,8 +56,19 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
   } = useFormVehicleTrip(id)
 
   const onPressSave = async () => {
-    await save();
-    navigation.goBack();
+    const response = await save();
+
+    if (response.success) {
+      if (isString(id)) {
+        navigation.goBack();
+      } else {
+        navigation.dispatch(
+          StackActions.replace(routeMap.FormsRoutes.VEHICLE_TRIP, { id: response.result.id })
+        );
+      }
+    } else {
+      alert("Ocorreu um erro ao salvar o deslocamento.")
+    }
   }
 
   if (isLoading) {
