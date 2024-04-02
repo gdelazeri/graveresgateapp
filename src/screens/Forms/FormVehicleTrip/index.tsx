@@ -3,7 +3,7 @@ import Header from "@screens/components/header";
 import CardInfo from "@screens/components/cardInfo";
 import Label from "@screens/components/label";
 import Styled from "./styles";
-import { useVehicleTrip } from "./useVehicleTrip";
+import { useFormVehicleTrip } from "./useFormVehicleTrip";
 import RadioGroup from "@screens/components/radioGroup";
 import Loader from "@screens/components/loader";
 import DateInput from "@screens/components/dateInput";
@@ -16,7 +16,7 @@ import VehicleTripDriver from "./components/vehicleTripDriver";
 import routeMap from "@routes/routeMap";
 import { User } from "@api/user/types";
 
-interface VehicleTripProps {
+interface FormVehicleTripProps {
   navigation: NavigationProp<ParamListBase>;
   route: {
     params: {
@@ -25,7 +25,7 @@ interface VehicleTripProps {
   }
 }
 
-const VehicleTrip = ({ navigation, route }: VehicleTripProps) => {
+const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
   const { id } = route.params || {};
   const {
     isLoading,
@@ -48,8 +48,16 @@ const VehicleTrip = ({ navigation, route }: VehicleTripProps) => {
     reason,
     setReason,
     vehicleList,
-    driverList
-  } = useVehicleTrip(id)
+    driverList,
+    isProcessing,
+    isFormValid,
+    save,
+  } = useFormVehicleTrip(id)
+
+  const onPressSave = async () => {
+    await save();
+    navigation.goBack();
+  }
 
   if (isLoading) {
     return <Loader />
@@ -80,6 +88,7 @@ const VehicleTrip = ({ navigation, route }: VehicleTripProps) => {
               navigation.navigate(routeMap.FormsRoutes.SELECT_USER, {
                 title: "Selecione o condutor",
                 position: "DRIVER",
+                userSelectedId: driverId,
                 onSelect: (user: User) => setDriverId(user.id)
               })
             }}
@@ -163,17 +172,17 @@ const VehicleTrip = ({ navigation, route }: VehicleTripProps) => {
       <FooterContainer>
         <Button
           title="Salvar"
-          onPress={() => {}}
-          disabled={false}
-          loading={false}
+          onPress={onPressSave}
+          disabled={!isFormValid}
+          loading={isProcessing}
         />
       </FooterContainer>
     </Styled.Container>
   );
 };
 
-export default VehicleTrip;
+export default FormVehicleTrip;
 
-export const NavHeader = ({ navigation }: VehicleTripProps) => (
+export const NavHeader = ({ navigation }: FormVehicleTripProps) => (
   <Header onBackPress={navigation.goBack} title="Registrar deslocamento" />
 );

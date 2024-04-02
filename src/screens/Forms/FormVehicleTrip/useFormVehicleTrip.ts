@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Vehicle } from "@api/vehicle/types";
 import { useFocusEffect } from "@react-navigation/native";
 import { listAvailableVehicles } from "@api/vehicle/vehicleApi";
@@ -8,7 +8,7 @@ import moment from "moment";
 import { isString } from "@utils/stringHelper";
 import { postVehicleTrip, putVehicleTrip } from "@api/vehicleTrip/vehicleTripApi";
 
-export const useVehicleTrip = (id?: string) => {
+export const useFormVehicleTrip = (id?: string) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [vehicleId, setVehicleId] = useState<string | undefined>()
   const [driverId, setDriverId] = useState<string | undefined>()
@@ -19,9 +19,21 @@ export const useVehicleTrip = (id?: string) => {
   const [endAt, setEndAt] = useState<string>('')
   const [place, setPlace] = useState<string>('')
   const [reason, setReason] = useState<string>('')
-  const [vehicleList, setVehicleList] = useState<Vehicle[]>([]);
-  const [driverList, setDriverList] = useState<User[]>([]);
+  const [vehicleList, setVehicleList] = useState<Vehicle[]>([])
+  const [driverList, setDriverList] = useState<User[]>([])
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
+
+  const isFormValid = useMemo(() => (
+    isString(vehicleId) &&
+    isString(driverId) &&
+    isString(date) &&
+    isString(kmInitial) &&
+    isString(kmFinal) &&
+    isString(startAt) &&
+    isString(endAt) &&
+    isString(place) &&
+    isString(reason)
+  ), [vehicleId, driverId, date, kmInitial, kmFinal, startAt, endAt, place, reason])
   
   useFocusEffect(
     useCallback(() => {
@@ -95,6 +107,7 @@ export const useVehicleTrip = (id?: string) => {
     vehicleList,
     driverList,
     isProcessing,
+    isFormValid,
     save
   };
 }

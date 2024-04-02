@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import * as FormsHomeScreen from "@screens/Forms/FormsHome";
-import * as VehicleTripScreen from "@screens/Forms/VehicleTrip";
+import * as VehicleTripScreen from "@screens/Forms/FormVehicleTrip";
 import * as SelectUserScreen from "@screens/Forms/SelectUser";
 import routeMap from "@routes/routeMap";
 
