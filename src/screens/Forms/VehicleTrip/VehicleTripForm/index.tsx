@@ -16,6 +16,7 @@ import VehicleTripDriver from "./components/vehicleTripDriver";
 import routeMap from "@routes/routeMap";
 import { User } from "@api/user/types";
 import { isString } from "@utils/stringHelper";
+import { Alert } from "react-native";
 
 interface FormVehicleTripProps {
   navigation: NavigationProp<ParamListBase>;
@@ -68,7 +69,11 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
         );
       }
     } else {
-      alert("Ocorreu um erro ao salvar o deslocamento.")
+      Alert.alert(
+        'Erro ao salvar o deslocamento',
+        'Ocorreu algum erro ao salvar o formulário, verifique os dados e tente novamente.',
+        [{ text: 'OK' }]
+      )
     }
   }
 

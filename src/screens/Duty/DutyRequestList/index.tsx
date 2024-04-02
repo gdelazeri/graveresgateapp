@@ -7,6 +7,7 @@ import DutyRequestItem from "./components/dutyRequestItem";
 import routeMap from "@routes/routeMap";
 import Styled from "./styles";
 import Loader from "@screens/components/loader";
+import EmptyList from "@screens/components/emptyList";
 
 interface DutyRequestListProps {
   navigation: NavigationProp<ParamListBase>;
@@ -31,6 +32,7 @@ const DutyRequestList = ({ navigation }: DutyRequestListProps) => {
       contentContainerStyle={{ padding: 16 }}
       keyExtractor={(item) => item.id}
       ItemSeparatorComponent={() => <Styled.Divider />}
+      ListEmptyComponent={<EmptyList text="Você não possui solicitações de plantão" />}
       renderItem={({ item }) => (
         <DutyRequestItem
           item={item}

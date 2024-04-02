@@ -28,7 +28,7 @@ export interface PostVehicleTripPayload {
   reason: string
 }
 
-export interface GetVehicleTripData extends VehicleTrip {
+export interface VehicleTripData extends VehicleTrip {
   vehicle: Vehicle
   driver: User
   createdByUser: User

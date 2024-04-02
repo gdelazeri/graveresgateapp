@@ -13,7 +13,7 @@ interface HomeCardProps {
   disabled?: boolean;
 }
 
-const CardListItem = ({ icon, iconType, title, subtitle, onPress, disabled = false }: HomeCardProps) => (
+const CardHomeItem = ({ icon, iconType, title, subtitle, onPress, disabled = false }: HomeCardProps) => (
   <ListItem
     Component={TouchableScale}
     // @ts-ignore
@@ -49,4 +49,4 @@ const CardListItem = ({ icon, iconType, title, subtitle, onPress, disabled = fal
   </ListItem>
 );
 
-export default CardListItem;
+export default CardHomeItem;

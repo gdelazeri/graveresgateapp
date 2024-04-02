@@ -41,6 +41,7 @@ enum FormsRoutes {
   FORMS_HOME = "FormsHome",
   VEHICLE_TRIP_FORM = "VehicleTripForm",
   VEHICLE_TRIP_DETAILS = "VehicleTripDetails",
+  VEHICLE_TRIP_LIST = "VehicleTripList",
   SELECT_USER = "SelectUser",
 }
 

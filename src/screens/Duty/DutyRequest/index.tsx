@@ -65,7 +65,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
     } else {
       Alert.alert(
         'Erro ao solicitar plantão',
-        'Ocorreu algum erro ao solicitar o plantão, tente novamente.',
+        'Ocorreu algum erro ao solicitar o plantão, verifique os dados e tente novamente.',
         [{ text: 'OK' }]
       )
     }

@@ -1,7 +1,7 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 
 import Header from "@screens/components/header";
-import CardListItem from "@screens/components/cardListItem";
+import CardHomeItem from "@screens/components/cardHomeItem";
 import routeMap from "@routes/routeMap";
 import Styled from "./styles";
 
@@ -11,7 +11,7 @@ interface SettingsHomeProps {
 
 const SettingsHome = ({ navigation }: SettingsHomeProps) => (
   <Styled.Container>
-    <CardListItem
+    <CardHomeItem
       title="Viaturas"
       subtitle="Gerencie os veículos da instituição"
       icon="truck-plus"

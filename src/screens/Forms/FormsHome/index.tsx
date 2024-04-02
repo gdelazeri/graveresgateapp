@@ -1,7 +1,7 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 
 import Header from "@screens/components/header";
-import CardListItem from "@screens/components/cardListItem";
+import CardHomeItem from "@screens/components/cardHomeItem";
 import routeMap from "@routes/routeMap";
 import Styled from "./styles";
 
@@ -11,30 +11,30 @@ interface FormsHomeProps {
 
 const FormsHome = ({ navigation }: FormsHomeProps) => (
   <Styled.Container>
-    <CardListItem
+    <CardHomeItem
       title="Ficha de atendimento"
       icon="hospital-box-outline"
       iconType="material-community"
       onPress={() => { navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST) }}
     />
-    <CardListItem
+    <CardHomeItem
       title="Livro de deslocamento"
       icon="edit-road"
-      onPress={() => { navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP_FORM) }}
+      onPress={() => { navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP_LIST) }}
     />
-    <CardListItem
+    <CardHomeItem
       title="Checklist Condutor"
       icon="truck-plus"
       iconType="material-community"
       onPress={() => { navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST) }}
     />
-    <CardListItem
+    <CardHomeItem
       title="Checklist Socorrista"
       icon="doctor"
       iconType="material-community"
       onPress={() => { navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST) }}
     />
-    <CardListItem
+    <CardHomeItem
       title="Checklist Radio Operador"
       icon="radio-handheld"
       iconType="material-community"

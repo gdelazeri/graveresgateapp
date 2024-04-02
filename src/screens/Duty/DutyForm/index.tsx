@@ -62,7 +62,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
     } else {
       Alert.alert(
         'Erro ao salvar',
-        'Ocorreu algum erro ao salvar a escala do plantão, tente novamente.',
+        'Ocorreu algum erro ao salvar a escala do plantão, verifique os dados e tente novamente.',
         [{ text: 'OK' }]
       )
     }

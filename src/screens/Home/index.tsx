@@ -1,7 +1,7 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import Styled from "./styles";
 import Header from "./components/header";
-import CardListItem from "@screens/components/cardListItem";
+import CardHomeItem from "@screens/components/cardHomeItem";
 import routeMap from "@routes/routeMap";
 import { useUserContext } from "@context/userContext";
 import { UserPermission, UserStatus } from "@api/user/types";
@@ -16,7 +16,7 @@ const Home = ({ navigation }: HomeProps) => {
 
   return (
     <Styled.Container>
-      <CardListItem
+      <CardHomeItem
         icon={'insert-invitation'}
         title="Plantões"
         subtitle="Marcação de plantão e escalas"
@@ -25,7 +25,7 @@ const Home = ({ navigation }: HomeProps) => {
         }}
         disabled={isNavigationDisabled}
       />
-      <CardListItem
+      <CardHomeItem
         icon={'list-alt'}
         title="Formulários"
         subtitle="Fichas, livros e checklists"
@@ -34,7 +34,7 @@ const Home = ({ navigation }: HomeProps) => {
         }}
         disabled={isNavigationDisabled}
       />
-      <CardListItem
+      <CardHomeItem
         icon={'group'}
         title="Equipe"
         subtitle="Voluntários e carga horária"
@@ -43,7 +43,7 @@ const Home = ({ navigation }: HomeProps) => {
         }}
         disabled={isNavigationDisabled}
       />
-      <CardListItem
+      <CardHomeItem
         icon={'local-activity'}
         title="Eventos"
         subtitle="Informações sobre eventos e fotos"
@@ -51,7 +51,7 @@ const Home = ({ navigation }: HomeProps) => {
         disabled={isNavigationDisabled}
       />
       {permission === UserPermission.ADMIN && (
-        <CardListItem
+        <CardHomeItem
           icon={'settings'}
           title="Configurações"
           subtitle="Ajuste as configurações do aplicativo"
