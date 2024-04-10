@@ -115,7 +115,7 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
           <Styled.Divider />
           <RadioGroup
             label="Posições*"
-            items={positionOptions}
+            options={positionOptions}
             selectedValue={positions}
             onChangeValue={(value) => setPositions(value as DutyPosition[])}
             multiple

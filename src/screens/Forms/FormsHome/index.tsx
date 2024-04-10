@@ -15,7 +15,7 @@ const FormsHome = ({ navigation }: FormsHomeProps) => (
       title="Ficha de atendimento"
       icon="hospital-box-outline"
       iconType="material-community"
-      onPress={() => { navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST) }}
+      onPress={() => { navigation.navigate(routeMap.FormsRoutes.DUTY_CARE_FORM) }}
     />
     <CardHomeItem
       title="Livro de deslocamento"

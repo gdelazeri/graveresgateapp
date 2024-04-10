@@ -4,6 +4,7 @@ import * as VehicleTripFormScreen from "@screens/Forms/VehicleTrip/VehicleTripFo
 import * as VehicleTripDetailsScreen from "@screens/Forms/VehicleTrip/VehicleTripDetails";
 import * as VehicleTripListScreen from "@screens/Forms/VehicleTrip/VehicleTripList";
 import * as SelectUserScreen from "@screens/Forms/SelectUser";
+import * as DutyCareFormScreen from "@screens/Forms/DutyCare/DutyCareForm";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -42,6 +43,13 @@ const FormsStack = () => (
       component={SelectUserScreen.default}
       // @ts-ignore
       options={{ header: SelectUserScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.DUTY_CARE_FORM}
+      // @ts-ignore
+      component={DutyCareFormScreen.default}
+      // @ts-ignore
+      options={{ header: DutyCareFormScreen.NavHeader }}
     />
   </Stack.Navigator>
 );

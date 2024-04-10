@@ -7,7 +7,7 @@ import RadioButtonUnchecked from "../icons/radioUnchecked";
 
 interface RadioGroupProps {
   label: string;
-  items: { label: string; value: string }[];
+  options: { label: string; value: string }[];
   selectedValue?: string | string[];
   onChangeValue: (newValue: string | string[]) => void;
   testID?: string;
@@ -18,7 +18,7 @@ interface RadioGroupProps {
 
 const RadioGroup = ({
   label,
-  items,
+  options,
   selectedValue,
   onChangeValue,
   testID,
@@ -49,7 +49,7 @@ const RadioGroup = ({
   return (
     <Styled.Container testID={testID}>
       <Label size={'small'}>{label}</Label>
-      {items.map((item) => (
+      {options.map((item) => (
         <Styled.Item key={item.value} onPress={() => onSelectValue(item.value)}>
           {isChecked(item.value) ? <RadioButtonChecked size={20} color={colors.red} /> : <RadioButtonUnchecked size={20} color={colors.red} />}
           <Styled.ItemLabel>

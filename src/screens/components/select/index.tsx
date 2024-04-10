@@ -10,7 +10,7 @@ interface SelectProps {
   placeholder: string;
   items: { label: string; value: string }[];
   label: string;
-  value: string | null;
+  value?: string | null;
   onChangeValue: (newValue: string | null) => void;
   invalid?: boolean;
   invalidText?: string;
