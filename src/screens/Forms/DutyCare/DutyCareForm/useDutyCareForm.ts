@@ -28,32 +28,31 @@ export const useDutyCareForm = () => {
 
   const setFormChecklistQuestionValue = useCallback((
     { question, item, optionValue }:
-    { question: ChecklistQuestion, item?: ChecklistQuestionItem, optionValue: string }
+    { question: ChecklistQuestion, item?: ChecklistQuestionItem, optionValue: string | string[] }
   ) => {
-    const checklistAnswers = form.checklistAnswers || []
+    let checklistAnswers = Array.isArray(form.checklistAnswers) ? [...form.checklistAnswers] : []
 
     const questionIndex = checklistAnswers.findIndex(answer => (
       answer.checklistQuestionId === question.id
-      && answer.checklistQuestionItem === item?.text
-      && answer.checklistQuestionOption === optionValue
     ))
-
+    
     if (questionIndex > -1) {
-      setForm({ ...form, checklistAnswers: [...checklistAnswers.filter((_, index) => index !== questionIndex)] })
+      checklistAnswers[questionIndex] = {
+        ...checklistAnswers[questionIndex],
+        checklistQuestionOption: Array.isArray(optionValue) ? optionValue.join(';') : optionValue
+      }
     } else {
-      setForm({
-        ...form,
-        checklistAnswers: [
-          ...checklistAnswers,
-          {
-            checklistQuestionId: question.id,
-            checklistQuestion: question.text,
-            checklistQuestionItem: item?.text,
-            checklistQuestionOption: optionValue
-          }
-        ]
-      })
+      checklistAnswers = [
+        ...checklistAnswers,
+        {
+          checklistQuestionId: question.id,
+          checklistQuestion: question.text,
+          checklistQuestionOption: Array.isArray(optionValue) ? optionValue.join(';') : optionValue,
+        }
+      ]
     }
+
+    setForm({ ...form, checklistAnswers })
   }, [form])
 
   const isFormValid = true
@@ -91,7 +90,7 @@ export const useDutyCareForm = () => {
 
     return response
   };
-
+  
   return {
     isLoading,
     isProcessing,

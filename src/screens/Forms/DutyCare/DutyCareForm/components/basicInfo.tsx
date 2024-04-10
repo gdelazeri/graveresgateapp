@@ -19,7 +19,7 @@ const BasicInfo = ({
   setFormValue: (key: PostDutyCareChecklistField, value: any) => void,
   vehicleList: Vehicle[],
 }) => (
-  <CardInfo title="">
+  <CardInfo title="Informações gerais">
     <Select
       label="Plantão*"
       placeholder="Selecione o plantão"

@@ -15,7 +15,7 @@ const ChecklistInfo = ({
   form: PostDutyCareChecklistPayload,
   setFormChecklistQuestionValue: (
     { question, item, optionValue }:
-    { question: ChecklistQuestion, item?: ChecklistQuestionItem, optionValue: string }
+    { question: ChecklistQuestion, item?: ChecklistQuestionItem, optionValue: string | string[] }
   ) => void,
 }) => {
   if (!checklistQuestions || !Array.isArray(checklistQuestions.questions) || checklistQuestions.questions.length === 0) return <></>;
@@ -33,12 +33,16 @@ const ChecklistInfo = ({
       )
     }
 
+    const answer = form.checklistAnswers?.find(answer => answer.checklistQuestionId === question.id);
+    const selectedValue = question.multiple ? answer?.checklistQuestionOption.split(';') : answer?.checklistQuestionOption;
+    
     return (
       <RadioGroup
         label={question.text}
-        selectedValue={undefined}
-        onChangeValue={(value) => setFormChecklistQuestionValue({ question, item: undefined, optionValue: String(value) })}
+        selectedValue={selectedValue}
+        onChangeValue={(value) => setFormChecklistQuestionValue({ question, item: undefined, optionValue: value })}
         options={question.options.map(option => ({ label: option.text, value: option.text }))}
+        multiple={question.multiple}
       />
     )
   }
