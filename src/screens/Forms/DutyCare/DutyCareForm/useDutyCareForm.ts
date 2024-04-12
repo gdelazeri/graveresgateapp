@@ -1,13 +1,13 @@
 import moment from "moment";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { Vehicle } from "@api/vehicle/types";
 import { useFocusEffect } from "@react-navigation/native";
 import { listAvailableVehicles } from "@api/vehicle/vehicleApi";
-import { isString } from "@utils/stringHelper";
 import { postDutyCare } from "@api/dutyCareChecklist/dutyCareChecklistApi";
-import { DutyCareChecklistIncidentContinuation, PostDutyCareChecklistPayload } from "@api/dutyCareChecklist/types";
+import { PostDutyCareChecklistPayload } from "@api/dutyCareChecklist/types";
 import { getChecklistQuestions } from "@api/checklist/checklistApi";
-import { Checklist, ChecklistQuestion, ChecklistQuestionItem, ChecklistQuestionOption, ChecklistType } from "@api/checklist/types";
+import { Checklist, ChecklistQuestion, ChecklistQuestionItem, ChecklistType } from "@api/checklist/types";
+import { isString } from "@utils/stringHelper";
 
 export type PostDutyCareChecklistField = keyof PostDutyCareChecklistPayload
 
@@ -35,13 +35,31 @@ export const useDutyCareForm = () => {
     const questionIndex = checklistAnswers.findIndex(answer => (
       answer.checklistQuestionId === question.id
     ))
+
+    const isValidOption = isString(optionValue) || (Array.isArray(optionValue) && optionValue.length > 0)
+
+    // Check if click on the same option
+    if (
+      isValidOption
+      && questionIndex > -1
+      && !question.multiple
+      && checklistAnswers[questionIndex].checklistQuestionOption === optionValue
+    ) {
+      checklistAnswers = checklistAnswers.filter((_, index) => (index !== questionIndex))
+      setForm({ ...form, checklistAnswers })
+      return
+    }
     
     if (questionIndex > -1) {
-      checklistAnswers[questionIndex] = {
-        ...checklistAnswers[questionIndex],
-        checklistQuestionOption: Array.isArray(optionValue) ? optionValue.join(';') : optionValue
+      if (isValidOption) {
+        checklistAnswers[questionIndex] = {
+          ...checklistAnswers[questionIndex],
+          checklistQuestionOption: Array.isArray(optionValue) ? optionValue.join(';') : optionValue
+        }
+      } else {
+        checklistAnswers = checklistAnswers.filter((_, index) => (index !== questionIndex))
       }
-    } else {
+    } else if (isValidOption) {
       checklistAnswers = [
         ...checklistAnswers,
         {
@@ -82,7 +100,9 @@ export const useDutyCareForm = () => {
   const save = async () => {
     setIsProcessing(true);
 
-    const payload = { };
+    const payload = {
+      ...form
+    };
 
     const response = await postDutyCare(payload);
 

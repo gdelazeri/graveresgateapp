@@ -5,6 +5,7 @@ import Styled from "../styles";
 import { PostDutyCareChecklistPayload } from "@api/dutyCareChecklist/types";
 import { Checklist, ChecklistQuestion, ChecklistQuestionItem, ChecklistQuestionOption, ChecklistQuestionType } from "@api/checklist/types";
 import Input from "@screens/components/input";
+import { isString } from "@utils/stringHelper";
 
 const ChecklistInfo = ({
   checklistQuestions,
@@ -34,15 +35,16 @@ const ChecklistInfo = ({
     }
 
     const answer = form.checklistAnswers?.find(answer => answer.checklistQuestionId === question.id);
-    const selectedValue = question.multiple ? answer?.checklistQuestionOption.split(';') : answer?.checklistQuestionOption;
+    const selectedValue = question.multiple && isString(answer?.checklistQuestionOption) ? answer?.checklistQuestionOption.split(';') : answer?.checklistQuestionOption;
     
     return (
       <RadioGroup
-        label={question.text}
+        label={`${question.text}${question.required ? '*' : ''}`}
         selectedValue={selectedValue}
         onChangeValue={(value) => setFormChecklistQuestionValue({ question, item: undefined, optionValue: value })}
         options={question.options.map(option => ({ label: option.text, value: option.text }))}
         multiple={question.multiple}
+        hasOtherOption={question.hasOtherOption}
       />
     )
   }

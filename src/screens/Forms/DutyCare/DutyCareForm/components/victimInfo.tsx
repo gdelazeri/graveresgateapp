@@ -13,7 +13,7 @@ const VictimInfo = ({
   form: PostDutyCareChecklistPayload,
   setFormValue: (key: PostDutyCareChecklistField, value: any) => void,
 }) => (
-  <CardInfo title="Paciente">
+  <CardInfo title="Dados do Paciente">
     <Input
       label="Nome completo*"
       placeholder="Informe o nome completo do paciente"
