@@ -58,6 +58,8 @@ const RadioGroup = ({
   }
 
   useEffect(() => {
+    if (!hasOtherOption) return;
+
     if (multiple && Array.isArray(selectedValue)) {
       const allowedValues = selectedValue
         .map((item) => options.map((option) => option.value).includes(item) ? item : null)

@@ -2,20 +2,11 @@ import { useMemo, useState } from "react";
 import { Alert } from "react-native";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import Header from "@screens/components/header";
-import CardInfo from "@screens/components/cardInfo";
-import Label from "@screens/components/label";
-import RadioGroup from "@screens/components/radioGroup";
 import Loader from "@screens/components/loader";
 import FooterContainer from "@screens/components/footerContainer";
 import Button from "@screens/components/button";
-import Select from "@screens/components/select";
-import Input from "@screens/components/input";
-import { INPUT_TYPE } from "@screens/components/input/types";
-import DateInput from "@screens/components/dateInput";
-import TimeInput from "@screens/components/timeInput";
 import {
   DutyCareChecklistIncidentContinuation,
-  DutyCareChecklistIncidentContinuationLabel
 } from "@api/dutyCareChecklist/types";
 import Styled from "./styles";
 import { useDutyCareForm } from "./useDutyCareForm";
@@ -24,6 +15,7 @@ import VictimInfo from "./components/victimInfo";
 import LocationInfo from "./components/locationInfo";
 import EvolutionInfo from "./components/evolutionInfo";
 import ChecklistInfo from "./components/checklistInfo";
+import { isString } from "@utils/stringHelper";
 
 interface DutyCareFormProps {
   navigation: NavigationProp<ParamListBase>;
@@ -53,26 +45,39 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
     form,
     setFormValue,
     setFormChecklistQuestionValue,
-    isFormValid,
     save
   } = useDutyCareForm()
 
   const onPressContinue = async () => {
     if (pageIndex < PageIndex.EVOLUTION_INFO) {
-      setPageIndex(pageIndex + 1);
+      if (pageIndex === PageIndex.LOCATION_INFO && form.incidentContinuation === DutyCareChecklistIncidentContinuation.REFUSED) {
+        setPageIndex(PageIndex.EVOLUTION_INFO);
+      } else {
+        setPageIndex(pageIndex + 1);
+      }
       return;
     }
 
     const response = await save();
 
     if (response.success) {
-      
+      navigation.goBack();
     } else {
       Alert.alert(
         'Erro ao salvar a ficha de atendimento',
         'Ocorreu algum erro ao salvar o formulário, verifique os dados e tente novamente.',
         [{ text: 'OK' }]
       )
+    }
+  }
+
+  const onPressGoBack = async () => {
+    if (pageIndex > PageIndex.BASIC_INFO) {
+      if (pageIndex === PageIndex.EVOLUTION_INFO && form.incidentContinuation === DutyCareChecklistIncidentContinuation.REFUSED) {
+        setPageIndex(PageIndex.LOCATION_INFO);
+      } else {
+        setPageIndex(pageIndex - 1);
+      }
     }
   }
 
@@ -91,6 +96,32 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
     }
   }, [pageIndex, form, setFormValue, vehicleList])
 
+  const isNextEnabled = useMemo(() => {
+    switch (pageIndex) {
+      case PageIndex.BASIC_INFO:
+        return (
+          // isString(form.dutyId) &&
+          isString(form.date) && isString(form.time) && isString(form.vehicleId) && isString(form.reason)
+        );
+      case PageIndex.VICTIM_INFO:
+        return (
+          isString(form.victimName) && isString(form.victimAge) && isString(form.victimGender)
+        );
+      case PageIndex.LOCATION_INFO:
+        return (
+          isString(form.incidentAddress) && isString(form.incidentAddressCity) && isString(form.incidentAddressDistrict) && isString(form.incidentContinuation)
+        );
+      case PageIndex.CHECKLIST_INFO:
+        return (
+          checklistQuestions?.questions.filter(question => question.required).map(question => question.id).every(questionId => (form.checklistAnswers || []).map(answer => answer.checklistQuestionId).includes(questionId))
+        )
+      case PageIndex.EVOLUTION_INFO:
+        return (
+          isString(form.incidentEvolution)
+        );
+    }
+  }, [pageIndex, form])
+
   if (isLoading) {
     return <Loader />
   }
@@ -105,7 +136,7 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
           <Styled.InlineInput style={{ paddingRight: 4 }}>
             <Button
               title="Voltar"
-              onPress={() => setPageIndex(pageIndex - 1)}
+              onPress={onPressGoBack}
               disabled={pageIndex === PageIndex.BASIC_INFO}
               loading={isProcessing}
               secondary
@@ -113,9 +144,9 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
           </Styled.InlineInput>
           <Styled.InlineInput style={{ paddingLeft: 4 }}>
             <Button
-              title="Próximo"
+              title={pageIndex < PageIndex.EVOLUTION_INFO ? "Próximo" : "Finalizar"}
               onPress={onPressContinue}
-              disabled={!isFormValid}
+              disabled={!isNextEnabled}
               loading={isProcessing}
             />
           </Styled.InlineInput>
@@ -127,6 +158,24 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
 
 export default DutyCareForm;
 
-export const NavHeader = ({ navigation }: DutyCareFormProps) => (
-  <Header onBackPress={navigation.goBack} title="Ficha de Atendimento" />
-);
+export const NavHeader = ({ navigation }: DutyCareFormProps) => {
+  const onGoBack = () => {
+    Alert.alert(
+      'Deseja voltar para a tela anterior?',
+      'Ao voltar você perderá todos os dados preenchidos.',
+      [
+        {
+          text: 'Não',
+          style: 'cancel'
+        },
+        {
+          text: 'Sim',
+          style: 'destructive',
+          onPress: navigation.goBack
+        }
+      ]
+    )
+  }
+
+  return <Header onBackPress={onGoBack} title="Ficha de Atendimento" />
+};

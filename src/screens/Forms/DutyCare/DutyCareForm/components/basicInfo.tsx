@@ -68,12 +68,14 @@ const BasicInfo = ({
 
     <Styled.Divider />
 
-    <Input
-      label="Motivo"
-      placeholder="Digite aqui..."
-      value={form.reason}
-      onChangeText={(value) => setFormValue('reason', value)}
-      type={INPUT_TYPE.DEFAULT}
+    <RadioGroup
+      label="Motivo*"
+      options={[
+        { label: 'Acidente', value: 'Acidente' },
+      ]}
+      hasOtherOption
+      selectedValue={form.reason}
+      onChangeValue={(value) => setFormValue('reason', value)}
     />
   </CardInfo>
 )
