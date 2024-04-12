@@ -162,9 +162,6 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
           <Label size='small' color={colors.Greyscale.b50}>Líder</Label>
           <UserDetailsLeader isLeader={user!.isLeader} />
         </CardInfo>
-
-        <Styled.Divider />
-        <Styled.Divider />
       </Styled.ScrollView>
       <FooterContainer>
         {user?.status === UserStatus.PENDING && <>

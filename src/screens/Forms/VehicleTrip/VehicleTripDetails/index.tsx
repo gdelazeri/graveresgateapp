@@ -111,8 +111,6 @@ const VehicleTripDetails = ({ navigation, route }: VehicleTripDetailsProps) => {
           <Label size={"small"} color={colors.Greyscale.b50}>Preenchido por</Label>
           <Label size={"medium"}>{createdByUser?.name}</Label>
         </CardInfo>
-        
-        <Styled.Divider />
       </Styled.ScrollView>
       {permission === UserPermission.ADMIN && (
         <FooterContainer>

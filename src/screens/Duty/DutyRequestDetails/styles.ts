@@ -1,9 +1,11 @@
 import colors from "@theme/colors";
 import styled from "styled-components/native";
 
-const Container = styled.ScrollView`
-  padding: 16px;
-`;
+const ScrollView = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    padding: 16
+  }
+})``;
 
 const Divider = styled.Text`
   height: 8px;
@@ -21,7 +23,7 @@ const StatusContainer = styled.View`
 `
 
 export default {
-  Container,
+  ScrollView,
   Divider,
   Footer,
   StatusContainer,

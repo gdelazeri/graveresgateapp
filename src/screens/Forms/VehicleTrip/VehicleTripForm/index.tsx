@@ -184,8 +184,6 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
             type={INPUT_TYPE.TEXT}
           />
         </CardInfo>
-        
-        <Styled.Divider />
       </Styled.ScrollView>
       <FooterContainer>
         <Button

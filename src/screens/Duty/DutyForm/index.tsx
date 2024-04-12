@@ -74,7 +74,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
   return (
     <>
-      <Styled.Container>
+      <Styled.ScrollView>
         <CardInfo>
           <Label size='small'>Data</Label>
           <Label size='medium'>{moment(duty.date).format('dddd')}, {moment(duty.date).format('LL')}</Label>
@@ -232,9 +232,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           />
 
         </CardInfo>
-
-        <Styled.Divider />
-      </Styled.Container>
+      </Styled.ScrollView>
       <Styled.Footer>
         <Button
           testID="continue-btn"

@@ -69,7 +69,7 @@ const DutyRequestDetails = ({ route, navigation }: DutyRequestDetailsProps) => {
 
   return (
     <>
-      <Styled.Container>
+      <Styled.ScrollView>
         <CardInfo>
           <Label size={"small"} color={colors.Greyscale.b50}>Data</Label>
           <Label size={"medium"}>{moment(dutyRequest?.date).format('LL')}</Label>
@@ -108,7 +108,7 @@ const DutyRequestDetails = ({ route, navigation }: DutyRequestDetailsProps) => {
             </>
           )}
         </CardInfo>
-      </Styled.Container>
+      </Styled.ScrollView>
       <Styled.Footer>
         <Button
           testID="delete-btn"

@@ -4,9 +4,11 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const ScrollView = styled.ScrollView`
-  padding: 12px;
-`;
+const ScrollView = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    padding: 16
+  }
+})``;
 
 const ContainerAvatar = styled.View`
   align-items: center;

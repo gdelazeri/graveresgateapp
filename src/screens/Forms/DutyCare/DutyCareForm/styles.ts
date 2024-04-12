@@ -5,9 +5,11 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const ScrollView = styled(KeyboardAwareScrollView)`
-  padding: 16px;
-`;
+const ScrollView = styled(KeyboardAwareScrollView).attrs({
+  contentContainerStyle: {
+    padding: 16
+  }
+})``;
 
 const Divider = styled.View`
   height: 16px;

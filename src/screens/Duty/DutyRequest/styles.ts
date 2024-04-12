@@ -3,9 +3,11 @@ import colors from "@theme/colors";
 import fonts from "@theme/fonts";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-const Container = styled(KeyboardAwareScrollView)`
-  padding: 16px;
-`;
+const Container = styled(KeyboardAwareScrollView).attrs({
+  contentContainerStyle: {
+    padding: 16
+  }
+})``;
 
 const Footer = styled.View`
   padding: 16px;

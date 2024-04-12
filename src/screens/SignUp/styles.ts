@@ -7,9 +7,11 @@ const Container = styled.View`
   flex: 1;
 `;
 
-const Form = styled(KeyboardAwareScrollView)`
-  padding: 16px;
-`;
+const Form = styled(KeyboardAwareScrollView).attrs({
+  contentContainerStyle: {
+    padding: 16
+  }
+})``;
 
 const Title = styled.Text`
   font-family: ${fonts.regular};
