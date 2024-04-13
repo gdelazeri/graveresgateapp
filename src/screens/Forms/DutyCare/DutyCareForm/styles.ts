@@ -25,10 +25,15 @@ const InlineInput = styled.View`
   width: 50%;
 `;
 
+const DutyInfo = styled.View`
+  margin-top: 4px;
+`;
+
 export default {
   Container,
   ScrollView,
   Divider,
   InlineInputContainer,
-  InlineInput
+  InlineInput,
+  DutyInfo
 };

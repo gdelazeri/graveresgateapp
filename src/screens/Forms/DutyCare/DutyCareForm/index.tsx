@@ -41,6 +41,7 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
     isLoading,
     isProcessing,
     vehicleList,
+    dutyList,
     checklistQuestions,
     form,
     setFormValue,
@@ -84,7 +85,7 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
   const pageIndexRenderer = useMemo(() => {
     switch (pageIndex) {
       case PageIndex.BASIC_INFO:
-        return <BasicInfo form={form} setFormValue={setFormValue} vehicleList={vehicleList} />;
+        return <BasicInfo form={form} setFormValue={setFormValue} dutyList={dutyList} vehicleList={vehicleList} />;
       case PageIndex.VICTIM_INFO:
         return <VictimInfo form={form} setFormValue={setFormValue} />;
       case PageIndex.LOCATION_INFO:
@@ -94,14 +95,13 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
       case PageIndex.EVOLUTION_INFO:
         return <EvolutionInfo form={form} setFormValue={setFormValue} />;
     }
-  }, [pageIndex, form, setFormValue, vehicleList])
+  }, [pageIndex, form, setFormValue, dutyList, vehicleList])
 
   const isNextEnabled = useMemo(() => {
     switch (pageIndex) {
       case PageIndex.BASIC_INFO:
         return (
-          // isString(form.dutyId) &&
-          isString(form.date) && isString(form.time) && isString(form.vehicleId) && isString(form.reason)
+          isString(form.dutyId) && isString(form.date) && isString(form.time) && isString(form.vehicleId) && isString(form.reason)
         );
       case PageIndex.VICTIM_INFO:
         return (

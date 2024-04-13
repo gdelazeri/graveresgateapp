@@ -18,7 +18,19 @@ export const listDutyByMonth = async (period: ListDutyPeriod) => {
 export const listPreviousDuty = async (page: number, pageSize: number) => {
   try {
     const response: AxiosResponse<ApiResponse<Duty[]>> = await get(
-      `/v1/duty/listPrevious?page=${page}&pageSize=${pageSize}`,
+      `/v1/duty/list/previous?page=${page}&pageSize=${pageSize}`,
+    );
+    return response.data;
+  } catch (err: any) {
+    const error = err as AxiosError<ApiResponse<Duty[]>>;
+    return error.response!.data;
+  }
+};
+
+export const listNearbyDuty = async () => {
+  try {
+    const response: AxiosResponse<ApiResponse<Duty[]>> = await get(
+      `/v1/duty/list/nearby`,
     );
     return response.data;
   } catch (err: any) {
@@ -48,18 +60,6 @@ export const postDuty = async (payload: DutyPayload) => {
     return response.data;
   } catch (err: any) {
     const error = err as AxiosError<ApiResponse<Duty>>;
-    return error.response!.data;
-  }
-};
-
-export const listNearbyDuties = async () => {
-  try {
-    const response: AxiosResponse<ApiResponse<Duty[]>> = await get(
-      '/v1/duty/nearby',
-    );
-    return response.data;
-  } catch (err: any) {
-    const error = err as AxiosError<ApiResponse<Duty[]>>;
     return error.response!.data;
   }
 };
