@@ -30,13 +30,13 @@ export const putVehicleTrip = async (id: string, payload: PostVehicleTripPayload
 
 export const listVehicleTrip = async (page: number, pageSize: number, vehicleId?: string) => {
   try {
-    const response: AxiosResponse<ApiResponse<VehicleTrip[]>> = await get(
+    const response: AxiosResponse<ApiResponse<VehicleTripData[]>> = await get(
       '/v1/vehicle-trip/list',
       { page, pageSize, vehicleId }
     );
     return response.data;
   } catch (err) {
-    const error = err as AxiosError<ApiResponse<VehicleTrip[]>>;
+    const error = err as AxiosError<ApiResponse<VehicleTripData[]>>;
     return error.response!.data;
   }
 };

@@ -91,7 +91,7 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
 
           <RadioGroup
             label="Viatura*"
-            items={vehicleList.map(vehicle => ({ label: vehicle.name, value: vehicle.id }))}
+            options={vehicleList.map(vehicle => ({ label: vehicle.name, value: vehicle.id }))}
             selectedValue={vehicleId}
             onChangeValue={(value) => setVehicleId(value as string)}
           />
