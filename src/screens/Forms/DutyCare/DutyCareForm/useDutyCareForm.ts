@@ -8,7 +8,7 @@ import { PostDutyCareChecklistPayload } from "@api/dutyCareChecklist/types";
 import { getChecklistQuestions } from "@api/checklist/checklistApi";
 import { Checklist, ChecklistQuestion, ChecklistQuestionItem, ChecklistType } from "@api/checklist/types";
 import { isString } from "@utils/stringHelper";
-import { listNearbyDuty } from "@api/duty/dutyApi";
+import { listDutyForChecklist } from "@api/duty/dutyApi";
 import { Duty } from "@api/duty/types";
 
 export type PostDutyCareChecklistField = keyof PostDutyCareChecklistPayload
@@ -93,7 +93,7 @@ export const useDutyCareForm = () => {
           setChecklistQuestions({ ...responseChecklistQuestions.result });
         }
 
-        const responseDutyList = await listNearbyDuty();
+        const responseDutyList = await listDutyForChecklist();
         if (responseDutyList.success && responseDutyList.result) {
           setDutyList([ ...responseDutyList.result ]);
         }

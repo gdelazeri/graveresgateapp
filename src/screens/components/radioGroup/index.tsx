@@ -32,6 +32,20 @@ const RadioGroup = ({
   const [isOtherSelected, setIsOrderSelected] = useState(false)
   const [otherText, setOtherText] = useState('')
 
+  useEffect(() => {
+    if (isString(selectedValue) && !multiple && hasOtherOption && options.find((item) => item.value === selectedValue) === undefined) {
+      setIsOrderSelected(true)
+      setOtherText(String(selectedValue))
+    }
+
+    if (Array.isArray(selectedValue) && multiple && hasOtherOption) {
+      const otherValue = selectedValue
+        .find((item) => !options.map((option) => option.value).includes(item)) 
+      setIsOrderSelected(isString(otherValue))
+      setOtherText(otherValue || '')
+    }
+  }, [])
+
   const onSelectValue = (value: string) => {
     if (multiple && Array.isArray(selectedValue)) {
       if (selectedValue.includes(value)) {
@@ -42,7 +56,6 @@ const RadioGroup = ({
     } else {
       if (!multiple && isOtherSelected) {
         setIsOrderSelected(false);
-        setOtherText('')
       }
       onChangeValue(value);
     }
@@ -64,12 +77,12 @@ const RadioGroup = ({
       const allowedValues = selectedValue
         .map((item) => options.map((option) => option.value).includes(item) ? item : null)
         .filter((item) => item !== null) as string[];
-      if (isString(otherText)) {
+      if (isString(otherText) && isOtherSelected) {
         onChangeValue([...allowedValues, otherText]);
       } else {
         onChangeValue([...allowedValues]);
       }
-    } else {
+    } else if (isString(otherText) && isOtherSelected) {
       onChangeValue(otherText);
     }
   }, [otherText, isOtherSelected])
@@ -90,7 +103,7 @@ const RadioGroup = ({
         </Styled.Item>
       ))}
       {hasOtherOption && (
-        <Styled.Item onPress={() => { setIsOrderSelected(!isOtherSelected); setOtherText("") }}>
+        <Styled.Item onPress={() => setIsOrderSelected(!isOtherSelected)}>
           {isOtherSelected ? <RadioButtonChecked size={20} color={colors.red} /> : <RadioButtonUnchecked size={20} color={colors.red} />}
           <Styled.ItemLabel>
             <Label size={'medium'}>Outro:</Label>

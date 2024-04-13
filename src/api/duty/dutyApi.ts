@@ -27,10 +27,10 @@ export const listPreviousDuty = async (page: number, pageSize: number) => {
   }
 };
 
-export const listNearbyDuty = async () => {
+export const listDutyForChecklist = async () => {
   try {
     const response: AxiosResponse<ApiResponse<Duty[]>> = await get(
-      `/v1/duty/list/nearby`,
+      `/v1/duty/list/checklist`,
     );
     return response.data;
   } catch (err: any) {
