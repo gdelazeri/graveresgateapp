@@ -21,11 +21,13 @@ const BasicInfo = ({
   setFormValue,
   dutyList,
   vehicleList,
+  reasonList,
 }: {
   form: PostDutyCareChecklistPayload
   setFormValue: (key: PostDutyCareChecklistField, value: any) => void
   dutyList: Duty[]
   vehicleList: Vehicle[]
+  reasonList: string[]
 }) => {
   const dutySelected = dutyList.find(duty => duty.id === form.dutyId)
 
@@ -92,9 +94,7 @@ const BasicInfo = ({
 
       <RadioGroup
         label="Motivo*"
-        options={[
-          { label: 'Acidente', value: 'Acidente' },
-        ]}
+        options={reasonList.map((reason) => ({ label: reason, value: reason }))}
         hasOtherOption
         selectedValue={form.reason}
         onChangeValue={(value) => setFormValue('reason', value)}

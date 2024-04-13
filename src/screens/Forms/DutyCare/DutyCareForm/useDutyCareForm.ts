@@ -10,6 +10,8 @@ import { Checklist, ChecklistQuestion, ChecklistQuestionItem, ChecklistType } fr
 import { isString } from "@utils/stringHelper";
 import { listDutyForChecklist } from "@api/duty/dutyApi";
 import { Duty } from "@api/duty/types";
+import { getSetting } from "@api/settings/settingApi";
+import { SettingKey } from "@api/settings/types";
 
 export type PostDutyCareChecklistField = keyof PostDutyCareChecklistPayload
 
@@ -18,6 +20,7 @@ export const useDutyCareForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const [vehicleList, setVehicleList] = useState<Vehicle[]>([])
   const [dutyList, setDutyList] = useState<Duty[]>([])
+  const [reasonList, setReasonList] = useState<string[]>([])
   const [checklistQuestions, setChecklistQuestions] = useState<Checklist | undefined>()
 
   const [form, setForm] = useState<PostDutyCareChecklistPayload>({
@@ -98,6 +101,11 @@ export const useDutyCareForm = () => {
           setDutyList([ ...responseDutyList.result ]);
         }
 
+        const responseSetting = await getSetting(SettingKey.DUTY_CARE_REASONS);
+        if (responseSetting.success && responseSetting.result && Array.isArray(responseSetting.result)) {
+          setReasonList([ ...responseSetting.result ]);
+        }
+
         setIsLoading(false);
       };
 
@@ -124,6 +132,7 @@ export const useDutyCareForm = () => {
     isProcessing,
     vehicleList,
     dutyList,
+    reasonList,
     checklistQuestions,
     form,
     setFormValue,
