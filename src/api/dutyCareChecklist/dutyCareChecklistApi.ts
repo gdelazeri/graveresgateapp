@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
-import { ApiResponse, post } from "../request";
-import { PostDutyCareChecklistPayload } from "./types";
+import { ApiResponse, get, post } from "../request";
+import { DutyCareChecklist, PostDutyCareChecklistPayload } from "./types";
 
 export const postDutyCare = async (payload: PostDutyCareChecklistPayload) => {
   try {
@@ -8,6 +8,16 @@ export const postDutyCare = async (payload: PostDutyCareChecklistPayload) => {
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<{ id: string }>>;
+    return error.response!.data;
+  }
+};
+
+export const listDutyCarePaged = async (page: number, pageSize: number) => {
+  try {
+    const response: AxiosResponse<ApiResponse<DutyCareChecklist[]>> = await get('/v1/duty-care-checklist/list/paged', { page, pageSize });
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ApiResponse<DutyCareChecklist[]>>;
     return error.response!.data;
   }
 };
