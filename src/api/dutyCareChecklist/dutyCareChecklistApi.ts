@@ -21,3 +21,13 @@ export const listDutyCarePaged = async (page: number, pageSize: number) => {
     return error.response!.data;
   }
 };
+
+export const getDutyCare = async (id: string) => {
+  try {
+    const response: AxiosResponse<ApiResponse<DutyCareChecklist>> = await get(`/v1/duty-care-checklist/get/${id}`);
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError<ApiResponse<DutyCareChecklist>>;
+    return error.response!.data;
+  }
+};

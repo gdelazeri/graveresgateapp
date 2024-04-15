@@ -41,7 +41,7 @@ const DutyCareList = ({ navigation }: DutyCareListProps) => {
         ItemSeparatorComponent={() => <Styled.Divider />}
         renderItem={({ item }) => (
           <DutyCareListItem
-            onPress={() => navigation.navigate(routeMap.FormsRoutes.DUTY_CARE_FORM, { id: item.id })}
+            onPress={() => navigation.navigate(routeMap.FormsRoutes.DUTY_CARE_DETAILS, { id: item.id })}
             item={item}
           />
         )}
@@ -50,7 +50,7 @@ const DutyCareList = ({ navigation }: DutyCareListProps) => {
       />
       <FooterContainer>
         <Button
-          title="Novo atendimento"
+          title="Nova ficha de atendimento"
           onPress={onPressAdd}
         />
       </FooterContainer>

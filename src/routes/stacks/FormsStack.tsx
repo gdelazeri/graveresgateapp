@@ -5,6 +5,7 @@ import * as VehicleTripDetailsScreen from "@screens/Forms/VehicleTrip/VehicleTri
 import * as VehicleTripListScreen from "@screens/Forms/VehicleTrip/VehicleTripList";
 import * as SelectUserScreen from "@screens/Forms/SelectUser";
 import * as DutyCareListScreen from "@screens/Forms/DutyCare/DutyCareList";
+import * as DutyCareDetailsScreen from "@screens/Forms/DutyCare/DutyCareDetails";
 import * as DutyCareFormScreen from "@screens/Forms/DutyCare/DutyCareForm";
 import routeMap from "@routes/routeMap";
 
@@ -47,10 +48,15 @@ const FormsStack = () => (
     />
     <Stack.Screen
       name={routeMap.FormsRoutes.DUTY_CARE_LIST}
-      // @ts-ignore
       component={DutyCareListScreen.default}
-      // @ts-ignore
       options={{ header: DutyCareListScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.DUTY_CARE_DETAILS}
+      // @ts-ignore
+      component={DutyCareDetailsScreen.default}
+      // @ts-ignore
+      options={{ header: DutyCareDetailsScreen.NavHeader }}
     />
     <Stack.Screen
       name={routeMap.FormsRoutes.DUTY_CARE_FORM}

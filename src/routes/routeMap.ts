@@ -45,6 +45,7 @@ enum FormsRoutes {
   SELECT_USER = "SelectUser",
   DUTY_CARE_FORM = "DutyCareForm",
   DUTY_CARE_LIST = "DutyCareList",
+  DUTY_CARE_DETAILS = "DutyCareDetails",
 }
 
 export default {

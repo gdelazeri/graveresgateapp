@@ -79,6 +79,15 @@ const BasicInfo = ({
         selectedValue={form.vehicleId}
         onChangeValue={(value) => setFormValue('vehicleId', value as string)}
       />
+      <Styled.Divider />
+
+      <RadioGroup
+        label="Motivo*"
+        options={reasonList.map((reason) => ({ label: reason, value: reason }))}
+        hasOtherOption
+        selectedValue={form.reason}
+        onChangeValue={(value) => setFormValue('reason', value)}
+      />
 
       <Styled.Divider />
       
@@ -88,16 +97,6 @@ const BasicInfo = ({
         value={form.note}
         onChangeText={(value) => setFormValue('note', value)}
         type={INPUT_TYPE.TEXT}
-      />
-
-      <Styled.Divider />
-
-      <RadioGroup
-        label="Motivo*"
-        options={reasonList.map((reason) => ({ label: reason, value: reason }))}
-        hasOtherOption
-        selectedValue={form.reason}
-        onChangeValue={(value) => setFormValue('reason', value)}
       />
     </CardInfo>
   )

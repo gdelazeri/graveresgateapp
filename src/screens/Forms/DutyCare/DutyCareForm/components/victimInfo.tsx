@@ -3,7 +3,7 @@ import RadioGroup from "@screens/components/radioGroup";
 import Input from "@screens/components/input";
 import { INPUT_TYPE } from "@screens/components/input/types";
 import Styled from "../styles";
-import { PostDutyCareChecklistPayload } from "@api/dutyCareChecklist/types";
+import { PostDutyCareChecklistPayload, VictimGender, VictimGenderLabel } from "@api/dutyCareChecklist/types";
 import { PostDutyCareChecklistField } from "../useDutyCareForm";
 
 const VictimInfo = ({
@@ -13,7 +13,7 @@ const VictimInfo = ({
   form: PostDutyCareChecklistPayload,
   setFormValue: (key: PostDutyCareChecklistField, value: any) => void,
 }) => (
-  <CardInfo title="Dados do Paciente">
+  <CardInfo title="Dados do paciente">
     <Input
       label="Nome completo*"
       placeholder="Informe o nome completo do paciente"
@@ -27,11 +27,10 @@ const VictimInfo = ({
     <RadioGroup
       label="Sexo*"
       selectedValue={form.victimGender}
-      options={[
-        { label: 'Masculino', value: 'M' },
-        { label: 'Feminino', value: 'F' },
-        { label: 'Indefinido', value: '-' },
-      ]}
+      options={Object.values(VictimGender).map((value) => ({
+        label: VictimGenderLabel[value],
+        value
+      }))}
       onChangeValue={(value) => setFormValue('victimGender', String(value))}
     />
 

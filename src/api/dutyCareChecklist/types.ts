@@ -20,6 +20,13 @@ export interface DutyCareChecklist {
   incidentAddressCity: string;
   incidentContinuation: DutyCareChecklistIncidentContinuation;
   incidentEvolution: string;
+  checklistName: string;
+  checklistFilledAnswers: {
+    checklistQuestionId: string
+    checklistQuestion: string
+    checklistQuestionItem?: string
+    checklistQuestionOption: string
+  }[]
 }
 
 export interface PostDutyCareChecklistPayload {
@@ -54,4 +61,16 @@ export enum DutyCareChecklistIncidentContinuation {
 export const DutyCareChecklistIncidentContinuationLabel = {
   [DutyCareChecklistIncidentContinuation.REMOVAL]: 'Remoção de vítima',
   [DutyCareChecklistIncidentContinuation.REFUSED]: 'Recusa de atendimento'
+}
+
+export enum VictimGender {
+  MALE = 'M',
+  FEMALE = 'F',
+  UNDEFINED = '-'
+}
+
+export const VictimGenderLabel = {
+  [VictimGender.MALE]: 'Masculino',
+  [VictimGender.FEMALE]: 'Feminino',
+  [VictimGender.UNDEFINED]: 'Indefinido',
 }

@@ -50,10 +50,10 @@ const LocationInfo = ({
       label="Continuação da ocorrência*"
       selectedValue={form.incidentContinuation}
       onChangeValue={(value) => setFormValue('incidentContinuation', value as string)}
-      options={[
-        { label: DutyCareChecklistIncidentContinuationLabel[DutyCareChecklistIncidentContinuation.REFUSED], value: DutyCareChecklistIncidentContinuation.REFUSED },
-        { label: DutyCareChecklistIncidentContinuationLabel[DutyCareChecklistIncidentContinuation.REMOVAL], value: DutyCareChecklistIncidentContinuation.REMOVAL },
-      ]}
+      options={Object.values(DutyCareChecklistIncidentContinuation).map((value) => ({
+        label: DutyCareChecklistIncidentContinuationLabel[value],
+        value
+      }))}
     />
   </CardInfo>
 )
