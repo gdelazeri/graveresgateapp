@@ -43,6 +43,7 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
     vehicleList,
     dutyList,
     reasonList,
+    cityList,
     checklistQuestions,
     form,
     setFormValue,
@@ -96,7 +97,7 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
       case PageIndex.VICTIM_INFO:
         return <VictimInfo form={form} setFormValue={setFormValue} />;
       case PageIndex.LOCATION_INFO:
-        return <LocationInfo form={form} setFormValue={setFormValue} />;
+        return <LocationInfo form={form} setFormValue={setFormValue} cityList={cityList} />;
       case PageIndex.CHECKLIST_INFO:
         return <ChecklistInfo
           form={form}

@@ -9,9 +9,11 @@ import { PostDutyCareChecklistField } from "../useDutyCareForm";
 const LocationInfo = ({
   form,
   setFormValue,
+  cityList = []
 }: {
   form: PostDutyCareChecklistPayload,
   setFormValue: (key: PostDutyCareChecklistField, value: any) => void,
+  cityList: string[]
 }) => (
   <CardInfo title="Local da ocorrência/atendimento">
     <Input
@@ -38,10 +40,11 @@ const LocationInfo = ({
       label="Cidade*"
       selectedValue={form.incidentAddressCity}
       onChangeValue={(value) => setFormValue('incidentAddressCity', String(value))}
-      options={[
-        { label: 'Gravataí/RS', value: 'Gravataí/RS' },
-        { label: 'Cachoeirinha/RS', value: 'Cachoeirinha/RS' },
-      ]}
+      options={cityList.map((city) => ({
+        label: city,
+        value: city
+      }))}
+      hasOtherOption
     />
 
     <Styled.Divider />

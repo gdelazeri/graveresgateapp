@@ -21,6 +21,7 @@ export const useDutyCareForm = () => {
   const [vehicleList, setVehicleList] = useState<Vehicle[]>([])
   const [dutyList, setDutyList] = useState<Duty[]>([])
   const [reasonList, setReasonList] = useState<string[]>([])
+  const [cityList, setCityList] = useState<string[]>([])
   const [checklistQuestions, setChecklistQuestions] = useState<Checklist | undefined>()
 
   const [form, setForm] = useState<PostDutyCareChecklistPayload>({
@@ -101,9 +102,22 @@ export const useDutyCareForm = () => {
           setDutyList([ ...responseDutyList.result ]);
         }
 
-        const responseSetting = await getSetting(SettingKey.DUTY_CARE_REASONS);
-        if (responseSetting.success && responseSetting.result && Array.isArray(responseSetting.result)) {
-          setReasonList([ ...responseSetting.result ]);
+        const responseSettingDutyCareReasons = await getSetting(SettingKey.DUTY_CARE_REASONS);
+        if (
+          responseSettingDutyCareReasons.success
+          && responseSettingDutyCareReasons.result
+          && Array.isArray(responseSettingDutyCareReasons.result)
+        ) {
+          setReasonList([ ...responseSettingDutyCareReasons.result ]);
+        }
+
+        const responseSettingCities = await getSetting(SettingKey.CITIES);
+        if (
+          responseSettingCities.success
+          && responseSettingCities.result
+          && Array.isArray(responseSettingCities.result)
+        ) {
+          setCityList([ ...responseSettingCities.result ]);
         }
 
         setIsLoading(false);
@@ -133,6 +147,7 @@ export const useDutyCareForm = () => {
     vehicleList,
     dutyList,
     reasonList,
+    cityList,
     checklistQuestions,
     form,
     setFormValue,
