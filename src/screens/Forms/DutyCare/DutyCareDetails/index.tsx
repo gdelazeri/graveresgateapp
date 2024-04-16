@@ -61,6 +61,16 @@ const DutyCareDetails = ({ navigation, route }: DutyCareDetailsProps) => {
               <Label size={"medium"}>{dutyCareChecklist.note}</Label>
             </>
           )}
+
+          <Styled.Divider />
+
+          <Label size={"small"} color={colors.Greyscale.b50}>Preenchido em</Label>
+          <Label size={"medium"}>{moment(dutyCareChecklist.createdAt).format('DD/MM/YYYY HH:mm')}</Label>
+
+          <Styled.Divider />
+
+          <Label size={"small"} color={colors.Greyscale.b50}>Preenchido por</Label>
+          <Label size={"medium"}>{dutyCareChecklist.createdByUser.name}</Label>
         </CardInfo>
 
         <Styled.Divider />
