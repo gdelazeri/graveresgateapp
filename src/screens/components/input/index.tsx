@@ -9,8 +9,8 @@ import Styled from "./styles";
 import { INPUT_TYPE } from "./types";
 
 interface InputProps {
-  placeholder: string;
-  label: string;
+  placeholder?: string;
+  label?: string;
   value: string | null | undefined;
   onChangeText: (newValue: string) => void;
   type?: INPUT_TYPE;
@@ -67,7 +67,7 @@ const Input = ({
 
   return (
     <>
-      <Label size={'small'}>{label}</Label>
+      {isString(label) && <Label size={'small'}>{label}</Label>}
       <Styled.Container>
         <Styled.TextInput
           testID={testID}

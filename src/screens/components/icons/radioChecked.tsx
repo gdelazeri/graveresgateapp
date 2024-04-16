@@ -6,7 +6,7 @@ interface IconProps {
 }
 
 const RadioButtonChecked = ({ size, color }: IconProps) => (
-  <Icon type={'material'} name={'radio-button-checked'} size={size} color={color} />
+  <Icon type={'material'} name={'check-circle'} size={size} color={color} />
 );
 
 export default RadioButtonChecked;

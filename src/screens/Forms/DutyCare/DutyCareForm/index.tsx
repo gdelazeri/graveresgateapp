@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Alert } from "react-native";
-import { NavigationProp, ParamListBase } from "@react-navigation/native";
+import { NavigationProp, ParamListBase, StackActions } from "@react-navigation/native";
 import Header from "@screens/components/header";
 import Loader from "@screens/components/loader";
 import FooterContainer from "@screens/components/footerContainer";
@@ -16,6 +16,7 @@ import LocationInfo from "./components/locationInfo";
 import EvolutionInfo from "./components/evolutionInfo";
 import ChecklistInfo from "./components/checklistInfo";
 import { isString } from "@utils/stringHelper";
+import routeMap from "@routes/routeMap";
 
 interface DutyCareFormProps {
   navigation: NavigationProp<ParamListBase>;
@@ -63,8 +64,10 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
 
     const response = await save();
 
-    if (response.success) {
-      navigation.goBack();
+    if (response.success && response.result) {
+      navigation.dispatch(
+        StackActions.replace(routeMap.FormsRoutes.DUTY_CARE_DETAILS, { id: response.result.id })
+      );
     } else {
       Alert.alert(
         'Erro ao salvar a ficha de atendimento',

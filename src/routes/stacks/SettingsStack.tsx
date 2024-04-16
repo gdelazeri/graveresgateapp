@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import * as SettingsHomeScreen from "@screens/Settings/SettingsHome";
+import * as SettingsFormScreen from "@screens/Settings/SettingsForm";
 import * as VehicleListScreen from "@screens/Settings/Vehicle/VehicleList";
 import * as VehicleFormScreen from "@screens/Settings/Vehicle/VehicleForm";
 import routeMap from "@routes/routeMap";
@@ -12,6 +13,13 @@ const SettingsStack = () => (
       name={routeMap.SettingsRoutes.SETTINGS_HOME}
       component={SettingsHomeScreen.default}
       options={{ header: SettingsHomeScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.SettingsRoutes.SETTINGS_FORM}
+      // @ts-ignore
+      component={SettingsFormScreen.default}
+      // @ts-ignore
+      options={{ header: SettingsFormScreen.NavHeader }}
     />
     <Stack.Screen
       name={routeMap.SettingsRoutes.VEHICLE_LIST}

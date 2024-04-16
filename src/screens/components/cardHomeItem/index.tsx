@@ -11,9 +11,18 @@ interface HomeCardProps {
   subtitle?: string;
   onPress: () => void;
   disabled?: boolean;
+  size?: number;
 }
 
-const CardHomeItem = ({ icon, iconType, title, subtitle, onPress, disabled = false }: HomeCardProps) => (
+const CardHomeItem = ({
+  icon,
+  iconType,
+  title,
+  subtitle,
+  onPress,
+  disabled = false,
+  size = 56
+}: HomeCardProps) => (
   <ListItem
     Component={TouchableScale}
     // @ts-ignore
@@ -37,7 +46,7 @@ const CardHomeItem = ({ icon, iconType, title, subtitle, onPress, disabled = fal
     disabled={disabled}
     containerStyle={{ borderRadius: 8 }}
   >
-    {icon && <Icon name={icon} size={56} color={colors.red} type={iconType} />}
+    {icon && <Icon name={icon} size={size} color={colors.red} type={iconType} />}
     <ListItem.Content>
       <ListItem.Title style={{ fontFamily: fonts.bold }}>
         {title}

@@ -17,6 +17,7 @@ const DutyHome = ({ navigation }: DutyHomeProps) => (
       icon="calendar-month"
       iconType="material-community"
       onPress={() => { navigation.navigate(routeMap.DutyRoutes.SCHEDULE) }}
+      size={40}
     />
     <CardHomeItem
       title="Marcação de plantão"
@@ -24,6 +25,7 @@ const DutyHome = ({ navigation }: DutyHomeProps) => (
       icon="calendar-plus"
       iconType="material-community"
       onPress={() => { navigation.navigate(routeMap.DutyRoutes.CREATE_DUTY_REQUEST) }}
+      size={40}
     />
     <CardHomeItem
       title="Minhas solicitações"
@@ -31,6 +33,7 @@ const DutyHome = ({ navigation }: DutyHomeProps) => (
       icon="calendar-account"
       iconType="material-community"
       onPress={() => { navigation.navigate(routeMap.DutyRoutes.LIST_DUTY_REQUEST) }}
+      size={40}
     />
   </Styled.Container>
 );
