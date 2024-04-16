@@ -18,7 +18,7 @@ const CardInfo = ({ children, title, onPressEdit }: React.PropsWithChildren<Card
     <Styled.Container>
       {(hasTitle || hasonPressEdit) && (
         <Styled.LabelContainer>
-          {hasTitle && <Label size="medium" bold>{title}</Label>}
+          {hasTitle && <Label size="large" bold>{title}</Label>}
           {hasonPressEdit && <TouchableOpacity onPress={onPressEdit}>
             <Icon name="edit" size={24} color={colors.Greyscale.b50} />
           </TouchableOpacity>}

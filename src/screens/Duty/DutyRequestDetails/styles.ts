@@ -7,7 +7,7 @@ const ScrollView = styled.ScrollView.attrs({
   }
 })``;
 
-const Divider = styled.Text`
+const Divider = styled.View`
   height: 8px;
 `;
 

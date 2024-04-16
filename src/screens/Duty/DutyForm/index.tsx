@@ -249,5 +249,5 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 export default DutyForm;
 
 export const NavHeader = ({ navigation }: DutyFormProps) => {
-  return <Header title="Plantão" onBackPress={navigation.goBack} />
+  return <Header title="Equipe do plantão" onBackPress={navigation.goBack} />
 };

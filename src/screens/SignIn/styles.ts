@@ -16,7 +16,7 @@ const Title = styled.Text`
   color: ${colors.black};
 `;
 
-const Divider = styled.Text`
+const Divider = styled.View`
   height: 16px;
 `;
 

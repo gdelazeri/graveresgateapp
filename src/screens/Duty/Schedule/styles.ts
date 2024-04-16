@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-const Divider = styled.Text`
+const Divider = styled.View`
   height: 16px;
 `;
 

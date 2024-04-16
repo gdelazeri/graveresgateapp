@@ -13,7 +13,7 @@ const Footer = styled.View`
   border-top-left-radius: 8px;
 `;
 
-const Divider = styled.Text`
+const Divider = styled.View`
   height: 16px;
 `;
 

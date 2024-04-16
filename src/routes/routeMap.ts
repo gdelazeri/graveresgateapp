@@ -26,6 +26,7 @@ enum DutyRoutes {
   DUTY_REQUEST_DETAILS = "DutyRequestDetails",
   SCHEDULE = "Schedule",
   DUTY_FORM = "DutyForm",
+  DUTY_DETAILS = "DutyDetails",
   DUTY_SELECT_USER = "DutySelectUser"
 }
 
