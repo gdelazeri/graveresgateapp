@@ -17,6 +17,7 @@ import EvolutionInfo from "./components/evolutionInfo";
 import ChecklistInfo from "./components/checklistInfo";
 import { isString } from "@utils/stringHelper";
 import routeMap from "@routes/routeMap";
+import Toast from "react-native-toast-message";
 
 interface DutyCareFormProps {
   navigation: NavigationProp<ParamListBase>;
@@ -65,6 +66,12 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
     const response = await save();
 
     if (response.success && response.result) {
+      Toast.show({
+        type: 'success',
+        text1: 'Ficha de atendimento',
+        text2: 'Salva com sucesso!',
+        position: 'bottom',
+      })
       navigation.dispatch(
         StackActions.replace(routeMap.FormsRoutes.DUTY_CARE_DETAILS, { id: response.result.id })
       );

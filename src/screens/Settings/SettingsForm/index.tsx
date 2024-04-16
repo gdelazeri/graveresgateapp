@@ -12,6 +12,7 @@ import colors from "@theme/colors";
 import { isString } from "@utils/stringHelper";
 import SettingItem from "./components/settingItem";
 import Styled from "./styles";
+import Toast from "react-native-toast-message";
 
 interface SettingsFormProps {
   navigation: NavigationProp<ParamListBase>;
@@ -38,6 +39,13 @@ const SettingsForm = ({ navigation, route }: SettingsFormProps) => {
     const response = await save();
 
     if (response.success && response.result) {
+      Toast.show({
+        type: 'success',
+        text1: SettingKeyLabel[settingKey],
+        text2: 'Salvo com sucesso!',
+        position: 'bottom',
+      })
+
       navigation.goBack();
     } else {
       Alert.alert(

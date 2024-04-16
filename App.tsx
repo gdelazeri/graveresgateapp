@@ -4,11 +4,13 @@ import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
+import Toast from 'react-native-toast-message';
 
 import Navigation from "./src/routes";
 import colors from "./src/theme/colors";
 import fonts from "./src/theme/fonts";
 import { UserProvider } from "@context/userContext";
+import toastConfig from "@utils/toastConfig";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -38,6 +40,7 @@ export default function App() {
       <UserProvider>
         <Navigation />
       </UserProvider>
+      <Toast config={toastConfig} />
     </SafeAreaView>
   );
 }

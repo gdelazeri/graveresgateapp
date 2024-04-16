@@ -9,6 +9,8 @@ import Input from "@screens/components/input";
 import Label from "@screens/components/label";
 import colors from "@theme/colors";
 import Styled from "./styles";
+import Toast from "react-native-toast-message";
+import { Alert } from "react-native";
 
 interface VehicleListProps {
   navigation: NavigationProp<ParamListBase>;
@@ -40,8 +42,24 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
   } = useVehicleForm({ vehicle });
 
   const onPressSave = async () => {
-    await save();
-    navigation.goBack();
+    const response = await save();
+
+    if (response.success && response.result) {
+      Toast.show({
+        type: 'success',
+        text1: 'Viatura',
+        text2: 'Salvo com sucesso!',
+        position: 'bottom',
+      })
+
+      navigation.goBack();
+    } else {
+      Alert.alert(
+        'Erro ao salvar',
+        'Ocorreu algum erro ao salvar, verifique os dados e tente novamente.',
+        [{ text: 'OK' }]
+      )
+    }
   }
 
   return (

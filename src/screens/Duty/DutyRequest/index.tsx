@@ -14,6 +14,7 @@ import routeMap from "@routes/routeMap";
 import useDutyRequest from "./useDutyRequest";
 import Styled from "./styles";
 import CardInfo from '@screens/components/cardInfo';
+import Toast from 'react-native-toast-message';
 
 interface DutyRequestProps {
   navigation: NavigationProp<ParamListBase>;
@@ -50,6 +51,12 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
     const response = await save();
 
     if (response.success && response.result) {
+      Toast.show({
+        type: 'success',
+        text1: 'Marcação de plantão',
+        text2: 'Solicitado com sucesso!',
+        position: 'bottom',
+      })
       navigation.dispatch(
         StackActions.replace(routeMap.DutyRoutes.LIST_DUTY_REQUEST)
       );
@@ -146,5 +153,5 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
 export default DutyRequest;
 
 export const NavHeader = ({ navigation }: DutyRequestProps) => (
-  <Header title="Marcação de Plantão" onBackPress={navigation.goBack} />
+  <Header title="Marcação de plantão" onBackPress={navigation.goBack} />
 );

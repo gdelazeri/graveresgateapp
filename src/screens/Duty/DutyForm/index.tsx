@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { Alert } from 'react-native';
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
+import Toast from 'react-native-toast-message';
 import Header from "@screens/components/header";
 import Label from "@screens/components/label";
 import Button from "@screens/components/button";
@@ -12,7 +13,6 @@ import Loader from '@screens/components/loader';
 import { User } from '@api/user/types';
 import routeMap from '@routes/routeMap';
 import DutyUserPosition from './components/dutyUserPosition';
-import { isString } from '@utils/stringHelper';
 import Styled from "./styles";
 
 interface DutyFormProps {
@@ -58,6 +58,12 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
     const response = await save();
 
     if (response.success && response.result) {
+      Toast.show({
+        type: 'success',
+        text1: 'Escala do plantão',
+        text2: 'Salvo com sucesso!',
+        position: 'bottom',
+      })
       navigation.goBack();
     } else {
       Alert.alert(

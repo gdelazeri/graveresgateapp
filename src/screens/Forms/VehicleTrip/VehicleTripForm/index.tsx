@@ -17,6 +17,7 @@ import routeMap from "@routes/routeMap";
 import { User } from "@api/user/types";
 import { isString } from "@utils/stringHelper";
 import { Alert } from "react-native";
+import Toast from "react-native-toast-message";
 
 interface FormVehicleTripProps {
   navigation: NavigationProp<ParamListBase>;
@@ -60,6 +61,13 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
     const response = await save();
 
     if (response.success) {
+      Toast.show({
+        type: 'success',
+        text1: 'Livro de deslocamento',
+        text2: 'Deslocamento salvo com sucesso!',
+        position: 'bottom',
+      })
+
       if (isString(id)) {
         navigation.goBack();
       } else {

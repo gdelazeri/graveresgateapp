@@ -40,8 +40,10 @@ const useVehicleForm = ({ vehicle }: UseVehicleFormProps) => {
   const save = async () => {
     setIsProcessing(true);
 
+    let response
+
     if (isString(vehicle?.id)) {
-      await putVehicle(String(vehicle?.id), {
+      response = await putVehicle(String(vehicle?.id), {
         name,
         brand,
         model,
@@ -50,7 +52,7 @@ const useVehicleForm = ({ vehicle }: UseVehicleFormProps) => {
         isAvailable
       });
     } else {
-      await postVehicle({
+      response = await postVehicle({
         name,
         brand,
         model,
@@ -61,6 +63,8 @@ const useVehicleForm = ({ vehicle }: UseVehicleFormProps) => {
     }
 
     setIsProcessing(false);
+
+    return response
   }
 
   return {
