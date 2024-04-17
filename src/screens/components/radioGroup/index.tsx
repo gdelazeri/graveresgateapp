@@ -96,7 +96,7 @@ const RadioGroup = ({
       <Label size={'small'}>{label}</Label>
       {options.map((item) => (
         <Styled.Item key={item.value} onPress={() => onSelectValue(item.value)}>
-          {isChecked(item.value) ? <RadioButtonChecked size={20} color={colors.red} /> : <RadioButtonUnchecked size={20} color={colors.red} />}
+          {isChecked(item.value) ? <RadioButtonChecked size={20} color={colors.red} /> : <RadioButtonUnchecked size={20} color={colors.Greyscale.b50} />}
           <Styled.ItemLabel>
             <Label size={'medium'}>{item.label}</Label>
           </Styled.ItemLabel>
@@ -104,7 +104,7 @@ const RadioGroup = ({
       ))}
       {hasOtherOption && (
         <Styled.Item onPress={() => setIsOrderSelected(!isOtherSelected)}>
-          {isOtherSelected ? <RadioButtonChecked size={20} color={colors.red} /> : <RadioButtonUnchecked size={20} color={colors.red} />}
+          {isOtherSelected ? <RadioButtonChecked size={20} color={colors.red} /> : <RadioButtonUnchecked size={20} color={colors.Greyscale.b50} />}
           <Styled.ItemLabel>
             <Label size={'medium'}>Outro:</Label>
             <Styled.InputOther
