@@ -62,6 +62,24 @@ const SettingsForm = ({ navigation, route }: SettingsFormProps) => {
   }
 
   const onPressDelete = (index: number) => {
+    Alert.alert(
+      'Deseja realmente remover esse item?',
+      '',
+      [
+        {
+          text: 'Não',
+          style: 'cancel'
+        },
+        {
+          text: 'Sim',
+          style: 'destructive',
+          onPress: () => onDeleteFromList(index)
+        }
+      ]
+    )
+  }
+
+  const onDeleteFromList = (index: number) => {
     const newList = [...list].filter((_, i) => i !== index);
     setList([...newList]);
   }
@@ -83,7 +101,7 @@ const SettingsForm = ({ navigation, route }: SettingsFormProps) => {
             />
           </Styled.InputValue>
           <Styled.IconButton disabled={!isString(text)} onPress={onPressAdd}>
-            <Icon name="add-circle" size={32} color={isString(text) ? colors.green : colors.Greyscale.b60} />
+            <Icon name="add-circle" size={32} color={isString(text) ? colors.green : colors.Greyscale.b80} />
           </Styled.IconButton>
         </Styled.InlineContainer>
       </CardInfo>
