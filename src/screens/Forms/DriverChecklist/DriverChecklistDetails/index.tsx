@@ -9,7 +9,6 @@ import { useDriverChecklistDetails } from "./useDriverChecklistDetails";
 import Loader from "@screens/components/loader";
 import colors from "@theme/colors";
 import { DutyShiftLabel } from "@api/dutyRequest/types";
-import { isString } from "@utils/stringHelper";
 import ChecklistAnswers from "@screens/components/checklistAnswers";
 
 interface DriverChecklistDetailsProps {

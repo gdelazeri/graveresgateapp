@@ -5,6 +5,8 @@ import { User } from "@api/user/types";
 import { listDutyCareByDutyId } from "@api/dutyCareChecklist/dutyCareChecklistApi";
 import { DutyCareChecklist } from "@api/dutyCareChecklist/types";
 import { useFocusEffect } from "@react-navigation/native";
+import { listChecklistsByDuty } from "@api/checklist/checklistApi";
+import { DutyChecklist } from "@api/checklist/types";
 
 interface UseDutyDetailsProps {
   duty: Duty
@@ -20,6 +22,7 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
   const [assistantRadioOperator, setAssistantRadioOperator] = useState<User | null>(null);
   const [trainee, setTrainee] = useState<User | null>(null);
   const [dutyCareChecklists, setDutyCareChecklists] = useState<DutyCareChecklist[]>([]);
+  const [dutyChecklists, setDutyChecklists] = useState<DutyChecklist[]>([]);
 
   useFocusEffect(
     useCallback(() => {
@@ -67,11 +70,15 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
         }
   
         const responseDutyCares = await listDutyCareByDutyId(duty.id);
-  
         if (responseDutyCares.success && responseDutyCares.result) {
           setDutyCareChecklists([...responseDutyCares.result]);
         }
-  
+
+        const responseDutyChecklists = await listChecklistsByDuty(duty.id);
+        if (responseDutyChecklists.success && responseDutyChecklists.result) {
+          setDutyChecklists([...responseDutyChecklists.result]);
+        }
+
         setIsLoading(false)
       }
 
@@ -88,7 +95,8 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
     radioOperator,
     assistantRadioOperator,
     trainee,
-    dutyCareChecklists
+    dutyCareChecklists,
+    dutyChecklists
   };
 };
 

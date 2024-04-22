@@ -47,3 +47,9 @@ export type ChecklistFilledAnswer = {
   checklistQuestionItem?: string
   checklistQuestionOption: string
 }
+
+export interface DutyChecklist {
+  id: string
+  checklistName: string
+  type: ChecklistType
+}

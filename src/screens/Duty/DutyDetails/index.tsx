@@ -14,6 +14,7 @@ import EmptyList from '@screens/components/emptyList';
 import routeMap from '@routes/routeMap';
 import { View } from 'react-native';
 import DutyCareListItem from '@screens/components/dutyCareListItem';
+import { ChecklistType, DutyChecklist } from '@api/checklist/types';
 
 interface DutyDetailsProps {
   navigation: NavigationProp<ParamListBase>;
@@ -35,8 +36,29 @@ const DutyDetails = ({ navigation, route }: DutyDetailsProps) => {
     radioOperator,
     assistantRadioOperator,
     trainee,
-    dutyCareChecklists
+    dutyCareChecklists,
+    dutyChecklists
   } = useDutyDetails({ duty });
+
+  const onPressChecklist = (dutyChecklist: DutyChecklist) => {
+    switch (dutyChecklist.type) {
+      case ChecklistType.DRIVER:
+        return navigation.navigate(routeMap.FormsRoutes.STACK, {
+          screen: routeMap.FormsRoutes.DRIVER_CHECKLIST_DETAILS,
+          params: { id: dutyChecklist.id }
+        })
+      case ChecklistType.RADIO_OPERATOR:
+        return navigation.navigate(routeMap.FormsRoutes.STACK, {
+          screen: routeMap.FormsRoutes.DRIVER_CHECKLIST_DETAILS,
+          params: { id: dutyChecklist.id }
+        })
+      case ChecklistType.RESCUER:
+        return navigation.navigate(routeMap.FormsRoutes.STACK, {
+          screen: routeMap.FormsRoutes.DRIVER_CHECKLIST_DETAILS,
+          params: { id: dutyChecklist.id }
+        })
+    }
+  }
 
   if (isLoading) {
     return <Loader />
@@ -87,6 +109,18 @@ const DutyDetails = ({ navigation, route }: DutyDetailsProps) => {
 
         <Label size='small' color={colors.Greyscale.b50}>Estágio</Label>
         <Label size='medium'>{isString(trainee?.name) ? trainee?.name : '-'}</Label>
+      </CardInfo>
+
+      <Styled.Divider />
+
+      <CardInfo title='Checklists'>
+        {dutyChecklists.length === 0 && <EmptyList text='Nenhuma checklist preenchido' />}
+        {dutyChecklists.map((item, index) => (
+          <Styled.Item key={item.id} onPress={() => onPressChecklist(item)}>
+            <Label size='medium'>{item.checklistName}</Label>
+            {index < dutyCareChecklists.length - 1 && <Styled.Divider />}
+          </Styled.Item>
+        ))}
       </CardInfo>
 
       <Styled.Divider />
