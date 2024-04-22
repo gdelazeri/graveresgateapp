@@ -5,61 +5,40 @@ import Header from "@screens/components/header";
 import Loader from "@screens/components/loader";
 import FooterContainer from "@screens/components/footerContainer";
 import Button from "@screens/components/button";
-import {
-  DutyCareChecklistIncidentContinuation,
-} from "@api/dutyCareChecklist/types";
 import Styled from "./styles";
-import { useDutyCareForm } from "./useDutyCareForm";
+import { useDriverChecklistForm } from "./useDriverChecklistForm";
 import BasicInfo from "./components/basicInfo";
-import VictimInfo from "./components/victimInfo";
-import LocationInfo from "./components/locationInfo";
-import EvolutionInfo from "./components/evolutionInfo";
 import { isString } from "@utils/stringHelper";
 import routeMap from "@routes/routeMap";
 import Toast from "react-native-toast-message";
 import ChecklistQuestions from "@screens/components/checklistQuestions";
 
-interface DutyCareFormProps {
+interface DriverChecklistFormProps {
   navigation: NavigationProp<ParamListBase>;
-  route: {
-    params: {
-      id?: string
-    }
-  }
 }
 
 enum PageIndex {
   BASIC_INFO,
-  VICTIM_INFO,
-  LOCATION_INFO,
   CHECKLIST_INFO,
-  EVOLUTION_INFO
 }
 
-const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
-  const { id } = route.params || {};
+const DriverChecklistForm = ({ navigation }: DriverChecklistFormProps) => {
   const [pageIndex, setPageIndex] = useState<PageIndex>(PageIndex.BASIC_INFO)
   const {
     isLoading,
     isProcessing,
     vehicleList,
     dutyList,
-    reasonList,
-    cityList,
     checklistQuestions,
     form,
     setFormValue,
     setFormChecklistQuestionValue,
     save
-  } = useDutyCareForm()
+  } = useDriverChecklistForm()
 
   const onPressContinue = async () => {
-    if (pageIndex < PageIndex.EVOLUTION_INFO) {
-      if (pageIndex === PageIndex.LOCATION_INFO && form.incidentContinuation === DutyCareChecklistIncidentContinuation.REFUSED) {
-        setPageIndex(PageIndex.EVOLUTION_INFO);
-      } else {
-        setPageIndex(pageIndex + 1);
-      }
+    if (pageIndex < PageIndex.CHECKLIST_INFO) {
+      setPageIndex(pageIndex + 1);
       return;
     }
 
@@ -68,8 +47,8 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
     if (response.success && response.result) {
       Toast.show({
         type: 'success',
-        text1: 'Ficha de atendimento',
-        text2: 'Salva com sucesso!',
+        text1: 'Checklist Condutor',
+        text2: 'Salvo com sucesso!',
         position: 'bottom',
       })
       navigation.dispatch(
@@ -77,7 +56,7 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
       );
     } else {
       Alert.alert(
-        'Erro ao salvar a ficha de atendimento',
+        'Erro ao salvar o checklist do condutor',
         'Ocorreu algum erro ao salvar o formulário, verifique os dados e tente novamente.',
         [{ text: 'OK' }]
       )
@@ -86,11 +65,7 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
 
   const onPressGoBack = async () => {
     if (pageIndex > PageIndex.BASIC_INFO) {
-      if (pageIndex === PageIndex.EVOLUTION_INFO && form.incidentContinuation === DutyCareChecklistIncidentContinuation.REFUSED) {
-        setPageIndex(PageIndex.LOCATION_INFO);
-      } else {
-        setPageIndex(pageIndex - 1);
-      }
+      setPageIndex(pageIndex - 1);
     }
   }
 
@@ -102,45 +77,39 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
           setFormValue={setFormValue}
           dutyList={dutyList}
           vehicleList={vehicleList}
-          reasonList={reasonList}
         />;
-      case PageIndex.VICTIM_INFO:
-        return <VictimInfo form={form} setFormValue={setFormValue} />;
-      case PageIndex.LOCATION_INFO:
-        return <LocationInfo form={form} setFormValue={setFormValue} cityList={cityList} />;
       case PageIndex.CHECKLIST_INFO:
         return <ChecklistQuestions
           form={form}
           setFormChecklistQuestionValue={setFormChecklistQuestionValue}
           checklistQuestions={checklistQuestions}
         />;
-      case PageIndex.EVOLUTION_INFO:
-        return <EvolutionInfo form={form} setFormValue={setFormValue} />;
     }
-  }, [pageIndex, form, setFormValue, dutyList, vehicleList, reasonList])
+  }, [pageIndex, form, setFormValue, dutyList, vehicleList])
 
   const isNextEnabled = useMemo(() => {
     switch (pageIndex) {
       case PageIndex.BASIC_INFO:
         return (
-          isString(form.dutyId) && isString(form.date) && isString(form.time) && isString(form.vehicleId) && isString(form.reason)
-        );
-      case PageIndex.VICTIM_INFO:
-        return (
-          isString(form.victimName) && isString(form.victimAge) && isString(form.victimGender)
-        );
-      case PageIndex.LOCATION_INFO:
-        return (
-          isString(form.incidentAddress) && isString(form.incidentAddressCity) && isString(form.incidentAddressDistrict) && isString(form.incidentContinuation)
+          isString(form.dutyId) && isString(form.vehicleId) && isString(form.kmInitial)
         );
       case PageIndex.CHECKLIST_INFO:
         return (
-          checklistQuestions?.questions.filter(question => question.required).map(question => question.id).every(questionId => (form.checklistAnswers || []).map(answer => answer.checklistQuestionId).includes(questionId))
+          checklistQuestions?.questions
+            .filter(question => question.required && question.items?.length === 0)
+            .map(question => question.id)
+            .every(questionId => (form.checklistAnswers || []).map(answer => answer.checklistQuestionId).includes(questionId))
+          &&
+          checklistQuestions?.questions
+            .filter(question => question.required && question.items?.length > 0)
+            .map(question => question.items?.map(item => ({ question: question.id, item: item.text })))
+            .flat()
+            .every(obj => 
+              (form.checklistAnswers || [])
+              .map(answer => ({ question: answer.checklistQuestionId, item: answer.checklistQuestionItem }))
+              .find(x => x.item === obj.item && x.question === obj.question)
+            )
         )
-      case PageIndex.EVOLUTION_INFO:
-        return (
-          isString(form.incidentEvolution)
-        );
     }
   }, [pageIndex, form])
 
@@ -165,7 +134,7 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
           </Styled.InlineInput>
           <Styled.InlineInput style={{ paddingLeft: 4 }}>
             <Button
-              title={pageIndex < PageIndex.EVOLUTION_INFO ? "Próximo" : "Finalizar"}
+              title={pageIndex < PageIndex.CHECKLIST_INFO ? "Próximo" : "Finalizar"}
               onPress={onPressContinue}
               disabled={!isNextEnabled}
               loading={isProcessing}
@@ -177,9 +146,9 @@ const DutyCareForm = ({ navigation, route }: DutyCareFormProps) => {
   );
 };
 
-export default DutyCareForm;
+export default DriverChecklistForm;
 
-export const NavHeader = ({ navigation }: DutyCareFormProps) => {
+export const NavHeader = ({ navigation }: DriverChecklistFormProps) => {
   const onGoBack = () => {
     Alert.alert(
       'Deseja voltar para a tela anterior?',
@@ -198,5 +167,5 @@ export const NavHeader = ({ navigation }: DutyCareFormProps) => {
     )
   }
 
-  return <Header onBackPress={onGoBack} title="Ficha de Atendimento" />
+  return <Header onBackPress={onGoBack} title="Checklist Condutor" />
 };

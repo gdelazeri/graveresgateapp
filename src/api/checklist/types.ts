@@ -7,7 +7,8 @@ export enum ChecklistType {
 
 export enum ChecklistQuestionType {
   TEXT = 'TEXT',
-  OPTION = 'OPTION'
+  OPTION = 'OPTION',
+  SELECT = 'SELECT'
 }
 
 export interface Checklist {

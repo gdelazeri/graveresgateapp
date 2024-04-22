@@ -3,31 +3,19 @@ import fonts from "@theme/fonts";
 import styled from "styled-components/native";
 
 const Container = styled.View`
-  margin-top: 4px;
   position: relative;
 `
 
-const Item = styled.TouchableOpacity`
+const Item = styled.View`
+  margin-top: 4px;
   flex-direction: row;
   align-items: center;
-  margin-top: 8px;
+  justify-content: space-between;
 `
 
 const ItemLabel = styled.View`
-  margin-top: 2px;
-  margin-left: 4px;
-  flex-direction: row;
-  width: 90%;
-`
-
-const InputOther = styled.TextInput`
-  font-size: 16px;
-  font-family: ${fonts.regular};
-  color: ${colors.black};
-  margin-left: 8px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${colors.Greyscale.b80};
-  width: 75%;
+  width: 60%;
+  padding-right: 8px;
 `
 
 const ErrorText = styled.Text`
@@ -42,5 +30,4 @@ export default {
   Item,
   ErrorText,
   ItemLabel,
-  InputOther
 };

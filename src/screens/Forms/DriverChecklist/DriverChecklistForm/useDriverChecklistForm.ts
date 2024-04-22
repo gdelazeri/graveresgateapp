@@ -1,35 +1,28 @@
-import moment from "moment";
 import { useCallback, useState } from "react";
 import { Vehicle } from "@api/vehicle/types";
 import { useFocusEffect } from "@react-navigation/native";
 import { listAvailableVehicles } from "@api/vehicle/vehicleApi";
 import { postDutyCare } from "@api/dutyCareChecklist/dutyCareChecklistApi";
-import { PostDutyCareChecklistPayload } from "@api/dutyCareChecklist/types";
 import { getChecklistQuestions } from "@api/checklist/checklistApi";
-import { Checklist, ChecklistQuestion, ChecklistType } from "@api/checklist/types";
+import { Checklist, ChecklistQuestion, ChecklistQuestionType, ChecklistType } from "@api/checklist/types";
 import { isString } from "@utils/stringHelper";
 import { listDutyForChecklist } from "@api/duty/dutyApi";
 import { Duty } from "@api/duty/types";
-import { getSetting } from "@api/settings/settingApi";
-import { SettingKey } from "@api/settings/types";
+import { PostDriverChecklistPayload } from "@api/driverChecklist/types";
+import { postDriverChecklist } from "@api/driverChecklist/driverChecklistApi";
 
-export type PostDutyCareChecklistField = keyof PostDutyCareChecklistPayload
+export type PostDriverChecklistPayloadField = keyof PostDriverChecklistPayload
 
-export const useDutyCareForm = () => {
+export const useDriverChecklistForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const [vehicleList, setVehicleList] = useState<Vehicle[]>([])
   const [dutyList, setDutyList] = useState<Duty[]>([])
-  const [reasonList, setReasonList] = useState<string[]>([])
-  const [cityList, setCityList] = useState<string[]>([])
   const [checklistQuestions, setChecklistQuestions] = useState<Checklist | undefined>()
 
-  const [form, setForm] = useState<PostDutyCareChecklistPayload>({
-    date: moment().format('YYYY-MM-DD'),
-    time: moment().format('HH:mm'),
-  })
+  const [form, setForm] = useState<PostDriverChecklistPayload>({})
 
-  const setFormValue = useCallback((key: PostDutyCareChecklistField, value: string) => {
+  const setFormValue = useCallback((key: PostDriverChecklistPayloadField, value: string) => {
     setForm({ ...form, [key]: value })
   }, [form])
 
@@ -40,7 +33,7 @@ export const useDutyCareForm = () => {
     let checklistAnswers = Array.isArray(form.checklistAnswers) ? [...form.checklistAnswers] : []
 
     const questionIndex = checklistAnswers.findIndex(answer => (
-      answer.checklistQuestionId === question.id
+      answer.checklistQuestionId === question.id && answer.checklistQuestionItem === item
     ))
 
     const isValidOption = isString(optionValue) || (Array.isArray(optionValue) && optionValue.length > 0)
@@ -48,31 +41,36 @@ export const useDutyCareForm = () => {
     // Check if click on the same option
     if (
       isValidOption
+      && question.type === ChecklistQuestionType.OPTION
       && questionIndex > -1
       && !question.multiple
       && checklistAnswers[questionIndex].checklistQuestionOption === optionValue
+      && checklistAnswers[questionIndex].checklistQuestionItem === item
     ) {
       checklistAnswers = checklistAnswers.filter((_, index) => (index !== questionIndex))
       setForm({ ...form, checklistAnswers })
       return
     }
-    
+
     if (questionIndex > -1) {
       if (isValidOption) {
         checklistAnswers[questionIndex] = {
           ...checklistAnswers[questionIndex],
-          checklistQuestionOption: Array.isArray(optionValue) ? optionValue.join(';') : optionValue
+          checklistQuestionItem: item,
+          checklistQuestionOption: Array.isArray(optionValue) ? optionValue.join(';') : String(optionValue)
         }
       } else {
         checklistAnswers = checklistAnswers.filter((_, index) => (index !== questionIndex))
       }
     } else if (isValidOption) {
+      
       checklistAnswers = [
         ...checklistAnswers,
         {
           checklistQuestionId: question.id,
           checklistQuestion: question.text,
-          checklistQuestionOption: Array.isArray(optionValue) ? optionValue.join(';') : optionValue,
+          checklistQuestionItem: item,
+          checklistQuestionOption: Array.isArray(optionValue) ? optionValue.join(';') : String(optionValue),
         }
       ]
     }
@@ -92,7 +90,7 @@ export const useDutyCareForm = () => {
           setVehicleList([ ...responseVehicles.result ]);
         }
 
-        const responseChecklistQuestions = await getChecklistQuestions(ChecklistType.DUTY_CARE);
+        const responseChecklistQuestions = await getChecklistQuestions(ChecklistType.DRIVER);
         if (responseChecklistQuestions.success && responseChecklistQuestions.result) {
           setChecklistQuestions({ ...responseChecklistQuestions.result });
         }
@@ -100,24 +98,6 @@ export const useDutyCareForm = () => {
         const responseDutyList = await listDutyForChecklist();
         if (responseDutyList.success && responseDutyList.result) {
           setDutyList([ ...responseDutyList.result ]);
-        }
-
-        const responseSettingDutyCareReasons = await getSetting(SettingKey.DUTY_CARE_REASONS);
-        if (
-          responseSettingDutyCareReasons.success
-          && responseSettingDutyCareReasons.result
-          && Array.isArray(responseSettingDutyCareReasons.result)
-        ) {
-          setReasonList([ ...responseSettingDutyCareReasons.result ]);
-        }
-
-        const responseSettingCities = await getSetting(SettingKey.CITIES);
-        if (
-          responseSettingCities.success
-          && responseSettingCities.result
-          && Array.isArray(responseSettingCities.result)
-        ) {
-          setCityList([ ...responseSettingCities.result ]);
         }
 
         setIsLoading(false);
@@ -130,11 +110,9 @@ export const useDutyCareForm = () => {
   const save = async () => {
     setIsProcessing(true);
 
-    const payload = {
-      ...form
-    };
+    const payload = { ...form };
 
-    const response = await postDutyCare(payload);
+    const response = await postDriverChecklist(payload);
 
     setIsProcessing(false);
 
@@ -146,8 +124,6 @@ export const useDutyCareForm = () => {
     isProcessing,
     vehicleList,
     dutyList,
-    reasonList,
-    cityList,
     checklistQuestions,
     form,
     setFormValue,

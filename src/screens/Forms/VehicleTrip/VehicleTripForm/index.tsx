@@ -155,7 +155,7 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
           <Styled.InlineInputContainer>
             <Styled.InlineInput style={{ paddingRight: 4 }}>
               <Input
-                label="KM inicial do plantão*"
+                label="KM inicial*"
                 placeholder="Informe o KM"
                 value={kmInitial}
                 onChangeText={setKmInitial}
