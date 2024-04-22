@@ -10,7 +10,7 @@ import colors from "@theme/colors";
 import { DutyShiftLabel } from "@api/dutyRequest/types";
 import { isString } from "@utils/stringHelper";
 import { DutyCareChecklistIncidentContinuationLabel, VictimGender, VictimGenderLabel } from "@api/dutyCareChecklist/types";
-import { View } from "react-native";
+import ChecklistAnswers from "@screens/components/checklistAnswers";
 
 interface DutyCareDetailsProps {
   navigation: NavigationProp<ParamListBase>;
@@ -123,15 +123,10 @@ const DutyCareDetails = ({ navigation, route }: DutyCareDetailsProps) => {
         {Array.isArray(dutyCareChecklist.checklistFilledAnswers) && dutyCareChecklist.checklistFilledAnswers.length > 0 && (
           <>
             <Styled.Divider />
-            <CardInfo title={dutyCareChecklist.checklistName}>
-              {dutyCareChecklist.checklistFilledAnswers.map((answer, index) => (
-                <View key={index}>
-                  <Label size={"small"} color={colors.Greyscale.b50}>{answer.checklistQuestion}</Label>
-                  <Label size={"medium"}>{answer.checklistQuestionOption.replace(/;/g, ', ')}</Label>
-                  {index < dutyCareChecklist.checklistFilledAnswers.length - 1 && <Styled.Divider />}
-                </View>
-              ))}
-            </CardInfo>
+            <ChecklistAnswers
+              checklistName={dutyCareChecklist.checklistName}
+              answers={dutyCareChecklist.checklistFilledAnswers}
+            />
           </>
         )}
 

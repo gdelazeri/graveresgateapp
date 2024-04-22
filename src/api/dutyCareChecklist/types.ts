@@ -1,3 +1,4 @@
+import { ChecklistFilledAnswer } from "@api/checklist/types";
 import { Duty } from "@api/duty/types";
 import { User } from "@api/user/types";
 import { Vehicle } from "@api/vehicle/types";
@@ -24,12 +25,7 @@ export interface DutyCareChecklist {
   createdByUserId: string;
   createdByUser: User;
   checklistName: string;
-  checklistFilledAnswers: {
-    checklistQuestionId: string
-    checklistQuestion: string
-    checklistQuestionItem?: string
-    checklistQuestionOption: string
-  }[]
+  checklistFilledAnswers: ChecklistFilledAnswer[]
   createdAt: string
 }
 
@@ -49,12 +45,7 @@ export interface PostDutyCareChecklistPayload {
   incidentAddressCity?: string;
   incidentContinuation?: DutyCareChecklistIncidentContinuation;
   incidentEvolution?: string;
-  checklistAnswers?: {
-    checklistQuestionId: string
-    checklistQuestion: string
-    checklistQuestionItem?: string
-    checklistQuestionOption: string
-  }[]
+  checklistAnswers?: ChecklistFilledAnswer[]
 }
 
 export enum DutyCareChecklistIncidentContinuation {

@@ -11,7 +11,7 @@ export const useVehicleTripList = () => {
   const [page, setPage] = useState<number>(1)
 
   const fetchData = async () => {
-    setIsLoading(page === 0);
+    setIsLoading(page === 1 && list.length === 0);
 
     const response = await listVehicleTrip(page, MAX_PAGE_SIZE);
     if (response.success && response.result) {

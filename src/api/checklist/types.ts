@@ -40,3 +40,10 @@ export interface ChecklistQuestionOption {
   text: string
   order: number
 }
+
+export type ChecklistFilledAnswer = {
+  checklistQuestionId: string
+  checklistQuestion: string
+  checklistQuestionItem?: string
+  checklistQuestionOption: string
+}

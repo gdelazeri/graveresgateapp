@@ -52,7 +52,7 @@ const DriverChecklistForm = ({ navigation }: DriverChecklistFormProps) => {
         position: 'bottom',
       })
       navigation.dispatch(
-        StackActions.replace(routeMap.FormsRoutes.DUTY_CARE_DETAILS, { id: response.result.id })
+        StackActions.replace(routeMap.FormsRoutes.DRIVER_CHECKLIST_DETAILS, { id: response.result.id })
       );
     } else {
       Alert.alert(

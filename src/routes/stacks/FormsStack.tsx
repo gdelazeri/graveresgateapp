@@ -8,6 +8,8 @@ import * as DutyCareListScreen from "@screens/Forms/DutyCare/DutyCareList";
 import * as DutyCareDetailsScreen from "@screens/Forms/DutyCare/DutyCareDetails";
 import * as DutyCareFormScreen from "@screens/Forms/DutyCare/DutyCareForm";
 import * as DriverChecklistFormScreen from "@screens/Forms/DriverChecklist/DriverChecklistForm";
+import * as DriverChecklistListScreen from "@screens/Forms/DriverChecklist/DriverChecklistList";
+import * as DriverChecklistDetailsScreen from "@screens/Forms/DriverChecklist/DriverChecklistDetails";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -70,6 +72,18 @@ const FormsStack = () => (
       name={routeMap.FormsRoutes.DRIVER_CHECKLIST_FORM}
       component={DriverChecklistFormScreen.default}
       options={{ header: DriverChecklistFormScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.DRIVER_CHECKLIST_LIST}
+      component={DriverChecklistListScreen.default}
+      options={{ header: DriverChecklistListScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.DRIVER_CHECKLIST_DETAILS}
+      // @ts-ignore
+      component={DriverChecklistDetailsScreen.default}
+      // @ts-ignore
+      options={{ header: DriverChecklistDetailsScreen.NavHeader }}
     />
   </Stack.Navigator>
 );

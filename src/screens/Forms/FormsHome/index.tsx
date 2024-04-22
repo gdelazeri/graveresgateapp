@@ -28,7 +28,7 @@ const FormsHome = ({ navigation }: FormsHomeProps) => (
       title="Checklist Condutor"
       icon="truck-plus"
       iconType="material-community"
-      onPress={() => { navigation.navigate(routeMap.FormsRoutes.DRIVER_CHECKLIST_FORM) }}
+      onPress={() => { navigation.navigate(routeMap.FormsRoutes.DRIVER_CHECKLIST_LIST) }}
       size={40}
     />
     <CardHomeItem

@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { listDutyCarePaged } from "@api/dutyCareChecklist/dutyCareChecklistApi";
-import { DutyCareChecklist } from "@api/dutyCareChecklist/types";
+import { listDriverChecklist } from "@api/driverChecklist/driverChecklistApi";
+import { DriverChecklist } from "@api/driverChecklist/types";
 
 const MAX_PAGE_SIZE = 20;
 
-export const useDutyCareList = () => {
+export const useDriverChecklist = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false)
-  const [list, setList] = useState<DutyCareChecklist[]>([])
+  const [list, setList] = useState<DriverChecklist[]>([])
   const [page, setPage] = useState<number>(1)
 
   const fetchData = async () => {
     setIsLoading(page === 1 && list.length === 0);
 
-    const response = await listDutyCarePaged(page, MAX_PAGE_SIZE);
+    const response = await listDriverChecklist(page, MAX_PAGE_SIZE);
     if (response.success && response.result) {
       setList(page === 1 ? [ ...response.result ] : [ ...list, ...response.result ]);
     }

@@ -49,6 +49,8 @@ enum FormsRoutes {
   DUTY_CARE_LIST = "DutyCareList",
   DUTY_CARE_DETAILS = "DutyCareDetails",
   DRIVER_CHECKLIST_FORM = "DriverChecklistForm",
+  DRIVER_CHECKLIST_LIST = "DriverChecklistList",
+  DRIVER_CHECKLIST_DETAILS = "DriverChecklistDetails",
 }
 
 export default {
