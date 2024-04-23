@@ -26,7 +26,6 @@ const Button = ({
   return (
     <RNEButton
       testID={testID}
-      loading={loading}
       title={title}
       icon={icon}
       disabled={disabled}
@@ -43,6 +42,8 @@ const Button = ({
         color: secondary ? colors.red : colors.Greyscale.b100,
       }}
       onPress={onPress}
+      loading={loading}
+      loadingProps={{ color: secondary ? colors.red : colors.Greyscale.b100 }}
     />
   );
 };

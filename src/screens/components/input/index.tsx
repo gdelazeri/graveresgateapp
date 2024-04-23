@@ -18,6 +18,7 @@ interface InputProps {
   invalid?: boolean;
   invalidText?: string;
   maxLength?: number;
+  autoFocus?: boolean;
 }
 
 const Input = ({
@@ -29,7 +30,8 @@ const Input = ({
   testID,
   invalid = false,
   invalidText,
-  maxLength
+  maxLength,
+  autoFocus = false,
 }: InputProps) => {
   const [isSecureTextEnabled, setIsSecureTextEnabled] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
@@ -89,6 +91,7 @@ const Input = ({
           onBlur={() => setIsFocused(false)}
           multiline={type === INPUT_TYPE.TEXT}
           maxLength={maxLength}
+          autoFocus={autoFocus}
         />
         {type === INPUT_TYPE.PASSWORD && (
           <Styled.IconContainer onPress={() => setIsSecureTextEnabled(!isSecureTextEnabled)}>

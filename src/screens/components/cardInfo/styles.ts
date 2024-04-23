@@ -1,12 +1,14 @@
 import styled from "styled-components/native";
 import colors from "@theme/colors";
 
-const Container = styled.View`
+interface ContainerProps { borderColor: string }
+
+const Container = styled.View<ContainerProps>`
   padding: 12px;
   border-radius: 8px;
   background-color: ${colors.Greyscale.b100};
   border-width: 1px;
-  border-color: ${colors.Greyscale.b90};
+  border-color: ${({ borderColor }: ContainerProps) => borderColor || colors.Greyscale.b90};
 `;
 
 const LabelContainer = styled.View`

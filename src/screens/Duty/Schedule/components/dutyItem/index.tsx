@@ -7,6 +7,8 @@ import fonts from "@theme/fonts";
 import { LabelSizeValue } from "@screens/components/label/types";
 import { Duty } from "@api/duty/types";
 import Label from "@screens/components/label";
+import Chip from "@screens/components/chip";
+import Styled from "./styles";
 
 interface DutyItemProps {
   item: Duty;
@@ -23,6 +25,8 @@ const DutyItem = ({ item, onPress, disabled }: DutyItemProps) => (
     activeScale={0.95}
     style={{
       borderRadius: 8,
+      borderColor: colors.red,
+      borderWidth: item.isAvailable ? 0 : 1,
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
@@ -38,6 +42,9 @@ const DutyItem = ({ item, onPress, disabled }: DutyItemProps) => (
     disabled={disabled}
   >
     <ListItem.Content>
+      {!item.isAvailable && <Styled.IconAvailability>
+        <Chip label="FA" labelColor={colors.Greyscale.b100} backgroundColor={colors.red} />
+      </Styled.IconAvailability>}
       <ListItem.Title style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}>
         {moment(item.date).format('ddd')}, {moment(item.date).format('LL')} - {DutyShiftLabel[item.shift]}
       </ListItem.Title>

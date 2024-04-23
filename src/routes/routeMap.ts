@@ -51,6 +51,8 @@ enum FormsRoutes {
   DRIVER_CHECKLIST_FORM = "DriverChecklistForm",
   DRIVER_CHECKLIST_LIST = "DriverChecklistList",
   DRIVER_CHECKLIST_DETAILS = "DriverChecklistDetails",
+  RESCUER_CHECKLIST_DETAILS = "RescuerChecklistDetails",
+  RADIO_OPERATOR_CHECKLIST_DETAILS = "RadioOperatorChecklistDetails",
 }
 
 export default {

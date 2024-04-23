@@ -3,9 +3,8 @@ import { Alert } from 'react-native';
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import Toast from 'react-native-toast-message';
 import Header from "@screens/components/header";
-import Label from "@screens/components/label";
 import Button from "@screens/components/button";
-import { DutyPosition, DutyShiftLabelTimes } from "@api/dutyRequest/types";
+import { DutyPosition, DutyShiftLabel } from "@api/dutyRequest/types";
 import CardInfo from '@screens/components/cardInfo';
 import { Duty } from '@api/duty/types';
 import useDutyForm from './useDutyForm';
@@ -60,7 +59,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
     if (response.success && response.result) {
       Toast.show({
         type: 'success',
-        text1: 'Escala do plantão',
+        text1: 'Equipe do plantão',
         text2: 'Salvo com sucesso!',
         position: 'bottom',
       })
@@ -68,7 +67,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
     } else {
       Alert.alert(
         'Erro ao salvar',
-        'Ocorreu algum erro ao salvar a escala do plantão, verifique os dados e tente novamente.',
+        'Ocorreu algum erro ao salvar a equipe do plantão, verifique os dados e tente novamente.',
         [{ text: 'OK' }]
       )
     }
@@ -81,17 +80,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
   return (
     <>
       <Styled.ScrollView>
-        <CardInfo>
-          <Label size='small'>Data</Label>
-          <Label size='medium'>{moment(duty.date).format('dddd')}, {moment(duty.date).format('LL')}</Label>
-
-          <Styled.Divider />
-
-          <Label size='small'>Turno</Label>
-          <Label size='medium'>{DutyShiftLabelTimes[duty.shift]}</Label>
-
-          <Styled.Divider />
-
+        <CardInfo title='Equipe do plantão'>
           <DutyUserPosition
             label='Líder'
             requestsCount={leaderRequests.length}
@@ -254,6 +243,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
 
 export default DutyForm;
 
-export const NavHeader = ({ navigation }: DutyFormProps) => {
-  return <Header title="Equipe do plantão" onBackPress={navigation.goBack} />
+export const NavHeader = ({ navigation, route: { params: { duty } } }: DutyFormProps) => {
+  const title = `${moment(duty.date).format('ddd')}, ${moment(duty.date).format('LL')} - ${DutyShiftLabel[duty.shift]}`
+  return <Header title={title} onBackPress={navigation.goBack} />
 };
