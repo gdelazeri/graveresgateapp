@@ -54,7 +54,7 @@ export const getDuty = async (date: string, shift: DutyShift) => {
 export const postDuty = async (payload: DutyPayload) => {
   try {
     const response: AxiosResponse<ApiResponse<Duty>> = await post(
-      '/v1/duty',
+      "/v1/duty",
       payload,
     );
     return response.data;

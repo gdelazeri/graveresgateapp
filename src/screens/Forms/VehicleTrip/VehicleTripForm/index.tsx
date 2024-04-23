@@ -1,4 +1,8 @@
-import { NavigationProp, ParamListBase, StackActions } from "@react-navigation/native";
+import {
+  NavigationProp,
+  ParamListBase,
+  StackActions,
+} from "@react-navigation/native";
 import Header from "@screens/components/header";
 import CardInfo from "@screens/components/cardInfo";
 import Label from "@screens/components/label";
@@ -23,9 +27,9 @@ interface FormVehicleTripProps {
   navigation: NavigationProp<ParamListBase>;
   route: {
     params: {
-      id?: string
-    }
-  }
+      id?: string;
+    };
+  };
 }
 
 const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
@@ -55,51 +59,57 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
     isProcessing,
     isFormValid,
     save,
-  } = useVehicleTripForm(id)
+  } = useVehicleTripForm(id);
 
   const onPressSave = async () => {
     const response = await save();
 
     if (response.success) {
       Toast.show({
-        type: 'success',
-        text1: 'Livro de deslocamento',
-        text2: 'Deslocamento salvo com sucesso!',
-        position: 'bottom',
-      })
+        type: "success",
+        text1: "Livro de deslocamento",
+        text2: "Deslocamento salvo com sucesso!",
+        position: "bottom",
+      });
 
       if (isString(id)) {
         navigation.goBack();
       } else {
         navigation.dispatch(
-          StackActions.replace(routeMap.FormsRoutes.VEHICLE_TRIP_DETAILS,
-          { id: response.result.id })
+          StackActions.replace(routeMap.FormsRoutes.VEHICLE_TRIP_DETAILS, {
+            id: response.result.id,
+          }),
         );
       }
     } else {
       Alert.alert(
-        'Erro ao salvar o deslocamento',
-        'Ocorreu algum erro ao salvar o formulário, verifique os dados e tente novamente.',
-        [{ text: 'OK' }]
-      )
+        "Erro ao salvar o deslocamento",
+        "Ocorreu algum erro ao salvar o formulário, verifique os dados e tente novamente.",
+        [{ text: "OK" }],
+      );
     }
-  }
+  };
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
-  
+
   return (
     <Styled.Container>
       <Styled.ScrollView>
         <CardInfo>
-          <Label size={"medium"}>Preencha os dados referente ao deslocamento da viatura.</Label>
+          <Label size={"medium"}>
+            Preencha os dados referente ao deslocamento da viatura.
+          </Label>
 
           <Styled.Divider />
 
           <RadioGroup
             label="Viatura*"
-            options={vehicleList.map(vehicle => ({ label: vehicle.name, value: vehicle.id }))}
+            options={vehicleList.map((vehicle) => ({
+              label: vehicle.name,
+              value: vehicle.id,
+            }))}
             selectedValue={vehicleId}
             onChangeValue={(value) => setVehicleId(value as string)}
           />
@@ -109,14 +119,14 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
           <VehicleTripDriver
             label="Condutor*"
             placeholder="Selecione o condutor"
-            user={driverList.find(driver => driver.id === driverId)}
+            user={driverList.find((driver) => driver.id === driverId)}
             onPress={() => {
               navigation.navigate(routeMap.FormsRoutes.SELECT_USER, {
                 title: "Selecione o condutor",
                 position: "DRIVER",
                 userSelectedId: driverId,
-                onSelect: (user: User) => setDriverId(user.id)
-              })
+                onSelect: (user: User) => setDriverId(user.id),
+              });
             }}
             onRemove={() => setDriverId(undefined)}
           />
@@ -149,7 +159,7 @@ const FormVehicleTrip = ({ navigation, route }: FormVehicleTripProps) => {
               />
             </Styled.InlineInput>
           </Styled.InlineInputContainer>
-                  
+
           <Styled.Divider />
 
           <Styled.InlineInputContainer>

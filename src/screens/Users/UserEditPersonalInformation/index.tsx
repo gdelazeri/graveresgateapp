@@ -14,12 +14,15 @@ interface UserEditPersonalInformationProps {
   route: {
     params: {
       user: User;
-    }
-  }
+    };
+  };
 }
 
-const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInformationProps) => {
-  const { user } = route.params
+const UserEditPersonalInformation = ({
+  navigation,
+  route,
+}: UserEditPersonalInformationProps) => {
+  const { user } = route.params;
   const {
     fullName,
     setFullName,
@@ -48,7 +51,7 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
     if (success) {
       navigation.goBack();
     }
-  }
+  };
 
   return (
     <>
@@ -100,7 +103,10 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
           placeholder="Selecione a edição do curso"
           value={isString(courseId) ? courseId : null}
           onChangeValue={(value) => setCourseId(value)}
-          items={courseList.map((course) => ({ value: course.id, label: course.name }))}
+          items={courseList.map((course) => ({
+            value: course.id,
+            label: course.name,
+          }))}
         />
         <Styled.Divider />
         <Input
@@ -123,7 +129,7 @@ const UserEditPersonalInformation = ({ navigation, route }: UserEditPersonalInfo
           loading={isProcessing}
         />
       </Styled.Footer>
-      </>
+    </>
   );
 };
 

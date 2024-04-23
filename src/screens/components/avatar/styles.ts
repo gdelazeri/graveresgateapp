@@ -3,17 +3,17 @@ import colors from "@theme/colors";
 import { Icon } from "react-native-elements";
 
 interface AvatarStyleProps {
-  size: number
+  size: number;
 }
 
 const UserIcon = styled(Icon).attrs({
   name: "user-circle",
-  type: 'font-awesome',
+  type: "font-awesome",
   color: colors.Greyscale.b50,
   containerStyle: {
     padding: 0,
-    margin: 0
-  }
+    margin: 0,
+  },
 })<AvatarStyleProps>``;
 
 const AvatarContainer = styled.View<AvatarStyleProps>`

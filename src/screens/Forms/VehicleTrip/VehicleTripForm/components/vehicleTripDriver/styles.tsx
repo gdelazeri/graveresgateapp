@@ -14,25 +14,25 @@ const Container = styled.TouchableOpacity`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-`
+`;
 
 const UserData = styled.View`
   flex-direction: row;
   align-items: center;
   width: 85%;
   padding-right: 20px;
-`
+`;
 
 const UserAvatar = styled.View`
   margin-right: 8px;
-`
+`;
 
 const IconContainer = styled.TouchableOpacity`
   height: 40px;
   width: 40px;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const RemoveIcon = styled(Icon).attrs({
   name: "clear",
@@ -40,8 +40,8 @@ const RemoveIcon = styled(Icon).attrs({
   color: colors.Greyscale.b50,
   containerStyle: {
     padding: 0,
-    margin: 0
-  }
+    margin: 0,
+  },
 })``;
 
 const LabelContainer = styled.View`

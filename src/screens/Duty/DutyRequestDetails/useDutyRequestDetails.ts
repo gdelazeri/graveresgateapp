@@ -1,5 +1,9 @@
 import { useCallback, useState } from "react";
-import { deleteDutyRequest, getDutyRequestDetails, listMyDutyRequests } from "@api/dutyRequest/dutyRequestApi";
+import {
+  deleteDutyRequest,
+  getDutyRequestDetails,
+  listMyDutyRequests,
+} from "@api/dutyRequest/dutyRequestApi";
 import { DutyRequestListItem } from "@api/dutyRequest/types";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -19,8 +23,8 @@ const useDutyRequestDetails = ({ id }: { id: string }) => {
         setIsLoading(false);
       };
 
-      fetchData()
-    }, [id])
+      fetchData();
+    }, [id]),
   );
 
   const remove = async () => {
@@ -30,7 +34,7 @@ const useDutyRequestDetails = ({ id }: { id: string }) => {
 
     setIsProcessing(false);
 
-    return response !== null
+    return response !== null;
   };
 
   return {

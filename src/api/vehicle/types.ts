@@ -6,7 +6,7 @@ export type Vehicle = {
   model: string;
   year: string;
   isAvailable: boolean;
-}
+};
 
 export interface PostVehiclePayload {
   name: string;

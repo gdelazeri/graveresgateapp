@@ -5,5 +5,5 @@ const Divider = styled.View`
 `;
 
 export default {
-  Divider
+  Divider,
 };

@@ -20,25 +20,23 @@ export const useUserEditPersonalInformation = (user: User) => {
     fullName.length > 3 && fullName.trim().split(" ").length > 1;
   const isEmailValid = isEmail(email);
   const isPhoneValid = removePhoneMask(phone).length === 11;
-  const isRegistrationIdValid = !registrationId || registrationId.length === 0 || registrationId.length > 3;
+  const isRegistrationIdValid =
+    !registrationId || registrationId.length === 0 || registrationId.length > 3;
 
   const isFormValid = useMemo(
-    () =>
-      isFullNameValid &&
-      isEmailValid &&
-      isPhoneValid,
-    [
-      isFullNameValid,
-      isEmailValid,
-      isPhoneValid
-    ],
+    () => isFullNameValid && isEmailValid && isPhoneValid,
+    [isFullNameValid, isEmailValid, isPhoneValid],
   );
 
   useEffect(() => {
     setFullName(user.name);
     setEmail(user.email);
     setPhone(user.phone);
-    setBirthDate(isString(user.birthDate) ? moment(user.birthDate).format('DD/MM/YYYY') : null);
+    setBirthDate(
+      isString(user.birthDate)
+        ? moment(user.birthDate).format("DD/MM/YYYY")
+        : null,
+    );
     setCourseId(user.courseId);
     setRegistrationId(user.registrationId);
 
@@ -46,26 +44,25 @@ export const useUserEditPersonalInformation = (user: User) => {
       if (response.success) {
         setCourseList([...response.result]);
       }
-    })
+    });
   }, [user]);
 
   const save = async () => {
     setIsProcessing(true);
-    const response = await putUserData(
-      user.id,
-      {
-        name: fullName,
-        email,
-        phone: removePhoneMask(phone),
-        birthDate: isString(user.birthDate) ? moment(birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD') : null,
-        courseId,
-        registrationId,
-      }
-    )
+    const response = await putUserData(user.id, {
+      name: fullName,
+      email,
+      phone: removePhoneMask(phone),
+      birthDate: isString(user.birthDate)
+        ? moment(birthDate, "DD/MM/YYYY").format("YYYY-MM-DD")
+        : null,
+      courseId,
+      registrationId,
+    });
     setIsProcessing(false);
 
-    return response !== null
-  }
+    return response !== null;
+  };
 
   return {
     isProcessing,
@@ -89,4 +86,4 @@ export const useUserEditPersonalInformation = (user: User) => {
     courseList,
     save,
   } as const;
-}
+};

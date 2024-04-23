@@ -16,7 +16,7 @@ interface ITokens {
 
 interface UserContextState {
   userData: User | null;
-  permission: UserPermission | null,
+  permission: UserPermission | null;
   accessToken: string | null;
   refreshToken: string | null;
   setTokens: (tokens: ITokens) => Promise<void>;
@@ -52,11 +52,11 @@ export const UserProvider = (props: UserContextProps) => {
     try {
       const accessTokenStorage = await storage.get(STORAGE_KEYS.ACCESS_TOKEN);
       const refreshTokenStorage = await storage.get(STORAGE_KEYS.REFRESH_TOKEN);
-  
+
       if (refreshTokenStorage) setRefreshToken(refreshTokenStorage);
       if (accessTokenStorage) {
         setAccessToken(accessTokenStorage);
-  
+
         const userDataResponse = await getUserData();
         if (userDataResponse?.success) {
           setUserData(userDataResponse.result);
@@ -90,17 +90,25 @@ export const UserProvider = (props: UserContextProps) => {
 
     await storage.clear(STORAGE_KEYS.ACCESS_TOKEN);
     await storage.clear(STORAGE_KEYS.REFRESH_TOKEN);
-  }
+  };
 
   const signOut = async () => {
     await clearTokens();
     await storage.clear(STORAGE_KEYS.USERNAME);
     await storage.clear(STORAGE_KEYS.PASSWORD);
-  }
+  };
 
   return (
     <UserContext.Provider
-      value={{ accessToken, refreshToken, setTokens, signOut, clearTokens, userData, permission }}
+      value={{
+        accessToken,
+        refreshToken,
+        setTokens,
+        signOut,
+        clearTokens,
+        userData,
+        permission,
+      }}
     >
       {props.children}
     </UserContext.Provider>

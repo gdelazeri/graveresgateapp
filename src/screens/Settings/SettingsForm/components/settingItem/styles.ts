@@ -16,4 +16,4 @@ const IconButton = styled.TouchableOpacity`
 export default {
   Touchable,
   IconButton,
-}
+};

@@ -92,7 +92,7 @@ describe("SignIn", () => {
     it("should show error message", async () => {
       // @ts-ignore
       useSignIn.mockReturnValueOnce({
-        isError: true
+        isError: true,
       });
 
       const { queryByText } = render(
@@ -100,7 +100,9 @@ describe("SignIn", () => {
       );
 
       expect(
-        queryByText("Ocorreu um erro ao tentar fazer login. Verifique suas credenciais e tente novamente."),
+        queryByText(
+          "Ocorreu um erro ao tentar fazer login. Verifique suas credenciais e tente novamente.",
+        ),
       ).toBeTruthy();
     });
   });

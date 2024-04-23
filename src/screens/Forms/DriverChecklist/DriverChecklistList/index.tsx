@@ -15,41 +15,45 @@ interface DutyCareListProps {
 }
 
 const DutyCareList = ({ navigation }: DutyCareListProps) => {
-  const {
-    isLoading,
-    isRefreshing,
-    list,
-    onEndReached,
-    onRefresh
-  } = useDriverChecklist();
+  const { isLoading, isRefreshing, list, onEndReached, onRefresh } =
+    useDriverChecklist();
 
   const onPressAdd = () => {
-    navigation.navigate(routeMap.FormsRoutes.DRIVER_CHECKLIST_FORM)
-  }
+    navigation.navigate(routeMap.FormsRoutes.DRIVER_CHECKLIST_FORM);
+  };
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
-  
+
   return (
     <Styled.Container>
       <FlatList
-        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        }
         data={list}
         contentContainerStyle={{ padding: 16 }}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Styled.Divider />}
         renderItem={({ item }) => (
-          <DriverChecklistItem item={item} onPress={() => navigation.navigate(routeMap.FormsRoutes.DRIVER_CHECKLIST_DETAILS, { id: item.id })} />
+          <DriverChecklistItem
+            item={item}
+            onPress={() =>
+              navigation.navigate(
+                routeMap.FormsRoutes.DRIVER_CHECKLIST_DETAILS,
+                { id: item.id },
+              )
+            }
+          />
         )}
-        ListEmptyComponent={() => <EmptyList text="Nenhum checklist encontrado" />}
+        ListEmptyComponent={() => (
+          <EmptyList text="Nenhum checklist encontrado" />
+        )}
         onEndReached={onEndReached}
       />
       <FooterContainer>
-        <Button
-          title="Novo checklist"
-          onPress={onPressAdd}
-        />
+        <Button title="Novo checklist" onPress={onPressAdd} />
       </FooterContainer>
     </Styled.Container>
   );

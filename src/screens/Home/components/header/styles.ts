@@ -16,7 +16,7 @@ const Header = styled.View`
 const TitleContainer = styled.View`
   flex-direction: row;
   align-items: center;
-`
+`;
 
 const Title = styled.Text`
   font-family: ${fonts.bold};
@@ -32,12 +32,12 @@ const SignOutIcon = styled(Icon).attrs({
   containerStyle: {
     padding: 8,
     margin: 0,
-  }
+  },
 })``;
 
 export default {
   Header,
   TitleContainer,
   Title,
-  SignOutIcon
+  SignOutIcon,
 };

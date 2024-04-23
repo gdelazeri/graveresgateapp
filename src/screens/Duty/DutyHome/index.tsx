@@ -16,7 +16,9 @@ const DutyHome = ({ navigation }: DutyHomeProps) => (
       subtitle="Veja as escalas disponíveis"
       icon="calendar-month"
       iconType="material-community"
-      onPress={() => { navigation.navigate(routeMap.DutyRoutes.SCHEDULE) }}
+      onPress={() => {
+        navigation.navigate(routeMap.DutyRoutes.SCHEDULE);
+      }}
       size={40}
     />
     <CardHomeItem
@@ -24,7 +26,9 @@ const DutyHome = ({ navigation }: DutyHomeProps) => (
       subtitle="Preencha o formulário para solicitar seu plantão"
       icon="calendar-plus"
       iconType="material-community"
-      onPress={() => { navigation.navigate(routeMap.DutyRoutes.CREATE_DUTY_REQUEST) }}
+      onPress={() => {
+        navigation.navigate(routeMap.DutyRoutes.CREATE_DUTY_REQUEST);
+      }}
       size={40}
     />
     <CardHomeItem
@@ -32,7 +36,9 @@ const DutyHome = ({ navigation }: DutyHomeProps) => (
       subtitle="Acompanhe as suas solicitações de plantão"
       icon="calendar-account"
       iconType="material-community"
-      onPress={() => { navigation.navigate(routeMap.DutyRoutes.LIST_DUTY_REQUEST) }}
+      onPress={() => {
+        navigation.navigate(routeMap.DutyRoutes.LIST_DUTY_REQUEST);
+      }}
       size={40}
     />
   </Styled.Container>

@@ -10,7 +10,7 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({ placeholder, onChangeText, value }: SearchBarProps) => (
-  <Searchbar 
+  <Searchbar
     placeholder={placeholder}
     onChangeText={onChangeText}
     value={value}
@@ -23,10 +23,10 @@ const SearchBar = ({ placeholder, onChangeText, value }: SearchBarProps) => (
       borderRadius: 4,
       borderWidth: 1,
       borderColor: colors.Greyscale.b80,
-      margin: 16
+      margin: 16,
     }}
     testID="search-bar"
   />
-)
+);
 
 export default SearchBar;

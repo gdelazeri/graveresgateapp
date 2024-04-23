@@ -1,5 +1,9 @@
-import { Alert } from 'react-native';
-import { NavigationProp, ParamListBase, StackActions } from "@react-navigation/native";
+import { Alert } from "react-native";
+import {
+  NavigationProp,
+  ParamListBase,
+  StackActions,
+} from "@react-navigation/native";
 import Header from "@screens/components/header";
 import Label from "@screens/components/label";
 import Input from "@screens/components/input";
@@ -7,14 +11,20 @@ import Button from "@screens/components/button";
 import { INPUT_TYPE } from "@screens/components/input/types";
 import DateInput from "@screens/components/dateInput";
 import Select from "@screens/components/select";
-import { DutyPosition, DutyRequestErrorCode, DutyRequestErrorCodeMessage, DutyShift, DutyShiftTimes } from "@api/dutyRequest/types";
+import {
+  DutyPosition,
+  DutyRequestErrorCode,
+  DutyRequestErrorCodeMessage,
+  DutyShift,
+  DutyShiftTimes,
+} from "@api/dutyRequest/types";
 import RadioGroup from "@screens/components/radioGroup";
 import TimeInput from "@screens/components/timeInput";
 import routeMap from "@routes/routeMap";
 import useDutyRequest from "./useDutyRequest";
 import Styled from "./styles";
-import CardInfo from '@screens/components/cardInfo';
-import Toast from 'react-native-toast-message';
+import CardInfo from "@screens/components/cardInfo";
+import Toast from "react-native-toast-message";
 
 interface DutyRequestProps {
   navigation: NavigationProp<ParamListBase>;
@@ -38,51 +48,57 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
     isFormValid,
     save,
     shiftOptions,
-    positionOptions
+    positionOptions,
   } = useDutyRequest();
 
   const onChangeShift = (shift: DutyShift) => {
     setShift(shift);
-    setStartAt(DutyShiftTimes[shift]?.start || null)
-    setEndAt(DutyShiftTimes[shift]?.end || null)
-  }
+    setStartAt(DutyShiftTimes[shift]?.start || null);
+    setEndAt(DutyShiftTimes[shift]?.end || null);
+  };
 
   const onPressSave = async () => {
     const response = await save();
 
     if (response.success && response.result) {
       Toast.show({
-        type: 'success',
-        text1: 'Marcação de plantão',
-        text2: 'Solicitado com sucesso!',
-        position: 'bottom',
-      })
+        type: "success",
+        text1: "Marcação de plantão",
+        text2: "Solicitado com sucesso!",
+        position: "bottom",
+      });
       navigation.dispatch(
-        StackActions.replace(routeMap.DutyRoutes.LIST_DUTY_REQUEST)
+        StackActions.replace(routeMap.DutyRoutes.LIST_DUTY_REQUEST),
       );
       navigation.dispatch(
-        StackActions.push(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: response.result.id })
+        StackActions.push(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, {
+          id: response.result.id,
+        }),
       );
     } else if (response.error === DutyRequestErrorCode.DutyRequestExistent) {
       Alert.alert(
-        'Erro ao solicitar plantão',
+        "Erro ao solicitar plantão",
         DutyRequestErrorCodeMessage[response.error],
-        [{ text: 'OK' }]
-      )
+        [{ text: "OK" }],
+      );
     } else {
       Alert.alert(
-        'Erro ao solicitar plantão',
-        'Ocorreu algum erro ao solicitar o plantão, verifique os dados e tente novamente.',
-        [{ text: 'OK' }]
-      )
+        "Erro ao solicitar plantão",
+        "Ocorreu algum erro ao solicitar o plantão, verifique os dados e tente novamente.",
+        [{ text: "OK" }],
+      );
     }
-  }
+  };
   return (
     <>
       <Styled.Container>
         <CardInfo>
-          <Label size={"medium"}>Preencha os dados para a solicitação de plantão.</Label>
-          <Label size={"small"}>A solicitação não é garantia de vaga na escala.</Label>
+          <Label size={"medium"}>
+            Preencha os dados para a solicitação de plantão.
+          </Label>
+          <Label size={"small"}>
+            A solicitação não é garantia de vaga na escala.
+          </Label>
           <Styled.Divider />
           <DateInput
             label="Data do plantão*"
@@ -118,7 +134,10 @@ const DutyRequest = ({ navigation }: DutyRequestProps) => {
               />
             </Styled.TimeInputContainer>
           </Styled.Inline>
-          <Label size="small">Edite os campos acima caso precise alterar os horários de entrada e saída</Label>
+          <Label size="small">
+            Edite os campos acima caso precise alterar os horários de entrada e
+            saída
+          </Label>
           <Styled.Divider />
           <RadioGroup
             label="Posições*"

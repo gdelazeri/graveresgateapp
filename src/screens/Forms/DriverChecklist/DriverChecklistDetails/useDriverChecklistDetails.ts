@@ -4,14 +4,16 @@ import { getDriverChecklist } from "@api/driverChecklist/driverChecklistApi";
 import { DriverChecklist } from "@api/driverChecklist/types";
 
 export const useDriverChecklistDetails = (id: string) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [driverChecklist, setDriverChecklist] = useState<DriverChecklist>({} as DriverChecklist)
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [driverChecklist, setDriverChecklist] = useState<DriverChecklist>(
+    {} as DriverChecklist,
+  );
 
   useFocusEffect(
     useCallback(() => {
       const fetchData = async () => {
         setIsLoading(true);
-        
+
         const response = await getDriverChecklist(id);
         if (response.success && response.result) {
           setDriverChecklist({ ...response.result });
@@ -20,12 +22,12 @@ export const useDriverChecklistDetails = (id: string) => {
         setIsLoading(false);
       };
 
-      fetchData()
-    }, [id])
+      fetchData();
+    }, [id]),
   );
 
   return {
     isLoading,
-    driverChecklist
+    driverChecklist,
   };
-}
+};

@@ -10,7 +10,7 @@ interface VehicleTripDriverProps {
   label?: string;
   user?: User | null;
   onPress: () => void;
-  disabled?: boolean
+  disabled?: boolean;
   onRemove: () => void;
 }
 
@@ -24,16 +24,20 @@ const VehicleTripDriver = ({
 }: VehicleTripDriverProps) => {
   return (
     <>
-      {isString(label) && <Styled.LabelContainer>
-        <Label size={'small'}>{label}</Label>
-      </Styled.LabelContainer>}
+      {isString(label) && (
+        <Styled.LabelContainer>
+          <Label size={"small"}>{label}</Label>
+        </Styled.LabelContainer>
+      )}
       <Styled.Container onPress={onPress} disabled={disabled}>
         {isString(user?.id) && (
           <Styled.UserData>
             <Styled.UserAvatar>
               <Avatar imageUrl={user?.imageUrl} size={32} />
             </Styled.UserAvatar>
-            <Label size={'medium'} numberOfLines={1} noMarginBottom>{user?.name}</Label>
+            <Label size={"medium"} numberOfLines={1} noMarginBottom>
+              {user?.name}
+            </Label>
           </Styled.UserData>
         )}
         {isString(user?.id) && !disabled && (
@@ -42,7 +46,9 @@ const VehicleTripDriver = ({
           </Styled.IconContainer>
         )}
         {!isString(user?.id) && isString(placeholder) && (
-          <Label size="medium" color={colors.Greyscale.b60} noMarginBottom>{placeholder}</Label>
+          <Label size="medium" color={colors.Greyscale.b60} noMarginBottom>
+            {placeholder}
+          </Label>
         )}
       </Styled.Container>
     </>

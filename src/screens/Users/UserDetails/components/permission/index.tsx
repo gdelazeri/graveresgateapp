@@ -3,7 +3,7 @@ import Chip from "@screens/components/chip";
 import colors from "@theme/colors";
 
 interface UserDetailsPermissionProps {
-  permission: UserPermission
+  permission: UserPermission;
 }
 
 const UserDetailsPermission = ({ permission }: UserDetailsPermissionProps) => (
@@ -12,6 +12,6 @@ const UserDetailsPermission = ({ permission }: UserDetailsPermissionProps) => (
     labelColor={colors.black}
     backgroundColor={colors.Greyscale.b90}
   />
-)
+);
 
 export default UserDetailsPermission;

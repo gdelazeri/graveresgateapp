@@ -6,8 +6,8 @@ const Container = styled.View`
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
-    padding: 16
-  }
+    padding: 16,
+  },
 })``;
 
 const ContainerAvatar = styled.View`
@@ -24,5 +24,5 @@ export default {
   Container,
   ScrollView,
   ContainerAvatar,
-  Divider
+  Divider,
 };

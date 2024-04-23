@@ -6,5 +6,5 @@ export enum INPUT_TYPE {
   PASSWORD,
   TEXT,
   DATE,
-  NUMERIC
+  NUMERIC,
 }

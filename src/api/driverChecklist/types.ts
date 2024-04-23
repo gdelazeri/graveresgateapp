@@ -7,7 +7,7 @@ export interface PostDriverChecklistPayload {
   dutyId?: string;
   vehicleId?: string;
   kmInitial?: string;
-  checklistAnswers?: ChecklistFilledAnswer[]
+  checklistAnswers?: ChecklistFilledAnswer[];
 }
 
 export interface DriverChecklist {
@@ -20,6 +20,6 @@ export interface DriverChecklist {
   createdByUserId: string;
   createdByUser: User;
   checklistName: string;
-  checklistFilledAnswers: ChecklistFilledAnswer[]
-  createdAt: string
+  checklistFilledAnswers: ChecklistFilledAnswer[];
+  createdAt: string;
 }

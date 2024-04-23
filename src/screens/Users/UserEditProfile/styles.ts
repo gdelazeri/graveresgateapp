@@ -19,11 +19,11 @@ const Divider = styled.View`
 
 const ContainerSwitch = styled.View`
   margin-top: 4px;
-`
+`;
 
 export default {
   Container,
   Footer,
   Divider,
-  ContainerSwitch
+  ContainerSwitch,
 };

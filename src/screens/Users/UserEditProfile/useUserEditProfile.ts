@@ -18,18 +18,15 @@ export const useUserEditProfile = (user: User) => {
 
   const save = async () => {
     setIsProcessing(true);
-    const response = await putUserData(
-      user.id,
-      {
-        permission,
-        isDriver,
-        isLeader,
-      }
-    )
+    const response = await putUserData(user.id, {
+      permission,
+      isDriver,
+      isLeader,
+    });
     setIsProcessing(false);
 
-    return response !== null
-  }
+    return response !== null;
+  };
 
   return {
     isProcessing,
@@ -42,4 +39,4 @@ export const useUserEditProfile = (user: User) => {
     isPermissionValid,
     save,
   } as const;
-}
+};

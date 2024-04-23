@@ -1,10 +1,10 @@
-import styled from "styled-components/native"
-import colors from "@theme/colors"
+import styled from "styled-components/native";
+import colors from "@theme/colors";
 
 const Container = styled.ScrollView.attrs({
   contentContainerStyle: {
-    padding: 16
-  }
+    padding: 16,
+  },
 })``;
 
 const Footer = styled.View`
@@ -20,11 +20,11 @@ const Divider = styled.View`
 
 const ContainerSwitch = styled.View`
   margin-top: 4px;
-`
+`;
 
 export default {
   Container,
   Footer,
   Divider,
-  ContainerSwitch
-}
+  ContainerSwitch,
+};

@@ -1,5 +1,5 @@
-import styled from "styled-components/native"
-import colors from "@theme/colors"
+import styled from "styled-components/native";
+import colors from "@theme/colors";
 
 const Container = styled.View`
   flex: 1;
@@ -19,5 +19,5 @@ const Divider = styled.View`
 export default {
   Container,
   Footer,
-  Divider
-}
+  Divider,
+};

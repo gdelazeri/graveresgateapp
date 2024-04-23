@@ -57,7 +57,8 @@ export const getUserData = async () => {
 
 export const listAllUsers = async () => {
   try {
-    const response: AxiosResponse<ApiResponse<User[]>> = await get("/v1/user/list/all");
+    const response: AxiosResponse<ApiResponse<User[]>> =
+      await get("/v1/user/list/all");
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<User[]>>;
@@ -75,11 +76,14 @@ export const listActiveUsers = async ({
   permission?: UserPermission;
 }) => {
   try {
-    const response: AxiosResponse<ApiResponse<User[]>> = await get("/v1/user/list/active", {
-      isDriver,
-      isLeader,
-      permission,
-    });
+    const response: AxiosResponse<ApiResponse<User[]>> = await get(
+      "/v1/user/list/active",
+      {
+        isDriver,
+        isLeader,
+        permission,
+      },
+    );
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<User[]>>;
@@ -89,7 +93,9 @@ export const listActiveUsers = async ({
 
 export const getUserById = async (id: string) => {
   try {
-    const response: AxiosResponse<ApiResponse<User>> = await get(`/v1/user/getById/${id}`);
+    const response: AxiosResponse<ApiResponse<User>> = await get(
+      `/v1/user/getById/${id}`,
+    );
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<User>>;
@@ -99,7 +105,10 @@ export const getUserById = async (id: string) => {
 
 export const putUserData = async (id: string, payload: any) => {
   try {
-    const response: AxiosResponse<ApiResponse<User>> = await put(`/v1/user/${id}`, payload);
+    const response: AxiosResponse<ApiResponse<User>> = await put(
+      `/v1/user/${id}`,
+      payload,
+    );
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<User>>;
@@ -109,7 +118,9 @@ export const putUserData = async (id: string, payload: any) => {
 
 export const deleteUserById = async (id: string) => {
   try {
-    const response: AxiosResponse<ApiResponse<boolean>> = await remove(`/v1/user/${id}`);
+    const response: AxiosResponse<ApiResponse<boolean>> = await remove(
+      `/v1/user/${id}`,
+    );
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<boolean>>;

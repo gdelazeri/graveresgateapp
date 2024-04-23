@@ -25,8 +25,8 @@ export interface DutyCareChecklist {
   createdByUserId: string;
   createdByUser: User;
   checklistName: string;
-  checklistFilledAnswers: ChecklistFilledAnswer[]
-  createdAt: string
+  checklistFilledAnswers: ChecklistFilledAnswer[];
+  createdAt: string;
 }
 
 export interface PostDutyCareChecklistPayload {
@@ -36,36 +36,36 @@ export interface PostDutyCareChecklistPayload {
   time: string;
   vehicleId?: string;
   reason?: string;
-  victimName?: string
-  victimGender?: string
-  victimAge?: number | string
-  victimDocument?: string
+  victimName?: string;
+  victimGender?: string;
+  victimAge?: number | string;
+  victimDocument?: string;
   incidentAddress?: string;
   incidentAddressDistrict?: string;
   incidentAddressCity?: string;
   incidentContinuation?: DutyCareChecklistIncidentContinuation;
   incidentEvolution?: string;
-  checklistAnswers?: ChecklistFilledAnswer[]
+  checklistAnswers?: ChecklistFilledAnswer[];
 }
 
 export enum DutyCareChecklistIncidentContinuation {
-  REMOVAL = 'REMOVAL',
-  REFUSED = 'REFUSED'
+  REMOVAL = "REMOVAL",
+  REFUSED = "REFUSED",
 }
 
 export const DutyCareChecklistIncidentContinuationLabel = {
-  [DutyCareChecklistIncidentContinuation.REMOVAL]: 'Remoção de vítima',
-  [DutyCareChecklistIncidentContinuation.REFUSED]: 'Recusa de atendimento'
-}
+  [DutyCareChecklistIncidentContinuation.REMOVAL]: "Remoção de vítima",
+  [DutyCareChecklistIncidentContinuation.REFUSED]: "Recusa de atendimento",
+};
 
 export enum VictimGender {
-  MALE = 'M',
-  FEMALE = 'F',
-  UNDEFINED = '-'
+  MALE = "M",
+  FEMALE = "F",
+  UNDEFINED = "-",
 }
 
 export const VictimGenderLabel = {
-  [VictimGender.MALE]: 'Masculino',
-  [VictimGender.FEMALE]: 'Feminino',
-  [VictimGender.UNDEFINED]: 'Indefinido',
-}
+  [VictimGender.MALE]: "Masculino",
+  [VictimGender.FEMALE]: "Feminino",
+  [VictimGender.UNDEFINED]: "Indefinido",
+};

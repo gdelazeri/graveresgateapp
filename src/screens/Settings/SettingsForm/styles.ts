@@ -1,5 +1,5 @@
-import styled from "styled-components/native"
-import colors from "@theme/colors"
+import styled from "styled-components/native";
+import colors from "@theme/colors";
 
 const Footer = styled.View`
   padding: 16px;
@@ -27,11 +27,11 @@ const InlineContainer = styled.View`
 
 const InputValue = styled.View`
   width: 85%;
-`
+`;
 
 const IconButton = styled.TouchableOpacity`
   padding: 8px;
-`
+`;
 
 export default {
   Footer,
@@ -39,5 +39,5 @@ export default {
   DividerLine,
   InlineContainer,
   InputValue,
-  IconButton
-}
+  IconButton,
+};

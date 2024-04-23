@@ -10,13 +10,17 @@ describe("SearchBar", () => {
     const onChangeValue = jest.fn();
 
     const { getByTestId, queryByText } = render(
-      <SearchBar placeholder="Search here..." value="" onChangeText={onChangeValue} />,
+      <SearchBar
+        placeholder="Search here..."
+        value=""
+        onChangeText={onChangeValue}
+      />,
     );
 
     await act(() => {
       fireEvent.changeText(getByTestId("search-bar"), "searching...");
-    })
+    });
 
-    expect(onChangeValue).toHaveBeenCalledWith('searching...');
+    expect(onChangeValue).toHaveBeenCalledWith("searching...");
   });
 });

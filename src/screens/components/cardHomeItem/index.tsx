@@ -1,8 +1,8 @@
-import TouchableScale from 'react-native-touchable-scale'; 
+import TouchableScale from "react-native-touchable-scale";
 import { Icon, ListItem } from "react-native-elements";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
-import { isString } from '@utils/stringHelper';
+import { isString } from "@utils/stringHelper";
 
 interface HomeCardProps {
   icon?: string;
@@ -21,7 +21,7 @@ const CardHomeItem = ({
   subtitle,
   onPress,
   disabled = false,
-  size = 56
+  size = 56,
 }: HomeCardProps) => (
   <ListItem
     Component={TouchableScale}
@@ -40,20 +40,24 @@ const CardHomeItem = ({
       shadowOpacity: 0.25,
       shadowRadius: 3.84,
       elevation: 5,
-      marginBottom: 24
+      marginBottom: 24,
     }}
     onPress={onPress}
     disabled={disabled}
     containerStyle={{ borderRadius: 8 }}
   >
-    {icon && <Icon name={icon} size={size} color={colors.red} type={iconType} />}
+    {icon && (
+      <Icon name={icon} size={size} color={colors.red} type={iconType} />
+    )}
     <ListItem.Content>
       <ListItem.Title style={{ fontFamily: fonts.bold }}>
         {title}
       </ListItem.Title>
-      {isString(subtitle) && <ListItem.Subtitle style={{ fontFamily: fonts.regular, marginTop: 2 }}>
-        {subtitle}
-      </ListItem.Subtitle>}
+      {isString(subtitle) && (
+        <ListItem.Subtitle style={{ fontFamily: fonts.regular, marginTop: 2 }}>
+          {subtitle}
+        </ListItem.Subtitle>
+      )}
     </ListItem.Content>
   </ListItem>
 );

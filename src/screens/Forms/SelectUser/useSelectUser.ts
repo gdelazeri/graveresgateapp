@@ -1,20 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
 import Fuse, { IFuseOptions } from "fuse.js";
-import {  DutyPosition } from "@api/dutyRequest/types";
+import { DutyPosition } from "@api/dutyRequest/types";
 import { User, UserPermission } from "@api/user/types";
 import { listActiveUsers } from "@api/user/userApi";
 
-const fuseOptionKey = ['name']
+const fuseOptionKey = ["name"];
 const fuseOptions = {
   includeScore: true,
   includeMatches: true,
   shouldSort: true,
   keys: fuseOptionKey,
   getFn: (obj: any, path: string) =>
-    typeof obj[path] === 'string' ? obj[path] : '',
+    typeof obj[path] === "string" ? obj[path] : "",
   threshold: 0.2,
-  ignoreLocation: true
-} as IFuseOptions<User>
+  ignoreLocation: true,
+} as IFuseOptions<User>;
 
 interface UseSelectUserProps {
   position: DutyPosition;
@@ -22,27 +22,27 @@ interface UseSelectUserProps {
 
 const useSelectUser = ({ position }: UseSelectUserProps) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState("");
   const [list, setList] = useState<User[]>([]);
   const [allUsers, setAllUsers] = useState<User[]>([]);
 
-  const initFuse = useMemo(() => new Fuse(allUsers, fuseOptions), [allUsers])
+  const initFuse = useMemo(() => new Fuse(allUsers, fuseOptions), [allUsers]);
 
   useEffect(() => {
     if (searchValue.length > 0) {
-      const results = initFuse.search(searchValue).map(result => ({
+      const results = initFuse.search(searchValue).map((result) => ({
         ...result.item,
-        matches: result.matches
-      }))
-      setList(results)
+        matches: result.matches,
+      }));
+      setList(results);
     } else {
-      setList(allUsers)
+      setList(allUsers);
     }
-  }, [searchValue, allUsers])
+  }, [searchValue, allUsers]);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
+      setIsLoading(true);
 
       let isDriver;
       let isLeader;
@@ -60,16 +60,20 @@ const useSelectUser = ({ position }: UseSelectUserProps) => {
           break;
       }
 
-      const response = await listActiveUsers({ isDriver, isLeader, permission });
+      const response = await listActiveUsers({
+        isDriver,
+        isLeader,
+        permission,
+      });
 
       if (response.success && response.result) {
         setAllUsers([...response.result]);
       }
 
-      setIsLoading(false)
-    }
+      setIsLoading(false);
+    };
     fetchData();
-  }, [])
+  }, []);
 
   return {
     isLoading,

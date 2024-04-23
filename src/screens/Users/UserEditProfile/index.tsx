@@ -5,7 +5,13 @@ import Button from "@screens/components/button";
 import { useUserEditProfile } from "./useUserEditProfile";
 import Styled from "./styles";
 import Label from "@screens/components/label";
-import { User, UserPermission, UserPermissionLabel, UserStatus, UserStatusLabel } from "@api/user/types";
+import {
+  User,
+  UserPermission,
+  UserPermissionLabel,
+  UserStatus,
+  UserStatusLabel,
+} from "@api/user/types";
 import Select from "@screens/components/select";
 import { Switch } from "react-native-elements";
 import colors from "@theme/colors";
@@ -15,12 +21,12 @@ interface UserEditProfileProps {
   route: {
     params: {
       user: User;
-    }
-  }
+    };
+  };
 }
 
 const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
-  const { user } = route.params
+  const { user } = route.params;
   const {
     isProcessing,
     permission,
@@ -38,15 +44,13 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
     if (success) {
       navigation.goBack();
     }
-  }
+  };
 
-  const permissionItems = Object
-    .keys(UserPermission)
-    .map((permission) => ({
-      key: permission,
-      label: UserPermissionLabel[permission as UserPermission],
-      value: permission
-    }));
+  const permissionItems = Object.keys(UserPermission).map((permission) => ({
+    key: permission,
+    label: UserPermissionLabel[permission as UserPermission],
+    value: permission,
+  }));
 
   return (
     <>
@@ -60,19 +64,27 @@ const UserEditProfile = ({ navigation, route }: UserEditProfileProps) => {
           invalid={!isPermissionValid}
           invalidText="Informe a permissão"
         />
-        
+
         <Styled.Divider />
 
-        <Label size={'small'}>Condutor</Label>
+        <Label size={"small"}>Condutor</Label>
         <Styled.ContainerSwitch>
-          <Switch value={isDriver} onValueChange={(value) => setIsDriver(value)} trackColor={{ true: colors.green }} />
+          <Switch
+            value={isDriver}
+            onValueChange={(value) => setIsDriver(value)}
+            trackColor={{ true: colors.green }}
+          />
         </Styled.ContainerSwitch>
-        
+
         <Styled.Divider />
 
-        <Label size={'small'}>Líder</Label>
+        <Label size={"small"}>Líder</Label>
         <Styled.ContainerSwitch>
-          <Switch value={isLeader} onValueChange={(value) => setIsLeader(value)} trackColor={{ true: colors.green }} />
+          <Switch
+            value={isLeader}
+            onValueChange={(value) => setIsLeader(value)}
+            trackColor={{ true: colors.green }}
+          />
         </Styled.ContainerSwitch>
       </Styled.Container>
       <Styled.Footer>

@@ -16,16 +16,9 @@ const useSignIn = () => {
   const isPasswordValid = password.length === 0 || password.length >= 8;
 
   const isFormValid = useMemo(
-    () => isString(email)
-    && isEmailValid
-    && isString(password)
-    && isPasswordValid,
-    [
-      email,
-      isEmailValid,
-      password,
-      isPasswordValid
-    ],
+    () =>
+      isString(email) && isEmailValid && isString(password) && isPasswordValid,
+    [email, isEmailValid, password, isPasswordValid],
   );
 
   const getCredentials = async () => {
@@ -39,26 +32,26 @@ const useSignIn = () => {
     }
 
     setIsLoading(false);
-  }
+  };
 
   useEffect(() => {
-    getCredentials(); 
-  }, [])
+    getCredentials();
+  }, []);
 
   const login = async () => {
     try {
       setIsProcessing(true);
-      setIsError(false)
-  
+      setIsError(false);
+
       const payload = {
         email: email.trim(),
         password,
       };
-  
+
       const response = await postLogin(payload);
-  
+
       setIsProcessing(false);
-  
+
       if (response?.success) {
         await storage.set(STORAGE_KEYS.USERNAME, payload.email);
         await storage.set(STORAGE_KEYS.PASSWORD, payload.password);
@@ -67,13 +60,13 @@ const useSignIn = () => {
           newRefreshToken: response.result.refreshToken,
         });
       } else {
-        setIsError(true)
+        setIsError(true);
       }
-  
+
       return response?.success;
     } catch (err) {
       setIsProcessing(false);
-      setIsError(true)
+      setIsError(true);
       return false;
     }
   };

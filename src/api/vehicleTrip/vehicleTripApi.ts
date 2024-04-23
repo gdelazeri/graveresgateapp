@@ -15,7 +15,10 @@ export const postVehicleTrip = async (payload: PostVehicleTripPayload) => {
   }
 };
 
-export const putVehicleTrip = async (id: string, payload: PostVehicleTripPayload) => {
+export const putVehicleTrip = async (
+  id: string,
+  payload: PostVehicleTripPayload,
+) => {
   try {
     const response: AxiosResponse<ApiResponse<VehicleTrip>> = await put(
       `/v1/vehicle-trip/${id}`,
@@ -28,11 +31,15 @@ export const putVehicleTrip = async (id: string, payload: PostVehicleTripPayload
   }
 };
 
-export const listVehicleTrip = async (page: number, pageSize: number, vehicleId?: string) => {
+export const listVehicleTrip = async (
+  page: number,
+  pageSize: number,
+  vehicleId?: string,
+) => {
   try {
     const response: AxiosResponse<ApiResponse<VehicleTripData[]>> = await get(
-      '/v1/vehicle-trip/list',
-      { page, pageSize, vehicleId }
+      "/v1/vehicle-trip/list",
+      { page, pageSize, vehicleId },
     );
     return response.data;
   } catch (err) {
@@ -43,11 +50,12 @@ export const listVehicleTrip = async (page: number, pageSize: number, vehicleId?
 
 export const getVehicleTrip = async (id: string) => {
   try {
-    const response: AxiosResponse<ApiResponse<VehicleTripData>> = await get(`/v1/vehicle-trip/getById/${id}`);
+    const response: AxiosResponse<ApiResponse<VehicleTripData>> = await get(
+      `/v1/vehicle-trip/getById/${id}`,
+    );
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<VehicleTripData>>;
     return error.response!.data;
   }
 };
-

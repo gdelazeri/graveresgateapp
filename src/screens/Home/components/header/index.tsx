@@ -9,14 +9,14 @@ const Header = () => {
 
   const onSignOut = () => {
     Alert.alert(
-      'Sair do Aplicativo',
-      'Tem certeza que deseja sair? Você precisará informar seu e-mail e senha para acessar o aplicativo novamente.',
+      "Sair do Aplicativo",
+      "Tem certeza que deseja sair? Você precisará informar seu e-mail e senha para acessar o aplicativo novamente.",
       [
-        { text: 'Não', style: 'cancel' },
-        { text: 'Sim, desejo sair', onPress: signOut, style: 'destructive' }
-      ]
-    )
-  }
+        { text: "Não", style: "cancel" },
+        { text: "Sim, desejo sair", onPress: signOut, style: "destructive" },
+      ],
+    );
+  };
 
   return (
     <Styled.Header>

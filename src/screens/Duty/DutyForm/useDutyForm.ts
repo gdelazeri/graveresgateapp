@@ -8,7 +8,7 @@ import { User } from "@api/user/types";
 import { isString } from "@utils/stringHelper";
 
 interface UseDutyFormProps {
-  duty: Duty
+  duty: Duty;
 }
 
 const useDutyForm = ({ duty }: UseDutyFormProps) => {
@@ -17,17 +17,21 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
   const [firstRescuer, setFirstRescuer] = useState<User | null>(null);
   const [secondRescuer, setSecondRescuer] = useState<User | null>(null);
   const [radioOperator, setRadioOperator] = useState<User | null>(null);
-  const [assistantRadioOperator, setAssistantRadioOperator] = useState<User | null>(null);
+  const [assistantRadioOperator, setAssistantRadioOperator] =
+    useState<User | null>(null);
   const [trainee, setTrainee] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [dutyRequestList, setDutyRequestList] = useState<DutyRequest[]>([]);
 
-  const isEditable = moment(duty.date).isSameOrAfter(moment().subtract(1, 'day'), "day");
+  const isEditable = moment(duty.date).isSameOrAfter(
+    moment().subtract(1, "day"),
+    "day",
+  );
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
+      setIsLoading(true);
 
       const responseDuty = await getDuty(duty.date, duty.shift);
 
@@ -35,50 +39,53 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
         setLeader({
           id: responseDuty.result.leaderId,
           name: responseDuty.result.leaderName,
-          imageUrl: responseDuty.result.leaderImageUrl
+          imageUrl: responseDuty.result.leaderImageUrl,
         } as User);
         setDriver({
           id: responseDuty.result.driverId,
           name: responseDuty.result.driverName,
-          imageUrl: responseDuty.result.driverImageUrl
+          imageUrl: responseDuty.result.driverImageUrl,
         } as User);
         setFirstRescuer({
           id: responseDuty.result.firstRescuerId,
           name: responseDuty.result.firstRescuerName,
-          imageUrl: responseDuty.result.firstRescuerImageUrl
+          imageUrl: responseDuty.result.firstRescuerImageUrl,
         } as User);
         setSecondRescuer({
           id: responseDuty.result.secondRescuerId,
           name: responseDuty.result.secondRescuerName,
-          imageUrl: responseDuty.result.secondRescuerImageUrl
+          imageUrl: responseDuty.result.secondRescuerImageUrl,
         } as User);
         setRadioOperator({
           id: responseDuty.result.radioOperatorId,
           name: responseDuty.result.radioOperatorName,
-          imageUrl: responseDuty.result.radioOperatorImageUrl
+          imageUrl: responseDuty.result.radioOperatorImageUrl,
         } as User);
         setAssistantRadioOperator({
           id: responseDuty.result.assistantRadioOperatorId,
           name: responseDuty.result.assistantRadioOperatorName,
-          imageUrl: responseDuty.result.assistantRadioOperatorImageUrl
+          imageUrl: responseDuty.result.assistantRadioOperatorImageUrl,
         } as User);
         setTrainee({
           id: responseDuty.result.traineeId,
           name: responseDuty.result.traineeName,
-          imageUrl: responseDuty.result.traineeImageUrl
+          imageUrl: responseDuty.result.traineeImageUrl,
         } as User);
       }
 
-      const responseDutyRequests = await listDutyRequests(duty.date, duty.shift);
+      const responseDutyRequests = await listDutyRequests(
+        duty.date,
+        duty.shift,
+      );
       if (responseDutyRequests.success && responseDutyRequests.result) {
         setDutyRequestList(responseDutyRequests.result);
       }
 
-      setIsLoading(false)
-    }
+      setIsLoading(false);
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const save = async () => {
     setIsProcessing(true);
@@ -99,17 +106,36 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
 
     setIsProcessing(false);
 
-    return response
+    return response;
   };
 
-  const usersAlreadySelected = [leader?.id, driver?.id, firstRescuer?.id, secondRescuer?.id, radioOperator?.id, assistantRadioOperator?.id, trainee?.id]
-    .filter((id) => isString(id)) as string[];
-  const leaderRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.LEADER));
-  const driverRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.DRIVER));
-  const rescuerRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.RESCUER));
-  const radioOperatorRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.RADIO_OPERATOR));
-  const assistantRadioOperatorRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.ASSISTANT_RADIO_OPERATOR));
-  const traineeRequests = dutyRequestList.filter((dutyRequest) => dutyRequest.positions.includes(DutyPosition.TRAINEE));
+  const usersAlreadySelected = [
+    leader?.id,
+    driver?.id,
+    firstRescuer?.id,
+    secondRescuer?.id,
+    radioOperator?.id,
+    assistantRadioOperator?.id,
+    trainee?.id,
+  ].filter((id) => isString(id)) as string[];
+  const leaderRequests = dutyRequestList.filter((dutyRequest) =>
+    dutyRequest.positions.includes(DutyPosition.LEADER),
+  );
+  const driverRequests = dutyRequestList.filter((dutyRequest) =>
+    dutyRequest.positions.includes(DutyPosition.DRIVER),
+  );
+  const rescuerRequests = dutyRequestList.filter((dutyRequest) =>
+    dutyRequest.positions.includes(DutyPosition.RESCUER),
+  );
+  const radioOperatorRequests = dutyRequestList.filter((dutyRequest) =>
+    dutyRequest.positions.includes(DutyPosition.RADIO_OPERATOR),
+  );
+  const assistantRadioOperatorRequests = dutyRequestList.filter((dutyRequest) =>
+    dutyRequest.positions.includes(DutyPosition.ASSISTANT_RADIO_OPERATOR),
+  );
+  const traineeRequests = dutyRequestList.filter((dutyRequest) =>
+    dutyRequest.positions.includes(DutyPosition.TRAINEE),
+  );
 
   return {
     isLoading,

@@ -64,12 +64,11 @@ const Input = ({
       default:
         return value;
     }
-
-  }, [value, type])
+  }, [value, type]);
 
   return (
     <>
-      {isString(label) && <Label size={'small'}>{label}</Label>}
+      {isString(label) && <Label size={"small"}>{label}</Label>}
       <Styled.Container>
         <Styled.TextInput
           testID={testID}
@@ -94,7 +93,9 @@ const Input = ({
           autoFocus={autoFocus}
         />
         {type === INPUT_TYPE.PASSWORD && (
-          <Styled.IconContainer onPress={() => setIsSecureTextEnabled(!isSecureTextEnabled)}>
+          <Styled.IconContainer
+            onPress={() => setIsSecureTextEnabled(!isSecureTextEnabled)}
+          >
             <Icon
               name={secureTextEntry ? "visibility" : "visibility-off"}
               color={colors.Greyscale.b50}

@@ -13,7 +13,7 @@ const Touchable = styled.TouchableOpacity<UserItemProps>`
   align-items: center;
   opacity: ${({ disabled }: UserItemProps) => (disabled ? 0.5 : 1)};
 `;
- 
+
 const UserInfo = styled.View`
   margin-left: 12px;
   width: 85%;
@@ -32,8 +32,8 @@ const TimeIcon = styled(Icon).attrs({
   color: colors.Greyscale.b50,
   containerStyle: {
     padding: 0,
-    margin: 0
-  }
+    margin: 0,
+  },
 })`
   margin-right: 4px;
 `;

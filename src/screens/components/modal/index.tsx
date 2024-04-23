@@ -1,4 +1,4 @@
-import { Overlay } from "react-native-elements"
+import { Overlay } from "react-native-elements";
 import colors from "@theme/colors";
 import CloseIcon from "@screens/components/icons/close";
 import Styled from "./styles";
@@ -10,7 +10,11 @@ interface ModalProps {
 }
 
 const Modal = ({ children, isOpen, onClose }: ModalProps) => (
-  <Overlay isVisible={isOpen} onBackdropPress={onClose} overlayStyle={{ width: '90%', top: -100, padding: 16 }}>
+  <Overlay
+    isVisible={isOpen}
+    onBackdropPress={onClose}
+    overlayStyle={{ width: "90%", top: -100, padding: 16 }}
+  >
     <>
       {children}
       <Styled.IconButton onPress={onClose}>
@@ -18,6 +22,6 @@ const Modal = ({ children, isOpen, onClose }: ModalProps) => (
       </Styled.IconButton>
     </>
   </Overlay>
-)
+);
 
-export default Modal
+export default Modal;

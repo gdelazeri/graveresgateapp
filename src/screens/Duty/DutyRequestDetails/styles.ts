@@ -3,8 +3,8 @@ import styled from "styled-components/native";
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
-    padding: 16
-  }
+    padding: 16,
+  },
 })``;
 
 const Divider = styled.View`
@@ -16,11 +16,11 @@ const Footer = styled.View`
   background-color: ${colors.Greyscale.b100};
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
-`
+`;
 
 const StatusContainer = styled.View`
   margin-top: 4px;
-`
+`;
 
 export default {
   ScrollView,

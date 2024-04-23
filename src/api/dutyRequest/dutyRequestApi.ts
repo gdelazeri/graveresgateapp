@@ -1,6 +1,11 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { post, ApiResponse, get, remove } from "../request";
-import { DutyPosition, DutyRequest, DutyRequestListItem, DutyShift } from "./types";
+import {
+  DutyPosition,
+  DutyRequest,
+  DutyRequestListItem,
+  DutyShift,
+} from "./types";
 
 export interface PostDutyRequestPayload {
   date: string;
@@ -8,7 +13,7 @@ export interface PostDutyRequestPayload {
   startAt: string;
   endAt: string;
   note: string;
-  positions: DutyPosition[]
+  positions: DutyPosition[];
 }
 
 export const postDutyRequest = async (payload: PostDutyRequestPayload) => {
@@ -26,9 +31,8 @@ export const postDutyRequest = async (payload: PostDutyRequestPayload) => {
 
 export const listDutyRequests = async (date: string, shift: DutyShift) => {
   try {
-    const response: AxiosResponse<ApiResponse<DutyRequestListItem[]>> = await get(
-      `/v1/duty-request/list/${date}/${shift}`,
-    );
+    const response: AxiosResponse<ApiResponse<DutyRequestListItem[]>> =
+      await get(`/v1/duty-request/list/${date}/${shift}`);
     return response.data;
   } catch (err: any) {
     const error = err as AxiosError<ApiResponse<DutyRequestListItem[]>>;
@@ -38,9 +42,8 @@ export const listDutyRequests = async (date: string, shift: DutyShift) => {
 
 export const listMyDutyRequests = async () => {
   try {
-    const response: AxiosResponse<ApiResponse<DutyRequestListItem[]>> = await get(
-      "/v1/duty-request/requests",
-    );
+    const response: AxiosResponse<ApiResponse<DutyRequestListItem[]>> =
+      await get("/v1/duty-request/requests");
     return response.data;
   } catch (err: any) {
     const error = err as AxiosError<ApiResponse<DutyRequestListItem[]>>;

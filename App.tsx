@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
-import Toast from 'react-native-toast-message';
+import Toast from "react-native-toast-message";
 
 import Navigation from "./src/routes";
 import colors from "./src/theme/colors";

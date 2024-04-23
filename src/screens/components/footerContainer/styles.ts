@@ -10,4 +10,4 @@ const Footer = styled.View`
 
 export default {
   Footer,
-}
+};

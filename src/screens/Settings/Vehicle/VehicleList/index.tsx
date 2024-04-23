@@ -15,16 +15,13 @@ interface VehicleListProps {
 }
 
 const VehicleList = ({ navigation }: VehicleListProps) => {
-  const {
-    isLoading,
-    isRefreshing,
-    list,
-    onRefresh
-  } = useVehicleList()
+  const { isLoading, isRefreshing, list, onRefresh } = useVehicleList();
 
   const onPressItem = (item: Vehicle) => {
-    navigation.navigate(routeMap.SettingsRoutes.VEHICLE_FORM, { vehicle: item })
-  }
+    navigation.navigate(routeMap.SettingsRoutes.VEHICLE_FORM, {
+      vehicle: item,
+    });
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -34,13 +31,12 @@ const VehicleList = ({ navigation }: VehicleListProps) => {
     <Styled.Container>
       <FlatList
         data={list}
-        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        }
         contentContainerStyle={{ padding: 16 }}
         renderItem={({ item }) => (
-          <VehicleItem
-            item={item}
-            onPress={() => onPressItem(item)}
-          />
+          <VehicleItem item={item} onPress={() => onPressItem(item)} />
         )}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Styled.Divider />}
@@ -48,7 +44,9 @@ const VehicleList = ({ navigation }: VehicleListProps) => {
       <Styled.Footer>
         <Button
           title="Adicionar viatura"
-          onPress={() => navigation.navigate(routeMap.SettingsRoutes.VEHICLE_FORM)}
+          onPress={() =>
+            navigation.navigate(routeMap.SettingsRoutes.VEHICLE_FORM)
+          }
         />
       </Styled.Footer>
     </Styled.Container>

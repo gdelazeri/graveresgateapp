@@ -12,6 +12,6 @@ export default {
   Greyscale,
   black: "#333333",
   red: "#eb3237",
-  green: '#03a523',
-  yellow: '#ffe45b',
+  green: "#03a523",
+  yellow: "#ffe45b",
 };

@@ -19,17 +19,18 @@ const UserSelectListItem = ({ user, onPress }: UserSelectListItemProps) => (
   >
     <Avatar imageUrl={user.imageUrl} size={48} />
     <Styled.UserInfo>
-      <Label size='medium'>{user.name}</Label>
+      <Label size="medium">{user.name}</Label>
       {user.dutyRequest && (
         <>
           <Styled.InlineTime>
             <Styled.TimeIcon />
-            <Label size='small' color={colors.Greyscale.b50} noMarginBottom>
-              {user.dutyRequest.startAt.substring(0, 5)} às {user.dutyRequest.endAt.substring(0, 5)}
+            <Label size="small" color={colors.Greyscale.b50} noMarginBottom>
+              {user.dutyRequest.startAt.substring(0, 5)} às{" "}
+              {user.dutyRequest.endAt.substring(0, 5)}
             </Label>
           </Styled.InlineTime>
           {isString(user.dutyRequest.note) && (
-            <Label size='small' color={colors.Greyscale.b50} noMarginBottom>
+            <Label size="small" color={colors.Greyscale.b50} noMarginBottom>
               Obs.: {user.dutyRequest.note}
             </Label>
           )}
@@ -38,18 +39,28 @@ const UserSelectListItem = ({ user, onPress }: UserSelectListItemProps) => (
       <Styled.Inline>
         {user.isLeader && (
           <Styled.ChipContainer>
-            <Chip label="Líder" backgroundColor={colors.Greyscale.b90} labelColor={colors.black} />
+            <Chip
+              label="Líder"
+              backgroundColor={colors.Greyscale.b90}
+              labelColor={colors.black}
+            />
           </Styled.ChipContainer>
         )}
         {user.isDriver && (
           <Styled.ChipContainer>
-            <Chip label="Condutor" backgroundColor={colors.Greyscale.b90} labelColor={colors.black} />
+            <Chip
+              label="Condutor"
+              backgroundColor={colors.Greyscale.b90}
+              labelColor={colors.black}
+            />
           </Styled.ChipContainer>
         )}
         {user.permission === UserPermission.TRAINEE && (
           <Styled.ChipContainer>
             <Chip
-              label={`Estagiário${user?.course ? ` - ${user.course.name}` : ''}`}
+              label={`Estagiário${
+                user?.course ? ` - ${user.course.name}` : ""
+              }`}
               backgroundColor={colors.Greyscale.b90}
               labelColor={colors.black}
             />
@@ -58,6 +69,6 @@ const UserSelectListItem = ({ user, onPress }: UserSelectListItemProps) => (
       </Styled.Inline>
     </Styled.UserInfo>
   </Styled.Touchable>
-)
+);
 
 export default UserSelectListItem;

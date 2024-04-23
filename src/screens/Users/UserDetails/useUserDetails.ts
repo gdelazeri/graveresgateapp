@@ -19,27 +19,27 @@ export const useUserDetails = (id: string) => {
   useFocusEffect(
     useCallback(() => {
       setIsLoading(true);
-      fetchData()
-    }, [])
+      fetchData();
+    }, []),
   );
 
   const deleteUser = async () => {
     setIsDeleting(true);
     await deleteUserById(id);
     setIsDeleting(false);
-  }
+  };
 
   const updateUserStatus = async (status: UserStatus) => {
     setIsLoading(true);
     await putUserData(id, { status });
     fetchData();
-  }
+  };
 
   return {
     isLoading,
     user,
     deleteUser,
     updateUserStatus,
-    isDeleting
+    isDeleting,
   } as const;
-}
+};

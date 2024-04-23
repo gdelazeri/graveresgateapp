@@ -9,14 +9,18 @@ interface DutyCareListItemProps {
 
 const DutyCareListItem = ({ item }: DutyCareListItemProps) => (
   <>
-    <Label size={'medium'} bold>
+    <Label size={"medium"} bold>
       {item.reason}
     </Label>
-    <Label size={'small'}>
-      {formatAddress({ address: item.incidentAddress, district: item.incidentAddressDistrict, city: item.incidentAddressCity })}
+    <Label size={"small"}>
+      {formatAddress({
+        address: item.incidentAddress,
+        district: item.incidentAddressDistrict,
+        city: item.incidentAddressCity,
+      })}
     </Label>
-    <Label size={'small'}>
-      {moment(item.date).format('LL')} - {item.time.substring(0, 5)}
+    <Label size={"small"}>
+      {moment(item.date).format("LL")} - {item.time.substring(0, 5)}
     </Label>
   </>
 );

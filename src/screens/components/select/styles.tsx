@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 const Container = styled.View`
   margin-top: 4px;
   position: relative;
-`
+`;
 
 const ErrorText = styled.Text`
   color: ${colors.red};

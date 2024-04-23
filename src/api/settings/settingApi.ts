@@ -3,7 +3,9 @@ import { ApiResponse, get, post } from "../request";
 
 export const getSetting = async (key: string) => {
   try {
-    const response: AxiosResponse<ApiResponse<any>> = await get(`/v1/setting/get/${key}`);
+    const response: AxiosResponse<ApiResponse<any>> = await get(
+      `/v1/setting/get/${key}`,
+    );
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<any>>;
@@ -13,7 +15,10 @@ export const getSetting = async (key: string) => {
 
 export const postSetting = async (key: string, value: any) => {
   try {
-    const response: AxiosResponse<ApiResponse<any>> = await post(`/v1/setting/${key}`, value);
+    const response: AxiosResponse<ApiResponse<any>> = await post(
+      `/v1/setting/${key}`,
+      value,
+    );
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<any>>;

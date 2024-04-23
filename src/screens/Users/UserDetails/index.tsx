@@ -24,95 +24,99 @@ interface UserDetailsProps {
   route: {
     params: {
       id: string;
-    }
-  }
+    };
+  };
 }
 
 const UserDetails = ({ navigation, route }: UserDetailsProps) => {
-  const { id } = route.params
-  const { isLoading, user, deleteUser, updateUserStatus } = useUserDetails(id)
+  const { id } = route.params;
+  const { isLoading, user, deleteUser, updateUserStatus } = useUserDetails(id);
 
   const onPressEditPersonalInformation = () => {
     navigation.navigate(routeMap.UserRoutes.USER_EDIT_PERSONAL_INFO, { user });
-  }
+  };
 
   const onPressEditProfile = () => {
     navigation.navigate(routeMap.UserRoutes.USER_EDIT_PROFILE, { user });
-  }
+  };
 
   const onPressDelete = () => {
     Alert.alert(
-      'Excluir voluntário',
-      'Tem certeza que deseja excluir este voluntário?',
+      "Excluir voluntário",
+      "Tem certeza que deseja excluir este voluntário?",
       [
         {
-          text: 'Cancelar',
-          style: 'cancel'
+          text: "Cancelar",
+          style: "cancel",
         },
         {
-          text: 'Sim, desejo excluir',
-          style: 'destructive',
+          text: "Sim, desejo excluir",
+          style: "destructive",
           onPress: () => {
-            deleteUser()
-            navigation.goBack()
-          }
-        }
-      ])
-  }
+            deleteUser();
+            navigation.goBack();
+          },
+        },
+      ],
+    );
+  };
 
   const onPressApprove = () => {
     Alert.alert(
-      'Aprovar voluntário',
-      'Tem certeza que deseja aprovar este voluntário?',
+      "Aprovar voluntário",
+      "Tem certeza que deseja aprovar este voluntário?",
       [
         {
-          text: 'Cancelar',
-          style: 'cancel'
+          text: "Cancelar",
+          style: "cancel",
         },
         {
-          text: 'Sim, desejo aprovar',
+          text: "Sim, desejo aprovar",
           onPress: () => {
-            updateUserStatus(UserStatus.ACTIVE)
-          }
-        }
-      ])
-  }
+            updateUserStatus(UserStatus.ACTIVE);
+          },
+        },
+      ],
+    );
+  };
 
   const onPressSuspend = () => {
     Alert.alert(
-      'Suspender voluntário',
-      'Tem certeza que deseja suspender este voluntário? Ao suspender, este usuário não poderá acessar o aplicativo até que seu status seja alterado para ATIVO novamente.',
+      "Suspender voluntário",
+      "Tem certeza que deseja suspender este voluntário? Ao suspender, este usuário não poderá acessar o aplicativo até que seu status seja alterado para ATIVO novamente.",
       [
         {
-          text: 'Cancelar',
-          style: 'cancel'
+          text: "Cancelar",
+          style: "cancel",
         },
         {
-          text: 'Sim, desejo suspender',
+          text: "Sim, desejo suspender",
           onPress: () => {
-            updateUserStatus(UserStatus.SUSPENDED)
-          }
-        }
-      ])
-  }
+            updateUserStatus(UserStatus.SUSPENDED);
+          },
+        },
+      ],
+    );
+  };
 
   const onPressActive = () => {
     Alert.alert(
-      'Ativar voluntário',
-      'Tem certeza que deseja ativar este voluntário? Ao ativar, este usuário poderá marcar novos plantões.',
+      "Ativar voluntário",
+      "Tem certeza que deseja ativar este voluntário? Ao ativar, este usuário poderá marcar novos plantões.",
       [
         {
-          text: 'Cancelar',
-          style: 'cancel'
+          text: "Cancelar",
+          style: "cancel",
         },
         {
-          text: 'Sim, desejo ativar',
+          text: "Sim, desejo ativar",
           onPress: () => {
-            updateUserStatus(UserStatus.ACTIVE)
-          }
-        }
-      ])
-  }
+            updateUserStatus(UserStatus.ACTIVE);
+          },
+        },
+      ],
+    );
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -127,67 +131,87 @@ const UserDetails = ({ navigation, route }: UserDetailsProps) => {
 
         <Styled.Divider />
 
-        <CardInfo title="Dados Pessoais" onPressEdit={onPressEditPersonalInformation}>
-          <Label size='small' color={colors.Greyscale.b50}>Nome</Label>
-          <Label size='medium'>{user?.name}</Label>
+        <CardInfo
+          title="Dados Pessoais"
+          onPressEdit={onPressEditPersonalInformation}
+        >
+          <Label size="small" color={colors.Greyscale.b50}>
+            Nome
+          </Label>
+          <Label size="medium">{user?.name}</Label>
           <Styled.Divider />
-          <Label size='small' color={colors.Greyscale.b50}>Email</Label>
-          <Label size='medium'>{user?.email}</Label>
+          <Label size="small" color={colors.Greyscale.b50}>
+            Email
+          </Label>
+          <Label size="medium">{user?.email}</Label>
           <Styled.Divider />
-          <Label size='small' color={colors.Greyscale.b50}>Telefone</Label>
-          <Label size='medium'>{user?.phone}</Label>
+          <Label size="small" color={colors.Greyscale.b50}>
+            Telefone
+          </Label>
+          <Label size="medium">{user?.phone}</Label>
           <Styled.Divider />
-          <Label size='small' color={colors.Greyscale.b50}>Data de nascimento</Label>
-          <Label size='medium'>{isString(user?.birthDate) ? moment(user?.birthDate).format('DD/MM/YYYY') : '-'}</Label>
+          <Label size="small" color={colors.Greyscale.b50}>
+            Data de nascimento
+          </Label>
+          <Label size="medium">
+            {isString(user?.birthDate)
+              ? moment(user?.birthDate).format("DD/MM/YYYY")
+              : "-"}
+          </Label>
           <Styled.Divider />
-          <Label size='small' color={colors.Greyscale.b50}>Edição do curso de APH</Label>
-          <Label size='medium'>{user?.course?.name || '-'}</Label>
+          <Label size="small" color={colors.Greyscale.b50}>
+            Edição do curso de APH
+          </Label>
+          <Label size="medium">{user?.course?.name || "-"}</Label>
           <Styled.Divider />
-          <Label size='small' color={colors.Greyscale.b50}>Matrícula</Label>
-          <Label size='medium'>{user?.registrationId || '-'}</Label>
+          <Label size="small" color={colors.Greyscale.b50}>
+            Matrícula
+          </Label>
+          <Label size="medium">{user?.registrationId || "-"}</Label>
         </CardInfo>
 
         <Styled.Divider />
 
         <CardInfo title="Perfil" onPressEdit={onPressEditProfile}>
-          <Label size='small' color={colors.Greyscale.b50}>Status</Label>
+          <Label size="small" color={colors.Greyscale.b50}>
+            Status
+          </Label>
           <UserDetailsStatus status={user!.status} />
           <Styled.Divider />
-          <Label size='small' color={colors.Greyscale.b50}>Permissão</Label>
+          <Label size="small" color={colors.Greyscale.b50}>
+            Permissão
+          </Label>
           <UserDetailsPermission permission={user!.permission} />
           <Styled.Divider />
-          <Label size='small' color={colors.Greyscale.b50}>Condutor</Label>
+          <Label size="small" color={colors.Greyscale.b50}>
+            Condutor
+          </Label>
           <UserDetailsDriver isDriver={user!.isDriver} />
           <Styled.Divider />
-          <Label size='small' color={colors.Greyscale.b50}>Líder</Label>
+          <Label size="small" color={colors.Greyscale.b50}>
+            Líder
+          </Label>
           <UserDetailsLeader isLeader={user!.isLeader} />
         </CardInfo>
       </Styled.ScrollView>
       <FooterContainer>
-        {user?.status === UserStatus.PENDING && <>
-          <Button
-            title="Aprovar voluntário"
-            onPress={onPressApprove}
-          />
-        </>}
-        {user?.status === UserStatus.ACTIVE && <>
-          <Button
-            title="Suspender voluntário"
-            onPress={onPressSuspend}
-          />
-        </>}
-        {user?.status === UserStatus.SUSPENDED && <>
-          <Button
-            title="Ativar voluntário"
-            onPress={onPressActive}
-          />
-        </>}
+        {user?.status === UserStatus.PENDING && (
+          <>
+            <Button title="Aprovar voluntário" onPress={onPressApprove} />
+          </>
+        )}
+        {user?.status === UserStatus.ACTIVE && (
+          <>
+            <Button title="Suspender voluntário" onPress={onPressSuspend} />
+          </>
+        )}
+        {user?.status === UserStatus.SUSPENDED && (
+          <>
+            <Button title="Ativar voluntário" onPress={onPressActive} />
+          </>
+        )}
         <Styled.Divider />
-        <Button
-          title="Excluir voluntário"
-          onPress={onPressDelete}
-          secondary
-        />
+        <Button title="Excluir voluntário" onPress={onPressDelete} secondary />
       </FooterContainer>
     </Styled.Container>
   );

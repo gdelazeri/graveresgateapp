@@ -23,16 +23,23 @@ const TextInput = styled.TextInput<CustomTextInputProps>`
   font-family: ${fonts.regular};
   border-width: 1px;
   border-radius: 4px;
-  border-color: ${({ isInvalid, isFocused }: CustomTextInputProps) => isInvalid ? colors.red : (isFocused ? colors.Greyscale.b50 : colors.Greyscale.b80)};
-  height: ${({ type }: CustomTextInputProps) => type === INPUT_TYPE.TEXT ? 120 : 50}px;
+  border-color: ${({ isInvalid, isFocused }: CustomTextInputProps) =>
+    isInvalid
+      ? colors.red
+      : isFocused
+        ? colors.Greyscale.b50
+        : colors.Greyscale.b80};
+  height: ${({ type }: CustomTextInputProps) =>
+    type === INPUT_TYPE.TEXT ? 120 : 50}px;
   padding: 12px;
-  padding-right: ${({ type }: CustomTextInputProps) => type === INPUT_TYPE.PASSWORD ? 50 : 12}px;
+  padding-right: ${({ type }: CustomTextInputProps) =>
+    type === INPUT_TYPE.PASSWORD ? 50 : 12}px;
 `;
 
 const Container = styled.View`
   margin-top: 4px;
   position: relative;
-`
+`;
 
 const IconContainer = styled.TouchableOpacity`
   position: absolute;
@@ -42,11 +49,11 @@ const IconContainer = styled.TouchableOpacity`
   width: 50px;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export default {
   ErrorText,
   TextInput,
   Container,
-  IconContainer
+  IconContainer,
 };

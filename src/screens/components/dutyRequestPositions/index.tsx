@@ -1,10 +1,10 @@
-import { DutyPosition, DutyPositionLabel } from '@api/dutyRequest/types';
-import Styled from './styles';
-import Chip from '../chip';
-import colors from '@theme/colors';
+import { DutyPosition, DutyPositionLabel } from "@api/dutyRequest/types";
+import Styled from "./styles";
+import Chip from "../chip";
+import colors from "@theme/colors";
 
 interface DutyRequestPositionsProps {
-  id: string
+  id: string;
   positions: DutyPosition[];
 }
 
@@ -21,6 +21,6 @@ const DutyRequestPositions = ({ id, positions }: DutyRequestPositionsProps) => (
       </Styled.Item>
     ))}
   </Styled.Container>
-)
+);
 
 export default DutyRequestPositions;

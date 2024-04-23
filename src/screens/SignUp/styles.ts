@@ -9,8 +9,8 @@ const Container = styled.View`
 
 const Form = styled(KeyboardAwareScrollView).attrs({
   contentContainerStyle: {
-    padding: 16
-  }
+    padding: 16,
+  },
 })``;
 
 const Title = styled.Text`

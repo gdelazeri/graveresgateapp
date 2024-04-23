@@ -16,18 +16,18 @@ const useDutyRequestList = () => {
     setIsLoading(false);
     setIsRefreshing(false);
   };
-  
+
   useFocusEffect(
     useCallback(() => {
       setIsLoading(true);
-      fetchData()
-    }, [])
+      fetchData();
+    }, []),
   );
 
   const onRefresh = async () => {
     setIsRefreshing(true);
     fetchData();
-  }
+  };
 
   return {
     isLoading,

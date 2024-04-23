@@ -17,8 +17,7 @@ jest.mock("@api/user", () => ({
 }));
 
 const TestComponent = () => {
-  const { accessToken, refreshToken, signOut, setTokens } =
-    useUserContext();
+  const { accessToken, refreshToken, signOut, setTokens } = useUserContext();
 
   return (
     <View>

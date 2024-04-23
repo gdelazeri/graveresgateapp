@@ -8,11 +8,13 @@ import { useFocusEffect } from "@react-navigation/native";
 const useSchedule = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(true);
-  const [periodOptions, setPeriodOptions] = useState<{ label: string, value: ListDutyPeriod }[]>([]);
+  const [periodOptions, setPeriodOptions] = useState<
+    { label: string; value: ListDutyPeriod }[]
+  >([]);
   const [list, setList] = useState<Duty[]>([]);
   const [period, setPeriod] = useState<ListDutyPeriod>(ListDutyPeriod.CURRENT);
   const [page, setPage] = useState(1);
-  const { userData } = useUserContext()
+  const { userData } = useUserContext();
 
   const fetchDutyByMonth = async () => {
     const response = await listDutyByMonth(period);
@@ -43,21 +45,21 @@ const useSchedule = () => {
       } else {
         fetchDutyByMonth();
       }
-    }, [period])
-  )
+    }, [period]),
+  );
 
   useEffect(() => {
-    const list = []
+    const list = [];
     if (userData?.permission === UserPermission.ADMIN) {
-      list.push({ label: 'Meses anteriores', value: ListDutyPeriod.PREVIOUS })
+      list.push({ label: "Meses anteriores", value: ListDutyPeriod.PREVIOUS });
     }
 
     setPeriodOptions([
       ...list,
-      { label: 'Mês atual', value: ListDutyPeriod.CURRENT },
-      { label: 'Próximo mês', value: ListDutyPeriod.NEXT },
-    ])
-  }, [userData])
+      { label: "Mês atual", value: ListDutyPeriod.CURRENT },
+      { label: "Próximo mês", value: ListDutyPeriod.NEXT },
+    ]);
+  }, [userData]);
 
   const refresh = () => {
     setIsRefreshing(true);
@@ -67,20 +69,23 @@ const useSchedule = () => {
     } else {
       fetchDutyByMonth();
     }
-  }
+  };
 
   const onEndReached = () => {
-    if (period === ListDutyPeriod.PREVIOUS && list.length === page * MAX_PAGE_SIZE) {
+    if (
+      period === ListDutyPeriod.PREVIOUS &&
+      list.length === page * MAX_PAGE_SIZE
+    ) {
       setPage(page + 1);
       fetchPreviousDuty(page + 1);
     }
-  }
+  };
 
   const onChangePeriod = (value: ListDutyPeriod) => {
     setIsLoading(true);
     setPage(1);
     setPeriod(value);
-  }
+  };
 
   return {
     isLoading,
@@ -90,7 +95,7 @@ const useSchedule = () => {
     period,
     onChangePeriod,
     refresh,
-    onEndReached
+    onEndReached,
   };
 };
 

@@ -1,7 +1,7 @@
-import { Vehicle } from "@api/vehicle/types"
+import { Vehicle } from "@api/vehicle/types";
 import { listAllVehicles } from "@api/vehicle/vehicleApi";
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback, useState } from "react"
+import { useCallback, useState } from "react";
 
 const useVehicleList = () => {
   const [list, setList] = useState<Vehicle[]>([]);
@@ -22,21 +22,21 @@ const useVehicleList = () => {
   useFocusEffect(
     useCallback(() => {
       setIsLoading(true);
-      fetchData()
-    }, [])
+      fetchData();
+    }, []),
   );
 
   const onRefresh = () => {
     setIsRefreshing(true);
     fetchData();
-  }
+  };
 
   return {
     isLoading,
     isRefreshing,
     list,
-    onRefresh
-  }
-}
+    onRefresh,
+  };
+};
 
 export default useVehicleList;

@@ -17,9 +17,9 @@ interface VehicleTripDetailsProps {
   navigation: NavigationProp<ParamListBase>;
   route: {
     params: {
-      id: string
-    }
-  }
+      id: string;
+    };
+  };
 }
 
 const VehicleTripDetails = ({ navigation, route }: VehicleTripDetailsProps) => {
@@ -37,43 +37,53 @@ const VehicleTripDetails = ({ navigation, route }: VehicleTripDetailsProps) => {
     reason,
     createdAt,
     createdByUser,
-  } = useVehicleTripDetails(id)
-  const { permission } = useUserContext()
+  } = useVehicleTripDetails(id);
+  const { permission } = useUserContext();
 
   const onPressEdit = () => {
-    navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP_FORM, { id })
-  }
+    navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP_FORM, { id });
+  };
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
-  
+
   return (
     <Styled.Container>
       <Styled.ScrollView>
         <CardInfo>
-          <Label size={"small"} color={colors.Greyscale.b50}>Viatura</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Viatura
+          </Label>
           <Label size={"medium"}>{vehicle?.name}</Label>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>Condutor</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Condutor
+          </Label>
           <Label size={"medium"}>{driver?.name}</Label>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>Data</Label>
-          <Label size={"medium"}>{moment(date).format('LL')}</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Data
+          </Label>
+          <Label size={"medium"}>{moment(date).format("LL")}</Label>
 
           <Styled.Divider />
 
           <Styled.InlineInputContainer>
             <Styled.InlineInput style={{ paddingRight: 4 }}>
-              <Label size={"small"} color={colors.Greyscale.b50}>Horário de saída</Label>
+              <Label size={"small"} color={colors.Greyscale.b50}>
+                Horário de saída
+              </Label>
               <Label size={"medium"}>{startAt}</Label>
             </Styled.InlineInput>
             <Styled.InlineInput style={{ paddingLeft: 4 }}>
-              <Label size={"small"} color={colors.Greyscale.b50}>Horário de chegada</Label>
+              <Label size={"small"} color={colors.Greyscale.b50}>
+                Horário de chegada
+              </Label>
               <Label size={"medium"}>{endAt}</Label>
             </Styled.InlineInput>
           </Styled.InlineInputContainer>
@@ -82,42 +92,53 @@ const VehicleTripDetails = ({ navigation, route }: VehicleTripDetailsProps) => {
 
           <Styled.InlineInputContainer>
             <Styled.InlineInput style={{ paddingRight: 4 }}>
-              <Label size={"small"} color={colors.Greyscale.b50}>KM inicial do plantão</Label>
+              <Label size={"small"} color={colors.Greyscale.b50}>
+                KM inicial do plantão
+              </Label>
               <Label size={"medium"}>{kmInitial}</Label>
             </Styled.InlineInput>
             <Styled.InlineInput style={{ paddingLeft: 4 }}>
-              <Label size={"small"} color={colors.Greyscale.b50}>KM de chegada</Label>
+              <Label size={"small"} color={colors.Greyscale.b50}>
+                KM de chegada
+              </Label>
               <Label size={"medium"}>{kmFinal}</Label>
             </Styled.InlineInput>
           </Styled.InlineInputContainer>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>Local</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Local
+          </Label>
           <Label size={"medium"}>{place}</Label>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>Motivo</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Motivo
+          </Label>
           <Label size={"medium"}>{reason}</Label>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>Preenchido em</Label>
-          <Label size={"medium"}>{moment(createdAt).format('DD/MM/YYYY HH:mm')}</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Preenchido em
+          </Label>
+          <Label size={"medium"}>
+            {moment(createdAt).format("DD/MM/YYYY HH:mm")}
+          </Label>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>Preenchido por</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Preenchido por
+          </Label>
           <Label size={"medium"}>{createdByUser?.name}</Label>
         </CardInfo>
       </Styled.ScrollView>
       {permission === UserPermission.ADMIN && (
         <FooterContainer>
-          <Button
-            title="Editar"
-            onPress={onPressEdit}
-          />
+          <Button title="Editar" onPress={onPressEdit} />
         </FooterContainer>
       )}
     </Styled.Container>

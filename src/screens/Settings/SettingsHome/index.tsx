@@ -17,21 +17,31 @@ const SettingsHome = ({ navigation }: SettingsHomeProps) => (
       subtitle="Gerencie os veículos da instituição"
       icon="truck-plus"
       iconType="material-community"
-      onPress={() => { navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST) }}
+      onPress={() => {
+        navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST);
+      }}
       size={40}
     />
     <CardHomeItem
       title={SettingKeyLabel[SettingKey.CITIES]}
       subtitle="Edite as cidades disponíveis"
       icon="add-location-alt"
-      onPress={() => { navigation.navigate(routeMap.SettingsRoutes.SETTINGS_FORM, { settingKey: SettingKey.CITIES }) }}
+      onPress={() => {
+        navigation.navigate(routeMap.SettingsRoutes.SETTINGS_FORM, {
+          settingKey: SettingKey.CITIES,
+        });
+      }}
       size={40}
     />
     <CardHomeItem
       title={SettingKeyLabel[SettingKey.DUTY_CARE_REASONS]}
       subtitle="Edite os motivos de atendimento"
       icon="playlist-add"
-      onPress={() => { navigation.navigate(routeMap.SettingsRoutes.SETTINGS_FORM, { settingKey: SettingKey.DUTY_CARE_REASONS }) }}
+      onPress={() => {
+        navigation.navigate(routeMap.SettingsRoutes.SETTINGS_FORM, {
+          settingKey: SettingKey.DUTY_CARE_REASONS,
+        });
+      }}
       size={40}
     />
   </Styled.Container>

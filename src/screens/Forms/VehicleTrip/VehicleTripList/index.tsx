@@ -15,44 +15,44 @@ interface VehicleTripListProps {
 }
 
 const VehicleTripList = ({ navigation }: VehicleTripListProps) => {
-  const {
-    isLoading,
-    isRefreshing,
-    list,
-    onEndReached,
-    onRefresh
-  } = useVehicleTripList();
+  const { isLoading, isRefreshing, list, onEndReached, onRefresh } =
+    useVehicleTripList();
 
   const onPressAdd = () => {
-    navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP_FORM)
-  }
+    navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP_FORM);
+  };
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
-  
+
   return (
     <Styled.Container>
       <FlatList
-        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        }
         data={list}
         contentContainerStyle={{ padding: 16 }}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Styled.Divider />}
         renderItem={({ item }) => (
           <VehicleTripListItem
-            onPress={() => navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP_DETAILS, { id: item.id })}
+            onPress={() =>
+              navigation.navigate(routeMap.FormsRoutes.VEHICLE_TRIP_DETAILS, {
+                id: item.id,
+              })
+            }
             item={item}
           />
         )}
-        ListEmptyComponent={() => <EmptyList text="Nenhum deslocamento encontrado" />}
+        ListEmptyComponent={() => (
+          <EmptyList text="Nenhum deslocamento encontrado" />
+        )}
         onEndReached={onEndReached}
       />
       <FooterContainer>
-        <Button
-          title="Novo deslocamento"
-          onPress={onPressAdd}
-        />
+        <Button title="Novo deslocamento" onPress={onPressAdd} />
       </FooterContainer>
     </Styled.Container>
   );

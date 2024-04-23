@@ -18,35 +18,35 @@ export type User = {
   createdAt: Date;
   updatedAt: Date;
   course: Course;
-}
+};
 
 export enum UserPermission {
   ADMIN = "ADMIN",
   VOLUNTARY = "VOLUNTARY",
-  ASSISTANT_RADIO_OPERATOR = 'ASSISTANT_RADIO_OPERATOR',
+  ASSISTANT_RADIO_OPERATOR = "ASSISTANT_RADIO_OPERATOR",
   TRAINEE = "TRAINEE",
 }
 
 export const UserPermissionLabel = {
-  [UserPermission.ADMIN]: 'Administrador',
-  [UserPermission.TRAINEE]: 'Estagiario',
-  [UserPermission.VOLUNTARY]: 'Voluntário',
-  [UserPermission.ASSISTANT_RADIO_OPERATOR]: 'Auxliar de S.O.'
-}
+  [UserPermission.ADMIN]: "Administrador",
+  [UserPermission.TRAINEE]: "Estagiario",
+  [UserPermission.VOLUNTARY]: "Voluntário",
+  [UserPermission.ASSISTANT_RADIO_OPERATOR]: "Auxliar de S.O.",
+};
 
 export enum UserStatus {
-  ACTIVE = 'ACTIVE',
-  PENDING = 'PENDING',
-  SUSPENDED = 'SUSPENDED',
-  DELETED = 'DELETED',
+  ACTIVE = "ACTIVE",
+  PENDING = "PENDING",
+  SUSPENDED = "SUSPENDED",
+  DELETED = "DELETED",
 }
 
 export const UserStatusLabel = {
-  [UserStatus.ACTIVE]: 'Ativo',
-  [UserStatus.PENDING]: 'Pendente',
-  [UserStatus.SUSPENDED]: 'Suspenso',
-  [UserStatus.DELETED]: 'Excluído',
-}
+  [UserStatus.ACTIVE]: "Ativo",
+  [UserStatus.PENDING]: "Pendente",
+  [UserStatus.SUSPENDED]: "Suspenso",
+  [UserStatus.DELETED]: "Excluído",
+};
 
 export interface UserDutyRequest extends User {
   dutyRequest: DutyRequest;

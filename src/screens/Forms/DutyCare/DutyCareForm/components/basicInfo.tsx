@@ -23,13 +23,13 @@ const BasicInfo = ({
   vehicleList,
   reasonList,
 }: {
-  form: PostDutyCareChecklistPayload
-  setFormValue: (key: PostDutyCareChecklistField, value: any) => void
-  dutyList: Duty[]
-  vehicleList: Vehicle[]
-  reasonList: string[]
+  form: PostDutyCareChecklistPayload;
+  setFormValue: (key: PostDutyCareChecklistField, value: any) => void;
+  dutyList: Duty[];
+  vehicleList: Vehicle[];
+  reasonList: string[];
 }) => {
-  const dutySelected = dutyList.find(duty => duty.id === form.dutyId)
+  const dutySelected = dutyList.find((duty) => duty.id === form.dutyId);
 
   return (
     <CardInfo title="Informações gerais">
@@ -37,29 +37,90 @@ const BasicInfo = ({
         label="Plantão*"
         placeholder="Selecione o plantão"
         value={form.dutyId}
-        onChangeValue={(value) => setFormValue('dutyId', value)}
-        items={dutyList.map(duty => ({ label: `${moment(duty.date).format('DD/MM/YYYY')} - ${DutyShiftLabel[duty.shift]}`, value: duty.id }))}
+        onChangeValue={(value) => setFormValue("dutyId", value)}
+        items={dutyList.map((duty) => ({
+          label: `${moment(duty.date).format("DD/MM/YYYY")} - ${
+            DutyShiftLabel[duty.shift]
+          }`,
+          value: duty.id,
+        }))}
       />
       {dutySelected && (
         <Styled.DutyInfo>
-          {isString(dutySelected.leaderId) && <Label size={'small'} color={colors.Greyscale.b50} numberOfLines={1}>Líder: {dutySelected.leaderName}</Label>}
-          {isString(dutySelected.driverId) && <Label size={'small'} color={colors.Greyscale.b50} numberOfLines={1}>Condutor: {dutySelected.driverName}</Label>}
-          {isString(dutySelected.firstRescuerId) && <Label size={'small'} color={colors.Greyscale.b50} numberOfLines={1}>1º Socorrista: {dutySelected.firstRescuerName}</Label>}
-          {isString(dutySelected.secondRescuerId) && <Label size={'small'} color={colors.Greyscale.b50} numberOfLines={1}>2º Socorrista: {dutySelected.secondRescuerName}</Label>}
-          {isString(dutySelected.assistantRadioOperatorId) && <Label size={'small'} color={colors.Greyscale.b50} numberOfLines={1}>Auxiliar de S.O: {dutySelected.assistantRadioOperatorName}</Label>}
-          {isString(dutySelected.radioOperatorId) && <Label size={'small'} color={colors.Greyscale.b50} numberOfLines={1}>S.O: {dutySelected.radioOperatorName}</Label>}
-          {isString(dutySelected.traineeId) && <Label size={'small'} color={colors.Greyscale.b50} numberOfLines={1}>S.O: {dutySelected.traineeName}</Label>}
+          {isString(dutySelected.leaderId) && (
+            <Label
+              size={"small"}
+              color={colors.Greyscale.b50}
+              numberOfLines={1}
+            >
+              Líder: {dutySelected.leaderName}
+            </Label>
+          )}
+          {isString(dutySelected.driverId) && (
+            <Label
+              size={"small"}
+              color={colors.Greyscale.b50}
+              numberOfLines={1}
+            >
+              Condutor: {dutySelected.driverName}
+            </Label>
+          )}
+          {isString(dutySelected.firstRescuerId) && (
+            <Label
+              size={"small"}
+              color={colors.Greyscale.b50}
+              numberOfLines={1}
+            >
+              1º Socorrista: {dutySelected.firstRescuerName}
+            </Label>
+          )}
+          {isString(dutySelected.secondRescuerId) && (
+            <Label
+              size={"small"}
+              color={colors.Greyscale.b50}
+              numberOfLines={1}
+            >
+              2º Socorrista: {dutySelected.secondRescuerName}
+            </Label>
+          )}
+          {isString(dutySelected.assistantRadioOperatorId) && (
+            <Label
+              size={"small"}
+              color={colors.Greyscale.b50}
+              numberOfLines={1}
+            >
+              Auxiliar de S.O: {dutySelected.assistantRadioOperatorName}
+            </Label>
+          )}
+          {isString(dutySelected.radioOperatorId) && (
+            <Label
+              size={"small"}
+              color={colors.Greyscale.b50}
+              numberOfLines={1}
+            >
+              S.O: {dutySelected.radioOperatorName}
+            </Label>
+          )}
+          {isString(dutySelected.traineeId) && (
+            <Label
+              size={"small"}
+              color={colors.Greyscale.b50}
+              numberOfLines={1}
+            >
+              S.O: {dutySelected.traineeName}
+            </Label>
+          )}
         </Styled.DutyInfo>
       )}
 
       <Styled.Divider />
-      
+
       <DateInput
         label="Data*"
         placeholder="Selecione a data"
         value={form.date}
-        onChangeValue={(value) => setFormValue('date', value)}
-        type={'normal'}
+        onChangeValue={(value) => setFormValue("date", value)}
+        type={"normal"}
       />
 
       <Styled.Divider />
@@ -67,7 +128,7 @@ const BasicInfo = ({
       <TimeInput
         label="Horário*"
         value={form.time}
-        onChangeValue={(value) => setFormValue('time', value)}
+        onChangeValue={(value) => setFormValue("time", value)}
         minuteInterval={1}
       />
 
@@ -75,9 +136,12 @@ const BasicInfo = ({
 
       <RadioGroup
         label="Viatura*"
-        options={vehicleList.map(vehicle => ({ label: vehicle.name, value: vehicle.id }))}
+        options={vehicleList.map((vehicle) => ({
+          label: vehicle.name,
+          value: vehicle.id,
+        }))}
         selectedValue={form.vehicleId}
-        onChangeValue={(value) => setFormValue('vehicleId', value as string)}
+        onChangeValue={(value) => setFormValue("vehicleId", value as string)}
       />
       <Styled.Divider />
 
@@ -86,20 +150,20 @@ const BasicInfo = ({
         options={reasonList.map((reason) => ({ label: reason, value: reason }))}
         hasOtherOption
         selectedValue={form.reason}
-        onChangeValue={(value) => setFormValue('reason', value)}
+        onChangeValue={(value) => setFormValue("reason", value)}
       />
 
       <Styled.Divider />
-      
+
       <Input
         label="Observações"
         placeholder="Digite aqui..."
         value={form.note}
-        onChangeText={(value) => setFormValue('note', value)}
+        onChangeText={(value) => setFormValue("note", value)}
         type={INPUT_TYPE.TEXT}
       />
     </CardInfo>
-  )
-}
+  );
+};
 
 export default BasicInfo;

@@ -1,5 +1,10 @@
-import { DutyRequestListItem, DutyRequestStatus, DutyRequestStatusLabel, DutyShiftLabel } from "@api/dutyRequest/types";
-import TouchableScale from 'react-native-touchable-scale'; 
+import {
+  DutyRequestListItem,
+  DutyRequestStatus,
+  DutyRequestStatusLabel,
+  DutyShiftLabel,
+} from "@api/dutyRequest/types";
+import TouchableScale from "react-native-touchable-scale";
 import { ListItem } from "react-native-elements";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
@@ -11,7 +16,7 @@ import DutyRequestPositions from "@screens/components/dutyRequestPositions";
 
 interface DutyRequestItemProps {
   item: DutyRequestListItem;
-  onPress: () => void
+  onPress: () => void;
 }
 
 const DutyRequestItem = ({ item, onPress }: DutyRequestItemProps) => (
@@ -37,23 +42,46 @@ const DutyRequestItem = ({ item, onPress }: DutyRequestItemProps) => (
     containerStyle={{ borderRadius: 8 }}
   >
     <ListItem.Content>
-      <ListItem.Title style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}>
-        {moment(item.date).format('ddd')}, {moment(item.date).format('LL')} - {DutyShiftLabel[item.shift]}
+      <ListItem.Title
+        style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}
+      >
+        {moment(item.date).format("ddd")}, {moment(item.date).format("LL")} -{" "}
+        {DutyShiftLabel[item.shift]}
       </ListItem.Title>
       <DutyRequestPositions id={item.id} positions={item.positions} />
-      <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }}>
+      <ListItem.Subtitle
+        style={{
+          fontFamily: fonts.regular,
+          fontSize: LabelSizeValue.small,
+          marginTop: 4,
+        }}
+      >
         {item.startAt.substring(0, 5)} às {item.endAt.substring(0, 5)}
       </ListItem.Subtitle>
       {isString(item.note) && (
-        <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }}>
+        <ListItem.Subtitle
+          style={{
+            fontFamily: fonts.regular,
+            fontSize: LabelSizeValue.small,
+            marginTop: 4,
+          }}
+        >
           {item.note}
         </ListItem.Subtitle>
       )}
     </ListItem.Content>
     <Chip
       label={DutyRequestStatusLabel[item.status]}
-      labelColor={item.status === DutyRequestStatus.APPROVED ? colors.Greyscale.b100 : colors.black}
-      backgroundColor={item.status === DutyRequestStatus.APPROVED ? colors.green : colors.yellow}
+      labelColor={
+        item.status === DutyRequestStatus.APPROVED
+          ? colors.Greyscale.b100
+          : colors.black
+      }
+      backgroundColor={
+        item.status === DutyRequestStatus.APPROVED
+          ? colors.green
+          : colors.yellow
+      }
     />
   </ListItem>
 );

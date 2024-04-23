@@ -5,20 +5,20 @@ import styled from "styled-components/native";
 const Container = styled.View`
   margin-top: 4px;
   position: relative;
-`
+`;
 
 const Item = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   margin-top: 8px;
-`
+`;
 
 const ItemLabel = styled.View`
   margin-top: 2px;
   margin-left: 4px;
   flex-direction: row;
   width: 90%;
-`
+`;
 
 const InputOther = styled.TextInput`
   font-size: 16px;
@@ -28,7 +28,7 @@ const InputOther = styled.TextInput`
   border-bottom-width: 1px;
   border-bottom-color: ${colors.Greyscale.b80};
   width: 75%;
-`
+`;
 
 const ErrorText = styled.Text`
   color: ${colors.red};
@@ -42,5 +42,5 @@ export default {
   Item,
   ErrorText,
   ItemLabel,
-  InputOther
+  InputOther,
 };

@@ -14,12 +14,7 @@ interface DutyRequestListProps {
 }
 
 const DutyRequestList = ({ navigation }: DutyRequestListProps) => {
-  const {
-    isLoading,
-    isRefreshing,
-    list,
-    onRefresh
-  } = useDutyRequestList();
+  const { isLoading, isRefreshing, list, onRefresh } = useDutyRequestList();
 
   if (isLoading) {
     return <Loader />;
@@ -27,17 +22,23 @@ const DutyRequestList = ({ navigation }: DutyRequestListProps) => {
 
   return (
     <FlatList
-      refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+      refreshControl={
+        <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+      }
       data={list}
       contentContainerStyle={{ padding: 16 }}
       keyExtractor={(item) => item.id}
       ItemSeparatorComponent={() => <Styled.Divider />}
-      ListEmptyComponent={<EmptyList text="Você não possui solicitações de plantão" />}
+      ListEmptyComponent={
+        <EmptyList text="Você não possui solicitações de plantão" />
+      }
       renderItem={({ item }) => (
         <DutyRequestItem
           item={item}
           onPress={() => {
-            navigation.navigate(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, { id: item.id })
+            navigation.navigate(routeMap.DutyRoutes.DUTY_REQUEST_DETAILS, {
+              id: item.id,
+            });
           }}
         />
       )}

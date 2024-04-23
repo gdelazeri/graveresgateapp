@@ -20,12 +20,12 @@ export const calendarTheme = {
   textDayFontFamily: fonts.regular,
   textMonthFontFamily: fonts.regular,
   textDayHeaderFontFamily: fonts.regular,
-  textDayFontWeight: '400' as const,
-  textMonthFontWeight: '700' as const,
-  textDayHeaderFontWeight: '400' as const,
+  textDayFontWeight: "400" as const,
+  textMonthFontWeight: "700" as const,
+  textDayHeaderFontWeight: "400" as const,
   textDayFontSize: 16,
   textMonthFontSize: 18,
   textDayHeaderFontSize: 12,
   markColor: colors.red,
-  markTextColor: colors.Greyscale.b100
-}
+  markTextColor: colors.Greyscale.b100,
+};

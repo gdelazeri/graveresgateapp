@@ -33,5 +33,5 @@ export default {
   Form,
   Title,
   Divider,
-  ErrorMessage
+  ErrorMessage,
 };

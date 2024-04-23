@@ -4,8 +4,8 @@ import { TouchableOpacityProps } from "react-native";
 
 const ScrollView = styled.ScrollView.attrs({
   contentContainerStyle: {
-    padding: 16
-  }
+    padding: 16,
+  },
 })``;
 
 const Footer = styled.View`
@@ -34,5 +34,5 @@ export default {
   Footer,
   Divider,
   Item,
-  DividerLine
+  DividerLine,
 };

@@ -7,8 +7,8 @@ const Container = styled.View`
 
 const ScrollView = styled(KeyboardAwareScrollView).attrs({
   contentContainerStyle: {
-    padding: 16
-  }
+    padding: 16,
+  },
 })``;
 
 const Divider = styled.View`
@@ -30,5 +30,5 @@ export default {
   ScrollView,
   Divider,
   InlineInputContainer,
-  InlineInput
+  InlineInput,
 };

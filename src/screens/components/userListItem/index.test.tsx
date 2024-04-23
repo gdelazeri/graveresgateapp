@@ -11,12 +11,15 @@ describe("UserListItem", () => {
     const onPressMock = jest.fn();
 
     const { queryByText, getByTestId } = render(
-      <UserListItem user={{ id: 'id', name: 'User Name', email: 'User E-mail' } as User} onPress={onPressMock} />
+      <UserListItem
+        user={{ id: "id", name: "User Name", email: "User E-mail" } as User}
+        onPress={onPressMock}
+      />,
     );
 
-    expect(queryByText('User Name')).toBeTruthy();
+    expect(queryByText("User Name")).toBeTruthy();
 
-    fireEvent.press(getByTestId('user-list-item-id'));
+    fireEvent.press(getByTestId("user-list-item-id"));
     expect(onPressMock).toHaveBeenCalledTimes(1);
   });
 });

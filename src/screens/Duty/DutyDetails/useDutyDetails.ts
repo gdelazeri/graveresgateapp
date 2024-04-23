@@ -10,7 +10,7 @@ import { listChecklistsByDuty } from "@api/checklist/checklistApi";
 import { DutyChecklist } from "@api/checklist/types";
 
 interface UseDutyDetailsProps {
-  duty: Duty
+  duty: Duty;
 }
 
 const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
@@ -21,16 +21,22 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
   const [firstRescuer, setFirstRescuer] = useState<User | null>(null);
   const [secondRescuer, setSecondRescuer] = useState<User | null>(null);
   const [radioOperator, setRadioOperator] = useState<User | null>(null);
-  const [assistantRadioOperator, setAssistantRadioOperator] = useState<User | null>(null);
+  const [assistantRadioOperator, setAssistantRadioOperator] =
+    useState<User | null>(null);
   const [trainee, setTrainee] = useState<User | null>(null);
   const [isAvailable, setIsAvailable] = useState<boolean>(true);
   const [note, setNote] = useState<string | null>(null);
-  const [dutyCareChecklists, setDutyCareChecklists] = useState<DutyCareChecklist[]>([]);
+  const [dutyCareChecklists, setDutyCareChecklists] = useState<
+    DutyCareChecklist[]
+  >([]);
   const [dutyChecklists, setDutyChecklists] = useState<DutyChecklist[]>([]);
-  const isEditable = moment(duty.date).isSameOrAfter(moment().subtract(1, 'day'), "day");
+  const isEditable = moment(duty.date).isSameOrAfter(
+    moment().subtract(1, "day"),
+    "day",
+  );
 
   const fetchData = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     const responseDuty = await getDuty(duty.date, duty.shift);
 
@@ -38,40 +44,40 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
       setLeader({
         id: responseDuty.result.leaderId,
         name: responseDuty.result.leaderName,
-        imageUrl: responseDuty.result.leaderImageUrl
+        imageUrl: responseDuty.result.leaderImageUrl,
       } as User);
       setDriver({
         id: responseDuty.result.driverId,
         name: responseDuty.result.driverName,
-        imageUrl: responseDuty.result.driverImageUrl
+        imageUrl: responseDuty.result.driverImageUrl,
       } as User);
       setFirstRescuer({
         id: responseDuty.result.firstRescuerId,
         name: responseDuty.result.firstRescuerName,
-        imageUrl: responseDuty.result.firstRescuerImageUrl
+        imageUrl: responseDuty.result.firstRescuerImageUrl,
       } as User);
       setSecondRescuer({
         id: responseDuty.result.secondRescuerId,
         name: responseDuty.result.secondRescuerName,
-        imageUrl: responseDuty.result.secondRescuerImageUrl
+        imageUrl: responseDuty.result.secondRescuerImageUrl,
       } as User);
       setRadioOperator({
         id: responseDuty.result.radioOperatorId,
         name: responseDuty.result.radioOperatorName,
-        imageUrl: responseDuty.result.radioOperatorImageUrl
+        imageUrl: responseDuty.result.radioOperatorImageUrl,
       } as User);
       setAssistantRadioOperator({
         id: responseDuty.result.assistantRadioOperatorId,
         name: responseDuty.result.assistantRadioOperatorName,
-        imageUrl: responseDuty.result.assistantRadioOperatorImageUrl
+        imageUrl: responseDuty.result.assistantRadioOperatorImageUrl,
       } as User);
       setTrainee({
         id: responseDuty.result.traineeId,
         name: responseDuty.result.traineeName,
-        imageUrl: responseDuty.result.traineeImageUrl
+        imageUrl: responseDuty.result.traineeImageUrl,
       } as User);
-      setIsAvailable(responseDuty.result.isAvailable)
-      setNote(responseDuty.result.note)
+      setIsAvailable(responseDuty.result.isAvailable);
+      setNote(responseDuty.result.note);
     }
 
     if (duty.id) {
@@ -79,20 +85,20 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
       if (responseDutyCares.success && responseDutyCares.result) {
         setDutyCareChecklists([...responseDutyCares.result]);
       }
-  
+
       const responseDutyChecklists = await listChecklistsByDuty(duty.id);
       if (responseDutyChecklists.success && responseDutyChecklists.result) {
         setDutyChecklists([...responseDutyChecklists.result]);
       }
     }
 
-    setIsLoading(false)
-  }
+    setIsLoading(false);
+  };
 
   useFocusEffect(
     useCallback(() => {
-      fetchData()
-    }, [duty])
+      fetchData();
+    }, [duty]),
   );
 
   const saveAsUnavailable = async () => {
@@ -102,14 +108,14 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
       date: duty.date,
       shift: duty.shift,
       note,
-      isAvailable: false
-    })
+      isAvailable: false,
+    });
 
     setIsProcessing(false);
     fetchData();
 
-    return response
-  }
+    return response;
+  };
 
   const saveAsAvailable = async () => {
     setIsProcessing(true);
@@ -118,14 +124,14 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
       date: duty.date,
       shift: duty.shift,
       note: null,
-      isAvailable: true
-    })
+      isAvailable: true,
+    });
 
     setIsProcessing(false);
     fetchData();
 
-    return response
-  }
+    return response;
+  };
 
   return {
     isLoading,
@@ -144,7 +150,7 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
     note,
     setNote,
     saveAsUnavailable,
-    saveAsAvailable
+    saveAsAvailable,
   };
 };
 

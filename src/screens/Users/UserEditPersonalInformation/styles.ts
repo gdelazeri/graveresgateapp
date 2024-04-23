@@ -4,8 +4,8 @@ import colors from "@theme/colors";
 
 const Container = styled(KeyboardAwareScrollView).attrs({
   contentContainerStyle: {
-    padding: 16
-  }
+    padding: 16,
+  },
 })``;
 
 const Footer = styled.View`

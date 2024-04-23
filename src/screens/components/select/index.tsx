@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RNPickerSelect from 'react-native-picker-select';
+import RNPickerSelect from "react-native-picker-select";
 import Label from "@screens/components/label";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
@@ -29,7 +29,7 @@ const Select = ({
 
   return (
     <>
-      <Label size={'small'}>{label}</Label>
+      <Label size={"small"}>{label}</Label>
       <Styled.Container>
         <RNPickerSelect
           onOpen={() => setIsFocused(true)}
@@ -46,7 +46,9 @@ const Select = ({
               color: colors.black,
               borderWidth: 1,
               borderRadius: 4,
-              borderColor: isFocused ? colors.Greyscale.b50 : colors.Greyscale.b80,
+              borderColor: isFocused
+                ? colors.Greyscale.b50
+                : colors.Greyscale.b80,
               height: 50,
               padding: 12,
             },
@@ -57,20 +59,22 @@ const Select = ({
               color: colors.black,
               borderWidth: 1,
               borderRadius: 4,
-              borderColor: isFocused ? colors.Greyscale.b50 : colors.Greyscale.b80,
+              borderColor: isFocused
+                ? colors.Greyscale.b50
+                : colors.Greyscale.b80,
               height: 50,
               padding: 12,
             },
             placeholder: {
               fontSize: 16,
               fontFamily: fonts.regular,
-              color: colors.Greyscale.b60
-            }
+              color: colors.Greyscale.b60,
+            },
           }}
         />
-      {invalid && isString(invalidText) && (
-        <Styled.ErrorText>{invalidText}</Styled.ErrorText>
-      )}
+        {invalid && isString(invalidText) && (
+          <Styled.ErrorText>{invalidText}</Styled.ErrorText>
+        )}
       </Styled.Container>
     </>
   );

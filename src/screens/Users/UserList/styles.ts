@@ -13,5 +13,5 @@ const Divider = styled.View`
 
 export default {
   Container,
-  Divider
+  Divider,
 };

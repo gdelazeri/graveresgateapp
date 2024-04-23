@@ -22,12 +22,12 @@ const UserList = ({ navigation }: UserListProps) => {
     searchQuery,
     setSearchQuery,
     list,
-    refresh
-  } = useUserList()
+    refresh,
+  } = useUserList();
 
   const onPressItem = (id: string) => {
-    navigation.navigate(routeMap.UserRoutes.USER_DETAILS, { id })
-  }
+    navigation.navigate(routeMap.UserRoutes.USER_DETAILS, { id });
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -36,17 +36,23 @@ const UserList = ({ navigation }: UserListProps) => {
   return (
     <Styled.Container>
       <SearchBar
-        placeholder={'Pesquisar...'}
+        placeholder={"Pesquisar..."}
         onChangeText={setSearchQuery}
         value={searchQuery}
       />
       <FlatList
         data={list}
-        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refresh} />}
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={refresh} />
+        }
         renderItem={({ item }) => (
           <UserListItem
             user={item}
-            onPress={permission === UserPermission.ADMIN ? () => onPressItem(item.id) : undefined}
+            onPress={
+              permission === UserPermission.ADMIN
+                ? () => onPressItem(item.id)
+                : undefined
+            }
           />
         )}
         keyExtractor={(item) => item.id}

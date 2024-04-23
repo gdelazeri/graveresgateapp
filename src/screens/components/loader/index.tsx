@@ -4,8 +4,8 @@ import colors from "@theme/colors";
 
 const Loader = () => (
   <Styled.Container>
-    <ActivityIndicator color={colors.Greyscale.b50} size={'large'} />
+    <ActivityIndicator color={colors.Greyscale.b50} size={"large"} />
   </Styled.Container>
-)
+);
 
 export default Loader;

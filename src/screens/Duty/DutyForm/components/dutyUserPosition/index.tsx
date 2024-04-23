@@ -12,7 +12,7 @@ interface DutyUserPositionProps {
   label?: string;
   user?: User | null;
   onPress: () => void;
-  disabled?: boolean
+  disabled?: boolean;
   onRemove: () => void;
   requestsCount: number;
   dutyRequest?: DutyRequest;
@@ -30,17 +30,21 @@ const DutyUserPosition = ({
 }: DutyUserPositionProps) => {
   return (
     <>
-      {isString(label) && <Styled.LabelContainer>
-        <Label size={'small'}>{label}</Label>
-        <RequestsIndicator count={requestsCount} />
-      </Styled.LabelContainer>}
+      {isString(label) && (
+        <Styled.LabelContainer>
+          <Label size={"small"}>{label}</Label>
+          <RequestsIndicator count={requestsCount} />
+        </Styled.LabelContainer>
+      )}
       <Styled.Container onPress={onPress} disabled={disabled}>
         {isString(user?.id) && (
           <Styled.UserData>
             <Styled.UserAvatar>
               <Avatar imageUrl={user?.imageUrl} size={32} />
             </Styled.UserAvatar>
-            <Label size={'medium'} numberOfLines={1} noMarginBottom>{user?.name}</Label>
+            <Label size={"medium"} numberOfLines={1} noMarginBottom>
+              {user?.name}
+            </Label>
           </Styled.UserData>
         )}
         {isString(user?.id) && !disabled && (
@@ -49,16 +53,25 @@ const DutyUserPosition = ({
           </Styled.IconContainer>
         )}
         {!isString(user?.id) && isString(placeholder) && (
-          <Label size="medium" color={colors.Greyscale.b60} noMarginBottom>{placeholder}</Label>
+          <Label size="medium" color={colors.Greyscale.b60} noMarginBottom>
+            {placeholder}
+          </Label>
         )}
       </Styled.Container>
       {dutyRequest && (
         <Styled.DutyRequestInfoContainer>
           <Styled.Inline>
             <Styled.TimeIcon />
-            <Label size={'small'} color={colors.Greyscale.b50}>{dutyRequest.startAt.substring(0,5)} às {dutyRequest.endAt.substring(0,5)}</Label>
+            <Label size={"small"} color={colors.Greyscale.b50}>
+              {dutyRequest.startAt.substring(0, 5)} às{" "}
+              {dutyRequest.endAt.substring(0, 5)}
+            </Label>
           </Styled.Inline>
-          {isString(dutyRequest.note) && <Label size={'small'} color={colors.Greyscale.b50} noMarginBottom>Obs.: {dutyRequest.note}</Label>}
+          {isString(dutyRequest.note) && (
+            <Label size={"small"} color={colors.Greyscale.b50} noMarginBottom>
+              Obs.: {dutyRequest.note}
+            </Label>
+          )}
         </Styled.DutyRequestInfoContainer>
       )}
     </>

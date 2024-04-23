@@ -27,24 +27,30 @@ const RadioGroup = ({
   invalid = false,
   invalidText,
   multiple = false,
-  hasOtherOption = false
+  hasOtherOption = false,
 }: RadioGroupProps) => {
-  const [isOtherSelected, setIsOrderSelected] = useState(false)
-  const [otherText, setOtherText] = useState('')
+  const [isOtherSelected, setIsOrderSelected] = useState(false);
+  const [otherText, setOtherText] = useState("");
 
   useEffect(() => {
-    if (isString(selectedValue) && !multiple && hasOtherOption && options.find((item) => item.value === selectedValue) === undefined) {
-      setIsOrderSelected(true)
-      setOtherText(String(selectedValue))
+    if (
+      isString(selectedValue) &&
+      !multiple &&
+      hasOtherOption &&
+      options.find((item) => item.value === selectedValue) === undefined
+    ) {
+      setIsOrderSelected(true);
+      setOtherText(String(selectedValue));
     }
 
     if (Array.isArray(selectedValue) && multiple && hasOtherOption) {
-      const otherValue = selectedValue
-        .find((item) => !options.map((option) => option.value).includes(item)) 
-      setIsOrderSelected(isString(otherValue))
-      setOtherText(otherValue || '')
+      const otherValue = selectedValue.find(
+        (item) => !options.map((option) => option.value).includes(item),
+      );
+      setIsOrderSelected(isString(otherValue));
+      setOtherText(otherValue || "");
     }
-  }, [])
+  }, []);
 
   const onSelectValue = (value: string) => {
     if (multiple && Array.isArray(selectedValue)) {
@@ -59,7 +65,7 @@ const RadioGroup = ({
       }
       onChangeValue(value);
     }
-  }
+  };
 
   const isChecked = (value: string) => {
     if (multiple && Array.isArray(selectedValue)) {
@@ -68,14 +74,16 @@ const RadioGroup = ({
       return selectedValue === value;
     }
     return false;
-  }
+  };
 
   useEffect(() => {
     if (!hasOtherOption) return;
 
     if (multiple && Array.isArray(selectedValue)) {
       const allowedValues = selectedValue
-        .map((item) => options.map((option) => option.value).includes(item) ? item : null)
+        .map((item) =>
+          options.map((option) => option.value).includes(item) ? item : null,
+        )
         .filter((item) => item !== null) as string[];
       if (isString(otherText) && isOtherSelected) {
         onChangeValue([...allowedValues, otherText]);
@@ -85,28 +93,36 @@ const RadioGroup = ({
     } else if (isString(otherText) && isOtherSelected) {
       onChangeValue(otherText);
     }
-  }, [otherText, isOtherSelected])
+  }, [otherText, isOtherSelected]);
 
   useEffect(() => {
-    setIsOrderSelected(isString(otherText))
-  }, [otherText])
+    setIsOrderSelected(isString(otherText));
+  }, [otherText]);
 
   return (
     <Styled.Container testID={testID}>
-      <Label size={'small'}>{label}</Label>
+      <Label size={"small"}>{label}</Label>
       {options.map((item) => (
         <Styled.Item key={item.value} onPress={() => onSelectValue(item.value)}>
-          {isChecked(item.value) ? <RadioButtonChecked size={20} color={colors.red} /> : <RadioButtonUnchecked size={20} color={colors.Greyscale.b50} />}
+          {isChecked(item.value) ? (
+            <RadioButtonChecked size={20} color={colors.red} />
+          ) : (
+            <RadioButtonUnchecked size={20} color={colors.Greyscale.b50} />
+          )}
           <Styled.ItemLabel>
-            <Label size={'medium'}>{item.label}</Label>
+            <Label size={"medium"}>{item.label}</Label>
           </Styled.ItemLabel>
         </Styled.Item>
       ))}
       {hasOtherOption && (
         <Styled.Item onPress={() => setIsOrderSelected(!isOtherSelected)}>
-          {isOtherSelected ? <RadioButtonChecked size={20} color={colors.red} /> : <RadioButtonUnchecked size={20} color={colors.Greyscale.b50} />}
+          {isOtherSelected ? (
+            <RadioButtonChecked size={20} color={colors.red} />
+          ) : (
+            <RadioButtonUnchecked size={20} color={colors.Greyscale.b50} />
+          )}
           <Styled.ItemLabel>
-            <Label size={'medium'}>Outro:</Label>
+            <Label size={"medium"}>Outro:</Label>
             <Styled.InputOther
               placeholder="Digite aqui..."
               value={otherText}
@@ -119,7 +135,7 @@ const RadioGroup = ({
         <Styled.ErrorText>{invalidText}</Styled.ErrorText>
       )}
     </Styled.Container>
-  )
-}
+  );
+};
 
 export default RadioGroup;

@@ -13,16 +13,14 @@ export const getFirstName = (userName: string | undefined) => {
 
   const nameSplitted = String(userName).split(" ");
   return nameSplitted[0];
-}
+};
 
 export const formatAddress = ({
   address,
   district,
   city,
 }: {
-  address: string
-  district: string
-  city: string
-}) => (
-  `${address} - ${district} - ${city}`
-)
+  address: string;
+  district: string;
+  city: string;
+}) => `${address} - ${district} - ${city}`;

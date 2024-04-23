@@ -1,6 +1,11 @@
 import moment from "moment";
 import { useEffect, useMemo, useState } from "react";
-import { DutyPosition, DutyPositionLabel, DutyShift, DutyShiftLabelTimes } from "@api/dutyRequest/types";
+import {
+  DutyPosition,
+  DutyPositionLabel,
+  DutyShift,
+  DutyShiftLabelTimes,
+} from "@api/dutyRequest/types";
 import { useUserContext } from "@context/userContext";
 import { isString } from "@utils/stringHelper";
 import { UserPermission } from "@api/user/types";
@@ -19,46 +24,47 @@ const useDutyRequest = () => {
   const isFormValid = isString(date) && shift !== null && positions.length > 0;
 
   const shiftOptions = useMemo(() => {
-    let optionList = [DutyShift.DAY, DutyShift.NIGHT]
+    let optionList = [DutyShift.DAY, DutyShift.NIGHT];
 
-    if (moment(date).weekday() === 4) optionList = [DutyShift.NIGHT]
-    if (moment(date).weekday() === 0) optionList = [DutyShift.DAY]
+    if (moment(date).weekday() === 4) optionList = [DutyShift.NIGHT];
+    if (moment(date).weekday() === 0) optionList = [DutyShift.DAY];
 
-    return [...optionList]
-      .map((value) => ({
-        key: value.toString(),
-        label: DutyShiftLabelTimes[value as DutyShift],
-        value: value
-      }))
-  }, [date])
+    return [...optionList].map((value) => ({
+      key: value.toString(),
+      label: DutyShiftLabelTimes[value as DutyShift],
+      value: value,
+    }));
+  }, [date]);
 
   const positionOptions = useMemo(() => {
-    let optionList = []
+    let optionList = [];
 
     if (userData?.permission === UserPermission.TRAINEE) {
-      optionList = [DutyPosition.TRAINEE]
-    } else if (userData?.permission === UserPermission.ASSISTANT_RADIO_OPERATOR) {
-      optionList = [DutyPosition.ASSISTANT_RADIO_OPERATOR]
+      optionList = [DutyPosition.TRAINEE];
+    } else if (
+      userData?.permission === UserPermission.ASSISTANT_RADIO_OPERATOR
+    ) {
+      optionList = [DutyPosition.ASSISTANT_RADIO_OPERATOR];
     } else {
-      optionList = [DutyPosition.RESCUER, DutyPosition.RADIO_OPERATOR]
-      if (userData?.isDriver) optionList.push(DutyPosition.DRIVER)
-      if (userData?.isLeader) optionList.push(DutyPosition.LEADER)
+      optionList = [DutyPosition.RESCUER, DutyPosition.RADIO_OPERATOR];
+      if (userData?.isDriver) optionList.push(DutyPosition.DRIVER);
+      if (userData?.isLeader) optionList.push(DutyPosition.LEADER);
     }
 
     return [...optionList]
       .map((value) => ({
         key: value.toString(),
         label: DutyPositionLabel[value as DutyPosition],
-        value: value
+        value: value,
       }))
-      .sort((a, b) => a.label.localeCompare(b.label))
-  }, [userData])
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [userData]);
 
   useEffect(() => {
     if (userData?.permission === UserPermission.TRAINEE) {
-      setPositions([DutyPosition.TRAINEE])
+      setPositions([DutyPosition.TRAINEE]);
     }
-  }, [userData])
+  }, [userData]);
 
   const save = async () => {
     setIsProcessing(true);
@@ -76,7 +82,7 @@ const useDutyRequest = () => {
 
     setIsProcessing(false);
 
-    return response
+    return response;
   };
 
   return {

@@ -18,21 +18,31 @@ const useSignUp = () => {
   const [courseList, setCourseList] = useState<Course[]>([]);
   const { setTokens } = useUserContext();
 
-  const isFullNameValid = fullName.length === 0 || (fullName.length > 3 && fullName.trim().split(" ").length > 1);
+  const isFullNameValid =
+    fullName.length === 0 ||
+    (fullName.length > 3 && fullName.trim().split(" ").length > 1);
   const isEmailValid = email.length === 0 || isEmail(email);
-  const isPhoneValid = phone.length === 0 || removePhoneMask(phone).length === 11;
+  const isPhoneValid =
+    phone.length === 0 || removePhoneMask(phone).length === 11;
   const isBirthDateValid = birthDate.length === 0 || birthDate.length === 10;
   const isPasswordValid = password.length === 0 || password.length >= 8;
-  const isPasswordsEqual = passwordConfirm.length === 0 || password === passwordConfirm;
+  const isPasswordsEqual =
+    passwordConfirm.length === 0 || password === passwordConfirm;
 
   const isFormValid = useMemo(
     () =>
-      isString(fullName) && isFullNameValid &&
-      isString(email) && isEmailValid &&
-      isString(phone) && isPhoneValid &&
-      isString(birthDate) && isBirthDateValid &&
-      isString(password) && isPasswordValid &&
-      isString(passwordConfirm) && isPasswordsEqual,
+      isString(fullName) &&
+      isFullNameValid &&
+      isString(email) &&
+      isEmailValid &&
+      isString(phone) &&
+      isPhoneValid &&
+      isString(birthDate) &&
+      isBirthDateValid &&
+      isString(password) &&
+      isPasswordValid &&
+      isString(passwordConfirm) &&
+      isPasswordsEqual,
     [
       fullName,
       email,
@@ -56,7 +66,7 @@ const useSignUp = () => {
       name: fullName.trim(),
       email: email.trim(),
       phone: removePhoneMask(phone),
-      birthDate: moment(birthDate, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+      birthDate: moment(birthDate, "DD/MM/YYYY").format("YYYY-MM-DD"),
       courseId,
       password,
     };
@@ -79,11 +89,11 @@ const useSignUp = () => {
     const fetchCourses = async () => {
       const response = await getAllCourses();
       if (response && response.success) {
-        setCourseList([ ...response.result ]);
+        setCourseList([...response.result]);
       }
-    }
+    };
     fetchCourses();
-  }, [])
+  }, []);
 
   return {
     fullName,

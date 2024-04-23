@@ -4,19 +4,19 @@ import styled from "styled-components/native";
 
 const Container = styled.View`
   position: relative;
-`
+`;
 
 const Item = styled.View`
   margin-top: 4px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-`
+`;
 
 const ItemLabel = styled.View`
   width: 60%;
   padding-right: 8px;
-`
+`;
 
 const ErrorText = styled.Text`
   color: ${colors.red};

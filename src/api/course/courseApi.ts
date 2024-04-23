@@ -4,7 +4,8 @@ import { Course } from "./types";
 
 export const getAllCourses = async () => {
   try {
-    const response: AxiosResponse<ApiResponse<Course[]>> = await get("/v1/course/list");
+    const response: AxiosResponse<ApiResponse<Course[]>> =
+      await get("/v1/course/list");
     return response.data;
   } catch (err) {
     const error = err as AxiosError<ApiResponse<Course[]>>;

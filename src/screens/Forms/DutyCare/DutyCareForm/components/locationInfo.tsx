@@ -3,24 +3,28 @@ import RadioGroup from "@screens/components/radioGroup";
 import Input from "@screens/components/input";
 import { INPUT_TYPE } from "@screens/components/input/types";
 import Styled from "../styles";
-import { DutyCareChecklistIncidentContinuation, DutyCareChecklistIncidentContinuationLabel, PostDutyCareChecklistPayload } from "@api/dutyCareChecklist/types";
+import {
+  DutyCareChecklistIncidentContinuation,
+  DutyCareChecklistIncidentContinuationLabel,
+  PostDutyCareChecklistPayload,
+} from "@api/dutyCareChecklist/types";
 import { PostDutyCareChecklistField } from "../useDutyCareForm";
 
 const LocationInfo = ({
   form,
   setFormValue,
-  cityList = []
+  cityList = [],
 }: {
-  form: PostDutyCareChecklistPayload,
-  setFormValue: (key: PostDutyCareChecklistField, value: any) => void,
-  cityList: string[]
+  form: PostDutyCareChecklistPayload;
+  setFormValue: (key: PostDutyCareChecklistField, value: any) => void;
+  cityList: string[];
 }) => (
   <CardInfo title="Local da ocorrência/atendimento">
     <Input
       label="Endereço completo*"
       placeholder="Informe a rua e número"
       value={form.incidentAddress}
-      onChangeText={(value) => setFormValue('incidentAddress', value)}
+      onChangeText={(value) => setFormValue("incidentAddress", value)}
       type={INPUT_TYPE.DEFAULT}
     />
 
@@ -30,35 +34,41 @@ const LocationInfo = ({
       label="Bairro*"
       placeholder="Informe o bairro"
       value={form.incidentAddressDistrict}
-      onChangeText={(value) => setFormValue('incidentAddressDistrict', value)}
+      onChangeText={(value) => setFormValue("incidentAddressDistrict", value)}
       type={INPUT_TYPE.DEFAULT}
     />
 
     <Styled.Divider />
 
-    <RadioGroup 
+    <RadioGroup
       label="Cidade*"
       selectedValue={form.incidentAddressCity}
-      onChangeValue={(value) => setFormValue('incidentAddressCity', String(value))}
+      onChangeValue={(value) =>
+        setFormValue("incidentAddressCity", String(value))
+      }
       options={cityList.map((city) => ({
         label: city,
-        value: city
+        value: city,
       }))}
       hasOtherOption
     />
 
     <Styled.Divider />
 
-    <RadioGroup 
+    <RadioGroup
       label="Continuação da ocorrência*"
       selectedValue={form.incidentContinuation}
-      onChangeValue={(value) => setFormValue('incidentContinuation', value as string)}
-      options={Object.values(DutyCareChecklistIncidentContinuation).map((value) => ({
-        label: DutyCareChecklistIncidentContinuationLabel[value],
-        value
-      }))}
+      onChangeValue={(value) =>
+        setFormValue("incidentContinuation", value as string)
+      }
+      options={Object.values(DutyCareChecklistIncidentContinuation).map(
+        (value) => ({
+          label: DutyCareChecklistIncidentContinuationLabel[value],
+          value,
+        }),
+      )}
     />
   </CardInfo>
-)
+);
 
 export default LocationInfo;

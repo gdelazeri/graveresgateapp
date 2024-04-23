@@ -15,5 +15,5 @@ const EmptyContainer = styled.View`
 
 export default {
   Container,
-  EmptyContainer
+  EmptyContainer,
 };

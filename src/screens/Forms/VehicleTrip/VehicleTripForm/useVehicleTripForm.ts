@@ -6,35 +6,51 @@ import { listActiveUsers } from "@api/user/userApi";
 import { User } from "@api/user/types";
 import moment from "moment";
 import { isString } from "@utils/stringHelper";
-import { getVehicleTrip, postVehicleTrip, putVehicleTrip } from "@api/vehicleTrip/vehicleTripApi";
+import {
+  getVehicleTrip,
+  postVehicleTrip,
+  putVehicleTrip,
+} from "@api/vehicleTrip/vehicleTripApi";
 
 export const useVehicleTripForm = (id?: string) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [vehicleId, setVehicleId] = useState<string | undefined>()
-  const [driverId, setDriverId] = useState<string | undefined>()
-  const [date, setDate] = useState<string>(moment().format('YYYY-MM-DD'))
-  const [kmInitial, setKmInitial] = useState<string>('')
-  const [kmFinal, setKmFinal] = useState<string>('')
-  const [startAt, setStartAt] = useState<string>('')
-  const [endAt, setEndAt] = useState<string>('')
-  const [place, setPlace] = useState<string>('')
-  const [reason, setReason] = useState<string>('')
-  const [vehicleList, setVehicleList] = useState<Vehicle[]>([])
-  const [driverList, setDriverList] = useState<User[]>([])
-  const [isProcessing, setIsProcessing] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [vehicleId, setVehicleId] = useState<string | undefined>();
+  const [driverId, setDriverId] = useState<string | undefined>();
+  const [date, setDate] = useState<string>(moment().format("YYYY-MM-DD"));
+  const [kmInitial, setKmInitial] = useState<string>("");
+  const [kmFinal, setKmFinal] = useState<string>("");
+  const [startAt, setStartAt] = useState<string>("");
+  const [endAt, setEndAt] = useState<string>("");
+  const [place, setPlace] = useState<string>("");
+  const [reason, setReason] = useState<string>("");
+  const [vehicleList, setVehicleList] = useState<Vehicle[]>([]);
+  const [driverList, setDriverList] = useState<User[]>([]);
+  const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
-  const isFormValid = useMemo(() => (
-    isString(vehicleId) &&
-    isString(driverId) &&
-    isString(date) &&
-    isString(kmInitial) &&
-    isString(kmFinal) &&
-    isString(startAt) &&
-    isString(endAt) &&
-    isString(place) &&
-    isString(reason)
-  ), [vehicleId, driverId, date, kmInitial, kmFinal, startAt, endAt, place, reason])
-  
+  const isFormValid = useMemo(
+    () =>
+      isString(vehicleId) &&
+      isString(driverId) &&
+      isString(date) &&
+      isString(kmInitial) &&
+      isString(kmFinal) &&
+      isString(startAt) &&
+      isString(endAt) &&
+      isString(place) &&
+      isString(reason),
+    [
+      vehicleId,
+      driverId,
+      date,
+      kmInitial,
+      kmFinal,
+      startAt,
+      endAt,
+      place,
+      reason,
+    ],
+  );
+
   useFocusEffect(
     useCallback(() => {
       const fetchData = async () => {
@@ -57,19 +73,19 @@ export const useVehicleTripForm = (id?: string) => {
 
         const responseVehicles = await listAvailableVehicles();
         if (responseVehicles.success && responseVehicles.result) {
-          setVehicleList([ ...responseVehicles.result ]);
+          setVehicleList([...responseVehicles.result]);
         }
 
         const responseDrivers = await listActiveUsers({ isDriver: true });
         if (responseDrivers.success && responseDrivers.result) {
-          setDriverList([ ...responseDrivers.result ])
+          setDriverList([...responseDrivers.result]);
         }
-       
+
         setIsLoading(false);
       };
 
-      fetchData()
-    }, [])
+      fetchData();
+    }, []),
   );
 
   const save = async () => {
@@ -96,7 +112,7 @@ export const useVehicleTripForm = (id?: string) => {
 
     setIsProcessing(false);
 
-    return response
+    return response;
   };
 
   return {
@@ -123,6 +139,6 @@ export const useVehicleTripForm = (id?: string) => {
     driverList,
     isProcessing,
     isFormValid,
-    save
+    save,
   };
-}
+};

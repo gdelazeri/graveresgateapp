@@ -5,42 +5,45 @@ import Fuse, { IFuseOptions } from "fuse.js";
 import { useFocusEffect } from "@react-navigation/native";
 import { useUserContext } from "@context/userContext";
 
-const fuseOptionKey = ['name']
+const fuseOptionKey = ["name"];
 const fuseOptions = {
   includeScore: true,
   includeMatches: true,
   shouldSort: true,
   keys: fuseOptionKey,
   getFn: (obj: any, path: string) =>
-    typeof obj[path] === 'string' ? obj[path] : '',
+    typeof obj[path] === "string" ? obj[path] : "",
   threshold: 0.2,
-  ignoreLocation: true
-} as IFuseOptions<User>
+  ignoreLocation: true,
+} as IFuseOptions<User>;
 
 export const useUserList = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [allUsers, setAllUsers] = useState<User[]>([]);
   const [list, setList] = useState<User[]>([]);
   const { permission } = useUserContext();
 
-  const initFuse = useMemo(() => new Fuse(allUsers, fuseOptions), [allUsers])
+  const initFuse = useMemo(() => new Fuse(allUsers, fuseOptions), [allUsers]);
 
   useEffect(() => {
     if (searchQuery.length > 0) {
-      const results = initFuse.search(searchQuery).map(result => ({
+      const results = initFuse.search(searchQuery).map((result) => ({
         ...result.item,
-        matches: result.matches
-      }))
-      setList(results)
+        matches: result.matches,
+      }));
+      setList(results);
     } else {
-      setList(allUsers)
+      setList(allUsers);
     }
-  }, [searchQuery, allUsers])
+  }, [searchQuery, allUsers]);
 
   const fetchData = async () => {
-    const response = permission === UserPermission.ADMIN ? await listAllUsers() : await listActiveUsers({});
+    const response =
+      permission === UserPermission.ADMIN
+        ? await listAllUsers()
+        : await listActiveUsers({});
     if (response?.success) {
       setAllUsers(response.result);
     } else {
@@ -51,16 +54,14 @@ export const useUserList = () => {
   useFocusEffect(
     useCallback(() => {
       setIsLoading(true);
-      fetchData()
-        .then(() => setIsLoading(false))
-    }, [])
+      fetchData().then(() => setIsLoading(false));
+    }, []),
   );
 
   const refresh = () => {
     setIsRefreshing(true);
-    fetchData()
-      .then(() => setIsRefreshing(false))
-  }
+    fetchData().then(() => setIsRefreshing(false));
+  };
 
   return {
     isLoading,
@@ -68,6 +69,6 @@ export const useUserList = () => {
     searchQuery,
     setSearchQuery,
     list,
-    refresh
+    refresh,
   } as const;
-}
+};

@@ -1,5 +1,5 @@
 import moment from "moment";
-import TouchableScale from 'react-native-touchable-scale';
+import TouchableScale from "react-native-touchable-scale";
 import { ListItem } from "react-native-elements";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
@@ -9,7 +9,7 @@ import { DutyShiftLabel } from "@api/dutyRequest/types";
 
 interface DriverChecklistItemProps {
   item: DriverChecklist;
-  onPress: () => void
+  onPress: () => void;
 }
 
 const DriverChecklistItem = ({ item, onPress }: DriverChecklistItemProps) => (
@@ -35,11 +35,20 @@ const DriverChecklistItem = ({ item, onPress }: DriverChecklistItemProps) => (
     containerStyle={{ borderRadius: 8 }}
   >
     <ListItem.Content>
-      <ListItem.Title style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}>
+      <ListItem.Title
+        style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}
+      >
         {item.vehicle.name}
       </ListItem.Title>
-      <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }}>
-        {moment(item.duty.date).format('LL')} - {DutyShiftLabel[item.duty.shift]}
+      <ListItem.Subtitle
+        style={{
+          fontFamily: fonts.regular,
+          fontSize: LabelSizeValue.small,
+          marginTop: 4,
+        }}
+      >
+        {moment(item.duty.date).format("LL")} -{" "}
+        {DutyShiftLabel[item.duty.shift]}
       </ListItem.Subtitle>
     </ListItem.Content>
   </ListItem>

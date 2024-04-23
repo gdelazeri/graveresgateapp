@@ -27,7 +27,7 @@ enum DutyRoutes {
   SCHEDULE = "Schedule",
   DUTY_FORM = "DutyForm",
   DUTY_DETAILS = "DutyDetails",
-  DUTY_SELECT_USER = "DutySelectUser"
+  DUTY_SELECT_USER = "DutySelectUser",
 }
 
 enum SettingsRoutes {
@@ -61,5 +61,5 @@ export default {
   UserRoutes,
   DutyRoutes,
   SettingsRoutes,
-  FormsRoutes
+  FormsRoutes,
 };

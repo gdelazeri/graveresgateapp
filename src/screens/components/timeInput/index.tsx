@@ -20,28 +20,33 @@ const TimeInput = ({
   label,
   value,
   onChangeValue,
-  minuteInterval = 1
+  minuteInterval = 1,
 }: TimeInputProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleConfirm = (date: Date) => {
-    onChangeValue(moment(date).format('HH:mm'));
+    onChangeValue(moment(date).format("HH:mm"));
     setIsVisible(false);
   };
 
-  const date = value ? moment(value, 'HH:mm').toDate() : new Date();
+  const date = value ? moment(value, "HH:mm").toDate() : new Date();
 
   return (
     <View>
-      <Label size={'small'}>{label}</Label>
-      <Styled.Container isFocused={isVisible} onPress={() => setIsVisible(!isVisible)}>
+      <Label size={"small"}>{label}</Label>
+      <Styled.Container
+        isFocused={isVisible}
+        onPress={() => setIsVisible(!isVisible)}
+      >
         {isString(value) && <Styled.TextDate>{value}</Styled.TextDate>}
-        {!isString(value) && <Styled.TextDatePlaceholder>-</Styled.TextDatePlaceholder>}
+        {!isString(value) && (
+          <Styled.TextDatePlaceholder>-</Styled.TextDatePlaceholder>
+        )}
       </Styled.Container>
       <DateTimePickerModal
-        locale={'pt'}
+        locale={"pt"}
         isVisible={isVisible}
-        mode={'time'}
+        mode={"time"}
         onConfirm={handleConfirm}
         onCancel={() => setIsVisible(false)}
         minuteInterval={minuteInterval}

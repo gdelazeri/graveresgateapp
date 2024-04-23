@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import moment from "moment";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { FlatList, RefreshControl } from "react-native";
-import SegmentedControl from '@react-native-segmented-control/segmented-control'
+import SegmentedControl from "@react-native-segmented-control/segmented-control";
 
 import Header from "@screens/components/header";
 import DutyItem from "./components/dutyItem";
@@ -29,21 +29,21 @@ const Schedule = ({ navigation }: ScheduleProps) => {
     periodOptions,
     period,
     onChangePeriod,
-    onEndReached
+    onEndReached,
   } = useSchedule();
   const ref = useRef<FlatList>(null);
 
   useEffect(() => {
     if (!isLoading) {
       if (ref.current) {
-        const date = moment().format('YYYY-MM-DD');
+        const date = moment().format("YYYY-MM-DD");
         const index = list.findIndex((item) => item.date >= date);
         if (index !== -1) {
           ref.current.scrollToIndex({ index, animated: true });
         }
       }
     }
-  }, [isLoading])
+  }, [isLoading]);
 
   return (
     <>
@@ -55,14 +55,18 @@ const Schedule = ({ navigation }: ScheduleProps) => {
         fontStyle={{ fontSize: LabelSizeValue.small }}
         activeFontStyle={{ fontSize: LabelSizeValue.small }}
         onChange={(event) => {
-          onChangePeriod(periodOptions[event.nativeEvent.selectedSegmentIndex].value)
+          onChangePeriod(
+            periodOptions[event.nativeEvent.selectedSegmentIndex].value,
+          );
         }}
       />
       {isLoading && <Loader />}
       {!isLoading && (
         <FlatList
           ref={ref}
-          refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={refresh} />}
+          refreshControl={
+            <RefreshControl refreshing={isRefreshing} onRefresh={refresh} />
+          }
           data={list}
           contentContainerStyle={{ padding: 16, paddingTop: 0 }}
           keyExtractor={(item) => `${item.date}_${item.shift}`}
@@ -71,15 +75,19 @@ const Schedule = ({ navigation }: ScheduleProps) => {
             <DutyItem
               item={item}
               onPress={() => {
-                navigation.navigate(routeMap.DutyRoutes.DUTY_DETAILS, { duty: item })
+                navigation.navigate(routeMap.DutyRoutes.DUTY_DETAILS, {
+                  duty: item,
+                });
               }}
               disabled={userData?.permission !== UserPermission.ADMIN}
             />
           )}
-          ListEmptyComponent={() => <EmptyList text="Nenhum plantão encontrado" />}
+          ListEmptyComponent={() => (
+            <EmptyList text="Nenhum plantão encontrado" />
+          )}
           onEndReached={onEndReached}
           onScrollToIndexFailed={({ index }) => {
-            const wait = new Promise(resolve => setTimeout(resolve, 500));
+            const wait = new Promise((resolve) => setTimeout(resolve, 500));
             wait.then(() => {
               ref.current?.scrollToIndex({ index, animated: true });
             });

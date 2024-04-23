@@ -1,6 +1,10 @@
 import { useMemo, useState } from "react";
 import { Alert } from "react-native";
-import { NavigationProp, ParamListBase, StackActions } from "@react-navigation/native";
+import {
+  NavigationProp,
+  ParamListBase,
+  StackActions,
+} from "@react-navigation/native";
 import Header from "@screens/components/header";
 import Loader from "@screens/components/loader";
 import FooterContainer from "@screens/components/footerContainer";
@@ -23,7 +27,7 @@ enum PageIndex {
 }
 
 const DriverChecklistForm = ({ navigation }: DriverChecklistFormProps) => {
-  const [pageIndex, setPageIndex] = useState<PageIndex>(PageIndex.BASIC_INFO)
+  const [pageIndex, setPageIndex] = useState<PageIndex>(PageIndex.BASIC_INFO);
   const {
     isLoading,
     isProcessing,
@@ -33,8 +37,8 @@ const DriverChecklistForm = ({ navigation }: DriverChecklistFormProps) => {
     form,
     setFormValue,
     setFormChecklistQuestionValue,
-    save
-  } = useDriverChecklistForm()
+    save,
+  } = useDriverChecklistForm();
 
   const onPressContinue = async () => {
     if (pageIndex < PageIndex.CHECKLIST_INFO) {
@@ -46,82 +50,106 @@ const DriverChecklistForm = ({ navigation }: DriverChecklistFormProps) => {
 
     if (response.success && response.result) {
       Toast.show({
-        type: 'success',
-        text1: 'Checklist Condutor',
-        text2: 'Salvo com sucesso!',
-        position: 'bottom',
-      })
+        type: "success",
+        text1: "Checklist Condutor",
+        text2: "Salvo com sucesso!",
+        position: "bottom",
+      });
       navigation.dispatch(
-        StackActions.replace(routeMap.FormsRoutes.DRIVER_CHECKLIST_DETAILS, { id: response.result.id })
+        StackActions.replace(routeMap.FormsRoutes.DRIVER_CHECKLIST_DETAILS, {
+          id: response.result.id,
+        }),
       );
     } else {
       Alert.alert(
-        'Erro ao salvar o checklist do condutor',
-        'Ocorreu algum erro ao salvar o formulário, verifique os dados e tente novamente.',
-        [{ text: 'OK' }]
-      )
+        "Erro ao salvar o checklist do condutor",
+        "Ocorreu algum erro ao salvar o formulário, verifique os dados e tente novamente.",
+        [{ text: "OK" }],
+      );
     }
-  }
+  };
 
   const onPressGoBack = async () => {
     if (pageIndex > PageIndex.BASIC_INFO) {
       setPageIndex(pageIndex - 1);
     }
-  }
+  };
 
   const pageIndexRenderer = useMemo(() => {
     switch (pageIndex) {
       case PageIndex.BASIC_INFO:
-        return <BasicInfo
-          form={form}
-          setFormValue={setFormValue}
-          dutyList={dutyList}
-          vehicleList={vehicleList}
-        />;
+        return (
+          <BasicInfo
+            form={form}
+            setFormValue={setFormValue}
+            dutyList={dutyList}
+            vehicleList={vehicleList}
+          />
+        );
       case PageIndex.CHECKLIST_INFO:
-        return <ChecklistQuestions
-          form={form}
-          setFormChecklistQuestionValue={setFormChecklistQuestionValue}
-          checklistQuestions={checklistQuestions}
-        />;
+        return (
+          <ChecklistQuestions
+            form={form}
+            setFormChecklistQuestionValue={setFormChecklistQuestionValue}
+            checklistQuestions={checklistQuestions}
+          />
+        );
     }
-  }, [pageIndex, form, setFormValue, dutyList, vehicleList])
+  }, [pageIndex, form, setFormValue, dutyList, vehicleList]);
 
   const isNextEnabled = useMemo(() => {
     switch (pageIndex) {
       case PageIndex.BASIC_INFO:
         return (
-          isString(form.dutyId) && isString(form.vehicleId) && isString(form.kmInitial)
+          isString(form.dutyId) &&
+          isString(form.vehicleId) &&
+          isString(form.kmInitial)
         );
       case PageIndex.CHECKLIST_INFO:
         return (
           checklistQuestions?.questions
-            .filter(question => question.required && question.items?.length === 0)
-            .map(question => question.id)
-            .every(questionId => (form.checklistAnswers || []).map(answer => answer.checklistQuestionId).includes(questionId))
-          &&
-          checklistQuestions?.questions
-            .filter(question => question.required && question.items?.length > 0)
-            .map(question => question.items?.map(item => ({ question: question.id, item: item.text })))
-            .flat()
-            .every(obj => 
-              (form.checklistAnswers || [])
-              .map(answer => ({ question: answer.checklistQuestionId, item: answer.checklistQuestionItem }))
-              .find(x => x.item === obj.item && x.question === obj.question)
+            .filter(
+              (question) => question.required && question.items?.length === 0,
             )
-        )
+            .map((question) => question.id)
+            .every((questionId) =>
+              (form.checklistAnswers || [])
+                .map((answer) => answer.checklistQuestionId)
+                .includes(questionId),
+            ) &&
+          checklistQuestions?.questions
+            .filter(
+              (question) => question.required && question.items?.length > 0,
+            )
+            .map(
+              (question) =>
+                question.items?.map((item) => ({
+                  question: question.id,
+                  item: item.text,
+                })),
+            )
+            .flat()
+            .every((obj) =>
+              (form.checklistAnswers || [])
+                .map((answer) => ({
+                  question: answer.checklistQuestionId,
+                  item: answer.checklistQuestionItem,
+                }))
+                .find(
+                  (x) => x.item === obj.item && x.question === obj.question,
+                ),
+            )
+        );
     }
-  }, [pageIndex, form])
+  }, [pageIndex, form]);
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
-  
+
   return (
     <Styled.Container>
-      <Styled.ScrollView>
-        {pageIndexRenderer}
-      </Styled.ScrollView>
+      <Styled.ScrollView>{pageIndexRenderer}</Styled.ScrollView>
       <FooterContainer>
         <Styled.InlineInputContainer>
           <Styled.InlineInput style={{ paddingRight: 4 }}>
@@ -134,7 +162,9 @@ const DriverChecklistForm = ({ navigation }: DriverChecklistFormProps) => {
           </Styled.InlineInput>
           <Styled.InlineInput style={{ paddingLeft: 4 }}>
             <Button
-              title={pageIndex < PageIndex.CHECKLIST_INFO ? "Próximo" : "Finalizar"}
+              title={
+                pageIndex < PageIndex.CHECKLIST_INFO ? "Próximo" : "Finalizar"
+              }
               onPress={onPressContinue}
               disabled={!isNextEnabled}
               loading={isProcessing}
@@ -151,21 +181,21 @@ export default DriverChecklistForm;
 export const NavHeader = ({ navigation }: DriverChecklistFormProps) => {
   const onGoBack = () => {
     Alert.alert(
-      'Deseja voltar para a tela anterior?',
-      'Ao voltar você perderá todos os dados preenchidos.',
+      "Deseja voltar para a tela anterior?",
+      "Ao voltar você perderá todos os dados preenchidos.",
       [
         {
-          text: 'Não',
-          style: 'cancel'
+          text: "Não",
+          style: "cancel",
         },
         {
-          text: 'Sim',
-          style: 'destructive',
-          onPress: navigation.goBack
-        }
-      ]
-    )
-  }
+          text: "Sim",
+          style: "destructive",
+          onPress: navigation.goBack,
+        },
+      ],
+    );
+  };
 
-  return <Header onBackPress={onGoBack} title="Checklist Condutor" />
+  return <Header onBackPress={onGoBack} title="Checklist Condutor" />;
 };

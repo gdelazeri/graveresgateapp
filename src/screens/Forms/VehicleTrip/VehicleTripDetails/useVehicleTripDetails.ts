@@ -6,24 +6,24 @@ import moment from "moment";
 import { getVehicleTrip } from "@api/vehicleTrip/vehicleTripApi";
 
 export const useVehicleTripDetails = (id: string) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [vehicle, setVehicle] = useState<Vehicle>()
-  const [driver, setDriver] = useState<User>()
-  const [date, setDate] = useState<string>(moment().format('YYYY-MM-DD'))
-  const [kmInitial, setKmInitial] = useState<string>('')
-  const [kmFinal, setKmFinal] = useState<string>('')
-  const [startAt, setStartAt] = useState<string>('')
-  const [endAt, setEndAt] = useState<string>('')
-  const [place, setPlace] = useState<string>('')
-  const [reason, setReason] = useState<string>('')
-  const [createdByUser, setCreatedByUser] = useState<User>()
-  const [createdAt, setCreatedAt] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [vehicle, setVehicle] = useState<Vehicle>();
+  const [driver, setDriver] = useState<User>();
+  const [date, setDate] = useState<string>(moment().format("YYYY-MM-DD"));
+  const [kmInitial, setKmInitial] = useState<string>("");
+  const [kmFinal, setKmFinal] = useState<string>("");
+  const [startAt, setStartAt] = useState<string>("");
+  const [endAt, setEndAt] = useState<string>("");
+  const [place, setPlace] = useState<string>("");
+  const [reason, setReason] = useState<string>("");
+  const [createdByUser, setCreatedByUser] = useState<User>();
+  const [createdAt, setCreatedAt] = useState<string>("");
 
   useFocusEffect(
     useCallback(() => {
       const fetchData = async () => {
         setIsLoading(true);
-        
+
         const response = await getVehicleTrip(id);
         if (response.success && response.result) {
           setVehicle(response.result.vehicle);
@@ -42,8 +42,8 @@ export const useVehicleTripDetails = (id: string) => {
         setIsLoading(false);
       };
 
-      fetchData()
-    }, [id])
+      fetchData();
+    }, [id]),
   );
 
   return {
@@ -60,4 +60,4 @@ export const useVehicleTripDetails = (id: string) => {
     createdByUser,
     createdAt,
   };
-}
+};

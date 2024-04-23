@@ -17,8 +17,8 @@ interface VehicleListProps {
   route: {
     params: {
       vehicle?: Vehicle;
-    }
-  }
+    };
+  };
 }
 
 const VehicleForm = ({ navigation, route }: VehicleListProps) => {
@@ -38,7 +38,7 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
     setIsAvailable,
     isProcessing,
     isValidForm,
-    save
+    save,
   } = useVehicleForm({ vehicle });
 
   const onPressSave = async () => {
@@ -46,21 +46,21 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
 
     if (response.success && response.result) {
       Toast.show({
-        type: 'success',
-        text1: 'Viatura',
-        text2: 'Salvo com sucesso!',
-        position: 'bottom',
-      })
+        type: "success",
+        text1: "Viatura",
+        text2: "Salvo com sucesso!",
+        position: "bottom",
+      });
 
       navigation.goBack();
     } else {
       Alert.alert(
-        'Erro ao salvar',
-        'Ocorreu algum erro ao salvar, verifique os dados e tente novamente.',
-        [{ text: 'OK' }]
-      )
+        "Erro ao salvar",
+        "Ocorreu algum erro ao salvar, verifique os dados e tente novamente.",
+        [{ text: "OK" }],
+      );
     }
-  }
+  };
 
   return (
     <>
@@ -73,7 +73,7 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
             placeholder="Ex.: UR-G01, VTR-02"
           />
 
-          <Styled.Divider/>
+          <Styled.Divider />
 
           <Input
             label="Marca do veículo"
@@ -82,7 +82,7 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
             placeholder="Ex.: Renault, Mercedes"
           />
 
-          <Styled.Divider/>
+          <Styled.Divider />
 
           <Input
             label="Modelo do veículo*"
@@ -91,7 +91,7 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
             placeholder="Ex.: Master, Sprinter"
           />
 
-          <Styled.Divider/>
+          <Styled.Divider />
 
           <Input
             label="Ano do modelo"
@@ -101,7 +101,7 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
             maxLength={4}
           />
 
-          <Styled.Divider/>
+          <Styled.Divider />
 
           <Input
             label="Placa do veículo"
@@ -111,11 +111,15 @@ const VehicleForm = ({ navigation, route }: VehicleListProps) => {
             maxLength={7}
           />
 
-          <Styled.Divider/>
+          <Styled.Divider />
 
-          <Label size={'small'}>Viatura disponível para uso</Label>
+          <Label size={"small"}>Viatura disponível para uso</Label>
           <Styled.ContainerSwitch>
-            <Switch value={isAvailable} onValueChange={(value) => setIsAvailable(value)} trackColor={{ true: colors.green }} />
+            <Switch
+              value={isAvailable}
+              onValueChange={(value) => setIsAvailable(value)}
+              trackColor={{ true: colors.green }}
+            />
           </Styled.ContainerSwitch>
         </CardInfo>
       </Styled.Container>
@@ -137,7 +141,5 @@ export const NavHeader = ({ navigation, route }: VehicleListProps) => {
   const { vehicle } = route?.params || {};
   const title = vehicle?.id ? "Editar viatura" : "Nova viatura";
 
-  return (
-    <Header onBackPress={navigation.goBack} title={title} />
-  )
-}
+  return <Header onBackPress={navigation.goBack} title={title} />;
+};

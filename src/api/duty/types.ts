@@ -27,7 +27,7 @@ export type Duty = {
   traineeImageUrl: string;
   isAvailable: boolean;
   note: string | null;
-}
+};
 
 export type DutyPayload = {
   date: string;
@@ -41,12 +41,12 @@ export type DutyPayload = {
   traineeId?: string | null;
   isAvailable?: boolean;
   note?: string | null;
-}
+};
 
 export enum ListDutyPeriod {
-  PREVIOUS = 'PREVIOUS',
-  CURRENT = 'CURRENT',
-  NEXT = 'NEXT',
+  PREVIOUS = "PREVIOUS",
+  CURRENT = "CURRENT",
+  NEXT = "NEXT",
 }
 
 export const MAX_PAGE_SIZE = 20;

@@ -11,7 +11,7 @@ interface DateInputProps {
   label: string;
   value: string;
   onChangeValue: (newValue: string) => void;
-  type: 'duty' | 'normal';
+  type: "duty" | "normal";
 }
 
 const DateInput = ({
@@ -23,14 +23,21 @@ const DateInput = ({
 }: DateInputProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const CalendarComponent = type === 'duty' ? DutyCalendar : Calendar;
+  const CalendarComponent = type === "duty" ? DutyCalendar : Calendar;
 
   return (
     <>
-      <Label size={'small'}>{label}</Label>
-      <Styled.Container isFocused={isVisible} onPress={() => setIsVisible(!isVisible)}>
-        {isString(value) && <Styled.TextDate>{moment(value).format('LL')}</Styled.TextDate>}
-        {!isString(value) && <Styled.TextDatePlaceholder>{placeholder}</Styled.TextDatePlaceholder>}
+      <Label size={"small"}>{label}</Label>
+      <Styled.Container
+        isFocused={isVisible}
+        onPress={() => setIsVisible(!isVisible)}
+      >
+        {isString(value) && (
+          <Styled.TextDate>{moment(value).format("LL")}</Styled.TextDate>
+        )}
+        {!isString(value) && (
+          <Styled.TextDatePlaceholder>{placeholder}</Styled.TextDatePlaceholder>
+        )}
       </Styled.Container>
       <CalendarComponent
         visible={isVisible}

@@ -15,59 +15,72 @@ interface DriverChecklistDetailsProps {
   navigation: NavigationProp<ParamListBase>;
   route: {
     params: {
-      id: string
-    }
-  }
+      id: string;
+    };
+  };
 }
 
 const DriverChecklistDetails = ({ route }: DriverChecklistDetailsProps) => {
   const { id } = route.params || {};
-  const {
-    isLoading,
-    driverChecklist
-  } = useDriverChecklistDetails(id)
+  const { isLoading, driverChecklist } = useDriverChecklistDetails(id);
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
-  
+
   return (
     <Styled.Container>
       <Styled.ScrollView>
         <CardInfo title="Informações gerais">
-          <Label size={"small"} color={colors.Greyscale.b50}>Plantão</Label>
-          <Label size={"medium"}>{moment(driverChecklist.duty.date).format('LL')} - {DutyShiftLabel[driverChecklist.duty.shift]}</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Plantão
+          </Label>
+          <Label size={"medium"}>
+            {moment(driverChecklist.duty.date).format("LL")} -{" "}
+            {DutyShiftLabel[driverChecklist.duty.shift]}
+          </Label>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>Viatura</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Viatura
+          </Label>
           <Label size={"medium"}>{driverChecklist.vehicle.name}</Label>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>KM Inicial</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            KM Inicial
+          </Label>
           <Label size={"medium"}>{driverChecklist.kmInitial}</Label>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>Preenchido em</Label>
-          <Label size={"medium"}>{moment(driverChecklist.createdAt).format('DD/MM/YYYY HH:mm')}</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Preenchido em
+          </Label>
+          <Label size={"medium"}>
+            {moment(driverChecklist.createdAt).format("DD/MM/YYYY HH:mm")}
+          </Label>
 
           <Styled.Divider />
 
-          <Label size={"small"} color={colors.Greyscale.b50}>Preenchido por</Label>
+          <Label size={"small"} color={colors.Greyscale.b50}>
+            Preenchido por
+          </Label>
           <Label size={"medium"}>{driverChecklist.createdByUser.name}</Label>
         </CardInfo>
 
-        {Array.isArray(driverChecklist.checklistFilledAnswers) && driverChecklist.checklistFilledAnswers.length > 0 && (
-          <>
-            <Styled.Divider />
-            <ChecklistAnswers
-              checklistName={driverChecklist.checklistName}
-              answers={driverChecklist.checklistFilledAnswers}
-            />
-          </>
-        )}
+        {Array.isArray(driverChecklist.checklistFilledAnswers) &&
+          driverChecklist.checklistFilledAnswers.length > 0 && (
+            <>
+              <Styled.Divider />
+              <ChecklistAnswers
+                checklistName={driverChecklist.checklistName}
+                answers={driverChecklist.checklistFilledAnswers}
+              />
+            </>
+          )}
       </Styled.ScrollView>
     </Styled.Container>
   );

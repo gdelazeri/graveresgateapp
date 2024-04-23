@@ -17,46 +17,46 @@ const Home = ({ navigation }: HomeProps) => {
   return (
     <Styled.Container>
       <CardHomeItem
-        icon={'insert-invitation'}
+        icon={"insert-invitation"}
         title="Plantões"
         subtitle="Marcação de plantão e escalas"
-        onPress={() => { 
-          navigation.navigate(routeMap.DutyRoutes.STACK)
+        onPress={() => {
+          navigation.navigate(routeMap.DutyRoutes.STACK);
         }}
         disabled={isNavigationDisabled}
       />
       <CardHomeItem
-        icon={'list-alt'}
+        icon={"list-alt"}
         title="Formulários"
         subtitle="Fichas, livros e checklists"
         onPress={() => {
-          navigation.navigate(routeMap.FormsRoutes.STACK)
+          navigation.navigate(routeMap.FormsRoutes.STACK);
         }}
         disabled={isNavigationDisabled}
       />
       <CardHomeItem
-        icon={'group'}
+        icon={"group"}
         title="Equipe"
         subtitle="Voluntários e carga horária"
-        onPress={() => { 
-          navigation.navigate(routeMap.UserRoutes.STACK)
+        onPress={() => {
+          navigation.navigate(routeMap.UserRoutes.STACK);
         }}
         disabled={isNavigationDisabled}
       />
       <CardHomeItem
-        icon={'local-activity'}
+        icon={"local-activity"}
         title="Eventos"
         subtitle="Informações sobre eventos e fotos"
-        onPress={() => { }}
+        onPress={() => {}}
         disabled={isNavigationDisabled}
       />
       {permission === UserPermission.ADMIN && (
         <CardHomeItem
-          icon={'settings'}
+          icon={"settings"}
           title="Configurações"
           subtitle="Ajuste as configurações do aplicativo"
           onPress={() => {
-            navigation.navigate(routeMap.SettingsRoutes.STACK)
+            navigation.navigate(routeMap.SettingsRoutes.STACK);
           }}
           disabled={isNavigationDisabled}
         />

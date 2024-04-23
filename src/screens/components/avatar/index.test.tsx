@@ -7,14 +7,10 @@ describe("Avatar", () => {
   });
 
   it("should render correctly without image", async () => {
-    const { } = render(
-      <Avatar imageUrl={undefined} />,
-    );
+    const {} = render(<Avatar imageUrl={undefined} />);
   });
 
   it("should render correctly with image", async () => {
-    const { } = render(
-      <Avatar imageUrl="" />,
-    );
+    const {} = render(<Avatar imageUrl="" />);
   });
 });

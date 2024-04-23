@@ -26,10 +26,11 @@ const Container = styled.TouchableOpacity<CustomTextDateProps>`
   background-color: ${colors.Greyscale.b100};
   border-width: 1px;
   border-radius: 4px;
-  border-color: ${({ isFocused }: CustomTextDateProps) => (isFocused ? colors.Greyscale.b50 : colors.Greyscale.b80)};
+  border-color: ${({ isFocused }: CustomTextDateProps) =>
+    isFocused ? colors.Greyscale.b50 : colors.Greyscale.b80};
   height: 50px;
   padding: 0px 12px;
-`
+`;
 
 export default {
   TextDate,

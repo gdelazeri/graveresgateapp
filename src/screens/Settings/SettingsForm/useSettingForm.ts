@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { postVehicle, putVehicle } from "@api/vehicle/vehicleApi";
 import { isString } from "@utils/stringHelper";
 import { SettingKey } from "@api/settings/types";
@@ -12,7 +12,7 @@ interface UseSettingFormProps {
 const useSettingForm = ({ settingKey }: UseSettingFormProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [list, setList] = useState<string[]>([]);
 
   useFocusEffect(
@@ -26,8 +26,8 @@ const useSettingForm = ({ settingKey }: UseSettingFormProps) => {
         setIsLoading(false);
       };
 
-      fetchData()
-    }, [settingKey])
+      fetchData();
+    }, [settingKey]),
   );
 
   const save = async () => {
@@ -38,7 +38,7 @@ const useSettingForm = ({ settingKey }: UseSettingFormProps) => {
     setIsProcessing(false);
 
     return response;
-  }
+  };
 
   return {
     isLoading,
@@ -47,8 +47,8 @@ const useSettingForm = ({ settingKey }: UseSettingFormProps) => {
     setText,
     list,
     setList,
-    save
-  }
-}
+    save,
+  };
+};
 
 export default useSettingForm;

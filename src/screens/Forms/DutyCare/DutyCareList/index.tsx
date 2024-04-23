@@ -18,26 +18,23 @@ interface DutyCareListProps {
 }
 
 const DutyCareList = ({ navigation }: DutyCareListProps) => {
-  const {
-    isLoading,
-    isRefreshing,
-    list,
-    onEndReached,
-    onRefresh
-  } = useDutyCareList();
+  const { isLoading, isRefreshing, list, onEndReached, onRefresh } =
+    useDutyCareList();
 
   const onPressAdd = () => {
-    navigation.navigate(routeMap.FormsRoutes.DUTY_CARE_FORM)
-  }
+    navigation.navigate(routeMap.FormsRoutes.DUTY_CARE_FORM);
+  };
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
-  
+
   return (
     <Styled.Container>
       <FlatList
-        refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />}
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        }
         data={list}
         contentContainerStyle={{ padding: 16 }}
         keyExtractor={(item) => item.id}
@@ -61,7 +58,11 @@ const DutyCareList = ({ navigation }: DutyCareListProps) => {
               shadowRadius: 3.84,
               elevation: 5,
             }}
-            onPress={() => navigation.navigate(routeMap.FormsRoutes.DUTY_CARE_DETAILS, { id: item.id })}
+            onPress={() =>
+              navigation.navigate(routeMap.FormsRoutes.DUTY_CARE_DETAILS, {
+                id: item.id,
+              })
+            }
             containerStyle={{ borderRadius: 8 }}
           >
             <ListItem.Content>
@@ -69,14 +70,13 @@ const DutyCareList = ({ navigation }: DutyCareListProps) => {
             </ListItem.Content>
           </ListItem>
         )}
-        ListEmptyComponent={() => <EmptyList text="Nenhum atendimento encontrado" />}
+        ListEmptyComponent={() => (
+          <EmptyList text="Nenhum atendimento encontrado" />
+        )}
         onEndReached={onEndReached}
       />
       <FooterContainer>
-        <Button
-          title="Nova ficha de atendimento"
-          onPress={onPressAdd}
-        />
+        <Button title="Nova ficha de atendimento" onPress={onPressAdd} />
       </FooterContainer>
     </Styled.Container>
   );

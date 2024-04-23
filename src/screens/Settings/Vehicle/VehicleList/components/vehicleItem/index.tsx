@@ -1,14 +1,14 @@
-import TouchableScale from 'react-native-touchable-scale'; 
+import TouchableScale from "react-native-touchable-scale";
 import { ListItem } from "react-native-elements";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
 import { LabelSizeValue } from "@screens/components/label/types";
 import { Vehicle } from "@api/vehicle/types";
-import Chip from '@screens/components/chip';
+import Chip from "@screens/components/chip";
 
 interface VehicleItemProps {
   item: Vehicle;
-  onPress: () => void
+  onPress: () => void;
 }
 
 const VehicleItem = ({ item, onPress }: VehicleItemProps) => (
@@ -34,21 +34,41 @@ const VehicleItem = ({ item, onPress }: VehicleItemProps) => (
     containerStyle={{ borderRadius: 8 }}
   >
     <ListItem.Content>
-      <ListItem.Title style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}>
+      <ListItem.Title
+        style={{ fontFamily: fonts.bold, fontSize: LabelSizeValue.medium }}
+      >
         {item.name}
       </ListItem.Title>
-      <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 4 }}>
+      <ListItem.Subtitle
+        style={{
+          fontFamily: fonts.regular,
+          fontSize: LabelSizeValue.small,
+          marginTop: 4,
+        }}
+      >
         {item.brand} - {item.model}
       </ListItem.Subtitle>
-      <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 2 }}>
+      <ListItem.Subtitle
+        style={{
+          fontFamily: fonts.regular,
+          fontSize: LabelSizeValue.small,
+          marginTop: 2,
+        }}
+      >
         Ano: {item.year}
       </ListItem.Subtitle>
-      <ListItem.Subtitle style={{ fontFamily: fonts.regular, fontSize: LabelSizeValue.small, marginTop: 2 }}>
+      <ListItem.Subtitle
+        style={{
+          fontFamily: fonts.regular,
+          fontSize: LabelSizeValue.small,
+          marginTop: 2,
+        }}
+      >
         Placa: {item.licensePlate}
       </ListItem.Subtitle>
     </ListItem.Content>
     <Chip
-      label={item.isAvailable ? 'Disponível' : 'Indisponível'}
+      label={item.isAvailable ? "Disponível" : "Indisponível"}
       labelColor={colors.Greyscale.b100}
       backgroundColor={item.isAvailable ? colors.green : colors.red}
     />

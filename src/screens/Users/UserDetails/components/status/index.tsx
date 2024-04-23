@@ -7,17 +7,17 @@ const StatusMapperBackgroundColor = {
   [UserStatus.PENDING]: colors.yellow,
   [UserStatus.SUSPENDED]: colors.red,
   [UserStatus.DELETED]: colors.red,
-}
+};
 
 const StatusMapperLabelColor = {
   [UserStatus.ACTIVE]: colors.Greyscale.b100,
   [UserStatus.PENDING]: colors.black,
   [UserStatus.SUSPENDED]: colors.Greyscale.b100,
   [UserStatus.DELETED]: colors.Greyscale.b100,
-}
+};
 
 interface UserDetailsStatusProps {
-  status: UserStatus
+  status: UserStatus;
 }
 
 const UserDetailsStatus = ({ status }: UserDetailsStatusProps) => (
@@ -26,6 +26,6 @@ const UserDetailsStatus = ({ status }: UserDetailsStatusProps) => (
     labelColor={StatusMapperLabelColor[status]}
     backgroundColor={StatusMapperBackgroundColor[status]}
   />
-)
+);
 
 export default UserDetailsStatus;

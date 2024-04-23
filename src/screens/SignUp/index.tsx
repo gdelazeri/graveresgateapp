@@ -97,7 +97,10 @@ const SignUp = ({ navigation }: SignUpProps) => {
           placeholder="Selecione a edição do curso"
           value={isString(courseId) ? courseId : null}
           onChangeValue={(value) => setCourseId(value)}
-          items={courseList.map((course) => ({ value: course.id, label: course.name }))}
+          items={courseList.map((course) => ({
+            value: course.id,
+            label: course.name,
+          }))}
         />
         <Styled.Divider />
         <Input

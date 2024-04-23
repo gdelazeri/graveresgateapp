@@ -7,8 +7,8 @@ jest.mock("@screens/UserList/useUserList", () => ({
   useUserList: jest.fn().mockImplementation(() => ({
     list: [],
     isLoading: true,
-    searchQuery: '',
-    setSearchQuery: jest.fn()
+    searchQuery: "",
+    setSearchQuery: jest.fn(),
   })),
 }));
 
@@ -29,11 +29,11 @@ describe("UserListScreen", () => {
     it("should render correctly with data", async () => {
       // @ts-ignore
       useUserList.mockImplementationOnce(() => ({
-        list: [{ id: 'id', name: 'name', email: 'email' }],
+        list: [{ id: "id", name: "name", email: "email" }],
         isLoading: false,
-        searchQuery: '',
-        setSearchQuery: jest.fn()
-      }))
+        searchQuery: "",
+        setSearchQuery: jest.fn(),
+      }));
 
       const {} = render(<UserListScreen.default navigation={navigationMock} />);
     });
@@ -46,7 +46,8 @@ describe("UserListScreen", () => {
           initialSafeAreaInsets={{ top: 1, left: 2, right: 3, bottom: 4 }}
         >
           <UserListScreen.NavHeader navigation={navigationMock} />
-        </SafeAreaProvider>);
+        </SafeAreaProvider>,
+      );
 
       await waitFor(() => {
         expect(queryByText("Equipe")).toBeTruthy();
