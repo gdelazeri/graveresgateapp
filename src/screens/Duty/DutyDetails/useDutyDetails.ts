@@ -30,7 +30,7 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
     DutyCareChecklist[]
   >([]);
   const [dutyChecklists, setDutyChecklists] = useState<DutyChecklist[]>([]);
-  const isEditable = moment(duty.date).isSameOrAfter(
+  const isReadOnly = moment(duty.date).isSameOrBefore(
     moment().subtract(1, "day"),
     "day",
   );
@@ -136,7 +136,7 @@ const useDutyDetails = ({ duty }: UseDutyDetailsProps) => {
   return {
     isLoading,
     isProcessing,
-    isEditable,
+    isReadOnly,
     leader,
     driver,
     firstRescuer,

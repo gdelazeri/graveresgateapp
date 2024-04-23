@@ -21,6 +21,8 @@ import Modal from "@screens/components/modal";
 import Input from "@screens/components/input";
 import { INPUT_TYPE } from "@screens/components/input/types";
 import { Alert } from "react-native";
+import { useUserContext } from "@context/userContext";
+import { UserPermission } from "@api/user/types";
 
 interface DutyDetailsProps {
   navigation: NavigationProp<ParamListBase>;
@@ -36,7 +38,7 @@ const DutyDetails = ({ navigation, route }: DutyDetailsProps) => {
   const {
     isLoading,
     isProcessing,
-    isEditable,
+    isReadOnly,
     leader,
     driver,
     firstRescuer,
@@ -53,6 +55,7 @@ const DutyDetails = ({ navigation, route }: DutyDetailsProps) => {
     saveAsUnavailable,
   } = useDutyDetails({ duty });
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const { permission } = useUserContext()
 
   const onPressChecklist = (dutyChecklist: DutyChecklist) => {
     switch (dutyChecklist.type) {
@@ -108,12 +111,8 @@ const DutyDetails = ({ navigation, route }: DutyDetailsProps) => {
 
         <CardInfo
           title="Equipe do plantão"
-          onPressEdit={
-            isEditable && isAvailable
-              ? () =>
-                  navigation.navigate(routeMap.DutyRoutes.DUTY_FORM, { duty })
-              : undefined
-          }
+          onPressEdit={() => navigation.navigate(routeMap.DutyRoutes.DUTY_FORM, { duty })}
+          onPressEditDisabled={isReadOnly || !isAvailable || permission !== UserPermission.ADMIN}
         >
           <Label size="small" color={colors.Greyscale.b50}>
             Líder
@@ -215,7 +214,7 @@ const DutyDetails = ({ navigation, route }: DutyDetailsProps) => {
           ))}
         </CardInfo>
       </Styled.ScrollView>
-      {isEditable && (
+      {!isReadOnly && (
         <FooterContainer>
           {isAvailable && (
             <Button

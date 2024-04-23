@@ -24,7 +24,7 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [dutyRequestList, setDutyRequestList] = useState<DutyRequest[]>([]);
 
-  const isEditable = moment(duty.date).isSameOrAfter(
+  const isReadOnly = moment(duty.date).isSameOrBefore(
     moment().subtract(1, "day"),
     "day",
   );
@@ -154,7 +154,7 @@ const useDutyForm = ({ duty }: UseDutyFormProps) => {
     setAssistantRadioOperator,
     trainee,
     setTrainee,
-    isEditable,
+    isReadOnly,
     save,
     usersAlreadySelected,
     leaderRequests,

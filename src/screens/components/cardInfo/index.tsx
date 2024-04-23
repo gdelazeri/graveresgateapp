@@ -9,6 +9,7 @@ import { TouchableOpacity } from "react-native";
 interface CardInfoProps {
   title?: string;
   onPressEdit?: () => void;
+  onPressEditDisabled?: boolean;
   borderColor?: string;
 }
 
@@ -16,6 +17,7 @@ const CardInfo = ({
   children,
   title,
   onPressEdit,
+  onPressEditDisabled = false,
   borderColor,
 }: React.PropsWithChildren<CardInfoProps>) => {
   const hasTitle = isString(title);
@@ -30,7 +32,7 @@ const CardInfo = ({
               {title}
             </Label>
           )}
-          {hasOnPressEdit && (
+          {hasOnPressEdit && !onPressEditDisabled && (
             <TouchableOpacity onPress={onPressEdit}>
               <Icon name="edit" size={24} color={colors.Greyscale.b50} />
             </TouchableOpacity>

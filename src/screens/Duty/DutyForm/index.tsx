@@ -42,7 +42,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
     setAssistantRadioOperator,
     trainee,
     setTrainee,
-    isEditable,
+    isReadOnly,
     save,
     usersAlreadySelected,
     leaderRequests,
@@ -99,7 +99,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected,
               });
             }}
-            disabled={!isEditable}
+            disabled={isReadOnly}
           />
 
           <Styled.Divider />
@@ -122,7 +122,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected,
               });
             }}
-            disabled={!isEditable}
+            disabled={isReadOnly}
           />
 
           <Styled.Divider />
@@ -145,7 +145,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected,
               });
             }}
-            disabled={!isEditable}
+            disabled={isReadOnly}
           />
 
           <Styled.Divider />
@@ -168,7 +168,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected,
               });
             }}
-            disabled={!isEditable}
+            disabled={isReadOnly}
           />
 
           <Styled.Divider />
@@ -192,7 +192,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected,
               });
             }}
-            disabled={!isEditable}
+            disabled={isReadOnly}
           />
 
           <Styled.Divider />
@@ -215,7 +215,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected,
               });
             }}
-            disabled={!isEditable}
+            disabled={isReadOnly}
           />
 
           <Styled.Divider />
@@ -238,7 +238,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
                 usersAlreadySelected,
               });
             }}
-            disabled={!isEditable}
+            disabled={isReadOnly}
           />
         </CardInfo>
       </Styled.ScrollView>
@@ -248,7 +248,7 @@ const DutyForm = ({ navigation, route }: DutyFormProps) => {
           title="Salvar"
           onPress={onPressSave}
           loading={isProcessing}
-          disabled={!isEditable}
+          disabled={isReadOnly}
         />
       </Styled.Footer>
     </>
