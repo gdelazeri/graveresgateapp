@@ -6,6 +6,8 @@ import { User } from "@api/user/types";
 import Avatar from "@screens/components/avatar";
 import RequestsIndicator from "../requestsIndicator";
 import { DutyRequest } from "@api/dutyRequest/types";
+import ClearIcon from "@screens/components/icons/clear";
+import TimeIcon from "@screens/components/icons/time";
 
 interface DutyUserPositionProps {
   placeholder: string;
@@ -49,7 +51,7 @@ const DutyUserPosition = ({
         )}
         {isString(user?.id) && !disabled && (
           <Styled.IconContainer onPress={onRemove}>
-            <Styled.RemoveIcon />
+            <ClearIcon color={colors.Greyscale.b50} />
           </Styled.IconContainer>
         )}
         {!isString(user?.id) && isString(placeholder) && (
@@ -61,7 +63,7 @@ const DutyUserPosition = ({
       {dutyRequest && (
         <Styled.DutyRequestInfoContainer>
           <Styled.Inline>
-            <Styled.TimeIcon />
+            <TimeIcon color={colors.Greyscale.b50} />
             <Label size={"small"} color={colors.Greyscale.b50}>
               {dutyRequest.startAt.substring(0, 5)} às{" "}
               {dutyRequest.endAt.substring(0, 5)}

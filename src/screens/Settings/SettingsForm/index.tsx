@@ -1,6 +1,5 @@
 import { Alert, FlatList } from "react-native";
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import { Icon } from "react-native-elements";
 import Header from "@screens/components/header";
 import Button from "@screens/components/button";
 import useSettingForm from "./useSettingForm";
@@ -13,6 +12,7 @@ import { isString } from "@utils/stringHelper";
 import SettingItem from "./components/settingItem";
 import Styled from "./styles";
 import Toast from "react-native-toast-message";
+import PlusIcon from "@screens/components/icons/plus";
 
 interface SettingsFormProps {
   navigation: NavigationProp<ParamListBase>;
@@ -90,9 +90,7 @@ const SettingsForm = ({ navigation, route }: SettingsFormProps) => {
             />
           </Styled.InputValue>
           <Styled.IconButton disabled={!isString(text)} onPress={onPressAdd}>
-            <Icon
-              name="add-circle"
-              size={32}
+            <PlusIcon
               color={isString(text) ? colors.green : colors.Greyscale.b80}
             />
           </Styled.IconButton>

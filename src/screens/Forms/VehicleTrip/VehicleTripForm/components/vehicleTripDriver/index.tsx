@@ -4,6 +4,7 @@ import { isString } from "@utils/stringHelper";
 import Styled from "./styles";
 import { User } from "@api/user/types";
 import Avatar from "@screens/components/avatar";
+import ClearIcon from "@screens/components/icons/clear";
 
 interface VehicleTripDriverProps {
   placeholder: string;
@@ -42,7 +43,7 @@ const VehicleTripDriver = ({
         )}
         {isString(user?.id) && !disabled && (
           <Styled.IconContainer onPress={onRemove}>
-            <Styled.RemoveIcon />
+            <ClearIcon color={colors.Greyscale.b50} />
           </Styled.IconContainer>
         )}
         {!isString(user?.id) && isString(placeholder) && (

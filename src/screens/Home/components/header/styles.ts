@@ -1,4 +1,3 @@
-import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
@@ -25,19 +24,11 @@ const Title = styled.Text`
   margin-left: 8px;
 `;
 
-const SignOutIcon = styled(Icon).attrs({
-  name: "logout",
-  size: 24,
-  color: colors.Greyscale.b50,
-  containerStyle: {
-    padding: 8,
-    margin: 0,
-  },
-})``;
+const SignOutButton = styled.TouchableOpacity``;
 
 export default {
   Header,
   TitleContainer,
   Title,
-  SignOutIcon,
+  SignOutButton,
 };

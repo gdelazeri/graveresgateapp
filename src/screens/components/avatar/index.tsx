@@ -1,6 +1,7 @@
 import { Avatar as RNEAvatar } from "react-native-elements";
 import { isString } from "@utils/stringHelper";
 import Styled from "./styles";
+import UserIcon from "../icons/user";
 
 interface AvatarProps {
   imageUrl?: string;
@@ -20,7 +21,7 @@ const Avatar = ({ imageUrl, size = 48 }: AvatarProps) => {
     );
   }
 
-  return <Styled.UserIcon size={size} />;
+  return <UserIcon size={size} />;
 };
 
 export default Avatar;

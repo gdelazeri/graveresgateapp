@@ -1,5 +1,4 @@
 import colors from "@theme/colors";
-import { Icon } from "react-native-elements";
 import styled from "styled-components/native";
 
 interface UserItemProps {
@@ -26,18 +25,6 @@ const InlineTime = styled.View`
   margin-bottom: 2px;
 `;
 
-const TimeIcon = styled(Icon).attrs({
-  name: "access-time",
-  size: 16,
-  color: colors.Greyscale.b50,
-  containerStyle: {
-    padding: 0,
-    margin: 0,
-  },
-})`
-  margin-right: 4px;
-`;
-
 const Inline = styled.View`
   flex-direction: row;
 `;
@@ -50,7 +37,6 @@ export default {
   Touchable,
   UserInfo,
   InlineTime,
-  TimeIcon,
   Inline,
   ChipContainer,
 };

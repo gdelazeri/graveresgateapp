@@ -5,6 +5,7 @@ import Avatar from "@screens/components/avatar";
 import colors from "@theme/colors";
 import { isString } from "@utils/stringHelper";
 import Chip from "@screens/components/chip";
+import TimeIcon from "@screens/components/icons/time";
 
 interface UserSelectListItemProps {
   user: UserDutyRequest;
@@ -23,7 +24,7 @@ const UserSelectListItem = ({ user, onPress }: UserSelectListItemProps) => (
       {user.dutyRequest && (
         <>
           <Styled.InlineTime>
-            <Styled.TimeIcon />
+            <TimeIcon color={colors.Greyscale.b50} />
             <Label size="small" color={colors.Greyscale.b50} noMarginBottom>
               {user.dutyRequest.startAt.substring(0, 5)} às{" "}
               {user.dutyRequest.endAt.substring(0, 5)}

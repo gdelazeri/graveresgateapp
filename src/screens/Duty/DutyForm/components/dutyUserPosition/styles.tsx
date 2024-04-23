@@ -1,6 +1,5 @@
 import styled from "styled-components/native";
 import colors from "@theme/colors";
-import { Icon } from "react-native-elements";
 
 const Container = styled.TouchableOpacity`
   background-color: ${colors.Greyscale.b100};
@@ -34,16 +33,6 @@ const IconContainer = styled.TouchableOpacity`
   align-items: center;
 `;
 
-const RemoveIcon = styled(Icon).attrs({
-  name: "clear",
-  size: 20,
-  color: colors.Greyscale.b50,
-  containerStyle: {
-    padding: 0,
-    margin: 0,
-  },
-})``;
-
 const LabelContainer = styled.View`
   flex-direction: row;
   align-items: baseline;
@@ -59,26 +48,12 @@ const Inline = styled.View`
   flex-direction: row;
 `;
 
-const TimeIcon = styled(Icon).attrs({
-  name: "access-time",
-  size: 16,
-  color: colors.Greyscale.b50,
-  containerStyle: {
-    padding: 0,
-    margin: 0,
-  },
-})`
-  margin-right: 4px;
-`;
-
 export default {
   Container,
   UserData,
   UserAvatar,
   LabelContainer,
   IconContainer,
-  RemoveIcon,
   DutyRequestInfoContainer,
   Inline,
-  TimeIcon,
 };

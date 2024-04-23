@@ -1,7 +1,7 @@
-import { Icon } from "react-native-elements";
 import Label from "@screens/components/label";
 import colors from "@theme/colors";
 import Styled from "./styles";
+import DeleteIcon from "@screens/components/icons/delete";
 
 interface SettingItemProps {
   value: string;
@@ -15,7 +15,7 @@ const SettingItem = ({ value, onPressDelete }: SettingItemProps) => (
   >
     <Label size={"medium"}>{value}</Label>
     <Styled.IconButton onPress={onPressDelete}>
-      <Icon name="delete" size={24} color={colors.red} />
+      <DeleteIcon color={colors.red} />
     </Styled.IconButton>
   </Styled.Touchable>
 );

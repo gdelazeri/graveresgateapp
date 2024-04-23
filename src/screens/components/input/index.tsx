@@ -1,12 +1,13 @@
 import { useMemo, useState } from "react";
 import { KeyboardType } from "react-native";
 import { mask } from "react-native-mask-text";
-import { Icon } from "react-native-elements";
 import Label from "@screens/components/label";
 import colors from "@theme/colors";
 import { isString } from "@utils/stringHelper";
 import Styled from "./styles";
 import { INPUT_TYPE } from "./types";
+import VisibilityOnIcon from "../icons/visibilityOn";
+import VisibilityOffIcon from "../icons/visibilityOff";
 
 interface InputProps {
   placeholder?: string;
@@ -96,11 +97,11 @@ const Input = ({
           <Styled.IconContainer
             onPress={() => setIsSecureTextEnabled(!isSecureTextEnabled)}
           >
-            <Icon
-              name={secureTextEntry ? "visibility" : "visibility-off"}
-              color={colors.Greyscale.b50}
-              testID="icon-secure-entry"
-            />
+            {secureTextEntry ? (
+              <VisibilityOnIcon color={colors.Greyscale.b50} />
+            ) : (
+              <VisibilityOffIcon color={colors.Greyscale.b50} />
+            )}
           </Styled.IconContainer>
         )}
       </Styled.Container>
