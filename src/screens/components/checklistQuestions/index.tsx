@@ -132,7 +132,7 @@ const ChecklistQuestions = ({
       {checklistQuestions.questions.map((question, index) => (
         <View key={index.toString()}>
           {renderQuestionInput(question)}
-          <Styled.Divider />
+          {index < checklistQuestions.questions.length - 1 && <Styled.Divider />}
         </View>
       ))}
     </CardInfo>
