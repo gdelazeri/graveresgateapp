@@ -4,15 +4,15 @@ import { ListItem } from "react-native-elements";
 import colors from "@theme/colors";
 import fonts from "@theme/fonts";
 import { LabelSizeValue } from "@screens/components/label/types";
-import { DriverChecklist } from "@api/driverChecklist/types";
+import { RescuerChecklist } from "@api/rescuerChecklist/types";
 import { DutyShiftLabel } from "@api/dutyRequest/types";
 
-interface DriverChecklistItemProps {
-  item: DriverChecklist;
+interface RescuerChecklistItemProps {
+  item: RescuerChecklist;
   onPress: () => void;
 }
 
-const DriverChecklistItem = ({ item, onPress }: DriverChecklistItemProps) => (
+const RescuerChecklistItem = ({ item, onPress }: RescuerChecklistItemProps) => (
   <ListItem
     Component={TouchableScale}
     // @ts-ignore
@@ -53,4 +53,4 @@ const DriverChecklistItem = ({ item, onPress }: DriverChecklistItemProps) => (
   </ListItem>
 );
 
-export default DriverChecklistItem;
+export default RescuerChecklistItem;

@@ -186,8 +186,8 @@ const DutyDetails = ({ navigation, route }: DutyDetailsProps) => {
           )}
           {dutyChecklists.map((item, index) => (
             <Styled.Item key={item.id} onPress={() => onPressChecklist(item)}>
-              <Label size="medium">{item.checklistName}</Label>
-              {index < dutyCareChecklists.length - 1 && <Styled.Divider />}
+              <Label size="medium" underline>{item.checklistName}</Label>
+              {index < dutyChecklists.length - 1 && <Styled.ChecklistDivider />}
             </Styled.Item>
           ))}
         </CardInfo>

@@ -5,13 +5,13 @@ import Header from "@screens/components/header";
 import CardInfo from "@screens/components/cardInfo";
 import Label from "@screens/components/label";
 import Styled from "./styles";
-import { useDriverChecklistDetails } from "./useDriverChecklistDetails";
+import { useRescuerChecklistDetails } from "./useRescuerChecklistDetails";
 import Loader from "@screens/components/loader";
 import colors from "@theme/colors";
 import { DutyShiftLabel } from "@api/dutyRequest/types";
 import ChecklistAnswers from "@screens/components/checklistAnswers";
 
-interface DriverChecklistDetailsProps {
+interface RescuerChecklistDetailsProps {
   navigation: NavigationProp<ParamListBase>;
   route: {
     params: {
@@ -20,9 +20,9 @@ interface DriverChecklistDetailsProps {
   };
 }
 
-const DriverChecklistDetails = ({ route }: DriverChecklistDetailsProps) => {
+const RescuerChecklistDetails = ({ route }: RescuerChecklistDetailsProps) => {
   const { id } = route.params || {};
-  const { isLoading, driverChecklist } = useDriverChecklistDetails(id);
+  const { isLoading, rescuerChecklist } = useRescuerChecklistDetails(id);
 
   if (isLoading) {
     return <Loader />;
@@ -36,8 +36,8 @@ const DriverChecklistDetails = ({ route }: DriverChecklistDetailsProps) => {
             Plantão
           </Label>
           <Label size={"medium"}>
-            {moment(driverChecklist.duty.date).format("LL")} -{" "}
-            {DutyShiftLabel[driverChecklist.duty.shift]}
+            {moment(rescuerChecklist.duty.date).format("LL")} -{" "}
+            {DutyShiftLabel[rescuerChecklist.duty.shift]}
           </Label>
 
           <Styled.Divider />
@@ -45,14 +45,7 @@ const DriverChecklistDetails = ({ route }: DriverChecklistDetailsProps) => {
           <Label size={"small"} color={colors.Greyscale.b50}>
             Viatura
           </Label>
-          <Label size={"medium"}>{driverChecklist.vehicle.name}</Label>
-
-          <Styled.Divider />
-
-          <Label size={"small"} color={colors.Greyscale.b50}>
-            KM Inicial
-          </Label>
-          <Label size={"medium"}>{driverChecklist.kmInitial}</Label>
+          <Label size={"medium"}>{rescuerChecklist.vehicle.name}</Label>
 
           <Styled.Divider />
 
@@ -60,7 +53,7 @@ const DriverChecklistDetails = ({ route }: DriverChecklistDetailsProps) => {
             Preenchido em
           </Label>
           <Label size={"medium"}>
-            {moment(driverChecklist.createdAt).format("DD/MM/YYYY HH:mm")}
+            {moment(rescuerChecklist.createdAt).format("DD/MM/YYYY HH:mm")}
           </Label>
 
           <Styled.Divider />
@@ -68,16 +61,16 @@ const DriverChecklistDetails = ({ route }: DriverChecklistDetailsProps) => {
           <Label size={"small"} color={colors.Greyscale.b50}>
             Preenchido por
           </Label>
-          <Label size={"medium"}>{driverChecklist.createdByUser.name}</Label>
+          <Label size={"medium"}>{rescuerChecklist.createdByUser.name}</Label>
         </CardInfo>
 
-        {Array.isArray(driverChecklist.checklistFilledAnswers) &&
-          driverChecklist.checklistFilledAnswers.length > 0 && (
+        {Array.isArray(rescuerChecklist.checklistFilledAnswers) &&
+          rescuerChecklist.checklistFilledAnswers.length > 0 && (
             <>
               <Styled.Divider />
               <ChecklistAnswers
                 checklistName={'Checklist'}
-                answers={driverChecklist.checklistFilledAnswers}
+                answers={rescuerChecklist.checklistFilledAnswers}
               />
             </>
           )}
@@ -86,8 +79,8 @@ const DriverChecklistDetails = ({ route }: DriverChecklistDetailsProps) => {
   );
 };
 
-export default DriverChecklistDetails;
+export default RescuerChecklistDetails;
 
-export const NavHeader = ({ navigation }: DriverChecklistDetailsProps) => (
-  <Header onBackPress={navigation.goBack} title="Checklist Condutor" />
+export const NavHeader = ({ navigation }: RescuerChecklistDetailsProps) => (
+  <Header onBackPress={navigation.goBack} title="Checklist Socorrista" />
 );

@@ -19,6 +19,10 @@ const Divider = styled.View`
   height: 16px;
 `;
 
+const ChecklistDivider = styled.View`
+  height: 8px;
+`;
+
 const Item = styled.TouchableOpacity<TouchableOpacityProps>``;
 
 const DividerLine = styled.View`
@@ -33,6 +37,7 @@ export default {
   ScrollView,
   Footer,
   Divider,
+  ChecklistDivider,
   Item,
   DividerLine,
 };

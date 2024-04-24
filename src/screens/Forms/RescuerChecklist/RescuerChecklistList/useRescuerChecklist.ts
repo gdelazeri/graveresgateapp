@@ -1,20 +1,20 @@
 import { useCallback, useState } from "react";
-import { listDriverChecklist } from "@api/driverChecklist/driverChecklistApi";
-import { DriverChecklist } from "@api/driverChecklist/types";
+import { listRescuerChecklist } from "@api/rescuerChecklist/rescuerChecklistApi";
+import { RescuerChecklist } from "@api/rescuerChecklist/types";
 import { useFocusEffect } from "@react-navigation/native";
 
 const MAX_PAGE_SIZE = 20;
 
-export const useDriverChecklist = () => {
+export const useRescuerChecklist = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const [list, setList] = useState<DriverChecklist[]>([]);
+  const [list, setList] = useState<RescuerChecklist[]>([]);
   const [page, setPage] = useState<number>(1);
 
   const fetchData = async (pageNumber: number) => {
     setIsLoading(pageNumber === 1 && list.length === 0);
 
-    const response = await listDriverChecklist(pageNumber, MAX_PAGE_SIZE);
+    const response = await listRescuerChecklist(pageNumber, MAX_PAGE_SIZE);
     if (response.success && response.result) {
       setList(
         pageNumber === 1 ? [...response.result] : [...list, ...response.result],

@@ -10,6 +10,9 @@ import * as DutyCareFormScreen from "@screens/Forms/DutyCare/DutyCareForm";
 import * as DriverChecklistFormScreen from "@screens/Forms/DriverChecklist/DriverChecklistForm";
 import * as DriverChecklistListScreen from "@screens/Forms/DriverChecklist/DriverChecklistList";
 import * as DriverChecklistDetailsScreen from "@screens/Forms/DriverChecklist/DriverChecklistDetails";
+import * as RescuerChecklistFormScreen from "@screens/Forms/RescuerChecklist/RescuerChecklistForm";
+import * as RescuerChecklistListScreen from "@screens/Forms/RescuerChecklist/RescuerChecklistList";
+import * as RescuerChecklistDetailsScreen from "@screens/Forms/RescuerChecklist/RescuerChecklistDetails";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -84,6 +87,23 @@ const FormsStack = () => (
       component={DriverChecklistDetailsScreen.default}
       // @ts-ignore
       options={{ header: DriverChecklistDetailsScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.RESCUER_CHECKLIST_FORM}
+      component={RescuerChecklistFormScreen.default}
+      options={{ header: RescuerChecklistFormScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.RESCUER_CHECKLIST_LIST}
+      component={RescuerChecklistListScreen.default}
+      options={{ header: RescuerChecklistListScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.RESCUER_CHECKLIST_DETAILS}
+      // @ts-ignore
+      component={RescuerChecklistDetailsScreen.default}
+      // @ts-ignore
+      options={{ header: RescuerChecklistDetailsScreen.NavHeader }}
     />
   </Stack.Navigator>
 );

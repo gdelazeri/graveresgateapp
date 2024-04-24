@@ -5,6 +5,7 @@ interface TextStyledProps {
   color: string;
   fontSize: number;
   noMarginBottom: boolean;
+  underline: boolean;
 }
 
 const Text = styled.Text<TextStyledProps>`
@@ -13,6 +14,9 @@ const Text = styled.Text<TextStyledProps>`
   color: ${({ color }: TextStyledProps) => color};
   margin-bottom: ${({ noMarginBottom }: TextStyledProps) =>
     noMarginBottom ? 0 : 2}px;
+  text-decoration: none;
+  text-decoration: ${({ underline }: TextStyledProps) =>
+    underline ? 'underline' : 'none'};
 `;
 
 export default {

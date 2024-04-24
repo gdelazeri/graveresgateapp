@@ -42,7 +42,7 @@ const FormsHome = ({ navigation }: FormsHomeProps) => (
       icon="doctor"
       iconType="material-community"
       onPress={() => {
-        navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST);
+        navigation.navigate(routeMap.FormsRoutes.RESCUER_CHECKLIST_LIST);
       }}
       size={40}
     />
