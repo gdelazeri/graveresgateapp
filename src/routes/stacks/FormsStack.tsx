@@ -13,6 +13,9 @@ import * as DriverChecklistDetailsScreen from "@screens/Forms/DriverChecklist/Dr
 import * as RescuerChecklistFormScreen from "@screens/Forms/RescuerChecklist/RescuerChecklistForm";
 import * as RescuerChecklistListScreen from "@screens/Forms/RescuerChecklist/RescuerChecklistList";
 import * as RescuerChecklistDetailsScreen from "@screens/Forms/RescuerChecklist/RescuerChecklistDetails";
+import * as RadioOperatorChecklistFormScreen from "@screens/Forms/RadioOperatorChecklist/RadioOperatorChecklistForm";
+import * as RadioOperatorChecklistListScreen from "@screens/Forms/RadioOperatorChecklist/RadioOperatorChecklistList";
+import * as RadioOperatorChecklistDetailsScreen from "@screens/Forms/RadioOperatorChecklist/RadioOperatorChecklistDetails";
 import routeMap from "@routes/routeMap";
 
 const Stack = createStackNavigator();
@@ -104,6 +107,23 @@ const FormsStack = () => (
       component={RescuerChecklistDetailsScreen.default}
       // @ts-ignore
       options={{ header: RescuerChecklistDetailsScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.RADIO_OPERATOR_CHECKLIST_FORM}
+      component={RadioOperatorChecklistFormScreen.default}
+      options={{ header: RadioOperatorChecklistFormScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.RADIO_OPERATOR_CHECKLIST_LIST}
+      component={RadioOperatorChecklistListScreen.default}
+      options={{ header: RadioOperatorChecklistListScreen.NavHeader }}
+    />
+    <Stack.Screen
+      name={routeMap.FormsRoutes.RADIO_OPERATOR_CHECKLIST_DETAILS}
+      // @ts-ignore
+      component={RadioOperatorChecklistDetailsScreen.default}
+      // @ts-ignore
+      options={{ header: RadioOperatorChecklistDetailsScreen.NavHeader }}
     />
   </Stack.Navigator>
 );

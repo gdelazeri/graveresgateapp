@@ -47,10 +47,10 @@ const FormsHome = ({ navigation }: FormsHomeProps) => (
       size={40}
     />
     <CardHomeItem
-      title="Checklist Radio Operador"
+      title="Checklist S.O."
       icon="support-agent"
       onPress={() => {
-        navigation.navigate(routeMap.SettingsRoutes.VEHICLE_LIST);
+        navigation.navigate(routeMap.FormsRoutes.RADIO_OPERATOR_CHECKLIST_LIST);
       }}
       size={40}
     />
